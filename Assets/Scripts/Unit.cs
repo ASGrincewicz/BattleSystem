@@ -18,6 +18,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected int _unitHitPoints;
         [SerializeField] protected int _currentUnitHP;
         [SerializeField] protected int _unitSpeed;
+        [SerializeField] protected int _unitDefense;
 
         private void Awake() => _currentUnitHP = _unitHitPoints;
     }

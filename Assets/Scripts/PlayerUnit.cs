@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace Veganimus.BattleSystem
 {
-    public class PlayerUnit : Unit, IDamageable
+    public class PlayerUnit : Unit, IDamageable, IHealable, IDefendable
     {
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
@@ -10,8 +10,14 @@ namespace Veganimus.BattleSystem
 
         public void Damage(int amount)
         {
-            _currentUnitHP -= amount;
+            _currentUnitHP -= (amount- _unitDefense);
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Player", _unitHitPoints, _currentUnitHP);
         }
+        public void Heal(int amount)
+        {
+            _currentUnitHP += amount;
+            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Player", _unitHitPoints, _currentUnitHP);
+        }
+        public void AdjustDefense(int amount) => _unitDefense = amount;
     }
 }

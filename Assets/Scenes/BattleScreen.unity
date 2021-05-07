@@ -4647,6 +4647,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
+      propertyPath: _unitDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
       propertyPath: _unitHPUpdateChannel
       value: 
       objectReference: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
