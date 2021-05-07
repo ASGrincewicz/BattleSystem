@@ -2499,6 +2499,7 @@ MonoBehaviour:
   _playerHitPointsSlider: {fileID: 26307328}
   _enemyHitPointsSlider: {fileID: 203217571}
   _unitNameUpdateChannel: {fileID: 11400000, guid: 4ec2433fc3ca04eff8ba1fa64706ed61, type: 2}
+  _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
 --- !u!1 &1340599706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3123,7 +3124,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1524927084}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1079766740183394}
+        m_TargetAssemblyTypeName: Veganimus.BattleSystem.EnemyUnit, Assembly-CSharp
+        m_MethodName: Damage
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 20
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1524927084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4216,6 +4229,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1079766740183394 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
+  m_PrefabInstance: {fileID: 6939135460559965476}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595f0ec97aafd4b6baf61a2e845a038e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4628475226205211 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3081973900726800698, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
@@ -4233,6 +4257,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1842159426}
     m_Modifications:
+    - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
+      propertyPath: _unitHPUpdateChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
     - target: {fileID: 3081973900726800698, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4618,6 +4646,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
+      propertyPath: _unitHPUpdateChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
     - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
       propertyPath: _unitNameUpdateChannel
       value: 

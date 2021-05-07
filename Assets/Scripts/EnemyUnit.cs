@@ -1,15 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace Veganimus.BattleSystem
 {
-    public class EnemyUnit : Unit
+    public class EnemyUnit : Unit, IDamageable
     {
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
+        [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
 
-        private void Start()
+
+        private void Start() => _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Enemy", _unitName);
+
+        public void Damage(int amount)
         {
-            _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Enemy",_unitName);
+            _currentUnitHP -= amount;
+            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Enemy",_unitHitPoints, _currentUnitHP);
         }
     }
 }

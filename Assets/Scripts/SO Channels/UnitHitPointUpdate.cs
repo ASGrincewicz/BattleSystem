@@ -5,13 +5,13 @@ namespace Veganimus.BattleSystem
     [CreateAssetMenu(menuName = "Channels/Unit HP Update")]
     public class UnitHitPointUpdate : ScriptableObject
     {
-        public UnityEvent<string, int> OnUnitHPUpdated;
+        public UnityEvent<string,int, int> OnUnitHPUpdated;
 
-        public void RaiseUnitHPUpdateEvent(string unit, int unitHP)
+        public void RaiseUnitHPUpdateEvent(string unit, int maxUnitHP, int unitHP)
         {
             if (OnUnitHPUpdated != null)
             {
-                OnUnitHPUpdated.Invoke(unit, unitHP);
+                OnUnitHPUpdated.Invoke(unit, maxUnitHP, unitHP);
             }
         }
     }

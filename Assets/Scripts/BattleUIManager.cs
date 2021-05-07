@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 namespace Veganimus.BattleSystem
 {
     public class BattleUIManager : MonoBehaviour
@@ -40,9 +37,18 @@ namespace Veganimus.BattleSystem
                     break;
             }
         }
-        private void DisplayCurrentUnitHP(string unit, int unitHP)
+        private void DisplayCurrentUnitHP(string unit,int maxUnitHP, int unitHP)
         {
-
+            float sliderValue = (float)unitHP / maxUnitHP * 100;
+            switch (unit)
+            {
+                case "Player":
+                    _playerHitPointsSlider.value = sliderValue;
+                    break;
+                case "Enemy":
+                    _enemyHitPointsSlider.value = sliderValue;
+                    break;
+            }
         }
     }
 }
