@@ -12,13 +12,13 @@ namespace Veganimus.BattleSystem
     {
         [SerializeField] private BattleState _battleState;
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-
+            _battleState = BattleState.Start;
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
 
         }
