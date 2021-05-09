@@ -10,12 +10,15 @@ namespace Veganimus.BattleSystem
         [SerializeField] private TMP_Text _enemyUnitNameText;
         [SerializeField] private Slider _playerHitPointsSlider;
         [SerializeField] private Slider _enemyHitPointsSlider;
+
         [Header("Player Attack Move Buttons")]
         [SerializeField] private TMP_Text[] _playerAttackNames = new TMP_Text[0];
         [SerializeField] private Button[] _playerAttackButtons = new Button[4];
+
         [Header("Player Defense Move Buttons")]
         [SerializeField] private TMP_Text[] _playerDefenseNames = new TMP_Text[0];
         [SerializeField] private Button[] _playerDefenseButtons = new Button[4];
+
         [Header("Listening To")]
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
@@ -62,7 +65,7 @@ namespace Veganimus.BattleSystem
                     break;
             }
         }
-        //Need To Separate Attack and Defense Name Updates
+       
         private void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
         {
             for (int i = _playerAttackNames.Length; i >= 0; i--)

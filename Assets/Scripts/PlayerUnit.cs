@@ -31,7 +31,7 @@ namespace Veganimus.BattleSystem
             _currentUnitHP += amount;
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Player", _unitHitPoints, _currentUnitHP);
         }
-        public void AdjustDefense(int amount) => _unitDefense = amount;
+        public void AdjustDefense(int amount) => _unitDefense += amount;
 
         private void InitiatePlayerTurn()
         {
@@ -42,6 +42,7 @@ namespace Veganimus.BattleSystem
         public void UseAttackMoveSlot(int slotNumber)
         {
             _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, slotNumber);
+            AcquireTarget(_unitAttacksMoveSet[slotNumber].damageAmount);
             _isPlayerTurnComplete = true;
             _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
         }
@@ -49,6 +50,7 @@ namespace Veganimus.BattleSystem
         public void UseDefenseMoveSlot(int slotNumber)
         {
             _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
+            AdjustDefense(_unitDefensesMoveSet[slotNumber].defenseBuff);
             _isPlayerTurnComplete = true;
             _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
         }

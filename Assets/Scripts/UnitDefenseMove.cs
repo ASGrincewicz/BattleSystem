@@ -6,8 +6,8 @@ using Veganimus.BattleSystem;
 [CreateAssetMenu(menuName = "Unit Moves/ Defense Move")]
 public class UnitDefenseMove : UnitMove
 {
-    [SerializeField] private int _defenseBuff;
-    [SerializeField] private int _defenseStrength;
+    public int defenseBuff;
+    public int defenseStrength;
 
     public UnityEvent OnDefenseMoveUsed;
 

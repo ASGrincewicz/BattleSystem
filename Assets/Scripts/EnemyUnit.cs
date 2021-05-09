@@ -13,6 +13,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private EnemyTurnChannel _enemyTurnChannel;
         [Space]
         private bool _isEnemyTurnComplete;
+        [SerializeField] private PlayerUnit _player;
 
         private void OnEnable()
         {
@@ -22,7 +23,11 @@ namespace Veganimus.BattleSystem
         {
             _enemyTurnChannel.OnEnemyTurn.RemoveListener(InitiateEnemyTurn);
         }
-        private void Start() => _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Enemy", _unitName);
+        private void Start()
+        {
+            _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Enemy", _unitName);
+            _player = GetComponent<PlayerUnit>();
+        }
 
         private void InitiateEnemyTurn()
         {
@@ -52,11 +57,15 @@ namespace Veganimus.BattleSystem
             _currentUnitHP += amount;
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Enemy", _unitHitPoints, _currentUnitHP);
         }
-        public void AdjustDefense(int amount) => _unitDefense = amount;
+        public void AdjustDefense(int amount) => _unitDefense += amount;
 
         public void UseAttackMoveSlot(int slotNumber)
         {
             _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, slotNumber);
+            if(_player != null)
+            {
+                _player.Damage(_unitAttacksMoveSet[slotNumber].damageAmount);
+            }
             _isEnemyTurnComplete = true;
             _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(true);
         }
@@ -64,6 +73,7 @@ namespace Veganimus.BattleSystem
         public void UseDefenseMoveSlot(int slotNumber)
         {
             _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
+            AdjustDefense(_unitDefensesMoveSet[slotNumber].defenseBuff);
             _isEnemyTurnComplete = true;
             _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(true);
         }

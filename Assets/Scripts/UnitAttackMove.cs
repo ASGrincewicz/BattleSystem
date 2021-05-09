@@ -6,8 +6,8 @@ using Veganimus.BattleSystem;
 [CreateAssetMenu(menuName = "Unit Moves/ Attack Move")]
 public class UnitAttackMove : UnitMove
 {
-    [SerializeField] private int _damageAmount;
-    [SerializeField] private float _attackSpeed;
+   public int damageAmount;
+   public float attackSpeed;
 
     public UnityEvent<int> OnAttackMoveUsed;
 
@@ -22,6 +22,7 @@ public class UnitAttackMove : UnitMove
         if (moveName != "")
         {
             Debug.Log($"{unitName} used {moveName}!");
+            //broadcast to UI
             OnAttackMoveUsed.Invoke(moveSlot);
         }
         else

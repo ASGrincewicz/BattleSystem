@@ -17,5 +17,11 @@ MonoBehaviour:
   _moveType: 0
   _elementType: 0
   _assignedUnit: {fileID: 0}
-  _damageAmount: 5
-  _attackSpeed: 2
+  OnMoveQueued:
+    m_PersistentCalls:
+      m_Calls: []
+  damageAmount: 20
+  attackSpeed: 0
+  OnAttackMoveUsed:
+    m_PersistentCalls:
+      m_Calls: []
