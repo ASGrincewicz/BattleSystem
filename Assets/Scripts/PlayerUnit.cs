@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using System.Collections;
 
 namespace Veganimus.BattleSystem
 {
@@ -41,8 +39,9 @@ namespace Veganimus.BattleSystem
         }
         public void UseAttackMoveSlot(int slotNumber)
         {
-            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, slotNumber);
-            AcquireTarget(_unitAttacksMoveSet[slotNumber].damageAmount);
+            int damageAmount = _unitAttacksMoveSet[slotNumber].damageAmount;
+            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName,this.transform,slotNumber);
+            _targetUnit.targetIDamageable.Damage(damageAmount);
             _isPlayerTurnComplete = true;
             _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
         }

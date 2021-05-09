@@ -2811,6 +2811,9 @@ GameObject:
   - component: {fileID: 6943622076856373113}
   - component: {fileID: 5378682100523537057}
   - component: {fileID: 8996078759317339853}
+  - component: {fileID: 1047851280}
+  - component: {fileID: 1047851279}
+  - component: {fileID: 1047851282}
   m_Layer: 6
   m_Name: Enemy_mech
   m_TagString: Enemy
@@ -2891,6 +2894,49 @@ MonoBehaviour:
   _enemyTurnCompleteChannel: {fileID: 11400000, guid: 16318d7640d314e568dab7544bf4eeab, type: 2}
   _enemyTurnChannel: {fileID: 11400000, guid: 314d096a87f744bbc8398ed2c3d790ba, type: 2}
   _player: {fileID: 0}
+--- !u!65 &1047851280
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939788526292788293}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.351503, y: 6.9362025, z: 8.342308}
+  m_Center: {x: -0.062773414, y: 3.3181012, z: -0.82884794}
+--- !u!114 &1047851279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939788526292788293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06292d0775a6241eabbc72c6d298b26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  sphereRadius: 2.83
+--- !u!54 &1047851282
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939788526292788293}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!1 &6939789966086779749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3318,8 +3364,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6939904651689027071}
-  m_LocalRotation: {x: 0, y: 0, z: 1.2246469e-16, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -2.1148987e-17, y: 0.17269447, z: 1.206247e-16, w: 0.9849755}
+  m_LocalPosition: {x: -0.32729983, y: -0.00000023841858, z: 0.060809016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6936246851148737447}
@@ -3328,7 +3374,7 @@ Transform:
   - {fileID: 6943703171844585679}
   m_Father: {fileID: 6936431540052701325}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 19.889, z: 0}
 --- !u!33 &6932338103997781489
 MeshFilter:
   m_ObjectHideFlags: 0

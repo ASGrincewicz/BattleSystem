@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace Veganimus.BattleSystem
 {
@@ -13,21 +12,12 @@ namespace Veganimus.BattleSystem
         [SerializeField] private EnemyTurnChannel _enemyTurnChannel;
         [Space]
         private bool _isEnemyTurnComplete;
-        [SerializeField] private PlayerUnit _player;
 
-        private void OnEnable()
-        {
-            _enemyTurnChannel.OnEnemyTurn.AddListener(InitiateEnemyTurn);
-        }
-        private void OnDisable()
-        {
-            _enemyTurnChannel.OnEnemyTurn.RemoveListener(InitiateEnemyTurn);
-        }
-        private void Start()
-        {
-            _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Enemy", _unitName);
-            _player = GetComponent<PlayerUnit>();
-        }
+        private void OnEnable() => _enemyTurnChannel.OnEnemyTurn.AddListener(InitiateEnemyTurn);
+
+        private void OnDisable() => _enemyTurnChannel.OnEnemyTurn.RemoveListener(InitiateEnemyTurn);
+
+        private void Start() => _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Enemy", _unitName);
 
         private void InitiateEnemyTurn()
         {
@@ -61,13 +51,11 @@ namespace Veganimus.BattleSystem
 
         public void UseAttackMoveSlot(int slotNumber)
         {
-            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, slotNumber);
-            if(_player != null)
-            {
-                _player.Damage(_unitAttacksMoveSet[slotNumber].damageAmount);
-            }
+            int damageAmount = _unitAttacksMoveSet[slotNumber].damageAmount;
+            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
+            _targetUnit.targetIDamageable.Damage(damageAmount);
             _isEnemyTurnComplete = true;
-            _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(true);
+            _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(_isEnemyTurnComplete);
         }
 
         public void UseDefenseMoveSlot(int slotNumber)

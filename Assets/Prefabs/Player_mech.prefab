@@ -3125,6 +3125,9 @@ GameObject:
   - component: {fileID: 3081973900726800698}
   - component: {fileID: 17178001128557794}
   - component: {fileID: 496021570683164530}
+  - component: {fileID: 2095247255}
+  - component: {fileID: 2095247254}
+  - component: {fileID: 2095247256}
   m_Layer: 7
   m_Name: Player_mech
   m_TagString: Player
@@ -3206,6 +3209,49 @@ MonoBehaviour:
   _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
   _playerTurnCompleteChannel: {fileID: 11400000, guid: 61cad106cc2e54a009e1dc392659f6f2, type: 2}
   _playerTurnChannel: {fileID: 11400000, guid: 1034325769ee8433797fd94f497b452d, type: 2}
+--- !u!65 &2095247255
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086928884379056646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.351503, y: 6.9362025, z: 8.342308}
+  m_Center: {x: -0.062773414, y: 3.3181012, z: -0.82884794}
+--- !u!114 &2095247254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086928884379056646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06292d0775a6241eabbc72c6d298b26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  sphereRadius: 2
+--- !u!54 &2095247256
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3086928884379056646}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!1 &3086930871192737354
 GameObject:
   m_ObjectHideFlags: 0

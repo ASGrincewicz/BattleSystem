@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace Veganimus.BattleSystem
 {
@@ -17,6 +15,7 @@ namespace Veganimus.BattleSystem
     public class Unit : MonoBehaviour
     {
         protected int _unitLevel;
+        [SerializeField] protected TargetFinder _targetUnit;
         [SerializeField] protected ElementType _unitType;
         [SerializeField] protected string _unitName;
         [SerializeField] protected int _unitHitPoints;
@@ -30,8 +29,6 @@ namespace Veganimus.BattleSystem
 
         [SerializeField] protected UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
         [SerializeField] protected UnitMoveNameUpdate _unitDefenseMoveNameUpdateChannel;
-
-        [SerializeField] protected LayerMask _target;
 
         //SO broadcast channel for turn completion
         //SO listener channel for BattleState change
@@ -52,20 +49,6 @@ namespace Veganimus.BattleSystem
                 for (int i = _unitDefensesMoveSet.Length - 1; i >= 0; i--)
                 {
                     _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitDefensesMoveSet[i].moveName, i);
-                }
-            }
-        }
-        protected void AcquireTarget(int amount)
-        {
-            RaycastHit hitInfo;
-            
-            if (Physics.SphereCast(transform.position,2f,Vector3.forward, out hitInfo, Mathf.Infinity,_target))
-            {
-                if(hitInfo.collider != null)
-                {
-                    Debug.Log($"{hitInfo.collider.name} was targeted!");
-                   var damage = hitInfo.collider.GetComponentInChildren<IDamageable>();
-                    damage.Damage(amount);
                 }
             }
         }

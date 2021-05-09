@@ -13,7 +13,7 @@ public abstract class UnitMove : ScriptableObject
     [SerializeField] protected MoveType _moveType;
 
     [SerializeField] protected ElementType _elementType;
-    public Unit _assignedUnit;
+    public Transform _assignedUnit;
 
     public UnityEvent<UnitMove> OnMoveQueued;
 
