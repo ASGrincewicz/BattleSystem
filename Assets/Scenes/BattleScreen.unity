@@ -1398,7 +1398,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3086425337214352674}
         m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
-        m_MethodName: UseMoveSlot
+        m_MethodName: UseAttackMoveSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1800,7 +1800,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 20
-  m_fontSizeMax: 40
+  m_fontSizeMax: 35
   m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1928,21 +1928,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1079766740183394}
-        m_TargetAssemblyTypeName: Veganimus.BattleSystem.EnemyUnit, Assembly-CSharp
-        m_MethodName: Damage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 20
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3086425337214352674}
         m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
-        m_MethodName: UseMoveSlot
+        m_MethodName: UseDefenseMoveSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2162,7 +2150,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 20
-  m_fontSizeMax: 40
+  m_fontSizeMax: 35
   m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2288,7 +2276,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 20
-  m_fontSizeMax: 40
+  m_fontSizeMax: 35
   m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2430,12 +2418,12 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3086425337214352674}
         m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
-        m_MethodName: UseMoveSlot
+        m_MethodName: UseAttackMoveSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2692,7 +2680,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 20
-  m_fontSizeMax: 40
+  m_fontSizeMax: 35
   m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2826,7 +2814,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 20
-  m_fontSizeMax: 40
+  m_fontSizeMax: 35
   m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3164,12 +3152,12 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3086425337214352674}
         m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
-        m_MethodName: UseMoveSlot
+        m_MethodName: UseAttackMoveSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3465,26 +3453,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1079766740183394}
-        m_TargetAssemblyTypeName: Veganimus.BattleSystem.EnemyUnit, Assembly-CSharp
-        m_MethodName: Damage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 20
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3086425337214352674}
         m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
-        m_MethodName: UseMoveSlot
+        m_MethodName: UseDefenseMoveSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3707,26 +3683,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1079766740183394}
-        m_TargetAssemblyTypeName: Veganimus.BattleSystem.EnemyUnit, Assembly-CSharp
-        m_MethodName: Damage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 20
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3086425337214352674}
         m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
-        m_MethodName: UseMoveSlot
+        m_MethodName: UseDefenseMoveSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4087,12 +4051,12 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3086425337214352674}
         m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
-        m_MethodName: UseMoveSlot
+        m_MethodName: UseAttackMoveSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4205,7 +4169,8 @@ MonoBehaviour:
   - {fileID: 1126963000}
   _unitNameUpdateChannel: {fileID: 11400000, guid: 4ec2433fc3ca04eff8ba1fa64706ed61, type: 2}
   _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
-  _unitMoveNameUpdateChannel: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}
+  _unitAttackMoveNameUpdateChannel: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}
+  _UnitDefenseMoveNameUpdateChannel: {fileID: 11400000, guid: ff4f6eedf94ed49c3a0e6636508523f0, type: 2}
 --- !u!1 &1340599706
 GameObject:
   m_ObjectHideFlags: 0
@@ -6077,7 +6042,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 20
-  m_fontSizeMax: 40
+  m_fontSizeMax: 35
   m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6404,7 +6369,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 20
-  m_fontSizeMax: 40
+  m_fontSizeMax: 35
   m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6532,26 +6497,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1079766740183394}
-        m_TargetAssemblyTypeName: Veganimus.BattleSystem.EnemyUnit, Assembly-CSharp
-        m_MethodName: Damage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 20
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3086425337214352674}
         m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
-        m_MethodName: UseMoveSlot
+        m_MethodName: UseDefenseMoveSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6664,7 +6617,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 20
-  m_fontSizeMax: 40
+  m_fontSizeMax: 35
   m_fontStyle: 33
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -6838,9 +6791,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
     - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
+      propertyPath: _emptyAttackPlaceholder
+      value: 
+      objectReference: {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
+    - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: _unitMoveSet.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
+      propertyPath: _emptyDefensePlaceholder
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
     - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: _unitMoveNameUpdateChannel
       value: 
@@ -6867,8 +6828,12 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 32451926f6cbe4d5db2b9f9f73067bd2, type: 2}
     - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: _unitDefensesMoveSet.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
+      propertyPath: _unitAttackMoveNameUpdateChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}
     - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: _unitAttacksMoveSet.Array.data[0]
       value: 
@@ -6884,7 +6849,11 @@ PrefabInstance:
     - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: _unitAttacksMoveSet.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 32451926f6cbe4d5db2b9f9f73067bd2, type: 2}
+      objectReference: {fileID: 11400000, guid: 60c44e7a30f164eb9a58298d78b28b0e, type: 2}
+    - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
+      propertyPath: _unitDefenseMoveNameUpdateChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: ff4f6eedf94ed49c3a0e6636508523f0, type: 2}
     - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: _unitDefensesMoveSet.Array.data[0]
       value: 
@@ -6896,11 +6865,11 @@ PrefabInstance:
     - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: _unitDefensesMoveSet.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
     - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: _unitDefensesMoveSet.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
     - target: {fileID: 3081973900726800698, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: m_RootOrder
       value: 0

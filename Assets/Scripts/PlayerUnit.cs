@@ -5,8 +5,9 @@ namespace Veganimus.BattleSystem
     {
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
-        [SerializeField] private UnitMoveNameUpdate _unitMoveNameUpdateChannel;
-
+        [SerializeField] private UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
+        [SerializeField] private UnitMoveNameUpdate _unitDefenseMoveNameUpdateChannel;
+        
         private void Start() => _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Player", _unitName);
 
         public void Damage(int amount)
@@ -27,14 +28,14 @@ namespace Veganimus.BattleSystem
             {
                 for (int i = _unitAttacksMoveSet.Length - 1; i >= 0; i--)
                 {
-                    _unitMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitAttacksMoveSet[i].moveName, i);
+                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitAttacksMoveSet[i].moveName, i);
                 }
             }
             else if (moveType == "Defense")
             {
                 for (int i = _unitDefensesMoveSet.Length - 1; i >= 0; i--)
                 {
-                    _unitMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitDefensesMoveSet[i].moveName, i);
+                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitDefensesMoveSet[i].moveName, i);
                 }
             }
         }

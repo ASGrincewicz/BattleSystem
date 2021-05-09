@@ -19,19 +19,22 @@ namespace Veganimus.BattleSystem
         [Header("Listening To")]
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
-        [SerializeField] private UnitMoveNameUpdate _unitMoveNameUpdateChannel;
+        [SerializeField] private UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
+        [SerializeField] private UnitMoveNameUpdate _UnitDefenseMoveNameUpdateChannel;
 
         private void OnEnable()
         {
             _unitNameUpdateChannel.OnUnitNameUpdated.AddListener(DisplayUnitName);
             _unitHPUpdateChannel.OnUnitHPUpdated.AddListener(DisplayCurrentUnitHP);
-            _unitMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentMoveNames);
+            _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentAttackMoveNames);
+            _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentDefenseMoveNames);
         }
         private void OnDisable()
         {
             _unitNameUpdateChannel.OnUnitNameUpdated.RemoveListener(DisplayUnitName);
             _unitHPUpdateChannel.OnUnitHPUpdated.RemoveListener(DisplayCurrentUnitHP);
-            _unitMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentMoveNames);
+            _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentAttackMoveNames);
+            _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentDefenseMoveNames);
         }
        
         private void DisplayUnitName(string unit, string unitName)
@@ -60,25 +63,28 @@ namespace Veganimus.BattleSystem
             }
         }
         //Need To Separate Attack and Defense Name Updates
-        private void DisplayCurrentMoveNames(string moveName, int moveSlot)
+        private void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
         {
-            for(int i = _playerAttackNames.Length; i>=0; i--)
+            for (int i = _playerAttackNames.Length; i >= 0; i--)
             {
                 _playerAttackNames[moveSlot].text = $"{moveName}";
-                foreach(Button button in _playerAttackButtons)
+                foreach (Button button in _playerAttackButtons)
                 {
                     if (moveName == null)
                         button.gameObject.SetActive(false);
                 }
             }
+        }
+        private void DisplayCurrentDefenseMoveNames(string moveName, int moveSlot)
+        { 
             for (int i = _playerDefenseNames.Length; i >= 0; i--)
             {
                 _playerDefenseNames[moveSlot].text = $"{moveName}";
-                foreach (Button button in _playerDefenseButtons)
-                {
-                    if (moveName == null)
-                        button.gameObject.SetActive(false);
-                }
+            }
+            foreach (Button button in _playerDefenseButtons)
+            {
+                if(_playerDefenseNames[moveSlot]== null)
+                    button.interactable = false;
             }
         }
     }

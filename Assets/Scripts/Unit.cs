@@ -22,16 +22,13 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected int _unitDefense;
         [SerializeField] protected UnitAttackMove[] _unitAttacksMoveSet = new UnitAttackMove[4];
         [SerializeField] protected UnitDefenseMove[] _unitDefensesMoveSet = new UnitDefenseMove[2];
+        [SerializeField] protected UnitAttackMove _emptyAttackPlaceholder;
+        [SerializeField] protected UnitDefenseMove _emptyDefensePlaceholder;
 
         private void Awake() => _currentUnitHP = _unitHitPoints;
 
-        public void UseAttackMoveSlot(int slotNumber)
-        {
-            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(this);
-        }
-        public void UseDefenseMoveSlot(int slotNumber)
-        {
-            _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(this);
-        }
+        public void UseAttackMoveSlot(int slotNumber) => _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(this);
+
+        public void UseDefenseMoveSlot(int slotNumber) => _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(this);
     }
 }
