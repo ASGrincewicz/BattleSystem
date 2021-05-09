@@ -4717,6 +4717,8 @@ MonoBehaviour:
   _currentEnemyUnit: {fileID: 0}
   _playerTurnChannel: {fileID: 11400000, guid: 1034325769ee8433797fd94f497b452d, type: 2}
   _enemyTurnChannel: {fileID: 11400000, guid: 314d096a87f744bbc8398ed2c3d790ba, type: 2}
+  _playerTurnCompleteChannel: {fileID: 11400000, guid: 61cad106cc2e54a009e1dc392659f6f2, type: 2}
+  _enemyTurnCompleteChannel: {fileID: 11400000, guid: 16318d7640d314e568dab7544bf4eeab, type: 2}
 --- !u!1 &1524927081
 GameObject:
   m_ObjectHideFlags: 0
@@ -6782,10 +6784,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1842159426}
     m_Modifications:
-    - target: {fileID: 496021570683164530, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
-      propertyPath: _playerTurnChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 1034325769ee8433797fd94f497b452d, type: 2}
     - target: {fileID: 3081973900726800698, guid: 7da9a075c24694c4fa8d00932053fb16, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -6902,53 +6900,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _unitType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _enemyTurnChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 314d096a87f744bbc8398ed2c3d790ba, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _emptyAttackPlaceholder
-      value: 
-      objectReference: {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _emptyDefensePlaceholder
-      value: 
-      objectReference: {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _unitAttackMoveNameUpdateChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _unitAttacksMoveSet.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _unitAttacksMoveSet.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 60c44e7a30f164eb9a58298d78b28b0e, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _unitAttacksMoveSet.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _unitAttacksMoveSet.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _unitDefenseMoveNameUpdateChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: ff4f6eedf94ed49c3a0e6636508523f0, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _unitDefensesMoveSet.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
-    - target: {fileID: 8996078759317339853, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}
-      propertyPath: _unitDefensesMoveSet.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 1797c1746195f4abf980856a149c29eb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8084f329a900c4e729e7da996aaa63da, type: 3}

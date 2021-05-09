@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 namespace Veganimus.BattleSystem
 {
@@ -26,7 +28,7 @@ namespace Veganimus.BattleSystem
         {
             _isEnemyTurnComplete = false;
             _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(_isEnemyTurnComplete);
-            DetermineAction();
+            StartCoroutine(TurnDelayRoutine());
         }
 
         private void DetermineAction()
@@ -64,6 +66,11 @@ namespace Veganimus.BattleSystem
             _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
             _isEnemyTurnComplete = true;
             _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(true);
+        }
+        private IEnumerator TurnDelayRoutine()
+        {
+            yield return new WaitForSeconds(5f);
+            DetermineAction();
         }
     }
 }

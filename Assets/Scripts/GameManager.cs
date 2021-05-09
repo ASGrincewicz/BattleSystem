@@ -13,8 +13,8 @@ namespace Veganimus.BattleSystem
         [SerializeField] private BattleState _battleState;
         [SerializeField] private GameObject _currentPlayerUnit;
         [SerializeField] private GameObject _currentEnemyUnit;
-        private bool _hasPlayerCompletedTurn;
-        private bool _hasEnemyCompletedTurn;
+        [SerializeField] private bool _hasPlayerCompletedTurn;
+        [SerializeField] private bool _hasEnemyCompletedTurn;
         
         [Header("Broadcasting on:")]
         [SerializeField] private PlayerTurnChannel _playerTurnChannel;
@@ -35,39 +35,44 @@ namespace Veganimus.BattleSystem
             _enemyTurnCompleteChannel.OnTurnComplete.RemoveListener(EnemyCompleteTurn);
         }
 
-        private IEnumerator Start()
+        private void Start()
         {
             var dieRoll = Random.Range(0, 20);
             _battleState = BattleState.Start;
             _currentPlayerUnit = GameObject.FindGameObjectWithTag("Player");
             _currentEnemyUnit = GameObject.FindGameObjectWithTag("Enemy");
-            yield return new WaitForSeconds(2f);
+
             if (dieRoll > 10)
-                ChangeState(BattleState.PlayerTurn);
-
+             ChangeState(BattleState.PlayerTurn);
+            
             else
-                ChangeState(BattleState.EnemyTurn);
+             ChangeState(BattleState.EnemyTurn);
         }
-        private void Update()
+       
+        private void PlayerCompleteTurn(bool turnComplete)
         {
-            if (_hasPlayerCompletedTurn == true && _hasEnemyCompletedTurn == false)
-                ChangeState(BattleState.EnemyTurn);
-
-            else if (_hasPlayerCompletedTurn == false && _hasEnemyCompletedTurn == true)
-                ChangeState(BattleState.PlayerTurn);
+            _hasPlayerCompletedTurn = turnComplete;
+            if (_hasPlayerCompletedTurn)
+             ChangeState(BattleState.EnemyTurn);
         }
-        private void PlayerCompleteTurn(bool turnComplete) => _hasPlayerCompletedTurn = turnComplete;
 
-        private void EnemyCompleteTurn(bool turnComplete) => _hasEnemyCompletedTurn = turnComplete;
-        
+        private void EnemyCompleteTurn(bool turnComplete)
+        {
+            _hasEnemyCompletedTurn = turnComplete;
+            if (_hasEnemyCompletedTurn)
+             ChangeState(BattleState.PlayerTurn);
+        }
+
         private void ChangeState(BattleState newState)
         {
             switch(newState)
             {
                 case BattleState.PlayerTurn:
+                    _battleState = BattleState.PlayerTurn;
                     _playerTurnChannel.RaisePlayerTurnEvent();
                     break;
                 case BattleState.EnemyTurn:
+                    _battleState = BattleState.EnemyTurn;
                     _enemyTurnChannel.RaiseEnemyTurnEvent();
                     break;
                 case BattleState.Win:
