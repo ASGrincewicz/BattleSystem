@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5474534120080010785}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6278858572720679378}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Parent_Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936462853886810951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LFJoint_3_Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 6936623588522218295}
   - component: {fileID: 6933949279682661429}
   - component: {fileID: 6924456337330964037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Backtoe_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936573782461910307}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_4_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 6943458392451309795}
   - component: {fileID: 6933677316416234715}
   - component: {fileID: 6926202949790326079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6936303280036447939}
   - component: {fileID: 7036571587536401083}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Upper_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936255196937411117}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_5_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936541668149025805}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_4_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,7 +439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936579195336616193}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBJoint_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936422531358916065}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBJoint_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943807841475195045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RFJoint_3_Goal_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,7 +532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936305793201902583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RFJoint_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943538920243396417}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,7 +596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6943930574375495941}
   - component: {fileID: 7037815020302446193}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,7 +684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6943817698718855883}
   - component: {fileID: 7035893551536250823}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Upper_leg_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,7 +769,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936441526244367753}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RFJoint_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +799,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943910867562599173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -832,7 +832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6936569236158006775}
   - component: {fileID: 7035940721026881467}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Upper_leg_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +917,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943786423737226505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RFJoint_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -950,7 +950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6936214293501802291}
   - component: {fileID: 7036111156251392093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shin_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1035,7 +1035,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943882979568328157}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1067,7 +1067,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936534419926291621}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RB_Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 6943570530539127775}
   - component: {fileID: 6934273605945799093}
   - component: {fileID: 6926084309679387739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fronttoe_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1178,7 +1178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943952009428498209}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1209,7 +1209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943470973095030631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LF_Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1239,7 +1239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943944899963434831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_5_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1269,7 +1269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943914647946571733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_5_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1301,7 +1301,7 @@ GameObject:
   - component: {fileID: 6943952275928679513}
   - component: {fileID: 6933710661610528737}
   - component: {fileID: 6926128166567228337}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Backtoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1380,7 +1380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936441401228963091}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RF_Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1412,7 +1412,7 @@ GameObject:
   - component: {fileID: 6943678408461468923}
   - component: {fileID: 6932374925883126611}
   - component: {fileID: 6925740552755756801}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1491,7 +1491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943920484720342311}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RFJoint_4_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1522,7 +1522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943654718702343349}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RFJoint_5_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1554,7 +1554,7 @@ GameObject:
   - component: {fileID: 6936408286741820363}
   - component: {fileID: 6933687419292917909}
   - component: {fileID: 6925760181157647673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Backtoe_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1633,7 +1633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943868522965316931}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1675,7 +1675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943634239522525375}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mech_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1719,7 +1719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6936431540052701325}
   - component: {fileID: 6279200182537227862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body_Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1763,7 +1763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936298687131711471}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1794,7 +1794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943574142260272567}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBJoint_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1826,7 +1826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943454421661286933}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBJoint_3_Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1858,7 +1858,7 @@ GameObject:
   - component: {fileID: 6936498444988896735}
   - component: {fileID: 6934283937335460509}
   - component: {fileID: 6926304607680875857}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fronttoe_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1937,7 +1937,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943834338036566521}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBJoint_3_Goal_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1969,7 +1969,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943700157835091969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_3_Goal_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2003,7 +2003,7 @@ GameObject:
   - component: {fileID: 6936136134050279225}
   - component: {fileID: 6934330618512783805}
   - component: {fileID: 6924487856959613399}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fronttoe_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2082,7 +2082,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943603244737371881}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBJoint_5_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2113,7 +2113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6943924899136789619}
   - component: {fileID: 7036295506306692663}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2198,7 +2198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943548212739754283}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RFJoint_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2229,7 +2229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936494795033626667}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_4_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2261,7 +2261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6936289751936329481}
   - component: {fileID: 7037735894434998509}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shin_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2347,7 +2347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6936660221439099561}
   - component: {fileID: 7037811908316173371}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shin_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2434,7 +2434,7 @@ GameObject:
   - component: {fileID: 6943703171844585679}
   - component: {fileID: 6932319493915722589}
   - component: {fileID: 6926408052153659307}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2513,7 +2513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936453314714113117}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2544,7 +2544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936113134086060847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2577,7 +2577,7 @@ GameObject:
   - component: {fileID: 6943428525990044467}
   - component: {fileID: 6933659126371037683}
   - component: {fileID: 6926397868416913185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fronttoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2656,7 +2656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943549374894797295}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LB_Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2686,7 +2686,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936403479454962601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBJoint_4_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2717,7 +2717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943601946127696181}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2748,7 +2748,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936454083751565971}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RFJoint_3_Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2778,7 +2778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943675877831673389}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2811,9 +2811,9 @@ GameObject:
   - component: {fileID: 6943622076856373113}
   - component: {fileID: 5378682100523537057}
   - component: {fileID: 8996078759317339853}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_mech
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2865,10 +2865,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595f0ec97aafd4b6baf61a2e845a038e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _unitType: 8
+  _unitType: 0
   _unitName: Enemy Mech
   _unitHitPoints: 100
+  _currentUnitHP: 0
   _unitSpeed: 6
+  _unitDefense: 5
+  _unitAttacksMoveSet:
+  - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
+  - {fileID: 11400000, guid: 60c44e7a30f164eb9a58298d78b28b0e, type: 2}
+  - {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
+  - {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
+  _unitDefensesMoveSet:
+  - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
+  - {fileID: 11400000, guid: 1797c1746195f4abf980856a149c29eb, type: 2}
+  _emptyAttackPlaceholder: {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
+  _emptyDefensePlaceholder: {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
+  _unitAttackMoveNameUpdateChannel: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}
+  _unitDefenseMoveNameUpdateChannel: {fileID: 11400000, guid: ff4f6eedf94ed49c3a0e6636508523f0, type: 2}
+  _unitNameUpdateChannel: {fileID: 11400000, guid: 4ec2433fc3ca04eff8ba1fa64706ed61, type: 2}
+  _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
+  _enemyTurnCompleteChannel: {fileID: 11400000, guid: 16318d7640d314e568dab7544bf4eeab, type: 2}
+  _enemyTurnChannel: {fileID: 11400000, guid: 314d096a87f744bbc8398ed2c3d790ba, type: 2}
 --- !u!1 &6939789966086779749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2880,7 +2898,7 @@ GameObject:
   - component: {fileID: 6943892439512654349}
   - component: {fileID: 6934059041679335361}
   - component: {fileID: 6926139678332498211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Backtoe_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2959,7 +2977,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943816086665310409}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RBJoint_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2990,7 +3008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936390082257135631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3021,7 +3039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6943621082711929425}
   - component: {fileID: 7037447041417918197}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Upper_leg_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3106,7 +3124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943511467893247031}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_3_Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3138,7 +3156,7 @@ GameObject:
   - component: {fileID: 6936246851148737447}
   - component: {fileID: 6933998621033712569}
   - component: {fileID: 6926237175603072259}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3217,7 +3235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6936642224263892825}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LBJoint_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3248,7 +3266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6943569265658503729}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LFJoint_3_Goal_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3282,7 +3300,7 @@ GameObject:
   - component: {fileID: 6936179286227193965}
   - component: {fileID: 6932338103997781489}
   - component: {fileID: 6926175151071883861}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body_Upper_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3365,7 +3383,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8973844525448896715}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mech2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

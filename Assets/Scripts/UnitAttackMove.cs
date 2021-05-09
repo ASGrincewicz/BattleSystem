@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEditor;
 using Veganimus.BattleSystem;
 
 [CreateAssetMenu(menuName = "Unit Moves/ Attack Move")]
@@ -8,13 +9,28 @@ public class UnitAttackMove : UnitMove
     [SerializeField] private int _damageAmount;
     [SerializeField] private float _attackSpeed;
 
-    public  void RaiseAttackMoveUsedEvent(Unit assignedUnit)
+    public UnityEvent<int> OnAttackMoveUsed;
+
+    public  void RaiseAttackMoveUsedEvent(string unitName, int moveSlot)
     {
-        PerformAttackMove(assignedUnit);
+        RaiseMoveQueuedEvent(this);
+        PerformAttackMove(unitName, moveSlot);
     }
 
-    private void PerformAttackMove(Unit assignedUnit)
+    private void PerformAttackMove(string unitName, int moveSlot)
     {
-        Debug.Log($"{assignedUnit} is Attacking");
+        if (moveName != "")
+        {
+            Debug.Log($"{unitName} used {moveName}!");
+            OnAttackMoveUsed.Invoke(moveSlot);
+        }
+        else
+            return;
+    }
+    public void CreateNewAttackMove(string newMoveName)
+    {
+        UnitAttackMove newAttackMove = CreateInstance<UnitAttackMove>();
+        newAttackMove.moveName = newMoveName;
+        AssetDatabase.CreateAsset(CreateInstance<UnitAttackMove>(), $"Assets/Scripts/Scriptable Objects/Moves/Attack Moves/{newAttackMove.moveName}.asset");
     }
 }

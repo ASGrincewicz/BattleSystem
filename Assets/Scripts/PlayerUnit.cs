@@ -1,13 +1,24 @@
 using UnityEngine;
+using System;
+using System.Collections;
+
 namespace Veganimus.BattleSystem
 {
     public class PlayerUnit : Unit, IDamageable, IHealable, IDefendable
-    {
+    { 
+        [Header("Broadcasting on")]
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
-        [SerializeField] private UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
-        [SerializeField] private UnitMoveNameUpdate _unitDefenseMoveNameUpdateChannel;
-        
+        [SerializeField] private TurnCompleteChannel _playerTurnCompleteChannel;
+        [Header("Listening to:")]
+        [SerializeField] private PlayerTurnChannel _playerTurnChannel;
+        [Space]
+        private bool _isPlayerTurnComplete;
+
+        private void OnEnable() => _playerTurnChannel.OnPlayerTurn.AddListener(InitiatePlayerTurn);
+
+        private void OnDisable() => _playerTurnChannel.OnPlayerTurn.RemoveListener(InitiatePlayerTurn);
+
         private void Start() => _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Player", _unitName);
 
         public void Damage(int amount)
@@ -22,22 +33,24 @@ namespace Veganimus.BattleSystem
         }
         public void AdjustDefense(int amount) => _unitDefense = amount;
 
-        public void UpdateMoveNames(string moveType)
+        private void InitiatePlayerTurn()
         {
-            if (moveType == "Attack")
-            {
-                for (int i = _unitAttacksMoveSet.Length - 1; i >= 0; i--)
-                {
-                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitAttacksMoveSet[i].moveName, i);
-                }
-            }
-            else if (moveType == "Defense")
-            {
-                for (int i = _unitDefensesMoveSet.Length - 1; i >= 0; i--)
-                {
-                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitDefensesMoveSet[i].moveName, i);
-                }
-            }
+            _isPlayerTurnComplete = false;
+            _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
+
+        }
+        public void UseAttackMoveSlot(int slotNumber)
+        {
+            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, slotNumber);
+            _isPlayerTurnComplete = true;
+            _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
+        }
+
+        public void UseDefenseMoveSlot(int slotNumber)
+        {
+            _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
+            _isPlayerTurnComplete = true;
+            _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
         }
     }
 }

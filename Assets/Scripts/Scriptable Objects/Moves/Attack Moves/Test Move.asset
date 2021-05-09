@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481f41dc42a5f424e9e3a1186c52fd9d, type: 3}
+  m_Name: Test Move
+  m_EditorClassIdentifier: 
+  moveName: 
+  moveCost: 0
+  _moveType: 0
+  _elementType: 0
+  _assignedUnit: {fileID: 0}
+  OnMoveQueued:
+    m_PersistentCalls:
+      m_Calls: []
+  _damageAmount: 0
+  _attackSpeed: 0
+  OnAttackMoveUsed:
+    m_PersistentCalls:
+      m_Calls: []

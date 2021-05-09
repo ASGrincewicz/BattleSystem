@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Veganimus.BattleSystem;
 
 public abstract class UnitMove : ScriptableObject
@@ -9,8 +10,16 @@ public abstract class UnitMove : ScriptableObject
     {
         Physical, Special, Buff, DeBuff
     }
-    [SerializeField] private MoveType _moveType;
+    [SerializeField] protected MoveType _moveType;
 
-    [SerializeField] private ElementType _elementType;
+    [SerializeField] protected ElementType _elementType;
     public Unit _assignedUnit;
+
+    public UnityEvent<UnitMove> OnMoveQueued;
+
+    public void RaiseMoveQueuedEvent(UnitMove unitMove)
+    {
+        if (OnMoveQueued != null)
+            OnMoveQueued.Invoke(this);
+    }
 }

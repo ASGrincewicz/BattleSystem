@@ -14,6 +14,7 @@ namespace Veganimus.BattleSystem
     }
     public class Unit : MonoBehaviour
     {
+        protected int _unitLevel;
         [SerializeField] protected ElementType _unitType;
         [SerializeField] protected string _unitName;
         [SerializeField] protected int _unitHitPoints;
@@ -25,10 +26,30 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected UnitAttackMove _emptyAttackPlaceholder;
         [SerializeField] protected UnitDefenseMove _emptyDefensePlaceholder;
 
+        [SerializeField] protected UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
+        [SerializeField] protected UnitMoveNameUpdate _unitDefenseMoveNameUpdateChannel;
+
+        //SO broadcast channel for turn completion
+        //SO listener channel for BattleState change
+
         private void Awake() => _currentUnitHP = _unitHitPoints;
 
-        public void UseAttackMoveSlot(int slotNumber) => _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(this);
-
-        public void UseDefenseMoveSlot(int slotNumber) => _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(this);
+        public void UpdateMoveNames(string moveType)
+        {
+            if (moveType == "Attack")
+            {
+                for (int i = _unitAttacksMoveSet.Length - 1; i >= 0; i--)
+                {
+                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitAttacksMoveSet[i].moveName, i);
+                }
+            }
+            else if (moveType == "Defense")
+            {
+                for (int i = _unitDefensesMoveSet.Length - 1; i >= 0; i--)
+                {
+                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitDefensesMoveSet[i].moveName, i);
+                }
+            }
+        }
     }
 }
