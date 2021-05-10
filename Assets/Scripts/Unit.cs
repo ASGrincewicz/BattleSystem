@@ -32,12 +32,8 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
         [SerializeField] protected UnitMoveNameUpdate _unitDefenseMoveNameUpdateChannel;
         [SerializeField] protected DisplayActionChannel _displayAttackActionChannel;
-        [SerializeField] protected DisplayActionChannel _displayDefenseActionChannel;
-        [SerializeField] protected DisplayActionChannel _displayItemActionChannel;
-        [SerializeField] protected DisplayActionChannel _displayOtherActionChannel;
-        //SO broadcast channel for turn completion
-        //SO listener channel for BattleState change
-
+        [SerializeField] protected BattleStateChannel _endBattleChannel;
+       
         private void Awake() => _currentUnitHP = _unitHitPoints;
 
         private void Start()

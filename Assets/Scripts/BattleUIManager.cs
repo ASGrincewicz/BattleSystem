@@ -21,16 +21,19 @@ namespace Veganimus.BattleSystem
         private static BattleUIManager _instance;
         [SerializeField] private Canvas _battleCanvas;
         [Header("Player UI")]
+        [SerializeField] private GameObject _playerUI;
         [SerializeField] private Image _playerTurnIndicator;
         [SerializeField] private TMP_Text _playerUnitNameText;
         [SerializeField] private Slider _playerHitPointsSlider;
         [Header("Enemy UI")]
+        [SerializeField] private GameObject _enemyUI;
         [SerializeField] private Image _enemyTurnIndicator;
         [SerializeField] private TMP_Text _enemyUnitNameText;
         [SerializeField] private Slider _enemyHitPointsSlider;
         [Space]
         [SerializeField] private TMP_Text _actionText;
         [SerializeField] private TMP_Text _statUpdateText;
+        [SerializeField] private TMP_Text _endBattleText;
         private WaitForSeconds _displayTextDelay;
 
         [Header("Player Attack Move Buttons")]
@@ -47,6 +50,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
         [SerializeField] private UnitMoveNameUpdate _UnitDefenseMoveNameUpdateChannel;
         [SerializeField] private DisplayActionChannel _displayActionTakenChannel;
+        [SerializeField] private BattleStateChannel _endBattleChannel;
 
         private void Awake() => _instance = this;
 
@@ -57,6 +61,7 @@ namespace Veganimus.BattleSystem
             _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentDefenseMoveNames);
             _displayActionTakenChannel.OnDisplayAction.AddListener(DisplayCurrentActionTaken);
+            _endBattleChannel.OnBattleStateChanged.AddListener(EndBattleUIActivate);
         }
         private void OnDisable()
         {
@@ -65,6 +70,7 @@ namespace Veganimus.BattleSystem
             _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentDefenseMoveNames);
             _displayActionTakenChannel.OnDisplayAction.RemoveListener(DisplayCurrentActionTaken);
+            _endBattleChannel.OnBattleStateChanged.RemoveListener(EndBattleUIActivate);
         }
         private void Start() => _displayTextDelay = new WaitForSeconds(2f);
 
@@ -92,6 +98,22 @@ namespace Veganimus.BattleSystem
                     button.interactable = true;
                 }
             }
+        }
+        private void EndBattleUIActivate(BattleState battleState)
+        {
+            _playerUI.SetActive(false);
+            _enemyUI.SetActive(false);
+            _actionText.gameObject.SetActive(false);
+            _statUpdateText.gameObject.SetActive(false);
+            _endBattleText.gameObject.SetActive(true);
+
+            if (battleState == BattleState.Win)
+              _endBattleText.text = $"YOU WIN!";
+            
+
+            else if (battleState == BattleState.Lose)
+             _endBattleText.text = $"YOU LOSE!";
+            
         }
 
         private void DisplayUnitName(string unit, string unitName)

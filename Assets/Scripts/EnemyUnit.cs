@@ -54,6 +54,7 @@ namespace Veganimus.BattleSystem
             {
                 _currentUnitHP = 0;
                 _animator.SetInteger("hitPoints", 0);
+                _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Win);
             }
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Enemy", _unitHitPoints, _currentUnitHP);
             StartCoroutine(StatUpdateDelayRoutine($"{_unitName} took {damage} damage!"));
