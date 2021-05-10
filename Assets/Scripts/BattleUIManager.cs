@@ -20,10 +20,15 @@ namespace Veganimus.BattleSystem
         }
         private static BattleUIManager _instance;
         [SerializeField] private Canvas _battleCanvas;
+        [Header("Player UI")]
+        [SerializeField] private Image _playerTurnIndicator;
         [SerializeField] private TMP_Text _playerUnitNameText;
-        [SerializeField] private TMP_Text _enemyUnitNameText;
         [SerializeField] private Slider _playerHitPointsSlider;
+        [Header("Enemy UI")]
+        [SerializeField] private Image _enemyTurnIndicator;
+        [SerializeField] private TMP_Text _enemyUnitNameText;
         [SerializeField] private Slider _enemyHitPointsSlider;
+        [Space]
         [SerializeField] private TMP_Text _actionText;
         [SerializeField] private TMP_Text _statUpdateText;
         private WaitForSeconds _displayTextDelay;
@@ -148,6 +153,25 @@ namespace Veganimus.BattleSystem
         {
             _statUpdateText.text = $"{statUpdate}";
             StartCoroutine(DisplayTextDelayRoutine(_statUpdateText));
+        }
+        public void ToggleTurnIndicators(BattleState battleState)
+        {
+            switch(battleState)
+            {
+                case BattleState.PlayerTurn:
+                    _playerTurnIndicator.gameObject.SetActive(true);
+                    _enemyTurnIndicator.gameObject.SetActive(false);
+                    break;
+                case BattleState.EnemyTurn:
+                    _playerTurnIndicator.gameObject.SetActive(false);
+                    _enemyTurnIndicator.gameObject.SetActive(true);
+                    break;
+                default:
+                    _playerTurnIndicator.gameObject.SetActive(false);
+                    _enemyTurnIndicator.gameObject.SetActive(false);
+                    break;
+
+            }
         }
         private IEnumerator DisplayTextDelayRoutine(TMP_Text text)
         {

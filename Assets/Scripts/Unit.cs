@@ -27,6 +27,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected UnitDefenseMove[] _unitDefensesMoveSet = new UnitDefenseMove[2];
         [SerializeField] protected UnitAttackMove _emptyAttackPlaceholder;
         [SerializeField] protected UnitDefenseMove _emptyDefensePlaceholder;
+        protected Animator _animator;
 
         [SerializeField] protected UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
         [SerializeField] protected UnitMoveNameUpdate _unitDefenseMoveNameUpdateChannel;
@@ -38,7 +39,12 @@ namespace Veganimus.BattleSystem
         //SO listener channel for BattleState change
 
         private void Awake() => _currentUnitHP = _unitHitPoints;
-      
+
+        private void Start()
+        {
+            _animator = GetComponent<Animator>();
+        }
+
         public void UpdateMoveNames(string moveType)
         {
             if (moveType == "Attack")

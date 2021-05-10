@@ -17,7 +17,11 @@ namespace Veganimus.BattleSystem
 
         private void OnDisable() => _enemyTurnChannel.OnEnemyTurn.RemoveListener(InitiateEnemyTurn);
 
-        private void Start() => _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Enemy", _unitName);
+        private void Start()
+        {
+            _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Enemy", _unitName);
+            _animator = GetComponent<Animator>();
+        }
 
         private void InitiateEnemyTurn()
         {
@@ -29,12 +33,14 @@ namespace Veganimus.BattleSystem
         private void DetermineAction()
         {
             var dieRoll = Random.Range(1, 6);
+            var attackToUse = Random.Range(0, _unitAttacksMoveSet.Length);
+            var defenseToUse = Random.Range(0, _unitDefensesMoveSet.Length);
+            //var itemToUse = Random.Range(0, _unitItems.Length);
             if (dieRoll >= 3)
-                UseAttackMoveSlot(0);
-            //end turn
+                UseAttackMoveSlot(attackToUse);
+            
             else if (dieRoll < 3)
-                UseDefenseMoveSlot(0);
-            //end turn
+                UseDefenseMoveSlot(defenseToUse);
         }
 
         public void Damage(int amount)
@@ -44,6 +50,11 @@ namespace Veganimus.BattleSystem
                 damage = 0;
 
             _currentUnitHP -= damage;
+            if (_currentUnitHP <= 0)
+            {
+                _currentUnitHP = 0;
+                _animator.SetInteger("hitPoints", 0);
+            }
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Enemy", _unitHitPoints, _currentUnitHP);
             StartCoroutine(StatUpdateDelayRoutine($"{_unitName} took {damage} damage!"));
         }

@@ -19,7 +19,11 @@ namespace Veganimus.BattleSystem
 
         private void OnDisable() => _playerTurnChannel.OnPlayerTurn.RemoveListener(InitiatePlayerTurn);
 
-        private void Start() => _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Player", _unitName);
+        private void Start()
+        {
+            _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Player", _unitName);
+            _animator = GetComponent<Animator>();
+        }
 
         public void Damage(int amount)
         {
@@ -28,6 +32,12 @@ namespace Veganimus.BattleSystem
                 damage = 0;
 
             _currentUnitHP -= damage;
+            if (_currentUnitHP <= 0)
+            {
+                _currentUnitHP = 0;
+                _animator.SetInteger("hitPoints", 0);
+            }
+
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Player", _unitHitPoints, _currentUnitHP);
            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} took {damage} damage!"));
         }

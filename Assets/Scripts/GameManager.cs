@@ -68,21 +68,27 @@ namespace Veganimus.BattleSystem
             yield return _changeStateDelay;
             switch(newState)
             {
+                case BattleState.Start:
+                    _battleState = BattleState.Start;
+                    BattleUIManager.Instance.ToggleTurnIndicators(BattleState.Start);
+                    break;
                 case BattleState.PlayerTurn:
                     _battleState = BattleState.PlayerTurn;
                     BattleUIManager.Instance.ActivateButtons(true);
+                    BattleUIManager.Instance.ToggleTurnIndicators(BattleState.PlayerTurn);
                     _playerTurnChannel.RaisePlayerTurnEvent();
                     break;
                 case BattleState.EnemyTurn:
                     _battleState = BattleState.EnemyTurn;
                     BattleUIManager.Instance.ActivateButtons(false);
+                    BattleUIManager.Instance.ToggleTurnIndicators(BattleState.EnemyTurn);
                     _enemyTurnChannel.RaiseEnemyTurnEvent();
                     break;
                 case BattleState.Win:
-                    //Display win sequence
+                    BattleUIManager.Instance.ToggleTurnIndicators(BattleState.Win);
                     break;
                 case BattleState.Lose:
-                    //Display losing sequence;
+                    BattleUIManager.Instance.ToggleTurnIndicators(BattleState.Lose);
                     break;
             }
         }
