@@ -1,15 +1,32 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 namespace Veganimus.BattleSystem
 {
     public class BattleUIManager : MonoBehaviour
     {
+        public static BattleUIManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    Debug.LogError("Boss is NULL!");
+                }
+                return _instance;
+            }
+        }
+        private static BattleUIManager _instance;
         [SerializeField] private Canvas _battleCanvas;
         [SerializeField] private TMP_Text _playerUnitNameText;
         [SerializeField] private TMP_Text _enemyUnitNameText;
         [SerializeField] private Slider _playerHitPointsSlider;
         [SerializeField] private Slider _enemyHitPointsSlider;
+        [SerializeField] private TMP_Text _actionText;
+        [SerializeField] private TMP_Text _statUpdateText;
+        private WaitForSeconds _displayTextDelay;
 
         [Header("Player Attack Move Buttons")]
         [SerializeField] private TMP_Text[] _playerAttackNames = new TMP_Text[0];
@@ -24,6 +41,9 @@ namespace Veganimus.BattleSystem
         [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
         [SerializeField] private UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
         [SerializeField] private UnitMoveNameUpdate _UnitDefenseMoveNameUpdateChannel;
+        [SerializeField] private DisplayActionChannel _displayActionTakenChannel;
+
+        private void Awake() => _instance = this;
 
         private void OnEnable()
         {
@@ -31,6 +51,7 @@ namespace Veganimus.BattleSystem
             _unitHPUpdateChannel.OnUnitHPUpdated.AddListener(DisplayCurrentUnitHP);
             _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentDefenseMoveNames);
+            _displayActionTakenChannel.OnDisplayAction.AddListener(DisplayCurrentActionTaken);
         }
         private void OnDisable()
         {
@@ -38,8 +59,36 @@ namespace Veganimus.BattleSystem
             _unitHPUpdateChannel.OnUnitHPUpdated.RemoveListener(DisplayCurrentUnitHP);
             _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentDefenseMoveNames);
+            _displayActionTakenChannel.OnDisplayAction.RemoveListener(DisplayCurrentActionTaken);
         }
-       
+        private void Start() => _displayTextDelay = new WaitForSeconds(2f);
+
+        public void ActivateButtons(bool isPlayerTurn)
+        {
+            if (isPlayerTurn == false)
+            {
+                foreach (var button in _playerAttackButtons)
+                {
+                    button.interactable = false;
+                }
+                foreach (var button in _playerDefenseButtons)
+                {
+                    button.interactable = false;
+                }
+            }
+            else if (isPlayerTurn)
+            {
+                foreach (var button in _playerAttackButtons)
+                {
+                    button.interactable = true;
+                }
+                foreach (var button in _playerDefenseButtons)
+                {
+                    button.interactable = true;
+                }
+            }
+        }
+
         private void DisplayUnitName(string unit, string unitName)
         {
             switch(unit)
@@ -89,6 +138,21 @@ namespace Veganimus.BattleSystem
                 if(_playerDefenseNames[moveSlot]== null)
                     button.interactable = false;
             }
+        }
+        public void DisplayCurrentActionTaken(string actionTaken)
+        {
+            _actionText.text = $"{actionTaken}";
+            StartCoroutine(DisplayTextDelayRoutine(_actionText));
+        }
+        public void DisplayStatUpdateText(string statUpdate)
+        {
+            _statUpdateText.text = $"{statUpdate}";
+            StartCoroutine(DisplayTextDelayRoutine(_statUpdateText));
+        }
+        private IEnumerator DisplayTextDelayRoutine(TMP_Text text)
+        {
+            yield return _displayTextDelay;
+            text.text = $"";
         }
     }
 }

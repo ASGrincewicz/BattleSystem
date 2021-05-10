@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace Veganimus.BattleSystem
 {
@@ -8,6 +9,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
         [SerializeField] private TurnCompleteChannel _playerTurnCompleteChannel;
+        [Space]
         [Header("Listening to:")]
         [SerializeField] private PlayerTurnChannel _playerTurnChannel;
         [Space]
@@ -21,15 +23,25 @@ namespace Veganimus.BattleSystem
 
         public void Damage(int amount)
         {
-            _currentUnitHP -= (amount- _unitDefense);
+            var damage = amount -= _unitDefense;
+            if (damage <= 0)
+                damage = 0;
+
+            _currentUnitHP -= damage;
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Player", _unitHitPoints, _currentUnitHP);
+           StartCoroutine(StatUpdateDelayRoutine($"{_unitName} took {damage} damage!"));
         }
         public void Heal(int amount)
         {
             _currentUnitHP += amount;
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Player", _unitHitPoints, _currentUnitHP);
+            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} healed {amount} HP!"));
         }
-        public void AdjustDefense(int amount) => _unitDefense += amount;
+        public void AdjustDefense(int amount)
+        {
+            _unitDefense += amount;
+            StartCoroutine(StatUpdateDelayRoutine(($"{_unitName} raised Defense by {amount}.")));
+        }
 
         private void InitiatePlayerTurn()
         {
@@ -39,15 +51,17 @@ namespace Veganimus.BattleSystem
         }
         public void UseAttackMoveSlot(int slotNumber)
         {
+            BattleUIManager.Instance.ActivateButtons(false);
             int damageAmount = _unitAttacksMoveSet[slotNumber].damageAmount;
-            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName,this.transform,slotNumber);
             _targetUnit.targetIDamageable.Damage(damageAmount);
+            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName,this.transform,slotNumber);
             _isPlayerTurnComplete = true;
             _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
         }
 
         public void UseDefenseMoveSlot(int slotNumber)
         {
+            BattleUIManager.Instance.ActivateButtons(false);
             _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
             AdjustDefense(_unitDefensesMoveSet[slotNumber].defenseBuff);
             _isPlayerTurnComplete = true;

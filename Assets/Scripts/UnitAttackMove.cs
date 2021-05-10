@@ -21,11 +21,8 @@ public class UnitAttackMove : UnitMove
     private void PerformAttackMove(string unitName, int moveSlot)
     {
         if (moveName != "")
-        {
-            Debug.Log($"{unitName} used {moveName}!");
-            //broadcast to UI
-            OnAttackMoveUsed.Invoke(moveSlot, _assignedUnit);
-        }
+         _displayActionChannel.RaiseDisplayActionEvent($"{unitName} used {moveName}!");
+        
         else
             return;
     }

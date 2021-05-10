@@ -19,7 +19,7 @@ public class UnitDefenseMove : UnitMove
     private void PerformDefenseMove(string unitName)
     {
         if (moveName != "")
-            Debug.Log($"{unitName} used {moveName}!");
+            _displayActionChannel.RaiseDisplayActionEvent($"{unitName} used {moveName}!");
 
         else
             return;

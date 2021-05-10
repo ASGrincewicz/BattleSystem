@@ -14,14 +14,7 @@ namespace Veganimus.BattleSystem
             {
                 _targetUnit = other.gameObject.GetComponent<Unit>();
                 if (_targetUnit != null)
-                {
-                    Debug.Log("Found Target");
                     targetIDamageable = _targetUnit.gameObject.GetComponent<IDamageable>();
-                    if(targetIDamageable!= null)
-                    {
-                        Debug.Log("Found Interface!");
-                    }
-                }
             }
         }
     }

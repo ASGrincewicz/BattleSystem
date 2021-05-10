@@ -39,21 +39,32 @@ namespace Veganimus.BattleSystem
 
         public void Damage(int amount)
         {
-            _currentUnitHP -= amount - _unitDefense;
-            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Enemy",_unitHitPoints, _currentUnitHP);
+            var damage = amount -= _unitDefense;
+            if (damage <= 0)
+                damage = 0;
+
+            _currentUnitHP -= damage;
+            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Enemy", _unitHitPoints, _currentUnitHP);
+            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} took {damage} damage!"));
         }
+       
         public void Heal(int amount)
         {
             _currentUnitHP += amount;
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Enemy", _unitHitPoints, _currentUnitHP);
+            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} healed {amount} HP!"));
         }
-        public void AdjustDefense(int amount) => _unitDefense += amount;
+        public void AdjustDefense(int amount)
+        {
+            _unitDefense += amount;
+            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} raised Defense by {amount}."));
+        }
 
         public void UseAttackMoveSlot(int slotNumber)
         {
             int damageAmount = _unitAttacksMoveSet[slotNumber].damageAmount;
-            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
             _targetUnit.targetIDamageable.Damage(damageAmount);
+            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
             _isEnemyTurnComplete = true;
             _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(_isEnemyTurnComplete);
         }

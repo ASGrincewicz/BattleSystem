@@ -17,8 +17,12 @@ MonoBehaviour:
   _moveType: 0
   _elementType: 0
   _assignedUnit: {fileID: 0}
-  _defenseBuff: 0
-  _defenseStrength: 0
+  _displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
+  OnMoveQueued:
+    m_PersistentCalls:
+      m_Calls: []
+  defenseBuff: 0
+  defenseStrength: 0
   OnDefenseMoveUsed:
     m_PersistentCalls:
       m_Calls: []

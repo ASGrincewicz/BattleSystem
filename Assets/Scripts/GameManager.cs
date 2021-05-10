@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Veganimus.BattleSystem
@@ -13,6 +14,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private GameObject _currentEnemyUnit;
         [SerializeField] private bool _hasPlayerCompletedTurn;
         [SerializeField] private bool _hasEnemyCompletedTurn;
+        private WaitForSeconds _changeStateDelay;
         
         [Header("Broadcasting on:")]
         [SerializeField] private PlayerTurnChannel _playerTurnChannel;
@@ -35,42 +37,45 @@ namespace Veganimus.BattleSystem
 
         private void Start()
         {
+            _changeStateDelay = new WaitForSeconds(5f);
             var dieRoll = Random.Range(0, 20);
             _battleState = BattleState.Start;
             _currentPlayerUnit = GameObject.FindGameObjectWithTag("Player");
             _currentEnemyUnit = GameObject.FindGameObjectWithTag("Enemy");
 
             if (dieRoll > 10)
-             ChangeState(BattleState.PlayerTurn);
-            
+                StartCoroutine(ChangeState(BattleState.PlayerTurn));
             else
-             ChangeState(BattleState.EnemyTurn);
+                StartCoroutine(ChangeState(BattleState.EnemyTurn));
         }
        
         private void PlayerCompleteTurn(bool turnComplete)
         {
             _hasPlayerCompletedTurn = turnComplete;
             if (_hasPlayerCompletedTurn)
-             ChangeState(BattleState.EnemyTurn);
+                StartCoroutine(ChangeState(BattleState.EnemyTurn));
         }
 
         private void EnemyCompleteTurn(bool turnComplete)
         {
             _hasEnemyCompletedTurn = turnComplete;
             if (_hasEnemyCompletedTurn)
-             ChangeState(BattleState.PlayerTurn);
+                StartCoroutine(ChangeState(BattleState.PlayerTurn));
         }
 
-        private void ChangeState(BattleState newState)
+        private IEnumerator ChangeState(BattleState newState)
         {
+            yield return _changeStateDelay;
             switch(newState)
             {
                 case BattleState.PlayerTurn:
                     _battleState = BattleState.PlayerTurn;
+                    BattleUIManager.Instance.ActivateButtons(true);
                     _playerTurnChannel.RaisePlayerTurnEvent();
                     break;
                 case BattleState.EnemyTurn:
                     _battleState = BattleState.EnemyTurn;
+                    BattleUIManager.Instance.ActivateButtons(false);
                     _enemyTurnChannel.RaiseEnemyTurnEvent();
                     break;
                 case BattleState.Win:

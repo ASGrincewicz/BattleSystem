@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 namespace Veganimus.BattleSystem
 {
@@ -29,12 +30,15 @@ namespace Veganimus.BattleSystem
 
         [SerializeField] protected UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
         [SerializeField] protected UnitMoveNameUpdate _unitDefenseMoveNameUpdateChannel;
-
+        [SerializeField] protected DisplayActionChannel _displayAttackActionChannel;
+        [SerializeField] protected DisplayActionChannel _displayDefenseActionChannel;
+        [SerializeField] protected DisplayActionChannel _displayItemActionChannel;
+        [SerializeField] protected DisplayActionChannel _displayOtherActionChannel;
         //SO broadcast channel for turn completion
         //SO listener channel for BattleState change
 
         private void Awake() => _currentUnitHP = _unitHitPoints;
-
+      
         public void UpdateMoveNames(string moveType)
         {
             if (moveType == "Attack")
@@ -51,6 +55,11 @@ namespace Veganimus.BattleSystem
                     _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitDefensesMoveSet[i].moveName, i);
                 }
             }
+        }
+        protected IEnumerator StatUpdateDelayRoutine(string actionTakenText)
+        {
+            yield return new WaitForSeconds(2f);
+            BattleUIManager.Instance.DisplayStatUpdateText(actionTakenText);
         }
     }
 }

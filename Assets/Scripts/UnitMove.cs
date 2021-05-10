@@ -15,6 +15,8 @@ public abstract class UnitMove : ScriptableObject
     [SerializeField] protected ElementType _elementType;
     public Transform _assignedUnit;
 
+    [SerializeField] protected DisplayActionChannel _displayActionChannel;
+
     public UnityEvent<UnitMove> OnMoveQueued;
 
     public void RaiseMoveQueuedEvent(UnitMove unitMove)
