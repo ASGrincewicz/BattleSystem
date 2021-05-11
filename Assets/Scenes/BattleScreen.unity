@@ -781,6 +781,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1776855242}
     m_Modifications:
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1207839900}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RightClick
+      objectReference: {fileID: 0}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Veganimus.BattleSystem.GUIPointerClick, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 714907297410086690, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2252,6 +2268,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &787360551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+  m_PrefabInstance: {fileID: 714907298529883841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0feaa8c27b74f5bb6036c89589d10f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &793879306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,6 +3614,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200645175}
   m_CullTransparentMesh: 1
+--- !u!114 &1207839900 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+  m_PrefabInstance: {fileID: 228409728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0feaa8c27b74f5bb6036c89589d10f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1280522495
 GameObject:
   m_ObjectHideFlags: 0
@@ -4252,6 +4290,17 @@ MonoBehaviour:
   _playerTurnCompleteChannel: {fileID: 11400000, guid: 61cad106cc2e54a009e1dc392659f6f2, type: 2}
   _enemyTurnCompleteChannel: {fileID: 11400000, guid: 16318d7640d314e568dab7544bf4eeab, type: 2}
   _endBattleChannel: {fileID: 11400000, guid: 3e2e44ced2e734f2bb44a5993706eb3b, type: 2}
+--- !u!114 &1487345503 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+  m_PrefabInstance: {fileID: 1862694416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0feaa8c27b74f5bb6036c89589d10f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1495079331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4259,6 +4308,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1776855242}
     m_Modifications:
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1882346558}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RightClick
+      objectReference: {fileID: 0}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Veganimus.BattleSystem.GUIPointerClick, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 714907297410086690, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5776,6 +5841,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1776855242}
     m_Modifications:
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1487345503}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RightClick
+      objectReference: {fileID: 0}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Veganimus.BattleSystem.GUIPointerClick, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 714907297410086690, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5959,6 +6040,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1882346558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+  m_PrefabInstance: {fileID: 1495079331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0feaa8c27b74f5bb6036c89589d10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1895158116
@@ -6578,6 +6670,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1776855242}
     m_Modifications:
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 787360551}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RightClick
+      objectReference: {fileID: 0}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Veganimus.BattleSystem.GUIPointerClick, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
+      propertyPath: onRight.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 714907297410086690, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
