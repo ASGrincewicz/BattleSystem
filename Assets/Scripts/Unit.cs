@@ -85,11 +85,13 @@ namespace Veganimus.BattleSystem
                 return;
             for (int i = _unitAttacksMoveSet.Length-1; i >= 0; i--)
             {
-                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _unitAttacksMoveSet[i].MoveUses, i);
+                if(_unitAttacksMoveSet[i].MoveUses >0)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _unitAttacksMoveSet[i].MoveUses, i);
             }
             for (int i = _unitDefensesMoveSet.Length-1; i >= 0; i--)
             {
-                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _unitDefensesMoveSet[i].MoveUses, i);
+                if(_unitDefensesMoveSet[i].MoveUses > 0)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _unitDefensesMoveSet[i].MoveUses, i);
             }
         }
         protected IEnumerator StatUpdateDelayRoutine(string actionTakenText)

@@ -155,7 +155,7 @@ namespace Veganimus.BattleSystem
                 _playerAttackNames[moveSlot].text = $"{moveName}";
                 foreach (Button button in _playerAttackButtons)
                 {
-                    if (moveName == null)
+                    if (moveName == "")
                         button.gameObject.SetActive(false);
                 }
             }
@@ -165,11 +165,6 @@ namespace Veganimus.BattleSystem
             for (int i = _playerDefenseNames.Length; i >= 0; i--)
             {
                 _playerDefenseNames[moveSlot].text = $"{moveName}";
-            }
-            foreach (Button button in _playerDefenseButtons)
-            {
-                if(_playerDefenseNames[moveSlot]== null)
-                    button.interactable = false;
             }
         }
         public void DisplayCurrentMoveUsesLeft(string moveType, int uses, int moveSlot)

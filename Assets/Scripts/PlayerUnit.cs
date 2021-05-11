@@ -93,7 +93,7 @@ namespace Veganimus.BattleSystem
             if (usesLeft >0)
             {
                 _defenseMoveUses[slotNumber]--;
-                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _attackMoveUses[slotNumber], slotNumber);
+                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveUses[slotNumber], slotNumber);
                 BattleUIManager.Instance.ActivateButtons(false);
                 _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
                 AdjustDefense(_unitDefensesMoveSet[slotNumber].DefenseBuff);
