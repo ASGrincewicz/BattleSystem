@@ -4,6 +4,9 @@ namespace Veganimus.BattleSystem
 {
     public class EnemyUnit : Unit, IDamageable, IHealable, IDefendable
     {
+        public int EnemyAggression { get => _enemyAggression; private set => _enemyAggression = value; }
+        [Range(-1, 1)] [SerializeField] private int _enemyAggression;
+
         [Header("Broadcasting On:")]
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
@@ -27,6 +30,7 @@ namespace Veganimus.BattleSystem
         {
             _isEnemyTurnComplete = false;
             _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(_isEnemyTurnComplete);
+            SetMoveUses();
             StartCoroutine(TurnDelayRoutine());
         }
 
@@ -36,10 +40,10 @@ namespace Veganimus.BattleSystem
             var attackToUse = Random.Range(0, _unitAttacksMoveSet.Length);
             var defenseToUse = Random.Range(0, _unitDefensesMoveSet.Length);
             //var itemToUse = Random.Range(0, _unitItems.Length);
-            if (dieRoll >= 3)
+            if (dieRoll + _enemyAggression >= 3 )
                 UseAttackMoveSlot(attackToUse);
             
-            else if (dieRoll < 3)
+            else if (dieRoll + _enemyAggression < 3)
                 UseDefenseMoveSlot(defenseToUse);
         }
 
@@ -74,19 +78,42 @@ namespace Veganimus.BattleSystem
 
         public void UseAttackMoveSlot(int slotNumber)
         {
-            int damageAmount = _unitAttacksMoveSet[slotNumber].damageAmount;
-            _targetUnit.targetIDamageable.Damage(damageAmount);
-            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
-            _isEnemyTurnComplete = true;
-            _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(_isEnemyTurnComplete);
+            int usesLeft = _attackMoveUses[slotNumber];
+            if (usesLeft > 0)
+            {
+                _attackMoveUses[slotNumber]--;
+                bool didMoveHit = _unitAttacksMoveSet[slotNumber].RollForMoveAccuracy(_accuracyModifier);
+                if (didMoveHit == true)
+                {
+                    int damageAmount = _unitAttacksMoveSet[slotNumber].DamageAmount;
+                    _targetUnit.targetIDamageable.Damage(damageAmount);
+                    _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
+                }
+                else if (didMoveHit == false)
+                {
+                    _displayAttackActionChannel.RaiseDisplayActionEvent($"{_unitName} used {_unitAttacksMoveSet[slotNumber].MoveName}!");
+                    StartCoroutine(StatUpdateDelayRoutine($"{_unitName} Missed!"));
+                }
+                _isEnemyTurnComplete = true;
+                _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(_isEnemyTurnComplete);
+            }
+            else if (usesLeft <= 0)
+                DetermineAction();
         }
 
         public void UseDefenseMoveSlot(int slotNumber)
         {
-            _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
-            AdjustDefense(_unitDefensesMoveSet[slotNumber].defenseBuff);
-            _isEnemyTurnComplete = true;
-            _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(true);
+            int usesLeft = _defenseMoveUses[slotNumber];
+            if (usesLeft > 0)
+            {
+                _defenseMoveUses[slotNumber]--;
+                _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
+                AdjustDefense(_unitDefensesMoveSet[slotNumber].DefenseBuff);
+                _isEnemyTurnComplete = true;
+                _enemyTurnCompleteChannel.RaiseTurnCompleteEvent(true);
+            }
+            else if (usesLeft <= 0)
+                DetermineAction();
         }
         private IEnumerator TurnDelayRoutine()
         {

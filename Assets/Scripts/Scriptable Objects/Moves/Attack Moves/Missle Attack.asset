@@ -12,17 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481f41dc42a5f424e9e3a1186c52fd9d, type: 3}
   m_Name: Missle Attack
   m_EditorClassIdentifier: 
-  moveName: Missle Attack
-  moveCost: 0
+  _moveName: Missle Attack
+  _moveUses: 5
+  _moveAccuracy: 65
   _moveType: 0
   _elementType: 0
   _assignedUnit: {fileID: 0}
   _displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
-  OnMoveQueued:
-    m_PersistentCalls:
-      m_Calls: []
-  damageAmount: 20
-  attackSpeed: 0
+  _damageAmount: 20
+  _attackSpeed: 0
   OnAttackMoveUsed:
     m_PersistentCalls:
       m_Calls: []

@@ -38,10 +38,12 @@ namespace Veganimus.BattleSystem
 
         [Header("Player Attack Move Buttons")]
         [SerializeField] private TMP_Text[] _playerAttackNames = new TMP_Text[0];
+        [SerializeField] private TMP_Text[] _attackMoveUses = new TMP_Text[0];
         [SerializeField] private Button[] _playerAttackButtons = new Button[4];
 
         [Header("Player Defense Move Buttons")]
         [SerializeField] private TMP_Text[] _playerDefenseNames = new TMP_Text[0];
+        [SerializeField] private TMP_Text[] _defenseMoveUses = new TMP_Text[0];
         [SerializeField] private Button[] _playerDefenseButtons = new Button[4];
 
         [Header("Listening To")]
@@ -52,7 +54,12 @@ namespace Veganimus.BattleSystem
         [SerializeField] private DisplayActionChannel _displayActionTakenChannel;
         [SerializeField] private BattleStateChannel _endBattleChannel;
 
-        private void Awake() => _instance = this;
+        private void Awake()
+        {
+            _instance = this;
+            ActivateButtons(false);
+            ToggleTurnIndicators(BattleState.Start);
+        }
 
         private void OnEnable()
         {
@@ -99,6 +106,7 @@ namespace Veganimus.BattleSystem
                 }
             }
         }
+        
         private void EndBattleUIActivate(BattleState battleState)
         {
             _playerUI.SetActive(false);
@@ -109,11 +117,9 @@ namespace Veganimus.BattleSystem
 
             if (battleState == BattleState.Win)
               _endBattleText.text = $"YOU WIN!";
-            
 
             else if (battleState == BattleState.Lose)
              _endBattleText.text = $"YOU LOSE!";
-            
         }
 
         private void DisplayUnitName(string unit, string unitName)
@@ -164,6 +170,18 @@ namespace Veganimus.BattleSystem
             {
                 if(_playerDefenseNames[moveSlot]== null)
                     button.interactable = false;
+            }
+        }
+        public void DisplayCurrentMoveUsesLeft(string moveType, int uses, int moveSlot)
+        {
+            switch(moveType)
+            {
+                case "attack":
+                    _attackMoveUses[moveSlot].text = $"Uses Left: {uses}";
+                    break;
+                case "defense":
+                    _defenseMoveUses[moveSlot].text = $"Uses Left: {uses}";
+                    break;
             }
         }
         public void DisplayCurrentActionTaken(string actionTaken)

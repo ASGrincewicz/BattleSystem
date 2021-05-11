@@ -59,23 +59,49 @@ namespace Veganimus.BattleSystem
             _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
 
         }
+       
         public void UseAttackMoveSlot(int slotNumber)
         {
-            BattleUIManager.Instance.ActivateButtons(false);
-            int damageAmount = _unitAttacksMoveSet[slotNumber].damageAmount;
-            _targetUnit.targetIDamageable.Damage(damageAmount);
-            _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName,this.transform,slotNumber);
-            _isPlayerTurnComplete = true;
-            _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
+            int usesLeft = _attackMoveUses[slotNumber];
+            if (usesLeft > 0)
+            {
+                _attackMoveUses[slotNumber]--;
+                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveUses[slotNumber], slotNumber);
+                BattleUIManager.Instance.ActivateButtons(false);
+                bool didMoveHit = _unitAttacksMoveSet[slotNumber].RollForMoveAccuracy(_accuracyModifier);
+                if (didMoveHit == true)
+                {
+                    int damageAmount = _unitAttacksMoveSet[slotNumber].DamageAmount;
+                    _targetUnit.targetIDamageable.Damage(damageAmount);
+                    _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
+                }
+                else if (didMoveHit == false)
+                {
+                    _displayAttackActionChannel.RaiseDisplayActionEvent($"{_unitName} used {_unitAttacksMoveSet[slotNumber].MoveName}!");
+                    StartCoroutine(StatUpdateDelayRoutine($"{_unitName} Missed!"));
+                }
+                _isPlayerTurnComplete = true;
+                _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
+            }
+            else if (usesLeft <= 0)
+                return;
         }
 
         public void UseDefenseMoveSlot(int slotNumber)
         {
-            BattleUIManager.Instance.ActivateButtons(false);
-            _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
-            AdjustDefense(_unitDefensesMoveSet[slotNumber].defenseBuff);
-            _isPlayerTurnComplete = true;
-            _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
+            int usesLeft = _defenseMoveUses[slotNumber];
+            if (usesLeft >0)
+            {
+                _defenseMoveUses[slotNumber]--;
+                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _attackMoveUses[slotNumber], slotNumber);
+                BattleUIManager.Instance.ActivateButtons(false);
+                _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
+                AdjustDefense(_unitDefensesMoveSet[slotNumber].DefenseBuff);
+                _isPlayerTurnComplete = true;
+                _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
+            }
+            else if (usesLeft <=0)
+                return;
         }
     }
 }
