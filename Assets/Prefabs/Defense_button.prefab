@@ -470,9 +470,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  textGridOne: {fileID: 6427817171412266167}
-  textGridTwo: {fileID: 8071777092335684957}
-  baseText: Button
+  gridOne: {fileID: 6427817171412266167}
+  gridTwo: {fileID: 8071777092335684957}
 --- !u!1 &4584161577104490385
 GameObject:
   m_ObjectHideFlags: 0

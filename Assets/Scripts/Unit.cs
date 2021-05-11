@@ -68,14 +68,18 @@ namespace Veganimus.BattleSystem
             {
                 for (int i = _unitAttacksMoveSet.Length - 1; i >= 0; i--)
                 {
-                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitAttacksMoveSet[i].MoveName, i);
+                    var move = _unitAttacksMoveSet[i];
+                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, i);
+                    BattleUIManager.Instance.DisplayMoveStats("attack", move.DamageAmount, move.MoveAccuracy, 0, i);
                 }
             }
             else if (moveType == "Defense")
             {
                 for (int i = _unitDefensesMoveSet.Length - 1; i >= 0; i--)
                 {
-                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(_unitDefensesMoveSet[i].MoveName, i);
+                    var move = _unitDefensesMoveSet[i];
+                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, i);
+                    BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.DefenseBuff, i);
                 }
             }
         }

@@ -14,10 +14,9 @@ namespace Veganimus.BattleSystem
     {
         public UnityEvent onLeft;
         public UnityEvent onRight;
-        public GameObject textGridOne;
-        public GameObject textGridTwo;
-        public string baseText = "Button";
-
+        public GameObject gridOne;
+        public GameObject gridTwo;
+        
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Left)
@@ -28,15 +27,15 @@ namespace Veganimus.BattleSystem
         }
         public void RightClick()
         {
-            textGridOne.SetActive(false);
-            textGridTwo.SetActive(true);
-            StartCoroutine(TextReset());
+            gridOne.SetActive(false);
+            gridTwo.SetActive(true);
+            StartCoroutine(GridReset());
         }
-        private IEnumerator TextReset()
+        private IEnumerator GridReset()
         {
             yield return new WaitForSeconds(2f);
-            textGridOne.SetActive(true);
-            textGridTwo.SetActive(false);
+            gridOne.SetActive(true);
+            gridTwo.SetActive(false);
         }
     }
 }
