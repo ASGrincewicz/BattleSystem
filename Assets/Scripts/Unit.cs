@@ -56,11 +56,11 @@ namespace Veganimus.BattleSystem
             {
                 for (int i = 0; i < _unitAttacksMoveSet.Length; i++)
                 {
-                    _attackMoveUses.Add(_unitAttacksMoveSet[i].MoveUses);
+                    _attackMoveUses.Add(_unitAttacksMoveSet[i].moveUses);
                 }
                 for (int i = 0; i < _unitDefensesMoveSet.Length; i++)
                 {
-                    _defenseMoveUses.Add(_unitDefensesMoveSet[i].MoveUses);
+                    _defenseMoveUses.Add(_unitDefensesMoveSet[i].moveUses);
                 }
             }
 
@@ -75,8 +75,8 @@ namespace Veganimus.BattleSystem
                 for (int i = _unitAttacksMoveSet.Length - 1; i >= 0; i--)
                 {
                     var move = _unitAttacksMoveSet[i];
-                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, i);
-                    BattleUIManager.Instance.DisplayMoveStats("attack", move.DamageAmount, move.MoveAccuracy, 0, i);
+                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.moveName, i);
+                    BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.moveAccuracy, 0, i);
                 }
             }
             else if (moveType == "Defense")
@@ -84,8 +84,8 @@ namespace Veganimus.BattleSystem
                 for (int i = _unitDefensesMoveSet.Length - 1; i >= 0; i--)
                 {
                     var move = _unitDefensesMoveSet[i];
-                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, i);
-                    BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.DefenseBuff, i);
+                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.moveName, i);
+                    BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.defenseBuff, i);
                 }
             }
         }
@@ -95,13 +95,13 @@ namespace Veganimus.BattleSystem
                 return;
             for (int i = _unitAttacksMoveSet.Length-1; i >= 0; i--)
             {
-                if(_unitAttacksMoveSet[i].MoveUses >0)
-                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _unitAttacksMoveSet[i].MoveUses, i);
+                if(_unitAttacksMoveSet[i].moveUses >0)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _unitAttacksMoveSet[i].moveUses, i);
             }
             for (int i = _unitDefensesMoveSet.Length-1; i >= 0; i--)
             {
-                if(_unitDefensesMoveSet[i].MoveUses > 0)
-                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _unitDefensesMoveSet[i].MoveUses, i);
+                if(_unitDefensesMoveSet[i].moveUses > 0)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _unitDefensesMoveSet[i].moveUses, i);
             }
         }
         protected IEnumerator StatUpdateDelayRoutine(string actionTakenText)

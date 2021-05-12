@@ -1,14 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "Unit Moves/ Attack Move")]
 public class UnitAttackMove : UnitMove
 {
-    public int DamageAmount { get => damageAmount; private set => value = damageAmount; }
     public int damageAmount;
-    public int AttackSpeed { get => attackSpeed; private set => value = attackSpeed; }
     public int attackSpeed;
-    
 
     public UnityEvent<int, Transform> OnAttackMoveUsed;
 
@@ -20,9 +16,9 @@ public class UnitAttackMove : UnitMove
     
     private void PerformAttackMove(string unitName, int moveSlot)
     {
-        if (MoveName != "")
+        if (moveName != "")
         {
-            _displayActionChannel.RaiseDisplayActionEvent($"{unitName} used {MoveName}!");
+            displayActionChannel.RaiseDisplayActionEvent($"{unitName} used {moveName}!");
         }
         else
             return;

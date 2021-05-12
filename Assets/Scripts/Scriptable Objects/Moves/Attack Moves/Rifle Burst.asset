@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 481f41dc42a5f424e9e3a1186c52fd9d, type: 3}
-  m_Name: Energy Drain
+  m_Name: Rifle Burst
   m_EditorClassIdentifier: 
-  moveName: Energy Drain
+  moveName: Rifle Burst
   moveUses: 5
-  moveAccuracy: 90
+  moveAccuracy: 75
   moveType: 0
   elementType: 0
   _assignedUnit: {fileID: 0}

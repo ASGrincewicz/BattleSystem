@@ -18,7 +18,7 @@ MonoBehaviour:
   moveType: 0
   elementType: 0
   _assignedUnit: {fileID: 0}
-  _displayActionChannel: {fileID: 0}
+  displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   defenseBuff: 0
   _defeneseStrength: 0
   OnDefenseMoveUsed:

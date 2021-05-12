@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481f41dc42a5f424e9e3a1186c52fd9d, type: 3}
   m_Name: Laser Shot
   m_EditorClassIdentifier: 
-  moveName: 
-  moveUses: 0
-  moveAccuracy: 0
+  moveName: Laser Shot
+  moveUses: 5
+  moveAccuracy: 75
   moveType: 0
   elementType: 0
   _assignedUnit: {fileID: 0}
-  _displayActionChannel: {fileID: 0}
-  damageAmount: 0
+  displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
+  damageAmount: 15
   attackSpeed: 0
   OnAttackMoveUsed:
     m_PersistentCalls:

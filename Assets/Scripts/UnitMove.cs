@@ -7,16 +7,16 @@ public enum MoveType
 }
 public abstract class UnitMove : ScriptableObject
 {
-    public string MoveName { get => moveName; protected set => moveName = value; }
+   
     public string moveName;
-    public int MoveUses { get => moveUses; protected set => moveUses = value; }
+    
     [Range(0, 10)] public int moveUses;
-    public float MoveAccuracy { get => moveAccuracy; private set => value = moveAccuracy; }
+    
     public float moveAccuracy;
     public MoveType moveType;
     public ElementType elementType;
     [SerializeField] protected Transform _assignedUnit;
-    [SerializeField] protected DisplayActionChannel _displayActionChannel;
+    public DisplayActionChannel displayActionChannel;
 
     public bool RollForMoveAccuracy(int accuracyModifier)
     {

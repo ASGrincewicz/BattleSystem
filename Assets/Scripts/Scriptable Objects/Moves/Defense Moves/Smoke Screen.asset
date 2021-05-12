@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481f41dc42a5f424e9e3a1186c52fd9d, type: 3}
-  m_Name: Energy Drain
+  m_Script: {fileID: 11500000, guid: 896baabd08f5449b09ff26ad842d7405, type: 3}
+  m_Name: Smoke Screen
   m_EditorClassIdentifier: 
-  moveName: Energy Drain
-  moveUses: 5
-  moveAccuracy: 90
+  moveName: 
+  moveUses: 0
+  moveAccuracy: 0
   moveType: 0
   elementType: 0
   _assignedUnit: {fileID: 0}
-  displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
-  damageAmount: 5
-  attackSpeed: 0
-  OnAttackMoveUsed:
+  displayActionChannel: {fileID: 0}
+  defenseBuff: 0
+  _defeneseStrength: 0
+  OnDefenseMoveUsed:
     m_PersistentCalls:
       m_Calls: []

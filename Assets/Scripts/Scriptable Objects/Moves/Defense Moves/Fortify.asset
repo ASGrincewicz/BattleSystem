@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896baabd08f5449b09ff26ad842d7405, type: 3}
   m_Name: Fortify
   m_EditorClassIdentifier: 
-  _moveName: Fortify
-  _moveUses: 2
-  _moveAccuracy: 0
-  _moveType: 0
-  _elementType: 0
+  moveName: Fortify
+  moveUses: 2
+  moveAccuracy: 0
+  moveType: 0
+  elementType: 0
   _assignedUnit: {fileID: 0}
-  _displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
-  _defenseBuff: 1
+  displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
+  defenseBuff: 1
   _defeneseStrength: 1
   OnDefenseMoveUsed:
     m_PersistentCalls:

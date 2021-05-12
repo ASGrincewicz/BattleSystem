@@ -69,13 +69,13 @@ namespace Veganimus.BattleSystem
                 bool didMoveHit = _unitAttacksMoveSet[slotNumber].RollForMoveAccuracy(_accuracyModifier);
                 if (didMoveHit == true)
                 {
-                    int damageAmount = _unitAttacksMoveSet[slotNumber].DamageAmount;
+                    int damageAmount = _unitAttacksMoveSet[slotNumber].damageAmount;
                     _targetUnit.targetIDamageable.Damage(damageAmount);
                     _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
                 }
                 else if (didMoveHit == false)
                 {
-                    _displayAttackActionChannel.RaiseDisplayActionEvent($"{_unitName} used {_unitAttacksMoveSet[slotNumber].MoveName}!");
+                    _displayAttackActionChannel.RaiseDisplayActionEvent($"{_unitName} used {_unitAttacksMoveSet[slotNumber].moveName}!");
                     StartCoroutine(StatUpdateDelayRoutine($"{_unitName} Missed!"));
                 }
                 _isPlayerTurnComplete = true;
@@ -94,7 +94,7 @@ namespace Veganimus.BattleSystem
                 BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveUses[slotNumber], slotNumber);
                 BattleUIManager.Instance.ActivateButtons(false);
                 _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
-                AdjustDefense(_unitDefensesMoveSet[slotNumber].DefenseBuff);
+                AdjustDefense(_unitDefensesMoveSet[slotNumber].defenseBuff);
                 _isPlayerTurnComplete = true;
                 _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
             }

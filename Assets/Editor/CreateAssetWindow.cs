@@ -23,6 +23,7 @@ namespace Veganimus.BattleSystem
         private MoveType moveType;
         private ElementType elementType;
         private int healAmount;
+        private Object channel;
 
         // Add menu named "My Window" to the Window menu
         [MenuItem("Custom/Create Asset")]
@@ -56,15 +57,17 @@ namespace Veganimus.BattleSystem
                     attackAccuracy = EditorGUILayout.IntSlider("Attack Accuracy",attackAccuracy,10,100, GUILayout.Width(200f));
                     moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", moveType);
                     elementType = (ElementType)EditorGUILayout.EnumPopup("Element Type", elementType);
+                    channel = EditorGUILayout.ObjectField(channel, typeof(DisplayActionChannel));
                     break;
                 case AssetTypeToCreate.DefenseMove:
                     uses = EditorGUILayout.IntField("Defense Move Uses", uses, GUILayout.Width(200f));
                     defenseBuff = EditorGUILayout.IntSlider("Defense Buff",defenseBuff,0,10, GUILayout.Width(200f));
                     moveType = (MoveType)EditorGUILayout.EnumPopup("Move Type", moveType);
+                    channel = EditorGUILayout.ObjectField(channel, typeof(DisplayActionChannel));
                     break;
 
             }
-            var button = GUILayout.RepeatButton("Create New Asset", GUILayout.Height(50f), GUILayout.Width(200f));
+            var button = GUILayout.Button("Create New Asset", GUILayout.Height(50f), GUILayout.Width(200f));
             if (button && _assetName != "")
                 CreateNewItemAsset(_assetTypeToCreate);
 
@@ -103,6 +106,7 @@ namespace Veganimus.BattleSystem
                     newAttackMove.moveAccuracy = attackAccuracy;
                     newAttackMove.moveType = moveType;
                     newAttackMove.elementType = elementType;
+                    newAttackMove.displayActionChannel = (DisplayActionChannel)channel;
                     break;
                 case AssetTypeToCreate.DefenseMove:
                     var newDefenseMove = CreateInstance<UnitDefenseMove>();
@@ -113,6 +117,7 @@ namespace Veganimus.BattleSystem
                     newDefenseMove.moveUses = uses;
                     newDefenseMove.defenseBuff = defenseBuff;
                     newDefenseMove.moveType = moveType;
+                    newDefenseMove.displayActionChannel = (DisplayActionChannel)channel;
                     break;
             }
         }
