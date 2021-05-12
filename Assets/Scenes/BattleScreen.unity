@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 42961e02cf49c4dcb8655d7bd0943d3e, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: cd1730f22aa544fc78f74cd7bb0e931d, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 93824111}
   - component: {fileID: 93824110}
   m_Layer: 5
-  m_Name: Run_button
+  m_Name: Switch_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2304,8 +2304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.995283, b: 0.995283, a: 0.69411767}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.64328945, g: 0.9811321, b: 0.77120984, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2591,13 +2591,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 834210296}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 5.2500005, y: 5.2500005, z: 0}
   m_LocalScale: {x: 10, y: 0.5, z: 10}
   m_Children: []
   m_Father: {fileID: 1189509344}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!65 &834210298
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3041,7 +3041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &956950874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3246,13 +3246,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083559848}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 5.2500005, z: 4.7500005}
   m_LocalScale: {x: 10, y: 0.5, z: 10}
   m_Children: []
   m_Father: {fileID: 1189509344}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 180}
 --- !u!65 &1083559850
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4123,6 +4123,10 @@ MonoBehaviour:
   _actionText: {fileID: 1978592159}
   _statUpdateText: {fileID: 1895158117}
   _endBattleText: {fileID: 1148509764}
+  _unitHPText: {fileID: 2144347277}
+  _unitSpeed: {fileID: 897449445}
+  _unitDefense: {fileID: 1504103812}
+  _unitAccuracy: {fileID: 1572498433}
   _playerAttackNames:
   - {fileID: 737339210}
   - {fileID: 233702965}
@@ -4456,7 +4460,7 @@ GameObject:
   - component: {fileID: 1397240642}
   - component: {fileID: 1397240641}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Switch_button_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4501,7 +4505,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Flee
+  m_text: 'Switch
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5874,6 +5880,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3086425337214352674}
+        m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
+        m_MethodName: DisplayUnitStats
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   gridOne: {fileID: 446832442}
   gridTwo: {fileID: 711350123}
 --- !u!114 &1651820341 stripped
@@ -6439,13 +6457,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815215748}
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: -5.25, y: 5.25, z: 0}
   m_LocalScale: {x: 10, y: 0.5, z: 10}
   m_Children: []
   m_Father: {fileID: 1189509344}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
 --- !u!65 &1815215750
 BoxCollider:
   m_ObjectHideFlags: 0

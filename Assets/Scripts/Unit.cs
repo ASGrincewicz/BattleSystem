@@ -42,6 +42,12 @@ namespace Veganimus.BattleSystem
 
         private void Start() => _animator = GetComponent<Animator>();
 
+        public void DisplayUnitStats() => BattleUIManager.Instance.DisplayUnitStats(_currentUnitHP,
+                                                                                    _unitHitPoints,
+                                                                                    _unitSpeed,
+                                                                                    _unitDefense,
+                                                                                    _accuracyModifier);
+
         public void SetMoveUses()
         {
             if (_attackMoveUses.Count > 0 || _defenseMoveUses.Count > 0)

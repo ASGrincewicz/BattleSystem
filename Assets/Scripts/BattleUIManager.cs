@@ -35,7 +35,12 @@ namespace Veganimus.BattleSystem
         [SerializeField] private TMP_Text _statUpdateText;
         [SerializeField] private TMP_Text _endBattleText;
         private WaitForSeconds _displayTextDelay;
-
+        [Space]
+        [Header("Unit Stats")]
+        [SerializeField] private TMP_Text _unitHPText;
+        [SerializeField] private TMP_Text _unitSpeed;
+        [SerializeField] private TMP_Text _unitDefense;
+        [SerializeField] private TMP_Text _unitAccuracy;
         [Header("Player Attack Move Buttons")]
         [SerializeField] private TMP_Text[] _playerAttackNames = new TMP_Text[0];
         [SerializeField] private TMP_Text[] _attackMoveUses = new TMP_Text[0];
@@ -169,6 +174,13 @@ namespace Veganimus.BattleSystem
             {
                 _playerDefenseNames[moveSlot].text = $"{moveName}";
             }
+        }
+        public void DisplayUnitStats(int hp, int maxHP,int speed, int defense, int accuracyMod)
+        {
+            _unitHPText.text = $"Current HP: {hp}/ {maxHP}";
+            _unitSpeed.text = $"Speed: {speed}";
+            _unitDefense.text = $"Defense: {defense}";
+            _unitAccuracy.text = $"Accuracy Mod: {accuracyMod}";
         }
         public void DisplayCurrentMoveUsesLeft(string moveType, int uses, int moveSlot)
         {
