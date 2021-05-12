@@ -2,7 +2,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 namespace Veganimus.BattleSystem
 {
     public class BattleUIManager : MonoBehaviour

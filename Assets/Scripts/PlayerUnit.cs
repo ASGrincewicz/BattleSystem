@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 namespace Veganimus.BattleSystem
 {
@@ -57,7 +56,6 @@ namespace Veganimus.BattleSystem
         {
             _isPlayerTurnComplete = false;
             _playerTurnCompleteChannel.RaiseTurnCompleteEvent(_isPlayerTurnComplete);
-
         }
        
         public void UseAttackMoveSlot(int slotNumber)

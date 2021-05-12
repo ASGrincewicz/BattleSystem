@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEditor;
-using Veganimus.BattleSystem;
 
 [CreateAssetMenu(menuName = "Unit Moves/ Defense Move")]
 public class UnitDefenseMove : UnitMove
 {
-    public int DefenseBuff { get => _defenseBuff; private set => value = _defenseBuff; }
-    [SerializeField] private int _defenseBuff;
+    public int DefenseBuff { get => defenseBuff; private set => value = defenseBuff; }
+    public int defenseBuff;
     public int DefenseStrength { get => _defeneseStrength; private set => value = _defeneseStrength; }
     [SerializeField] private int _defeneseStrength;
 
@@ -26,11 +24,5 @@ public class UnitDefenseMove : UnitMove
 
         else
             return;
-    }
-    public void CreateNewDefenseMove(string newMoveName)
-    {
-        UnitDefenseMove newDefenseMove = CreateInstance<UnitDefenseMove>();
-        newDefenseMove.MoveName = newMoveName;
-        AssetDatabase.CreateAsset(CreateInstance<UnitAttackMove>(), $"Assets/Scripts/Scriptable Objects/Moves/Attack Moves/{newDefenseMove.MoveName}.asset");
     }
 }
