@@ -1,15 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 namespace Veganimus.BattleSystem
 {
     public enum BattleState
     {
-        Start, PlayerTurn, EnemyTurn, Win, Lose
+        Start, PlayerTurn, EnemyTurn,AllyTurn,EnemyAllyTurn, Win, Lose
     }
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private BattleState _battleState;
+        [SerializeField] private List<Character> characters;
         [SerializeField] private GameObject _currentPlayerUnit;
         [SerializeField] private GameObject _currentEnemyUnit;
         [SerializeField] private bool _hasPlayerCompletedTurn;
@@ -18,31 +21,30 @@ namespace Veganimus.BattleSystem
         private WaitForSeconds _changeStateDelay;
         
         [Header("Broadcasting on:")]
-        [SerializeField] private PlayerTurnChannel _playerTurnChannel;
-        [SerializeField] private EnemyTurnChannel _enemyTurnChannel;
+        [SerializeField] private CharacterTurnChannel _characterTurnChannel;
         [Header("Listening to")]
-        [SerializeField] private TurnCompleteChannel _playerTurnCompleteChannel;
-        [SerializeField] private TurnCompleteChannel _enemyTurnCompleteChannel;
+        [SerializeField] private TurnCompleteChannel _characterTurnCompleteChannel;
+        //[SerializeField] private TurnCompleteChannel _enemyTurnCompleteChannel;
         [SerializeField] private BattleStateChannel _endBattleChannel;
 
         private void OnEnable()
         {
-            _playerTurnCompleteChannel.OnTurnComplete.AddListener(PlayerCompleteTurn);
-            _enemyTurnCompleteChannel.OnTurnComplete.AddListener(EnemyCompleteTurn);
+            _characterTurnCompleteChannel.OnTurnComplete.AddListener(CharacterCompleteTurn);
+            //_enemyTurnCompleteChannel.OnTurnComplete.AddListener(EnemyCompleteTurn);
             _endBattleChannel.OnBattleStateChanged.AddListener(EndBattle);
         }
 
         private void OnDisable()
         {
-            _playerTurnCompleteChannel.OnTurnComplete.RemoveListener(PlayerCompleteTurn);
-            _enemyTurnCompleteChannel.OnTurnComplete.RemoveListener(EnemyCompleteTurn);
+            _characterTurnCompleteChannel.OnTurnComplete.RemoveListener(CharacterCompleteTurn);
+            //_enemyTurnCompleteChannel.OnTurnComplete.RemoveListener(EnemyCompleteTurn);
             _endBattleChannel.OnBattleStateChanged.RemoveListener(EndBattle);
         }
 
         private void Start()
         {
             _changeStateDelay = new WaitForSeconds(5f);
-            var dieRoll = Random.Range(0, 20);
+            var dieRoll = UnityEngine.Random.Range(0, 20);
             _battleState = BattleState.Start;
             _currentPlayerUnit = GameObject.FindGameObjectWithTag("Player");
             _currentEnemyUnit = GameObject.FindGameObjectWithTag("Enemy");
@@ -52,20 +54,39 @@ namespace Veganimus.BattleSystem
             else
                 StartCoroutine(ChangeState(BattleState.EnemyTurn));
         }
-       
-        private void PlayerCompleteTurn(bool turnComplete)
+       private void CharacterCompleteTurn(CharacterType characterType, bool turnComplete)
         {
-            _hasPlayerCompletedTurn = turnComplete;
-            if (_hasPlayerCompletedTurn && _isBattleOver == false)
-                StartCoroutine(ChangeState(BattleState.EnemyTurn));
-        }
+            switch(characterType)
+            {
+                case CharacterType.Player:
+                    _hasPlayerCompletedTurn = turnComplete;
+                    if (_hasPlayerCompletedTurn && _isBattleOver == false)
+                        StartCoroutine(ChangeState(BattleState.EnemyTurn));
+                    break;
+                case CharacterType.Enemy:
+                    _hasEnemyCompletedTurn = turnComplete;
+                    if (_hasEnemyCompletedTurn && _isBattleOver == false)
+                        StartCoroutine(ChangeState(BattleState.PlayerTurn));
+                    break;
+                //default:
+                //    StartCoroutine(ChangeState(BattleState.PlayerTurn));
+                //    break;
 
-        private void EnemyCompleteTurn(bool turnComplete)
-        {
-            _hasEnemyCompletedTurn = turnComplete;
-            if (_hasEnemyCompletedTurn && _isBattleOver == false)
-                StartCoroutine(ChangeState(BattleState.PlayerTurn));
+            }
         }
+        //private void PlayerCompleteTurn(bool turnComplete)
+        //{
+        //    _hasPlayerCompletedTurn = turnComplete;
+        //    if (_hasPlayerCompletedTurn && _isBattleOver == false)
+        //        StartCoroutine(ChangeState(BattleState.EnemyTurn));
+        //}
+
+        //private void EnemyCompleteTurn(bool turnComplete)
+        //{
+        //    _hasEnemyCompletedTurn = turnComplete;
+        //    if (_hasEnemyCompletedTurn && _isBattleOver == false)
+        //        StartCoroutine(ChangeState(BattleState.PlayerTurn));
+        //}
         private void EndBattle(BattleState battleState)
         {
             _isBattleOver = true;
@@ -85,13 +106,13 @@ namespace Veganimus.BattleSystem
                     _battleState = BattleState.PlayerTurn;
                     BattleUIManager.Instance.ActivateButtons(true);
                     BattleUIManager.Instance.ToggleTurnIndicators(BattleState.PlayerTurn);
-                    _playerTurnChannel.RaisePlayerTurnEvent();
+                    _characterTurnChannel.RaiseCharacterTurnEvent(CharacterType.Player);
                     break;
                 case BattleState.EnemyTurn:
                     _battleState = BattleState.EnemyTurn;
                     BattleUIManager.Instance.ActivateButtons(false);
                     BattleUIManager.Instance.ToggleTurnIndicators(BattleState.EnemyTurn);
-                    _enemyTurnChannel.RaiseEnemyTurnEvent();
+                    _characterTurnChannel.RaiseCharacterTurnEvent(CharacterType.Enemy);
                     break;
                 case BattleState.Win:
                     _battleState = BattleState.Win;

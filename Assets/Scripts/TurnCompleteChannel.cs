@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using Veganimus.BattleSystem;
 
 [CreateAssetMenu(menuName = "Channels/ Turn Completion")]
 public class TurnCompleteChannel : ScriptableObject
 {
-    public UnityEvent<bool> OnTurnComplete;
+    public UnityEvent<CharacterType,bool> OnTurnComplete;
 
-    public void RaiseTurnCompleteEvent(bool isComplete)
+    public void RaiseTurnCompleteEvent(CharacterType characterType,bool isComplete)
     {
         if (OnTurnComplete != null)
-            OnTurnComplete.Invoke(isComplete);
+            OnTurnComplete.Invoke(characterType,isComplete);
     }
 }

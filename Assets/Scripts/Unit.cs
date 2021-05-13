@@ -49,7 +49,8 @@ namespace Veganimus.BattleSystem
 
         private void Start()
         {
-            _characterType = _owner.characterType;
+            _owner.activeUnit = this;
+            _characterType = _owner.thisCharacterType;
             _animator = GetComponent<Animator>();
             _unitNameUpdateChannel.RaiseUnitNameUpdateEvent(_characterType, _unitName);
         }
@@ -127,7 +128,10 @@ namespace Veganimus.BattleSystem
             {
                 _currentUnitHP = 0;
                 _animator.SetInteger("hitPoints", 0);
-                _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Lose);
+                if (_characterType == CharacterType.Player)
+                    _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Lose);
+                else
+                    _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Win);
             }
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
             StartCoroutine(StatUpdateDelayRoutine($"{_unitName} took {damage} damage!"));
@@ -143,10 +147,76 @@ namespace Veganimus.BattleSystem
             _unitDefense += amount;
             StartCoroutine(StatUpdateDelayRoutine(($"{_unitName} raised Defense by {amount}.")));
         }
+        public void UseAttackMoveSlot(int slotNumber)
+        {
+            int usesLeft = _attackMoveUses[slotNumber];
+            if (usesLeft > 0)
+            {
+                _attackMoveUses[slotNumber]--;
+                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveUses[slotNumber], slotNumber);
+                BattleUIManager.Instance.ActivateButtons(false);
+                bool didMoveHit = _unitAttacksMoveSet[slotNumber].RollForMoveAccuracy(_accuracyModifier);
+                if (didMoveHit == true)
+                {
+                    int damageAmount = _unitAttacksMoveSet[slotNumber].damageAmount;
+                    _targetUnit.targetIDamageable.Damage(damageAmount);
+                    _unitAttacksMoveSet[slotNumber].RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
+                }
+                else if (didMoveHit == false)
+                {
+                    _displayAttackActionChannel.RaiseDisplayActionEvent($"{_unitName} used {_unitAttacksMoveSet[slotNumber].moveName}!");
+                    StartCoroutine(StatUpdateDelayRoutine($"{_unitName} Missed!"));
+                }
+                _owner.isTurnComplete = true;
+                _owner.turnCompleteChannel.RaiseTurnCompleteEvent(_characterType, _owner.isTurnComplete);
+            }
+            else if (usesLeft <= 0)
+                return;
+        }
+
+        public void UseDefenseMoveSlot(int slotNumber)
+        {
+            int usesLeft = _defenseMoveUses[slotNumber];
+            if (usesLeft > 0)
+            {
+                _defenseMoveUses[slotNumber]--;
+                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveUses[slotNumber], slotNumber);
+                BattleUIManager.Instance.ActivateButtons(false);
+                _unitDefensesMoveSet[slotNumber].RaiseDefenseMoveUsedEvent(_unitName);
+                AdjustDefense(_unitDefensesMoveSet[slotNumber].defenseBuff);
+                _owner.isTurnComplete = true;
+                _owner.turnCompleteChannel.RaiseTurnCompleteEvent(_characterType,_owner.isTurnComplete);
+            }
+            else if (usesLeft <= 0)
+            {
+                if (_characterType != CharacterType.Player)
+                    DetermineAction();
+                else
+                    return;
+            }
+                
+        }
+        private void DetermineAction()
+        {
+            var dieRoll = UnityEngine.Random.Range(1, 6);
+            var attackToUse = UnityEngine.Random.Range(0, _unitAttacksMoveSet.Length);
+            var defenseToUse = UnityEngine.Random.Range(0, _unitDefensesMoveSet.Length);
+            //var itemToUse = Random.Range(0, _unitItems.Length);
+            if (dieRoll + _owner.aIAggression >= 3)
+                UseAttackMoveSlot(attackToUse);
+            
+            else if (dieRoll + _owner.aIAggression < 3)
+                UseDefenseMoveSlot(defenseToUse);
+        }
         protected IEnumerator StatUpdateDelayRoutine(string actionTakenText)
         {
             yield return new WaitForSeconds(2f);
             BattleUIManager.Instance.DisplayStatUpdateText(actionTakenText);
+        }
+        public IEnumerator TurnDelayRoutine()
+        {
+            yield return new WaitForSeconds(5f);
+            DetermineAction();
         }
     }
 }
