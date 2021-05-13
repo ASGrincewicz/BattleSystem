@@ -13,4 +13,11 @@ public abstract class Item : ScriptableObject
     public bool isConsumable;
     
     public int itemUses;
+
+    public void UseItem()
+    {
+        itemUses--;
+        if (itemUses <= 0)
+            return;
+    }
 }

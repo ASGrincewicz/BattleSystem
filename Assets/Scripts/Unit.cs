@@ -14,8 +14,10 @@ namespace Veganimus.BattleSystem
         Light = 16,
         Dark = 32
     }
-    public class Unit : MonoBehaviour
+    public class Unit : MonoBehaviour, IDamageable, IHealable,IDefendable
     {
+        [SerializeField] protected Character _owner;
+        [SerializeField] protected CharacterType _characterType;
         protected int _unitLevel;
         [SerializeField] protected TargetFinder _targetUnit;
         [SerializeField] protected ElementType _unitType;
@@ -32,15 +34,25 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected UnitAttackMove _emptyAttackPlaceholder;
         [SerializeField] protected UnitDefenseMove _emptyDefensePlaceholder;
         protected Animator _animator;
-
+        [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] protected UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
         [SerializeField] protected UnitMoveNameUpdate _unitDefenseMoveNameUpdateChannel;
+        [SerializeField] protected UnitHitPointUpdate _unitHPUpdateChannel;
         [SerializeField] protected DisplayActionChannel _displayAttackActionChannel;
         [SerializeField] protected BattleStateChannel _endBattleChannel;
-       
-        private void Awake() => _currentUnitHP = _unitHitPoints;
 
-        private void Start() => _animator = GetComponent<Animator>();
+        private void Awake()
+        {
+            _owner = GetComponentInParent<Character>();
+            _currentUnitHP = _unitHitPoints;
+        }
+
+        private void Start()
+        {
+            _characterType = _owner.characterType;
+            _animator = GetComponent<Animator>();
+            _unitNameUpdateChannel.RaiseUnitNameUpdateEvent(_characterType, _unitName);
+        }
 
         public void DisplayUnitStats() => BattleUIManager.Instance.DisplayUnitStats(_currentUnitHP,
                                                                                     _unitHitPoints,
@@ -103,6 +115,33 @@ namespace Veganimus.BattleSystem
                 if(_unitDefensesMoveSet[i].moveUses > 0)
                     BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _unitDefensesMoveSet[i].moveUses, i);
             }
+        }
+        public void Damage(int amount)
+        {
+            var damage = amount -= _unitDefense;
+            if (damage <= 0)
+                damage = 0;
+
+            _currentUnitHP -= damage;
+            if (_currentUnitHP <= 0)
+            {
+                _currentUnitHP = 0;
+                _animator.SetInteger("hitPoints", 0);
+                _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Lose);
+            }
+            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
+            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} took {damage} damage!"));
+        }
+        public void Heal(int amount)
+        {
+            _currentUnitHP += amount;
+            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
+            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} healed {amount} HP!"));
+        }
+        public void AdjustDefense(int amount)
+        {
+            _unitDefense += amount;
+            StartCoroutine(StatUpdateDelayRoutine(($"{_unitName} raised Defense by {amount}.")));
         }
         protected IEnumerator StatUpdateDelayRoutine(string actionTakenText)
         {

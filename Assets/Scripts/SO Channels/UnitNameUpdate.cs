@@ -5,13 +5,13 @@ namespace Veganimus.BattleSystem
     [CreateAssetMenu(menuName ="Channels/Unit Name Update")]
     public class UnitNameUpdate : ScriptableObject
     {
-        public UnityEvent<string, string> OnUnitNameUpdated;
+        public UnityEvent<CharacterType, string> OnUnitNameUpdated;
 
-        public void RaiseUnitNameUpdateEvent(string unit,string unitName)
+        public void RaiseUnitNameUpdateEvent(CharacterType characterType,string unitName)
         {
             if(OnUnitNameUpdated != null)
             {
-                OnUnitNameUpdated.Invoke(unit, unitName);
+                OnUnitNameUpdated.Invoke(characterType, unitName);
             }
         }
     }

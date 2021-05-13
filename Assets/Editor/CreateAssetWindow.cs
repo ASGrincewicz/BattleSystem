@@ -12,7 +12,7 @@ namespace Veganimus.BattleSystem
     {
         private static string _windowTitle = "Create Asset";
         private string _assetName;
-        public enum AssetTypeToCreate { [InspectorName("Health Item")]HealthItem, EquipmentItem, AttackMove, DefenseMove }
+        public enum AssetTypeToCreate {HealthItem, EquipmentItem, AttackMove, DefenseMove }
         private AssetTypeToCreate _assetTypeToCreate;
         private bool groupEnabled;
         private bool isConsumable = true;

@@ -2,14 +2,14 @@ using System.Collections;
 using UnityEngine;
 namespace Veganimus.BattleSystem
 {
-    public class EnemyUnit : Unit, IDamageable, IHealable, IDefendable
+    public class EnemyUnit : Unit
     {
         public int EnemyAggression { get => _enemyAggression; private set => _enemyAggression = value; }
         [Range(-1, 1)] [SerializeField] private int _enemyAggression;
 
         [Header("Broadcasting On:")]
-        [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
-        [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
+        //[SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
+        //[SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
         [SerializeField] private TurnCompleteChannel _enemyTurnCompleteChannel;
         [Header("Listening To:")]
         [SerializeField] private EnemyTurnChannel _enemyTurnChannel;
@@ -20,11 +20,11 @@ namespace Veganimus.BattleSystem
 
         private void OnDisable() => _enemyTurnChannel.OnEnemyTurn.RemoveListener(InitiateEnemyTurn);
 
-        private void Start()
-        {
-            _unitNameUpdateChannel.RaiseUnitNameUpdateEvent("Enemy", _unitName);
-            _animator = GetComponent<Animator>();
-        }
+        //private void Start()
+        //{
+        //    _unitNameUpdateChannel.RaiseUnitNameUpdateEvent(CharacterType.Enemy,_unitName);
+        //    _animator = GetComponent<Animator>();
+        //}
 
         private void InitiateEnemyTurn()
         {
@@ -47,34 +47,34 @@ namespace Veganimus.BattleSystem
                 UseDefenseMoveSlot(defenseToUse);
         }
 
-        public void Damage(int amount)
-        {
-            var damage = amount -= _unitDefense;
-            if (damage <= 0)
-                damage = 0;
+        //public void Damage(int amount)
+        //{
+        //    var damage = amount -= _unitDefense;
+        //    if (damage <= 0)
+        //        damage = 0;
 
-            _currentUnitHP -= damage;
-            if (_currentUnitHP <= 0)
-            {
-                _currentUnitHP = 0;
-                _animator.SetInteger("hitPoints", 0);
-                _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Win);
-            }
-            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Enemy", _unitHitPoints, _currentUnitHP);
-            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} took {damage} damage!"));
-        }
+        //    _currentUnitHP -= damage;
+        //    if (_currentUnitHP <= 0)
+        //    {
+        //        _currentUnitHP = 0;
+        //        _animator.SetInteger("hitPoints", 0);
+        //        _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Win);
+        //    }
+        //    _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(CharacterType.Enemy, _unitHitPoints, _currentUnitHP);
+        //    StartCoroutine(StatUpdateDelayRoutine($"{_unitName} took {damage} damage!"));
+        //}
        
-        public void Heal(int amount)
-        {
-            _currentUnitHP += amount;
-            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent("Enemy", _unitHitPoints, _currentUnitHP);
-            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} healed {amount} HP!"));
-        }
-        public void AdjustDefense(int amount)
-        {
-            _unitDefense += amount;
-            StartCoroutine(StatUpdateDelayRoutine($"{_unitName} raised Defense by {amount}."));
-        }
+        //public void Heal(int amount)
+        //{
+        //    _currentUnitHP += amount;
+        //    _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(CharacterType.Enemy, _unitHitPoints, _currentUnitHP);
+        //    StartCoroutine(StatUpdateDelayRoutine($"{_unitName} healed {amount} HP!"));
+        //}
+        //public void AdjustDefense(int amount)
+        //{
+        //    _unitDefense += amount;
+        //    StartCoroutine(StatUpdateDelayRoutine($"{_unitName} raised Defense by {amount}."));
+        //}
 
         public void UseAttackMoveSlot(int slotNumber)
         {

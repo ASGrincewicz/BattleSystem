@@ -3185,7 +3185,6 @@ GameObject:
   - component: {fileID: 17178001128557794}
   - component: {fileID: 496021570683164530}
   - component: {fileID: 2095247255}
-  - component: {fileID: 2095247254}
   - component: {fileID: 2095247256}
   m_Layer: 7
   m_Name: Player_mech
@@ -3242,6 +3241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f58a5fa3898d47b387b6c7c9f764f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _owner: {fileID: 0}
+  _characterType: 0
   _targetUnit: {fileID: 1435753310}
   _unitType: 0
   _unitName: Player Mech
@@ -3254,7 +3255,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 32451926f6cbe4d5db2b9f9f73067bd2, type: 2}
   - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
   - {fileID: 11400000, guid: 071f74185ebf84529be1a0208d210e36, type: 2}
-  - {fileID: 11400000, guid: 60c44e7a30f164eb9a58298d78b28b0e, type: 2}
+  - {fileID: 11400000, guid: 84ca8f0c2d9744fdc9acb8aa6e220218, type: 2}
   _attackMoveUses: 
   _unitDefensesMoveSet:
   - {fileID: 11400000, guid: 1797c1746195f4abf980856a149c29eb, type: 2}
@@ -3264,12 +3265,12 @@ MonoBehaviour:
   _defenseMoveUses: 
   _emptyAttackPlaceholder: {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
   _emptyDefensePlaceholder: {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
+  _unitNameUpdateChannel: {fileID: 11400000, guid: 4ec2433fc3ca04eff8ba1fa64706ed61, type: 2}
   _unitAttackMoveNameUpdateChannel: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}
   _unitDefenseMoveNameUpdateChannel: {fileID: 11400000, guid: ff4f6eedf94ed49c3a0e6636508523f0, type: 2}
+  _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
   _displayAttackActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   _endBattleChannel: {fileID: 11400000, guid: 3e2e44ced2e734f2bb44a5993706eb3b, type: 2}
-  _unitNameUpdateChannel: {fileID: 11400000, guid: 4ec2433fc3ca04eff8ba1fa64706ed61, type: 2}
-  _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
   _playerTurnCompleteChannel: {fileID: 11400000, guid: 61cad106cc2e54a009e1dc392659f6f2, type: 2}
   _playerTurnChannel: {fileID: 11400000, guid: 1034325769ee8433797fd94f497b452d, type: 2}
 --- !u!65 &2095247255
@@ -3285,20 +3286,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.351503, y: 6.9362025, z: 8.342308}
   m_Center: {x: -0.062773414, y: 3.3181012, z: -0.82884794}
---- !u!114 &2095247254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3086928884379056646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06292d0775a6241eabbc72c6d298b26c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  sphereRadius: 2
 --- !u!54 &2095247256
 Rigidbody:
   m_ObjectHideFlags: 0

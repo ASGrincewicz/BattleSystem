@@ -129,28 +129,38 @@ namespace Veganimus.BattleSystem
              _endBattleText.text = $"YOU LOSE!";
         }
 
-        private void DisplayUnitName(string unit, string unitName)
+        private void DisplayUnitName(CharacterType characterType, string unitName)
         {
-            switch(unit)
+            switch(characterType)
             {
-                case "Player":
+                case CharacterType.Player:
                     _playerUnitNameText.text = unitName;
                     break;
-                case "Enemy":
+                case CharacterType.Enemy:
                     _enemyUnitNameText.text = unitName;
+                    break;
+                case CharacterType.Ally:
+                    //Set up when ally is implemented.
+                    break;
+                case CharacterType.EnemyAlly:
                     break;
             }
         }
-        private void DisplayCurrentUnitHP(string unit,int maxUnitHP, int unitHP)
+        private void DisplayCurrentUnitHP(CharacterType characterType,int maxUnitHP, int unitHP)
         {
             float sliderValue = (float)unitHP / maxUnitHP * 100;
-            switch (unit)
+            switch (characterType)
             {
-                case "Player":
+                case CharacterType.Player:
                     _playerHitPointsSlider.value = sliderValue;
                     break;
-                case "Enemy":
+                case CharacterType.Enemy:
                     _enemyHitPointsSlider.value = sliderValue;
+                    break;
+                case CharacterType.Ally:
+                    //Set up when ally is implemented.
+                    break;
+                case CharacterType.EnemyAlly:
                     break;
             }
         }
