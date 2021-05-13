@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220326f253f534d6f8712e6a4512dd2a, type: 3}
   m_Name: Targeting Computer
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Targeting Computer
   isConsumable: 0
-  itemUses: 0
+  itemUses: 2
   statEffect: 0

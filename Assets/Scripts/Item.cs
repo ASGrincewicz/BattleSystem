@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Item : ScriptableObject
+public class Item : ScriptableObject
 {
     ///<summary>
     ///@author
@@ -14,7 +14,7 @@ public abstract class Item : ScriptableObject
     
     public int itemUses;
 
-    public void UseItem()
+    public virtual void UseItem()
     {
         itemUses--;
         if (itemUses <= 0)

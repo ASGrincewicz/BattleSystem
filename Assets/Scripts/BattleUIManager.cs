@@ -53,11 +53,17 @@ namespace Veganimus.BattleSystem
         [SerializeField] private TMP_Text[] _defenseMoveBuff = new TMP_Text[0];
         [SerializeField] private Button[] _playerDefenseButtons = new Button[4];
 
+        [Header("Player Item Buttons")]
+        [SerializeField] private TMP_Text[] _playerItemNames = new TMP_Text[4];
+        [SerializeField] private TMP_Text[] _playerItemUses = new TMP_Text[4];
+        [SerializeField] private Button[] _playerItemButtons = new Button[4];
+
         [Header("Listening To")]
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] private UnitHitPointUpdate _unitHPUpdateChannel;
         [SerializeField] private UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
         [SerializeField] private UnitMoveNameUpdate _UnitDefenseMoveNameUpdateChannel;
+        [SerializeField] private UnitMoveNameUpdate _itemNameUpdateChannel;
         [SerializeField] private DisplayActionChannel _displayActionTakenChannel;
         [SerializeField] private BattleStateChannel _endBattleChannel;
 
@@ -74,6 +80,7 @@ namespace Veganimus.BattleSystem
             _unitHPUpdateChannel.OnUnitHPUpdated.AddListener(DisplayCurrentUnitHP);
             _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentDefenseMoveNames);
+            _itemNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentItemNames);
             _displayActionTakenChannel.OnDisplayAction.AddListener(DisplayCurrentActionTaken);
             _endBattleChannel.OnBattleStateChanged.AddListener(EndBattleUIActivate);
         }
@@ -83,6 +90,7 @@ namespace Veganimus.BattleSystem
             _unitHPUpdateChannel.OnUnitHPUpdated.RemoveListener(DisplayCurrentUnitHP);
             _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentDefenseMoveNames);
+            _itemNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentItemNames);
             _displayActionTakenChannel.OnDisplayAction.RemoveListener(DisplayCurrentActionTaken);
             _endBattleChannel.OnBattleStateChanged.RemoveListener(EndBattleUIActivate);
         }
@@ -100,6 +108,10 @@ namespace Veganimus.BattleSystem
                 {
                     button.interactable = false;
                 }
+                foreach(var button in _playerItemButtons)
+                {
+                    button.interactable = false;
+                }
             }
             else if (isPlayerTurn)
             {
@@ -108,6 +120,10 @@ namespace Veganimus.BattleSystem
                     button.interactable = true;
                 }
                 foreach (var button in _playerDefenseButtons)
+                {
+                    button.interactable = true;
+                }
+                foreach (var button in _playerItemButtons)
                 {
                     button.interactable = true;
                 }
@@ -184,6 +200,13 @@ namespace Veganimus.BattleSystem
                 _playerDefenseNames[moveSlot].text = $"{moveName}";
             }
         }
+        private void DisplayCurrentItemNames(string itemName, int itemSlot)
+        {
+            for(int i = _playerItemNames.Length; i>=0; i--)
+            {
+                _playerItemNames[itemSlot].text = $"{itemName}";
+            }
+        }
         public void DisplayUnitStats(int hp, int maxHP,int speed, int defense, int accuracyMod)
         {
             _unitHPText.text = $"Current HP: {hp}/ {maxHP}";
@@ -200,6 +223,9 @@ namespace Veganimus.BattleSystem
                     break;
                 case "defense":
                     _defenseMoveUses[moveSlot].text = $"Uses Left: {uses}";
+                    break;
+                case "item":
+                    _playerItemUses[moveSlot].text = $"Uses Left: {uses}";
                     break;
             }
         }

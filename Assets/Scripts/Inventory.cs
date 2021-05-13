@@ -6,24 +6,29 @@ namespace Veganimus.BattleSystem
     {
         [SerializeField] private Character _owner;
 
-        [SerializeField] private List<Item> _inventory;
+        public List<Item> battleInventory;
+
+        [SerializeField] private List<Item> _assetInventory;
 
         [SerializeField] private int _capacity;
 
+        [SerializeField] private Item _selectedItem;
+
         private void Awake()
         {
-            _inventory = new List<Item>(_capacity);
+            battleInventory = new List<Item>(_capacity);
         }
         private void OnEnable()
         {
             _owner = GetComponent<Character>();
+            GenerateCopyItems();
         }
         public bool AddItem(Item item)
         {
-            if (_inventory.Count < _capacity)
+            if (battleInventory.Count < _capacity)
             {
                 item = ScriptableObject.CreateInstance<Item>();
-                _inventory.Add(item);
+                battleInventory.Add(item);
                 return true;
             }
 
@@ -32,11 +37,22 @@ namespace Veganimus.BattleSystem
         }
         public void RemoveItem(Item item)
         {
-            _inventory.Remove(item);
+            battleInventory.Remove(item);
         }
-        public void UseItem(Item item)
+        public void UseItem(int itemSlot)
         {
+            var item = battleInventory[itemSlot];
             item.UseItem();
+            if(item.itemUses <=0)
+            battleInventory.Remove(item);
+        }
+        public void GenerateCopyItems()
+        {
+            foreach(var item in _assetInventory)
+            {
+                var copy = Instantiate(item);
+                battleInventory.Add(copy);
+            }
         }
     }
 }

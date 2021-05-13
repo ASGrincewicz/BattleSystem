@@ -24,20 +24,17 @@ namespace Veganimus.BattleSystem
         [SerializeField] private CharacterTurnChannel _characterTurnChannel;
         [Header("Listening to")]
         [SerializeField] private TurnCompleteChannel _characterTurnCompleteChannel;
-        //[SerializeField] private TurnCompleteChannel _enemyTurnCompleteChannel;
         [SerializeField] private BattleStateChannel _endBattleChannel;
 
         private void OnEnable()
         {
             _characterTurnCompleteChannel.OnTurnComplete.AddListener(CharacterCompleteTurn);
-            //_enemyTurnCompleteChannel.OnTurnComplete.AddListener(EnemyCompleteTurn);
             _endBattleChannel.OnBattleStateChanged.AddListener(EndBattle);
         }
 
         private void OnDisable()
         {
             _characterTurnCompleteChannel.OnTurnComplete.RemoveListener(CharacterCompleteTurn);
-            //_enemyTurnCompleteChannel.OnTurnComplete.RemoveListener(EnemyCompleteTurn);
             _endBattleChannel.OnBattleStateChanged.RemoveListener(EndBattle);
         }
 
@@ -68,25 +65,9 @@ namespace Veganimus.BattleSystem
                     if (_hasEnemyCompletedTurn && _isBattleOver == false)
                         StartCoroutine(ChangeState(BattleState.PlayerTurn));
                     break;
-                //default:
-                //    StartCoroutine(ChangeState(BattleState.PlayerTurn));
-                //    break;
-
             }
         }
-        //private void PlayerCompleteTurn(bool turnComplete)
-        //{
-        //    _hasPlayerCompletedTurn = turnComplete;
-        //    if (_hasPlayerCompletedTurn && _isBattleOver == false)
-        //        StartCoroutine(ChangeState(BattleState.EnemyTurn));
-        //}
-
-        //private void EnemyCompleteTurn(bool turnComplete)
-        //{
-        //    _hasEnemyCompletedTurn = turnComplete;
-        //    if (_hasEnemyCompletedTurn && _isBattleOver == false)
-        //        StartCoroutine(ChangeState(BattleState.PlayerTurn));
-        //}
+      
         private void EndBattle(BattleState battleState)
         {
             _isBattleOver = true;
@@ -117,12 +98,10 @@ namespace Veganimus.BattleSystem
                 case BattleState.Win:
                     _battleState = BattleState.Win;
                     BattleUIManager.Instance.ToggleTurnIndicators(BattleState.Win);
-                    //Time.timeScale = 0;
                     break;
                 case BattleState.Lose:
                     _battleState = BattleState.Lose;
                     BattleUIManager.Instance.ToggleTurnIndicators(BattleState.Lose);
-                    //Time.timeScale = 0;
                     break;
             }
         }
