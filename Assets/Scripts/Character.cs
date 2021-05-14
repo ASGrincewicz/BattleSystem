@@ -45,10 +45,19 @@ namespace Veganimus.BattleSystem
         }
         public void UpdateItemNames()
         {
+            UpdateItemUseUI();
             for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
             {
                 var item = _inventory.battleInventory[i];
                 _itemNameUpdateChannel.RaiseMoveNameUpdateEvent(item.itemName, i);
+            }
+        }
+        private void UpdateItemUseUI()
+        {
+            for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
+            {
+                if (_inventory.battleInventory[i].itemUses >= 0)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("item", _inventory.battleInventory[i].itemUses, i);
             }
         }
         public void UseItemSlot(int slotNumber)
@@ -56,7 +65,7 @@ namespace Veganimus.BattleSystem
             int usesLeft = _inventory.battleInventory[slotNumber].itemUses;
             if (usesLeft > 0)
             {
-                usesLeft--;
+                _inventory.battleInventory[slotNumber].UseItem();
                 BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("item", usesLeft, slotNumber);
                 BattleUIManager.Instance.ActivateButtons(false);
                 _displayActionChannel.RaiseDisplayActionEvent($"{_characterName} used {_inventory.battleInventory[slotNumber].itemName}!");

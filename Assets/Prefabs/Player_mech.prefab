@@ -3289,6 +3289,8 @@ MonoBehaviour:
   _unitDefensesMoveSet:
   - {fileID: 11400000, guid: 652e65b08661c41ac859fe762502f818, type: 2}
   - {fileID: 11400000, guid: 1797c1746195f4abf980856a149c29eb, type: 2}
+  - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
+  - {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
   _defenseMoveUses: 
   _emptyAttackPlaceholder: {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
   _emptyDefensePlaceholder: {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
