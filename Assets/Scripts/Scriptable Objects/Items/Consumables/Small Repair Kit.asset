@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b238e3a329549e2a6c4cfcdad02011, type: 3}
   m_Name: Small Repair Kit
   m_EditorClassIdentifier: 
-  itemName: 
-  isConsumable: 0
-  itemUses: 0
-  healAmount: 0
+  itemName: Small Repair Kit
+  isConsumable: 1
+  itemUses: 1
+  healAmount: 10

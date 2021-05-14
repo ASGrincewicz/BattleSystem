@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -100,32 +101,32 @@ namespace Veganimus.BattleSystem
         {
             if (isPlayerTurn == false)
             {
-                foreach (var button in _playerAttackButtons)
+                foreach (var attackButton in _playerAttackButtons)
                 {
-                    button.interactable = false;
+                    attackButton.interactable = false;
                 }
-                foreach (var button in _playerDefenseButtons)
+                foreach (var defenseButton in _playerDefenseButtons)
                 {
-                    button.interactable = false;
+                    defenseButton.interactable = false;
                 }
-                foreach(var button in _playerItemButtons)
+                foreach(var itemButton in _playerItemButtons)
                 {
-                    button.interactable = false;
+                    itemButton.interactable = false;
                 }
             }
             else if (isPlayerTurn)
             {
-                foreach (var button in _playerAttackButtons)
+                foreach (var attackButton in _playerAttackButtons)
                 {
-                    button.interactable = true;
+                    attackButton.interactable = true;
                 }
-                foreach (var button in _playerDefenseButtons)
+                foreach (var defenseButton in _playerDefenseButtons)
                 {
-                    button.interactable = true;
+                    defenseButton.interactable = true;
                 }
-                foreach (var button in _playerItemButtons)
+                foreach (var itemButton in _playerItemButtons)
                 {
-                    button.interactable = true;
+                    itemButton.interactable = true;
                 }
             }
         }
@@ -183,7 +184,7 @@ namespace Veganimus.BattleSystem
        
         private void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
         {
-            for (int i = _playerAttackNames.Length; i >= 0; i--)
+            for (int a = _playerAttackNames.Length; a >= 0; a--)
             {
                 _playerAttackNames[moveSlot].text = $"{moveName}";
                 foreach (Button button in _playerAttackButtons)
@@ -195,7 +196,7 @@ namespace Veganimus.BattleSystem
         }
         private void DisplayCurrentDefenseMoveNames(string moveName, int moveSlot)
         { 
-            for (int i = _playerDefenseNames.Length; i >= 0; i--)
+            for (int d = _playerDefenseNames.Length; d >= 0; d--)
             {
                 _playerDefenseNames[moveSlot].text = $"{moveName}";
             }

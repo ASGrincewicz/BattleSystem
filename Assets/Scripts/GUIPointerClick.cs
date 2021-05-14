@@ -8,6 +8,7 @@ namespace Veganimus.BattleSystem
     ///<summary>
     ///@author
     ///Aaron Grincewicz
+    ///Allows user to right click on buttons to display alternate information.
     ///</summary>
     public class GUIPointerClick : MonoBehaviour, IPointerClickHandler
     {

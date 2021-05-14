@@ -2,6 +2,12 @@
 using UnityEngine;
 namespace Veganimus.BattleSystem
 {
+    ///<summary>
+    ///@author
+    ///Aaron Grincewicz
+    ///@info: this class is meant to be assigned to a Character GameObject. Assigned Item assets will be Instantiated
+    ///into a separate list. This prevents the values on the assets from changing.
+    ///</summary>
     public class Inventory : MonoBehaviour
     {
         [SerializeField] private Character _owner;
@@ -13,6 +19,8 @@ namespace Veganimus.BattleSystem
         [SerializeField] private int _capacity;
 
         [SerializeField] private Item _selectedItem;
+
+        [SerializeField] private Item _emptySlotPlaceHolder;
 
         private void Awake()
         {
@@ -37,15 +45,21 @@ namespace Veganimus.BattleSystem
         }
         public void RemoveItem(Item item)
         {
-            battleInventory.Remove(item);
+            if (item.itemUses <= 0)
+            {
+                battleInventory.Remove(item);
+                var empty = Instantiate(_emptySlotPlaceHolder);
+                battleInventory.Add(empty);
+            }
         }
         public void UseItem(int itemSlot)
         {
             var item = battleInventory[itemSlot];
-            item.UseItem();
-            if(item.itemUses <=0)
-            battleInventory.Remove(item);
+            item.UseItem(_owner.activeUnit);
         }
+        /// <summary>
+        /// This method creates copies of assigned items to prevent changes to asset values.
+        /// </summary>
         public void GenerateCopyItems()
         {
             foreach(var item in _assetInventory)

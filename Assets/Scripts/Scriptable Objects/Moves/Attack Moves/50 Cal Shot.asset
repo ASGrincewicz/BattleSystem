@@ -17,6 +17,7 @@ MonoBehaviour:
   moveAccuracy: 80
   moveType: 0
   elementType: 0
+  animationTrigger: quickShot
   _assignedUnit: {fileID: 0}
   displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   damageAmount: 10

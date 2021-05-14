@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-
+[System.Serializable]
 public class UnitDefenseMove : UnitMove
 {
     public int defenseBuff;

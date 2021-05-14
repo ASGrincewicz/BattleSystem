@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-
+[System.Serializable]
 public class UnitAttackMove : UnitMove
 {
     public int damageAmount;
     public int attackSpeed;
+   
 
     public UnityEvent<int, Transform> OnAttackMoveUsed;
 

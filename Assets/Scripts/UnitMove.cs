@@ -5,6 +5,7 @@ public enum MoveType
 {
     Physical, Special, Buff, DeBuff
 }
+[System.Serializable]
 public abstract class UnitMove : ScriptableObject
 {
    
@@ -15,6 +16,7 @@ public abstract class UnitMove : ScriptableObject
     public float moveAccuracy;
     public MoveType moveType;
     public ElementType elementType;
+    public string animationTrigger;
     [SerializeField] protected Transform _assignedUnit;
     public DisplayActionChannel displayActionChannel;
 

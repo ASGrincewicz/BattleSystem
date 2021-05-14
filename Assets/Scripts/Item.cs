@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using Veganimus.BattleSystem;
+[CreateAssetMenu(menuName ="Item/Empty")]
 public class Item : ScriptableObject
 {
     ///<summary>
@@ -14,7 +15,7 @@ public class Item : ScriptableObject
     
     public int itemUses;
 
-    public virtual void UseItem()
+    public virtual void UseItem(Unit unit)
     {
         itemUses--;
         if (itemUses <= 0)

@@ -2,10 +2,18 @@
 
 namespace Veganimus.BattleSystem
 {
+    ///<summary>
+    ///@author
+    ///Aaron Grincewicz
+    ///@info: This Class is assigned to a Unit to allow it to get the IDamageable
+    ///interface from the Unit within the collider.
+    ///It can be used for other reasons such as healing an ally through the IHealable
+    ///interface, etc..
+    ///</summary>
     public class TargetFinder : MonoBehaviour
     {
-        [SerializeField] protected Transform _targetUnitPosition;
-        [SerializeField] protected Unit _targetUnit;
+        [SerializeField] private Transform _targetUnitPosition;
+        [SerializeField] private Unit _targetUnit;
         public IDamageable targetIDamageable;
 
         private void OnTriggerEnter(Collider other)
