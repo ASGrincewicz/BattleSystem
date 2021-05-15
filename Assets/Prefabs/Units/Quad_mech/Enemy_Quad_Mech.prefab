@@ -3158,26 +3158,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _owner: {fileID: 0}
   _characterType: 1
+  _unitStats: {fileID: 11400000, guid: d22fb20ddf7ce4689a2a1554b53445b3, type: 2}
   _targetUnit: {fileID: 3189577914601157540}
   _unitType: 0
-  _unitName: Enemy Mech
-  _unitHitPoints: 50
   _currentUnitHP: 0
-  _unitSpeed: 0
-  _unitDefense: 0
-  _accuracyModifier: 0
-  _unitAttacksMoveSet:
-  - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
-  - {fileID: 11400000, guid: a3dc5d20cb25f4c5b805798a2a3c874a, type: 2}
-  - {fileID: 11400000, guid: 84ca8f0c2d9744fdc9acb8aa6e220218, type: 2}
-  - {fileID: 11400000, guid: 32451926f6cbe4d5db2b9f9f73067bd2, type: 2}
-  _attackMoveUses: 
-  _unitDefensesMoveSet:
-  - {fileID: 11400000, guid: 652e65b08661c41ac859fe762502f818, type: 2}
-  - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
-  _defenseMoveUses: 
-  _emptyAttackPlaceholder: {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
-  _emptyDefensePlaceholder: {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
+  _attackMoveSet: []
+  _defenseMoveSet: []
   _unitNameUpdateChannel: {fileID: 11400000, guid: 4ec2433fc3ca04eff8ba1fa64706ed61, type: 2}
   _unitAttackMoveNameUpdateChannel: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}
   _unitDefenseMoveNameUpdateChannel: {fileID: 11400000, guid: ff4f6eedf94ed49c3a0e6636508523f0, type: 2}
@@ -3186,6 +3172,14 @@ MonoBehaviour:
   _endBattleChannel: {fileID: 11400000, guid: 3e2e44ced2e734f2bb44a5993706eb3b, type: 2}
   _director: {fileID: 0}
   _moveCutScenes: []
+  _unitAttacksMoveSet:
+  - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
+  - {fileID: 11400000, guid: a3dc5d20cb25f4c5b805798a2a3c874a, type: 2}
+  - {fileID: 11400000, guid: 84ca8f0c2d9744fdc9acb8aa6e220218, type: 2}
+  - {fileID: 11400000, guid: 32451926f6cbe4d5db2b9f9f73067bd2, type: 2}
+  _unitDefensesMoveSet:
+  - {fileID: 11400000, guid: 652e65b08661c41ac859fe762502f818, type: 2}
+  - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
 --- !u!1 &5479963763529980285
 GameObject:
   m_ObjectHideFlags: 0

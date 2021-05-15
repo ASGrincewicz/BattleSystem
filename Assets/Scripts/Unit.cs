@@ -24,21 +24,24 @@ namespace Veganimus.BattleSystem
     {
         [SerializeField] protected Character _owner;
         [SerializeField] protected CharacterType _characterType;
+        [SerializeField] private UnitStats _unitStats;
         protected int _unitLevel;
         [SerializeField] protected TargetFinder _targetUnit;
         [SerializeField] protected ElementType _unitType;
-        [SerializeField] protected string _unitName;
-        [SerializeField] protected int _unitHitPoints;
+        [SerializeField] protected string _unitName => _unitStats.unitName;
+        [SerializeField] protected int _unitHitPoints => _unitStats.unitHitPoints;
         [SerializeField] protected int _currentUnitHP;
-        [SerializeField] protected int _unitSpeed;
-        [SerializeField] protected int _unitDefense;
-        [SerializeField] protected int _accuracyModifier = 0;
+        [SerializeField] protected int _unitSpeed => _unitStats.unitSpeed;
+        [SerializeField]
+        protected int UnitDefense
+        {
+            get => _unitStats.unitDefense; private set { }
+        }
+        [SerializeField] protected int _accuracyModifier => _unitStats.accuracyModifier;
         [Header("Runtime Assets")]
         [SerializeField] private List<UnitAttackMove> _attackMoveSet = new List<UnitAttackMove>();
         [SerializeField] private List<UnitDefenseMove> _defenseMoveSet = new List<UnitDefenseMove>();
        [Space]
-        [SerializeField] protected UnitAttackMove _emptyAttackPlaceholder;
-        [SerializeField] protected UnitDefenseMove _emptyDefensePlaceholder;
         protected Animator _animator;
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] protected UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
@@ -69,12 +72,12 @@ namespace Veganimus.BattleSystem
         }
         public void GenerateMoveSet()
         {
-            foreach(var attackMove in _unitAttacksMoveSet)
+            foreach(var attackMove in _unitStats.unitAttackMoves)
             {
                 var attackCopy = Instantiate(attackMove);
                 _attackMoveSet.Add(attackCopy);
             }
-            foreach(var defenseMove in _unitDefensesMoveSet)
+            foreach(var defenseMove in _unitStats.unitDefenseMoves)
             {
                 var defenseCopy = Instantiate(defenseMove);
                 _defenseMoveSet.Add(defenseCopy);
@@ -83,7 +86,7 @@ namespace Veganimus.BattleSystem
         public void DisplayUnitStats() => BattleUIManager.Instance.DisplayUnitStats(_currentUnitHP,
                                                                                     _unitHitPoints,
                                                                                     _unitSpeed,
-                                                                                    _unitDefense,
+                                                                                    UnitDefense,
                                                                                     _accuracyModifier);
        
         public void UpdateMoveNames(string moveType)
@@ -126,7 +129,7 @@ namespace Veganimus.BattleSystem
         }
         public void Damage(int amount)
         {
-            var damage = amount -= _unitDefense;
+            var damage = amount -= UnitDefense;
             if (damage <= 0)
                 damage = 0;
 
@@ -162,7 +165,7 @@ namespace Veganimus.BattleSystem
         }
         public void AdjustDefense(int amount)
         {
-            _unitDefense += amount;
+            UnitDefense += amount;
             StartCoroutine(StatUpdateDelayRoutine(($"{_unitName} raised Defense by {amount}.")));
         }
         public void UseAttackMoveSlot(int slotNumber)

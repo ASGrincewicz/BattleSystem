@@ -1,5 +1,6 @@
 using UnityEngine;
 using Veganimus.BattleSystem;
+
 [CreateAssetMenu(menuName ="Item/Empty")]
 public class Item : ScriptableObject
 {

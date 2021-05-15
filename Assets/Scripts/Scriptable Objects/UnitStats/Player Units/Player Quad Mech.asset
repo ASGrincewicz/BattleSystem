@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1689bb76600ab46fc9d63e16b0d2e71d, type: 3}
+  m_Name: Player Quad Mech
+  m_EditorClassIdentifier: 
+  unitName: Quad Mech
+  unitType: 0
+  unitHitPoints: 50
+  unitSpeed: 0
+  unitDefense: 0
+  accuracyModifier: 0
+  unitAttackMoves:
+  - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
+  - {fileID: 11400000, guid: a3dc5d20cb25f4c5b805798a2a3c874a, type: 2}
+  - {fileID: 11400000, guid: 84ca8f0c2d9744fdc9acb8aa6e220218, type: 2}
+  - {fileID: 11400000, guid: 071f74185ebf84529be1a0208d210e36, type: 2}
+  unitDefenseMoves:
+  - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
+  - {fileID: 11400000, guid: 1797c1746195f4abf980856a149c29eb, type: 2}
+  - {fileID: 11400000, guid: 652e65b08661c41ac859fe762502f818, type: 2}
+  - {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
+  director: {fileID: 0}
+  unitMoveCutscenes: []
