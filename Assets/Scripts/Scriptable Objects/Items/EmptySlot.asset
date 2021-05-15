@@ -15,3 +15,5 @@ MonoBehaviour:
   itemName: 
   isConsumable: 0
   itemUses: 0
+  _thisItemType: 4
+  healAmount: 0

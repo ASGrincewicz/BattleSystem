@@ -10,7 +10,7 @@ public class UnitDefenseMove : UnitMove
 
     public void RaiseDefenseMoveUsedEvent(string unitName)
     {
-        PerformDefenseMove(unitName);
+        //PerformDefenseMove(unitName);
     }
     private void PerformDefenseMove(string unitName)
     {

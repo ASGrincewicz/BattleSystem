@@ -12,7 +12,7 @@ public class UnitAttackMove : UnitMove
     public  void RaiseAttackMoveUsedEvent(string unitName,Transform unit,int moveSlot)
     {
         _assignedUnit = unit;
-        PerformAttackMove(unitName, moveSlot);
+        //PerformAttackMove(unitName, moveSlot);
     }
     
     private void PerformAttackMove(string unitName, int moveSlot)

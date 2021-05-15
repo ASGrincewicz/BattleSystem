@@ -15,4 +15,5 @@ MonoBehaviour:
   itemName: Ammo Refill
   isConsumable: 1
   itemUses: 1
+  _thisItemType: 3
   healAmount: 0

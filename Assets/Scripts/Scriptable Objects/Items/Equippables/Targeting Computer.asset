@@ -15,4 +15,6 @@ MonoBehaviour:
   itemName: Targeting Computer
   isConsumable: 0
   itemUses: 2
+  _thisItemType: 1
+  healAmount: 0
   statEffect: 0

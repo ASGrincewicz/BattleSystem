@@ -18,12 +18,9 @@ namespace Veganimus.BattleSystem
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other != null)
-            {
-                _targetUnit = other.gameObject.GetComponent<Unit>();
-                if (_targetUnit != null)
-                    targetIDamageable = _targetUnit.gameObject.GetComponent<IDamageable>();
-            }
+            _targetUnit = other.gameObject.GetComponentInParent<Unit>();
+            if (_targetUnit != null)
+                    targetIDamageable = _targetUnit.GetComponent<IDamageable>();
         }
     }
 }

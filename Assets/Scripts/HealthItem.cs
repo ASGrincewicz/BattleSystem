@@ -4,7 +4,7 @@ using Veganimus.BattleSystem;
 public class HealthItem : Item
 {
     public HealthItem(string itemName, bool isConsumable, int itemUses) { }
-    public int healAmount;
+   
 
     public override void UseItem(Unit unit)
     {

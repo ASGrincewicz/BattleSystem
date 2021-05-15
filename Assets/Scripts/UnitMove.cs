@@ -20,6 +20,7 @@ public abstract class UnitMove : ScriptableObject
     [SerializeField] protected Transform _assignedUnit;
     public DisplayActionChannel displayActionChannel;
 
+
     public bool RollForMoveAccuracy(int accuracyModifier)
     {
         int dieRoll = Random.Range(1, 6);

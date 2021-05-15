@@ -14,39 +14,59 @@ namespace Veganimus.BattleSystem
     ///</summary>
     public class Character : MonoBehaviour
     {
-        public CharacterType thisCharacterType;
+        [SerializeField] private CharacterType _thisCharacterType;
+        public CharacterType ThisCharacterType { get { return _thisCharacterType; } }
+
         [SerializeField] private string _characterName;
-        [Range(-1, 1)] public int aIAggression;
-        [SerializeField] private List<Unit> _party = new List<Unit>();
+        public string CharacterName { get { return _characterName; } }
+
+        [Range(-1, 1)][SerializeField] private int _aiAgression;
+        public int AIAgression { get { return _aiAgression; } }
+
+        [SerializeField] private List<UnitStats> _party = new List<UnitStats>();
+        public List<UnitStats> Party { get { return _party; } }
+
         private Inventory _inventory;
         public Unit activeUnit;
         public int turnCount;
         public bool isDefeated;
+        [SerializeField] private Transform activeUnitSpot;
         [Header("Broadcasting on")]
-        public TurnCompleteChannel turnCompleteChannel;
+        [SerializeField] private TurnCompleteChannel _turnCompleteChannel;
+        public TurnCompleteChannel TurnCompleteChannel { get { return _turnCompleteChannel; } }
+
         [SerializeField] private DisplayActionChannel _displayActionChannel;
         [SerializeField] private UnitMoveNameUpdate _itemNameUpdateChannel;
         [Space]
         [Header("Listening to:")]
-        public CharacterTurnChannel characterTurnChannel;
+        [SerializeField] private CharacterTurnChannel characterTurnChannel;
         [Space]
-        public bool isTurnComplete;
+        [SerializeField] private bool _isTurnComplete;
+        public bool IsTurnComplete { get => _isTurnComplete; set => _isTurnComplete = value; }
+
+        [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
 
         private void OnEnable() => characterTurnChannel.OnCharacterTurn.AddListener(InitiateCharacterTurn);
 
         private void OnDisable() => characterTurnChannel.OnCharacterTurn.RemoveListener(InitiateCharacterTurn);
 
-        private void Start() => _inventory = GetComponent<Inventory>();
+        private void Start()
+        {
+            _inventory = GetComponent<Inventory>();
+            GameObject activeUnitPrefab = Instantiate(_party[0].unitModelPrefab ,activeUnitSpot);
+            activeUnit.unitStats = _party[0];
+            activeUnitPrefab.transform.position = activeUnitSpot.position;
+            activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
+        }
 
         private void InitiateCharacterTurn(CharacterType characterType)
         {
-            if (characterType == thisCharacterType)
+            if (characterType == ThisCharacterType)
             {
-                isTurnComplete = false;
-                turnCompleteChannel.RaiseTurnCompleteEvent(characterType, isTurnComplete);
-                if (thisCharacterType != CharacterType.Player && isTurnComplete == false)
+                IsTurnComplete = false;
+                TurnCompleteChannel.RaiseTurnCompleteEvent(characterType, IsTurnComplete);
+                if (ThisCharacterType != CharacterType.Player && IsTurnComplete == false)
                 {
-                    //activeUnit.GenerateMoveSet();
                     StartCoroutine(activeUnit.TurnDelayRoutine());
                 }
             }
@@ -58,6 +78,8 @@ namespace Veganimus.BattleSystem
             {
                 var item = _inventory.battleInventory[i];
                 _itemNameUpdateChannel.RaiseMoveNameUpdateEvent(item.itemName, i);
+                if(item.ThisItemType == Item.ItemType.Health)
+                    BattleUIManager.Instance.DisplayMoveStats("health item", 0, 0, item.healAmount, i);
             }
         }
         private void UpdateItemUseUI()
@@ -84,8 +106,8 @@ namespace Veganimus.BattleSystem
                 BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("item", usesLeft, slotNumber);
                 BattleUIManager.Instance.ActivateButtons(false);
                 _displayActionChannel.RaiseDisplayActionEvent($"{_characterName} used {_inventory.battleInventory[slotNumber].itemName}!");
-                isTurnComplete = true;
-                turnCompleteChannel.RaiseTurnCompleteEvent(thisCharacterType, isTurnComplete);
+                IsTurnComplete = true;
+                TurnCompleteChannel.RaiseTurnCompleteEvent(ThisCharacterType, IsTurnComplete);
             }
             else if (usesLeft <= 0 && itemName == "")
                 return;

@@ -16,6 +16,11 @@ public class Item : ScriptableObject
     
     public int itemUses;
 
+    public enum ItemType { Health, Equipment, Boost, Refill, NULL}
+    [SerializeField] private ItemType _thisItemType;
+    public ItemType ThisItemType { get { return _thisItemType; } }
+
+    public int healAmount;
     public virtual void UseItem(Unit unit)
     {
         itemUses--;

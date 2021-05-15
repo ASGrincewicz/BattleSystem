@@ -57,6 +57,7 @@ namespace Veganimus.BattleSystem
         [Header("Player Item Buttons")]
         [SerializeField] private TMP_Text[] _playerItemNames = new TMP_Text[4];
         [SerializeField] private TMP_Text[] _playerItemUses = new TMP_Text[4];
+        [SerializeField] private TMP_Text[] _playerItemEffects = new TMP_Text[4];
         [SerializeField] private Button[] _playerItemButtons = new Button[4];
 
         [Header("Listening To")]
@@ -241,6 +242,13 @@ namespace Veganimus.BattleSystem
                 case "defense":
                     _defenseMoveBuff[moveSlot].text = $"Defense Buff: {buff}";
                     break;
+                case "health item":
+                    _playerItemEffects[moveSlot].text = $"Heal Amount:{buff}";
+                    break;
+                case "equipment":
+                    _playerItemEffects[moveSlot].text = $"Equip Effect:{buff}";
+                    break;
+
             }
         }
         public void DisplayCurrentActionTaken(string actionTaken)

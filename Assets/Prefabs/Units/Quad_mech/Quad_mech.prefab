@@ -31,65 +31,6 @@ Transform:
   m_Father: {fileID: 6197764367893506500}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3917576851456324742
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3917576851456324741}
-  - component: {fileID: 3917576851456324740}
-  - component: {fileID: 3917576851456324739}
-  m_Layer: 6
-  m_Name: Unit_target
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3917576851456324741
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3917576851456324742}
-  m_LocalRotation: {x: -0, y: -0.99144495, z: -0, w: 0.13052617}
-  m_LocalPosition: {x: 11.720668, y: 2.96, z: 20.746376}
-  m_LocalScale: {x: 4, y: 4, z: 4}
-  m_Children: []
-  m_Father: {fileID: 6197714080953623110}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
---- !u!65 &3917576851456324740
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3917576851456324742}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3917576851456324739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3917576851456324742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4adbdadb66fe047c484dd75102930910, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetUnitPosition: {fileID: 0}
-  _targetUnit: {fileID: 0}
 --- !u!1 &5387467300147898056
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +219,7 @@ GameObject:
   - component: {fileID: 9005771799514709918}
   - component: {fileID: 3917576851556146223}
   - component: {fileID: 3917576851556146221}
-  - component: {fileID: 8277769502020178070}
+  - component: {fileID: -3006911938380266996}
   m_Layer: 6
   m_Name: Quad_mech
   m_TagString: Enemy
@@ -299,7 +240,6 @@ Transform:
   m_Children:
   - {fileID: 5392927990681161204}
   - {fileID: 9054333828761846558}
-  - {fileID: 3917576851456324741}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -351,7 +291,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
---- !u!114 &8277769502020178070
+--- !u!114 &-3006911938380266996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,37 +300,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6201759631085898106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11d04de171a784eda80869f08e149735, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a2c60144b3d844dcbb249c77dbe0b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _owner: {fileID: 0}
-  _characterType: 0
-  _targetUnit: {fileID: 3917576851456324739}
-  _unitType: 0
-  _unitName: Enemy Mech
-  _unitHitPoints: 50
-  _currentUnitHP: 0
-  _unitSpeed: 0
-  _unitDefense: 0
-  _accuracyModifier: 0
-  _unitAttacksMoveSet:
-  - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
-  - {fileID: 11400000, guid: a3dc5d20cb25f4c5b805798a2a3c874a, type: 2}
-  - {fileID: 11400000, guid: 84ca8f0c2d9744fdc9acb8aa6e220218, type: 2}
-  - {fileID: 11400000, guid: 32451926f6cbe4d5db2b9f9f73067bd2, type: 2}
-  _attackMoveUses: 
-  _unitDefensesMoveSet:
-  - {fileID: 11400000, guid: 652e65b08661c41ac859fe762502f818, type: 2}
-  - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
-  _defenseMoveUses: 
-  _emptyAttackPlaceholder: {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
-  _emptyDefensePlaceholder: {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
-  _unitNameUpdateChannel: {fileID: 11400000, guid: 4ec2433fc3ca04eff8ba1fa64706ed61, type: 2}
-  _unitAttackMoveNameUpdateChannel: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}
-  _unitDefenseMoveNameUpdateChannel: {fileID: 11400000, guid: ff4f6eedf94ed49c3a0e6636508523f0, type: 2}
-  _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
-  _displayAttackActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
-  _endBattleChannel: {fileID: 11400000, guid: 3e2e44ced2e734f2bb44a5993706eb3b, type: 2}
+  _animator: {fileID: 9005771799514709918}
+  _animationClips: []
 --- !u!1 &6201761610155688160
 GameObject:
   m_ObjectHideFlags: 0

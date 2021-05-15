@@ -3151,14 +3151,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5479962463264362077}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11d04de171a784eda80869f08e149735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _owner: {fileID: 0}
   _characterType: 1
-  _unitStats: {fileID: 11400000, guid: d22fb20ddf7ce4689a2a1554b53445b3, type: 2}
+  unitStats: {fileID: 0}
   _targetUnit: {fileID: 3189577914601157540}
   _unitType: 0
   _currentUnitHP: 0
@@ -3170,16 +3170,6 @@ MonoBehaviour:
   _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
   _displayAttackActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   _endBattleChannel: {fileID: 11400000, guid: 3e2e44ced2e734f2bb44a5993706eb3b, type: 2}
-  _director: {fileID: 0}
-  _moveCutScenes: []
-  _unitAttacksMoveSet:
-  - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
-  - {fileID: 11400000, guid: a3dc5d20cb25f4c5b805798a2a3c874a, type: 2}
-  - {fileID: 11400000, guid: 84ca8f0c2d9744fdc9acb8aa6e220218, type: 2}
-  - {fileID: 11400000, guid: 32451926f6cbe4d5db2b9f9f73067bd2, type: 2}
-  _unitDefensesMoveSet:
-  - {fileID: 11400000, guid: 652e65b08661c41ac859fe762502f818, type: 2}
-  - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
 --- !u!1 &5479963763529980285
 GameObject:
   m_ObjectHideFlags: 0

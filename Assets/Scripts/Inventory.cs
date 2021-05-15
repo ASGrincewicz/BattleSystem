@@ -11,7 +11,6 @@ namespace Veganimus.BattleSystem
     public class Inventory : MonoBehaviour
     {
         [SerializeField] private Character _owner;
-
         public List<Item> battleInventory;
 
         [SerializeField] private List<Item> _assetInventory;
