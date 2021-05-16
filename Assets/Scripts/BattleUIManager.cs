@@ -250,13 +250,24 @@ namespace Veganimus.BattleSystem
                 case "defense":
                     _defenseMoveBuff[moveSlot].text = $"Defense Buff: {buff}";
                     break;
-                case "health item":
-                    _playerItemEffects[moveSlot].text = $"Heal Amount:{buff}";
+            }
+        }
+        public void DisplayItemEffects(ItemType type,StatAffected stat, int amount,int itemSlot)
+        {
+            switch(type)
+            {
+                case ItemType.Health:
+                    _playerItemEffects[itemSlot].text = $"Heal Amount: {amount}";
                     break;
-                case "equipment":
-                    _playerItemEffects[moveSlot].text = $"Equip Effect:{buff}";
+                case ItemType.Equipment:
+                    _playerItemEffects[itemSlot].text = $"{stat}: +{ amount}";
                     break;
-
+                case ItemType.Boost:
+                    _playerItemEffects[itemSlot].text = $"{stat}: +{ amount}";
+                    break;
+                case ItemType.Refill:
+                    _playerItemEffects[itemSlot].text = $"Move Uses +{amount}";
+                    break;
             }
         }
         public void DisplayCurrentActionTaken(string actionTaken)

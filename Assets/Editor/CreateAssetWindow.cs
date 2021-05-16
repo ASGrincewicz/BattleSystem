@@ -12,7 +12,7 @@ namespace Veganimus.BattleSystem
     {
         private static string _windowTitle = "Create Asset";
         private string _assetName;
-        public enum AssetTypeToCreate {HealthItem, EquipmentItem, AttackMove, DefenseMove }
+        public enum AssetTypeToCreate {Item, AttackMove, DefenseMove }
         private AssetTypeToCreate _assetTypeToCreate;
         private bool groupEnabled;
         private bool isConsumable = true;
@@ -22,7 +22,9 @@ namespace Veganimus.BattleSystem
         private int defenseBuff;
         private MoveType moveType;
         private ElementType elementType;
-        private int healAmount;
+        private ItemType _itemType;
+        private StatAffected _affectedStat;
+        private int _effectAmount;
         private Object channel;
 
         // Add menu named "My Window" to the Window menu
@@ -42,14 +44,12 @@ namespace Veganimus.BattleSystem
             _assetTypeToCreate = (AssetTypeToCreate)EditorGUILayout.EnumPopup("Type to Create", _assetTypeToCreate);
             switch (_assetTypeToCreate)
             {
-                case AssetTypeToCreate.HealthItem:
-                    isConsumable = EditorGUILayout.Toggle("Is Consumable", isConsumable);
-                    uses = EditorGUILayout.IntField("Health Item Uses",uses, GUILayout.Width(200f));
-                    healAmount = EditorGUILayout.IntField("Health Item Uses", healAmount, GUILayout.Width(200f));
-                    break;
-                case AssetTypeToCreate.EquipmentItem:
+                case AssetTypeToCreate.Item:
+                    _itemType = (ItemType)EditorGUILayout.EnumPopup("Item Type", _itemType);
                     isConsumable = EditorGUILayout.Toggle("Is Consumable", isConsumable);
                     uses = EditorGUILayout.IntField("Equipment Uses",uses,GUILayout.Width(200f));
+                    _affectedStat = (StatAffected)EditorGUILayout.EnumPopup("Affected Stat", _affectedStat);
+                    _effectAmount = EditorGUILayout.IntField("Effect Amount", _effectAmount, GUILayout.Width(200f));
                     break;
                 case AssetTypeToCreate.AttackMove:
                     uses = EditorGUILayout.IntField("Attack Move Uses",uses, GUILayout.Width(200f));
@@ -76,24 +76,17 @@ namespace Veganimus.BattleSystem
         {
             switch (asset)
             {
-                case AssetTypeToCreate.HealthItem:
-                    var newHealthItem = CreateInstance<HealthItem>();
+                case AssetTypeToCreate.Item:
+                    var newItem = CreateInstance<Item>();
                     AssetDatabase.CreateAsset(
-                        newHealthItem,
-                        $"Assets/Scripts/Scriptable Objects/Items/Consumables/{_assetName}.asset");
-                    newHealthItem.itemName = _assetName;
-                    newHealthItem.isConsumable = isConsumable;
-                    newHealthItem.itemUses = uses;
-                    newHealthItem.healAmount = healAmount;
-                    break;
-                case AssetTypeToCreate.EquipmentItem:
-                    var newEqupmentItem = CreateInstance<EquipmentItem>();
-                    AssetDatabase.CreateAsset(
-                        newEqupmentItem,
-                        $"Assets/Scripts/Scriptable Objects/Items/Equippables/{_assetName}.asset");
-                    newEqupmentItem.itemName = _assetName;
-                    newEqupmentItem.isConsumable = isConsumable;
-                    newEqupmentItem.itemUses = uses;
+                        newItem,
+                        $"Assets/Scripts/Scriptable Objects/Items/{_assetName}.asset");
+                    newItem.itemType = _itemType;
+                    newItem.itemName = _assetName;
+                    newItem.isConsumable = isConsumable;
+                    newItem.itemUses = uses;
+                    newItem.statAffected = _affectedStat;
+                    newItem.effectAmount = _effectAmount;
                     break;
                 case AssetTypeToCreate.AttackMove:
                     var newAttackMove = CreateInstance<UnitAttackMove>();

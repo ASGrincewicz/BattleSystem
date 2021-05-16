@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4042837017265398788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4042837017265398791}
+  - component: {fileID: 4042837017265398790}
+  m_Layer: 0
+  m_Name: BattleUIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4042837017265398791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042837017265398788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4042837017265398790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042837017265398788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb9b58fe942b4cb1a686c86977c36d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _battleCanvas: {fileID: 0}
+  _playerUI: {fileID: 0}
+  _playerTurnIndicator: {fileID: 0}
+  _playerCharacterNameText: {fileID: 0}
+  _playerUnitNameText: {fileID: 0}
+  _playerHitPointsSlider: {fileID: 0}
+  _enemyUI: {fileID: 0}
+  _enemyTurnIndicator: {fileID: 0}
+  _enemyCharacterNameText: {fileID: 0}
+  _enemyUnitNameText: {fileID: 0}
+  _enemyHitPointsSlider: {fileID: 0}
+  _actionText: {fileID: 0}
+  _statUpdateText: {fileID: 0}
+  _endBattleText: {fileID: 0}
+  _unitHPText: {fileID: 0}
+  _unitSpeed: {fileID: 0}
+  _unitDefense: {fileID: 0}
+  _unitAccuracy: {fileID: 0}
+  _playerAttackNames:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _attackMoveUses:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _attackMoveAccuracy:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _attackMoveDamage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerAttackButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerDefenseNames:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _defenseMoveUses:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _defenseMoveBuff:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerDefenseButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerItemNames:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerItemUses:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerItemEffects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerItemButtons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _unitNameUpdateChannel: {fileID: 11400000, guid: 4ec2433fc3ca04eff8ba1fa64706ed61, type: 2}
+  _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
+  _unitAttackMoveNameUpdateChannel: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}
+  _UnitDefenseMoveNameUpdateChannel: {fileID: 11400000, guid: ff4f6eedf94ed49c3a0e6636508523f0, type: 2}
+  _itemNameUpdateChannel: {fileID: 11400000, guid: 934baab64d80546c7b14daa67b9fb295, type: 2}
+  _displayActionTakenChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
+  _endBattleChannel: {fileID: 11400000, guid: 3e2e44ced2e734f2bb44a5993706eb3b, type: 2}
