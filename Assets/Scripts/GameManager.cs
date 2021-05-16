@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace Veganimus.BattleSystem
 {
@@ -105,5 +106,17 @@ namespace Veganimus.BattleSystem
                     break;
             }
         }
+        public void LoadMainMenu()
+        {
+            Time.timeScale = 1;
+            var load = SceneManager.LoadSceneAsync(0);
+            if (load.isDone)
+                SceneManager.UnloadSceneAsync(1);
+        }
+        public void PauseGame() => Time.timeScale = 0;
+
+        public void UnPauseGame() => Time.timeScale = 1;
+
+        public void QuitGame() => Application.Quit();
     }
 }

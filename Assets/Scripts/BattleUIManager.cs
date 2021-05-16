@@ -24,6 +24,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private TMP_Text _statUpdateText;
         [SerializeField] private TMP_Text _endBattleText;
         private WaitForSeconds _displayTextDelay;
+        private WaitForSeconds _endBattleDelay;
         [Space]
         [Header("Unit Stats")]
         [SerializeField] private TMP_Text _unitHPText;
@@ -85,7 +86,11 @@ namespace Veganimus.BattleSystem
             _displayActionTakenChannel.OnDisplayAction.RemoveListener(DisplayCurrentActionTaken);
             _endBattleChannel.OnBattleStateChanged.RemoveListener(EndBattleUIActivate);
         }
-        private void Start() => _displayTextDelay = new WaitForSeconds(2f);
+        private void Start()
+        {
+            _displayTextDelay = new WaitForSeconds(2f);
+            _endBattleDelay = new WaitForSeconds(5f);
+        }
 
         public void UpdateCharacterNames(CharacterType characterType, string characterName)
         {
@@ -147,6 +152,7 @@ namespace Veganimus.BattleSystem
 
             else if (battleState == BattleState.Lose)
              _endBattleText.text = $"YOU LOSE!";
+            StartCoroutine(DisplayTextDelayRoutine(_endBattleDelay,_endBattleText));
         }
 
         private void DisplayUnitName(CharacterType characterType, string unitName)
@@ -256,12 +262,12 @@ namespace Veganimus.BattleSystem
         public void DisplayCurrentActionTaken(string actionTaken)
         {
             _actionText.text = $"{actionTaken}";
-            StartCoroutine(DisplayTextDelayRoutine(_actionText));
+            StartCoroutine(DisplayTextDelayRoutine(_displayTextDelay,_actionText));
         }
         public void DisplayStatUpdateText(string statUpdate)
         {
             _statUpdateText.text = $"{statUpdate}";
-            StartCoroutine(DisplayTextDelayRoutine(_statUpdateText));
+            StartCoroutine(DisplayTextDelayRoutine(_displayTextDelay,_statUpdateText));
         }
         public void ToggleTurnIndicators(BattleState battleState)
         {
@@ -282,10 +288,14 @@ namespace Veganimus.BattleSystem
 
             }
         }
-        private IEnumerator DisplayTextDelayRoutine(TMP_Text text)
+        private IEnumerator DisplayTextDelayRoutine(WaitForSeconds delay ,TMP_Text text)
         {
-            yield return _displayTextDelay;
-            text.text = $"";
+            yield return delay;
+            if (delay == _endBattleDelay)
+                GameManager.Instance.LoadMainMenu();
+            else if (delay == _displayTextDelay)
+                text.text = "";
+           
         }
     }
 }
