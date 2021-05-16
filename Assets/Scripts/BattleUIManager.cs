@@ -1,33 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Veganimus.BattleSystem
 {
-    public class BattleUIManager : MonoBehaviour
+    public class BattleUIManager : Singleton<BattleUIManager>
     {
-        public static BattleUIManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    Debug.LogError("Boss is NULL!");
-                }
-                return _instance;
-            }
-        }
-        private static BattleUIManager _instance;
         [SerializeField] private Canvas _battleCanvas;
         [Header("Player UI")]
         [SerializeField] private GameObject _playerUI;
         [SerializeField] private Image _playerTurnIndicator;
+        [SerializeField] private TMP_Text _playerCharacterNameText;
         [SerializeField] private TMP_Text _playerUnitNameText;
         [SerializeField] private Slider _playerHitPointsSlider;
         [Header("Enemy UI")]
         [SerializeField] private GameObject _enemyUI;
         [SerializeField] private Image _enemyTurnIndicator;
+        [SerializeField] private TMP_Text _enemyCharacterNameText;
         [SerializeField] private TMP_Text _enemyUnitNameText;
         [SerializeField] private Slider _enemyHitPointsSlider;
         [Space]
@@ -35,6 +24,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private TMP_Text _statUpdateText;
         [SerializeField] private TMP_Text _endBattleText;
         private WaitForSeconds _displayTextDelay;
+        private WaitForSeconds _endBattleDelay;
         [Space]
         [Header("Unit Stats")]
         [SerializeField] private TMP_Text _unitHPText;
@@ -69,9 +59,9 @@ namespace Veganimus.BattleSystem
         [SerializeField] private DisplayActionChannel _displayActionTakenChannel;
         [SerializeField] private BattleStateChannel _endBattleChannel;
 
-        private void Awake()
+        protected override void Awake()
         {
-            _instance = this;
+            base.Awake();
             ActivateButtons(false);
             ToggleTurnIndicators(BattleState.Start);
         }
@@ -96,7 +86,24 @@ namespace Veganimus.BattleSystem
             _displayActionTakenChannel.OnDisplayAction.RemoveListener(DisplayCurrentActionTaken);
             _endBattleChannel.OnBattleStateChanged.RemoveListener(EndBattleUIActivate);
         }
-        private void Start() => _displayTextDelay = new WaitForSeconds(2f);
+        private void Start()
+        {
+            _displayTextDelay = new WaitForSeconds(2f);
+            _endBattleDelay = new WaitForSeconds(5f);
+        }
+
+        public void UpdateCharacterNames(CharacterType characterType, string characterName)
+        {
+            switch(characterType)
+            {
+                case CharacterType.Player:
+                    _playerCharacterNameText.text = $"{characterName}";
+                    break;
+                case CharacterType.Enemy:
+                    _enemyCharacterNameText.text = $"{characterName}";
+                    break;
+            }
+        }
 
         public void ActivateButtons(bool isPlayerTurn)
         {
@@ -145,6 +152,7 @@ namespace Veganimus.BattleSystem
 
             else if (battleState == BattleState.Lose)
              _endBattleText.text = $"YOU LOSE!";
+            StartCoroutine(DisplayTextDelayRoutine(_endBattleDelay,_endBattleText));
         }
 
         private void DisplayUnitName(CharacterType characterType, string unitName)
@@ -254,12 +262,12 @@ namespace Veganimus.BattleSystem
         public void DisplayCurrentActionTaken(string actionTaken)
         {
             _actionText.text = $"{actionTaken}";
-            StartCoroutine(DisplayTextDelayRoutine(_actionText));
+            StartCoroutine(DisplayTextDelayRoutine(_displayTextDelay,_actionText));
         }
         public void DisplayStatUpdateText(string statUpdate)
         {
             _statUpdateText.text = $"{statUpdate}";
-            StartCoroutine(DisplayTextDelayRoutine(_statUpdateText));
+            StartCoroutine(DisplayTextDelayRoutine(_displayTextDelay,_statUpdateText));
         }
         public void ToggleTurnIndicators(BattleState battleState)
         {
@@ -280,10 +288,14 @@ namespace Veganimus.BattleSystem
 
             }
         }
-        private IEnumerator DisplayTextDelayRoutine(TMP_Text text)
+        private IEnumerator DisplayTextDelayRoutine(WaitForSeconds delay ,TMP_Text text)
         {
-            yield return _displayTextDelay;
-            text.text = $"";
+            yield return delay;
+            if (delay == _endBattleDelay)
+                GameManager.Instance.LoadMainMenu();
+            else if (delay == _displayTextDelay)
+                text.text = "";
+           
         }
     }
 }

@@ -57,6 +57,7 @@ namespace Veganimus.BattleSystem
             activeUnit.unitStats = _party[0];
             activeUnitPrefab.transform.position = activeUnitSpot.position;
             activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
+            UpdateCharacterNames();
         }
 
         private void InitiateCharacterTurn(CharacterType characterType)
@@ -70,6 +71,10 @@ namespace Veganimus.BattleSystem
                     StartCoroutine(activeUnit.TurnDelayRoutine());
                 }
             }
+        }
+        private void UpdateCharacterNames()
+        {
+            BattleUIManager.Instance.UpdateCharacterNames(ThisCharacterType, CharacterName);
         }
         public void UpdateItemNames()
         {

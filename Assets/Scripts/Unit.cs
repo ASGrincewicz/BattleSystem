@@ -45,8 +45,16 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected UnitHitPointUpdate _unitHPUpdateChannel;
         [SerializeField] protected DisplayActionChannel _displayActionChannel;
         [SerializeField] protected BattleStateChannel _endBattleChannel;
-
-        private void Awake() => _owner = GetComponentInParent<Character>();
+        private WaitForSeconds _turnDelay;
+        private WaitForSeconds _statUpdateDelay;
+        private WaitForSeconds _endBattleDelay;
+        private void Awake()
+        {
+            _owner = GetComponentInParent<Character>();
+            _turnDelay = new WaitForSeconds(5f);
+            _statUpdateDelay = new WaitForSeconds(2f);
+            _endBattleDelay = new WaitForSeconds(1.5f);
+        }
 
         private IEnumerator Start()
         {
@@ -134,10 +142,9 @@ namespace Veganimus.BattleSystem
             {
                 _currentUnitHP = 0;
                 _unitAnimation.PlayClip("Death");
-                if (_characterType == CharacterType.Player)
-                    _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Lose);
-                else
-                    _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Win);
+                _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
+                StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} took {damage} damage!"));
+                StartCoroutine(EndBattleDelayRoutine());
             }
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
             StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} took {damage} damage!"));
@@ -245,15 +252,23 @@ namespace Veganimus.BattleSystem
             else if (dieRoll + _owner.AIAgression < 3)
                 UseDefenseMoveSlot(defenseToUse);
         }
-        protected IEnumerator StatUpdateDelayRoutine(string actionTakenText)
+        private IEnumerator StatUpdateDelayRoutine(string actionTakenText)
         {
-            yield return new WaitForSeconds(2f);
+            yield return _statUpdateDelay;
             BattleUIManager.Instance.DisplayStatUpdateText(actionTakenText);
         }
         public IEnumerator TurnDelayRoutine()
         {
-            yield return new WaitForSeconds(5f);
+            yield return _turnDelay;
             DetermineAction();
+        }
+        private IEnumerator EndBattleDelayRoutine()
+        {
+            yield return _endBattleDelay;
+            if (_characterType == CharacterType.Player)
+                _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Lose);
+            else
+                _endBattleChannel.RaiseBattleStateChangeEvent(BattleState.Win);
         }
     }
 }
