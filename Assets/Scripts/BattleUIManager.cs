@@ -1,33 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Veganimus.BattleSystem
 {
-    public class BattleUIManager : MonoBehaviour
+    public class BattleUIManager : Singleton<BattleUIManager>
     {
-        public static BattleUIManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    Debug.LogError("Boss is NULL!");
-                }
-                return _instance;
-            }
-        }
-        private static BattleUIManager _instance;
         [SerializeField] private Canvas _battleCanvas;
         [Header("Player UI")]
         [SerializeField] private GameObject _playerUI;
         [SerializeField] private Image _playerTurnIndicator;
+        [SerializeField] private TMP_Text _playerCharacterNameText;
         [SerializeField] private TMP_Text _playerUnitNameText;
         [SerializeField] private Slider _playerHitPointsSlider;
         [Header("Enemy UI")]
         [SerializeField] private GameObject _enemyUI;
         [SerializeField] private Image _enemyTurnIndicator;
+        [SerializeField] private TMP_Text _enemyCharacterNameText;
         [SerializeField] private TMP_Text _enemyUnitNameText;
         [SerializeField] private Slider _enemyHitPointsSlider;
         [Space]
@@ -69,9 +58,9 @@ namespace Veganimus.BattleSystem
         [SerializeField] private DisplayActionChannel _displayActionTakenChannel;
         [SerializeField] private BattleStateChannel _endBattleChannel;
 
-        private void Awake()
+        protected override void Awake()
         {
-            _instance = this;
+            base.Awake();
             ActivateButtons(false);
             ToggleTurnIndicators(BattleState.Start);
         }
@@ -97,6 +86,19 @@ namespace Veganimus.BattleSystem
             _endBattleChannel.OnBattleStateChanged.RemoveListener(EndBattleUIActivate);
         }
         private void Start() => _displayTextDelay = new WaitForSeconds(2f);
+
+        public void UpdateCharacterNames(CharacterType characterType, string characterName)
+        {
+            switch(characterType)
+            {
+                case CharacterType.Player:
+                    _playerCharacterNameText.text = $"{characterName}";
+                    break;
+                case CharacterType.Enemy:
+                    _enemyCharacterNameText.text = $"{characterName}";
+                    break;
+            }
+        }
 
         public void ActivateButtons(bool isPlayerTurn)
         {

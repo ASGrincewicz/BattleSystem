@@ -9,7 +9,7 @@ namespace Veganimus.BattleSystem
     {
         Start, PlayerTurn, EnemyTurn,AllyTurn,EnemyAllyTurn, Win, Lose
     }
-    public class GameManager : MonoBehaviour
+    public class GameManager : Singleton<GameManager>
     {
         [SerializeField] private BattleState _battleState;
         [SerializeField] private List<Character> characters;
