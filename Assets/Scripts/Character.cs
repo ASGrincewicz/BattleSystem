@@ -29,6 +29,7 @@ namespace Veganimus.BattleSystem
 
         private Inventory _inventory;
         public Unit activeUnit;
+        public GameObject activeUnitPrefab;
         public int turnCount;
         public bool isDefeated;
         [SerializeField] private Transform activeUnitSpot;
@@ -55,10 +56,12 @@ namespace Veganimus.BattleSystem
         private void Start()
         {
             _inventory = GetComponent<Inventory>();
-            GameObject activeUnitPrefab = Instantiate(_party[0].unitModelPrefab ,activeUnitSpot);
+            activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,activeUnitSpot);
+            
             activeUnit.unitStats = _party[0];
             activeUnitPrefab.transform.position = activeUnitSpot.position;
             activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
+            
             UpdateCharacterNames();
         }
 

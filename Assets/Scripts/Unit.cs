@@ -20,7 +20,7 @@ namespace Veganimus.BattleSystem
     ///Aaron Grincewicz
     ///@info:Assigned to a Unit Prefab to determine Stats, Moves, etc...
     ///</summary>
-    public class Unit : MonoBehaviour, IDamageable, IHealable,IDefendable, IBuffable
+    public class Unit : MonoBehaviour, IDamageable, IHealable, IDefendable, IBuffable
     {
         [SerializeField] protected Character _owner;
         [SerializeField] protected CharacterType _characterType;
@@ -34,7 +34,19 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected int _unitSpeed;
         [SerializeField] protected int _unitDefense;
         [SerializeField] protected int _accuracyModifier;
+        [Header("Defense Effect Prefabs")]
+        [SerializeField] private GameObject _unitEnergyShield;
+        public GameObject UnitEnergyShield { get { return _unitEnergyShield; } private set { _unitEnergyShield = value; } }
+
+        [SerializeField] private GameObject _unitBarrier;
+        public GameObject UnitBarrier { get { return _unitBarrier; } private set { _unitBarrier = value; } }
+
+        [SerializeField] private GameObject _unitCloak;
+        public GameObject UnitCloak { get { return _unitCloak; } private set { _unitCloak = value; } }
+
         [Header("Runtime Assets")]
+        [SerializeField] private GameObject _unitPrefab;
+        public GameObject UnitPrefab { get { return _unitPrefab; } set { } }
         [SerializeField] private List<UnitAttackMove> _attackMoveSet = new List<UnitAttackMove>();
         [SerializeField] private List<UnitDefenseMove> _defenseMoveSet = new List<UnitDefenseMove>();
         [Space]
@@ -66,12 +78,19 @@ namespace Veganimus.BattleSystem
         }
         private void PopulateRuntimeStats()
         {
+            _unitPrefab = _owner.activeUnitPrefab;
             _unitName = unitStats.UnitName;
             _unitHitPoints = unitStats.UnitHitPoints;
             _currentUnitHP = _unitHitPoints;
             _unitSpeed = unitStats.UnitSpeed;
             _unitDefense = unitStats.UnitDefense;
             _accuracyModifier = unitStats.UnitAccuracyModifier;
+            _unitEnergyShield = _unitPrefab.GetComponent<UnitPrefab>().shield;
+            _unitEnergyShield.SetActive(false);
+            _unitBarrier = _unitPrefab.GetComponent<UnitPrefab>().barrier;
+            _unitBarrier.SetActive(false);
+            _unitCloak = _unitPrefab.GetComponent<UnitPrefab>().cloak;
+            _unitCloak.SetActive(false);
             _unitAnimation = GetComponentInChildren<UnitAnimation>();
             _unitNameUpdateChannel.RaiseUnitNameUpdateEvent(_characterType, _unitName);
 
@@ -238,7 +257,7 @@ namespace Veganimus.BattleSystem
                     BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].moveUses, slotNumber);
                     BattleUIManager.Instance.ActivateButtons(false);
                 }
-               // move.RaiseDefenseMoveUsedEvent(_unitName);
+                move.RaiseDefenseMoveUsedEvent(this,move.MoveDefenseType);
                 AdjustDefense(move.defenseBuff);
                 _owner.IsTurnComplete = true;
                 _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType,_owner.IsTurnComplete);

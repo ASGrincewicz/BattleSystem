@@ -8,7 +8,10 @@ public class UnitStats : ScriptableObject
     ///<summary>
     ///Assigned in Unit Class on Unit Prefab to determine Stats.
     ///</summary>
-    public GameObject unitModelPrefab;
+    
+    [SerializeField] private GameObject _unitModelPrefab;
+    public GameObject UnitModelPrefab { get { return _unitModelPrefab; } }
+
     [SerializeField] private string _unitName;
     public string UnitName { get { return _unitName; } }
 
@@ -33,9 +36,16 @@ public class UnitStats : ScriptableObject
     [SerializeField] private List<UnitDefenseMove> _unitDefenseMoves = new List<UnitDefenseMove>();
     public List<UnitDefenseMove> UnitDefenseMoves { get { return _unitDefenseMoves; } }
 
+    //[SerializeField] private GameObject _unitEnergyShield;
+    //public GameObject UnitEnergyShield { get { return _unitEnergyShield; } }
+
+    //[SerializeField] private GameObject _unitBarrier;
+    //public GameObject UnitBarrier { get { return _unitBarrier; } }
+
+    //[SerializeField] private GameObject _unitCloak;
+    //public GameObject UnitCloak { get { return _unitCloak; } }
+
     public UnityEngine.Playables.PlayableDirector director;
     public List<GameObject> unitMoveCutscenes = new List<GameObject>();
-    private Animator animator;
-
-
+    private Animator _animator;
 }

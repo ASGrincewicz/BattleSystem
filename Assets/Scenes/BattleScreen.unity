@@ -3263,6 +3263,9 @@ MonoBehaviour:
   _unitSpeed: 0
   _unitDefense: 0
   _accuracyModifier: 0
+  _unitEnergyShield: {fileID: 0}
+  _unitBarrier: {fileID: 0}
+  _unitCloak: {fileID: 0}
   _attackMoveSet: []
   _defenseMoveSet: []
   _unitAnimation: {fileID: 0}
@@ -12236,6 +12239,9 @@ MonoBehaviour:
   _unitSpeed: 0
   _unitDefense: 0
   _accuracyModifier: 0
+  _unitEnergyShield: {fileID: 0}
+  _unitBarrier: {fileID: 0}
+  _unitCloak: {fileID: 0}
   _attackMoveSet: []
   _defenseMoveSet: []
   _unitAnimation: {fileID: 0}
