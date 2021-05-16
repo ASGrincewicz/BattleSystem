@@ -8,10 +8,10 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Electronic Highway Sign
   fontNames:
   - Electronic Highway Sign
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 17f2869ed2467424abfd706136111cbb, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
