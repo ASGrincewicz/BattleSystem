@@ -38,4 +38,13 @@ public class Item : ScriptableObject
             }
         }
     }
+
+    public void DeActivateItem(Unit unit)
+    {
+        if (itemType == ItemType.Equipment)
+        {
+            var iBuff = unit.GetComponent<IBuffable>();
+            iBuff.BuffStats(statAffected, -effectAmount);
+        }
+    }
 }

@@ -26,10 +26,10 @@ namespace Veganimus.BattleSystem
 
         [SerializeField] private List<UnitStats> _party = new List<UnitStats>();
         public List<UnitStats> Party { get { return _party; } }
-
+        public List<MoveEffect> effects = new List<MoveEffect>();
         private Inventory _inventory;
         public Unit activeUnit;
-        public int turnCount;
+        public GameObject activeUnitPrefab;
         public bool isDefeated;
         [SerializeField] private Transform activeUnitSpot;
         [Header("Broadcasting on")]
@@ -42,6 +42,8 @@ namespace Veganimus.BattleSystem
         [Header("Listening to:")]
         [SerializeField] private CharacterTurnChannel characterTurnChannel;
         [Space]
+        [SerializeField] private int _turnCount;
+        public int TurnCount { get { return _turnCount; } }
         [SerializeField] private bool _isTurnComplete;
         public bool IsTurnComplete { get => _isTurnComplete; set => _isTurnComplete = value; }
 
@@ -55,10 +57,12 @@ namespace Veganimus.BattleSystem
         private void Start()
         {
             _inventory = GetComponent<Inventory>();
-            GameObject activeUnitPrefab = Instantiate(_party[0].unitModelPrefab ,activeUnitSpot);
+            activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,activeUnitSpot);
+            
             activeUnit.unitStats = _party[0];
-            activeUnitPrefab.transform.position = activeUnitSpot.position;
+            activeUnitPrefab.transform.position = new Vector3(activeUnit.transform.position.x, 15, activeUnit.transform.position.z);
             activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
+            
             UpdateCharacterNames();
         }
 
@@ -66,11 +70,30 @@ namespace Veganimus.BattleSystem
         {
             if (characterType == ThisCharacterType)
             {
+                _turnCount++;
                 IsTurnComplete = false;
                 TurnCompleteChannel.RaiseTurnCompleteEvent(characterType, IsTurnComplete);
+                DeActivateEffects();
                 if (ThisCharacterType != CharacterType.Player && IsTurnComplete == false)
                 {
                     StartCoroutine(activeUnit.TurnDelayRoutine());
+                }
+            }
+        }
+        private void DeActivateEffects()
+        {
+            var efffect = GetComponentsInChildren<MoveEffect>();
+            foreach(var obj in activeUnit.GetComponentsInChildren<MoveEffect>())
+            {
+                effects.Add(obj);
+            }
+            for (int i = effects.Count - 1; i > 0; i--)
+            {
+                if (TurnCount - effects[i].activatedOnTurn > effects[i].turnsActive)
+                {
+                    effects[i].gameObject.SetActive(false);
+                    activeUnit.ResetDefense();
+                    effects.Remove(effects[i]); 
                 }
             }
         }

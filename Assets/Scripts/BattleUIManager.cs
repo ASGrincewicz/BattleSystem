@@ -42,6 +42,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private TMP_Text[] _playerDefenseNames = new TMP_Text[0];
         [SerializeField] private TMP_Text[] _defenseMoveUses = new TMP_Text[0];
         [SerializeField] private TMP_Text[] _defenseMoveBuff = new TMP_Text[0];
+        [SerializeField] private TMP_Text[] _defenseMoveActiveTurns = new TMP_Text[0];
         [SerializeField] private Button[] _playerDefenseButtons = new Button[4];
 
         [Header("Player Item Buttons")]
@@ -239,7 +240,7 @@ namespace Veganimus.BattleSystem
                     break;
             }
         }
-        public void DisplayMoveStats(string moveType,int damage, float accuracy,int buff, int moveSlot)
+        public void DisplayMoveStats(string moveType,int damage, float accuracy,int buff,int activeTurns, int moveSlot)
         {
             switch (moveType)
             {
@@ -249,6 +250,7 @@ namespace Veganimus.BattleSystem
                     break;
                 case "defense":
                     _defenseMoveBuff[moveSlot].text = $"Defense Buff: {buff}";
+                    _defenseMoveActiveTurns[moveSlot].text = $"Active for: {activeTurns} Turns";
                     break;
             }
         }

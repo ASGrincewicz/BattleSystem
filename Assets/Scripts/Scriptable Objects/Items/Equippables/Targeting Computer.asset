@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7926167caca0447fcb649649cfc893c7, type: 3}
   m_Name: Targeting Computer
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Targeting Computer
   isConsumable: 0
-  itemUses: 0
-  itemType: 0
-  statAffected: 0
-  effectAmount: 0
+  itemUses: 1
+  itemType: 1
+  statAffected: 3
+  effectAmount: 10

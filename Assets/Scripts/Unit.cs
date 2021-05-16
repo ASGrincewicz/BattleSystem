@@ -20,13 +20,15 @@ namespace Veganimus.BattleSystem
     ///Aaron Grincewicz
     ///@info:Assigned to a Unit Prefab to determine Stats, Moves, etc...
     ///</summary>
-    public class Unit : MonoBehaviour, IDamageable, IHealable,IDefendable, IBuffable
+    public class Unit : MonoBehaviour, IDamageable, IHealable, IDefendable, IBuffable
     {
         [SerializeField] protected Character _owner;
+        public Character Owner { get { return _owner; } }
         [SerializeField] protected CharacterType _characterType;
         public UnitStats unitStats;
         protected int _unitLevel;
         [SerializeField] protected TargetFinder _targetUnit;
+        public TargetFinder TargetUnit { get { return _targetUnit; } }
         [SerializeField] protected ElementType _unitType;
         [SerializeField] protected string _unitName;
         [SerializeField] protected int _unitHitPoints;
@@ -34,7 +36,21 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected int _unitSpeed;
         [SerializeField] protected int _unitDefense;
         [SerializeField] protected int _accuracyModifier;
+        [Header("Defense Effect Prefabs")]
+        [SerializeField] private GameObject _unitBaseModel;
+        public GameObject UnitBaseModel { get { return _unitBaseModel; } private set { _unitBaseModel = value; } }
+        [SerializeField] private GameObject _unitEnergyShield;
+        public GameObject UnitEnergyShield { get { return _unitEnergyShield; } private set { _unitEnergyShield = value; } }
+
+        [SerializeField] private GameObject _unitBarrier;
+        public GameObject UnitBarrier { get { return _unitBarrier; } private set { _unitBarrier = value; } }
+
+        [SerializeField] private GameObject _unitCloak;
+        public GameObject UnitCloak { get { return _unitCloak; } private set { _unitCloak = value; } }
+        public GameObject ActiveEffect { get; set; }
         [Header("Runtime Assets")]
+        [SerializeField] private GameObject _unitPrefab;
+        public GameObject UnitPrefab { get { return _unitPrefab; } set { } }
         [SerializeField] private List<UnitAttackMove> _attackMoveSet = new List<UnitAttackMove>();
         [SerializeField] private List<UnitDefenseMove> _defenseMoveSet = new List<UnitDefenseMove>();
         [Space]
@@ -48,6 +64,7 @@ namespace Veganimus.BattleSystem
         private WaitForSeconds _turnDelay;
         private WaitForSeconds _statUpdateDelay;
         private WaitForSeconds _endBattleDelay;
+        private bool _isEffectActive;
         private void Awake()
         {
             _owner = GetComponentInParent<Character>();
@@ -66,12 +83,21 @@ namespace Veganimus.BattleSystem
         }
         private void PopulateRuntimeStats()
         {
+            _unitPrefab = _owner.activeUnitPrefab;
             _unitName = unitStats.UnitName;
             _unitHitPoints = unitStats.UnitHitPoints;
             _currentUnitHP = _unitHitPoints;
             _unitSpeed = unitStats.UnitSpeed;
             _unitDefense = unitStats.UnitDefense;
             _accuracyModifier = unitStats.UnitAccuracyModifier;
+            var prefab = _unitPrefab.GetComponent<UnitPrefab>();
+            _unitBaseModel = prefab.baseModel;
+            _unitEnergyShield = prefab.shield;
+            _unitEnergyShield.SetActive(false);
+            _unitBarrier = prefab.barrier;
+            _unitBarrier.SetActive(false);
+            _unitCloak = prefab.cloak;
+            _unitCloak.SetActive(false);
             _unitAnimation = GetComponentInChildren<UnitAnimation>();
             _unitNameUpdateChannel.RaiseUnitNameUpdateEvent(_characterType, _unitName);
 
@@ -89,6 +115,7 @@ namespace Veganimus.BattleSystem
                 _defenseMoveSet.Add(defenseCopy);
             }
         }
+       
         public void DisplayUnitStats() => BattleUIManager.Instance.DisplayUnitStats(_currentUnitHP,
                                                                                     _unitHitPoints,
                                                                                     _unitSpeed,
@@ -105,7 +132,7 @@ namespace Veganimus.BattleSystem
                 {
                     var move = _attackMoveSet[a];
                     _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.moveName, a);
-                    BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.moveAccuracy, 0, a);
+                    BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.moveAccuracy,0, 0, a);
                 }
             }
             else if (moveType == "Defense")
@@ -114,7 +141,7 @@ namespace Veganimus.BattleSystem
                 {
                     var move = _defenseMoveSet[d];
                     _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.moveName, d);
-                    BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.defenseBuff, d);
+                    BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.defenseBuff,move.turnsActive, d);
                 }
             }
         }
@@ -141,6 +168,12 @@ namespace Veganimus.BattleSystem
             if (_currentUnitHP <= 0)
             {
                 _currentUnitHP = 0;
+                if (ActiveEffect != null)
+                {
+                    ActiveEffect.SetActive(false);
+                    UnitBaseModel.SetActive(true);
+                }
+
                 _unitAnimation.PlayClip("Death");
                 _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
                 StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} took {damage} damage!"));
@@ -170,6 +203,20 @@ namespace Veganimus.BattleSystem
         {
             _unitDefense += amount;
             StartCoroutine(StatUpdateDelayRoutine(($"{_owner.CharacterName} {_unitName} raised Defense by {amount}.")));
+        }
+        public void ResetDefense()
+        {
+            _isEffectActive = false;
+            if(!_unitBaseModel.activeInHierarchy)
+            {
+                _unitBaseModel.SetActive(true);
+                ActiveEffect = null;
+            }
+            _unitDefense = unitStats.UnitDefense;
+            TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, 10);// Need to change this so it's not hard coded.
+            StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} Defense was reset."));
+            StartCoroutine(ResetStatDelayRoutine(2));
+            
         }
         public void BuffStats(StatAffected statAffected, int amount)
         {
@@ -229,31 +276,56 @@ namespace Veganimus.BattleSystem
         {
             int usesLeft = _defenseMoveSet[slotNumber].moveUses;
             var move = _defenseMoveSet[slotNumber];
-            if (usesLeft > 0)
-            {
-                _displayActionChannel.RaiseDisplayActionEvent($"{_owner.CharacterName} {_unitName} used {move.moveName}!");
-                _defenseMoveSet[slotNumber].moveUses--;
-                if (_owner.ThisCharacterType == CharacterType.Player)
-                {
-                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].moveUses, slotNumber);
-                    BattleUIManager.Instance.ActivateButtons(false);
-                }
-               // move.RaiseDefenseMoveUsedEvent(_unitName);
-                AdjustDefense(move.defenseBuff);
-                _owner.IsTurnComplete = true;
-                _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType,_owner.IsTurnComplete);
-            }
-            else if (_defenseMoveSet[slotNumber].moveUses <= 0)
-            {
-                if(_owner.ThisCharacterType == CharacterType.Player)
-                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].moveUses, slotNumber);
 
-                if (_characterType != CharacterType.Player)
-                    DetermineAction();
+            if (CheckIfEffectActive() && usesLeft > 0)
+                {
+                    _displayActionChannel.RaiseDisplayActionEvent($"{_owner.CharacterName} {_unitName} used {move.moveName}!");
+                    _defenseMoveSet[slotNumber].moveUses--;
+                    if (_owner.ThisCharacterType == CharacterType.Player)
+                    {
+                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].moveUses, slotNumber);
+                        BattleUIManager.Instance.ActivateButtons(false);
+                    }
+                _isEffectActive = true;
+                    move.RaiseDefenseMoveUsedEvent(this, move.MoveDefenseType);
+                if (move.MoveDefenseType != UnitDefenseMove.DefenseType.Cloak)
+                    AdjustDefense(move.defenseBuff);
                 else
-                    return;
+                    StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} is harder to hit!"));
+
+                    _owner.IsTurnComplete = true;
+                    _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType, _owner.IsTurnComplete);
+                }
+                else if (_defenseMoveSet[slotNumber].moveUses <= 0 || CheckIfEffectActive()==false)
+                {
+                    if (_owner.ThisCharacterType == CharacterType.Player)
+                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].moveUses, slotNumber);
+
+                    if (_characterType != CharacterType.Player)
+                        DetermineAction();
+                    else
+                        return;
+                }
+            
+        }
+        private bool CheckIfEffectActive()
+        {
+            if (!_isEffectActive)
+            {
+                if (!_unitEnergyShield.activeInHierarchy)
+                    return true;
+
+                else if (!_unitBarrier.activeInHierarchy)
+                    return true;
+
+                else if (!_unitCloak.activeInHierarchy)
+                    return true;
+                else
+                    return false;
             }
-                
+            else
+                return false;
+
         }
         ///<summary>
         ///Uses a dice roll system to determine what Action an AI character will take.
@@ -269,6 +341,10 @@ namespace Veganimus.BattleSystem
             
             else if (dieRoll + _owner.AIAgression < 3)
                 UseDefenseMoveSlot(defenseToUse);
+        }
+        private IEnumerator ResetStatDelayRoutine(float delay)
+        {
+            yield return new WaitForSeconds(delay);
         }
         private IEnumerator StatUpdateDelayRoutine(string actionTakenText)
         {
