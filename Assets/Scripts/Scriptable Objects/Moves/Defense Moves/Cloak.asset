@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896baabd08f5449b09ff26ad842d7405, type: 3}
   m_Name: Cloak
   m_EditorClassIdentifier: 
-  moveName: Fortify
+  moveName: Cloak
   moveUses: 2
   moveAccuracy: 0
   moveType: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
   _assignedUnit: {fileID: 0}
   displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   defenseBuff: 1
-  turnsActive: 0
+  turnsActive: 2
   _defenseType: 2
   effectObject: {fileID: 0}
   OnDefenseMoveUsed:

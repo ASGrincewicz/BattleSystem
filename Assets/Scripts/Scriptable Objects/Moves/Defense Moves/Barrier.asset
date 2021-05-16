@@ -15,12 +15,15 @@ MonoBehaviour:
   moveName: Barrier
   moveUses: 1
   moveAccuracy: 0
-  moveType: 0
+  moveType: 1
   elementType: 0
+  animationTrigger: 
   _assignedUnit: {fileID: 0}
   displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   defenseBuff: 3
-  _defeneseStrength: 0
+  turnsActive: 1
+  _defenseType: 1
+  effectObject: {fileID: 0}
   OnDefenseMoveUsed:
     m_PersistentCalls:
       m_Calls: []

@@ -132,7 +132,7 @@ namespace Veganimus.BattleSystem
                 {
                     var move = _attackMoveSet[a];
                     _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.moveName, a);
-                    BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.moveAccuracy, 0, a);
+                    BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.moveAccuracy,0, 0, a);
                 }
             }
             else if (moveType == "Defense")
@@ -141,7 +141,7 @@ namespace Veganimus.BattleSystem
                 {
                     var move = _defenseMoveSet[d];
                     _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.moveName, d);
-                    BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.defenseBuff, d);
+                    BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.defenseBuff,move.turnsActive, d);
                 }
             }
         }
@@ -169,7 +169,10 @@ namespace Veganimus.BattleSystem
             {
                 _currentUnitHP = 0;
                 if (ActiveEffect != null)
+                {
                     ActiveEffect.SetActive(false);
+                    UnitBaseModel.SetActive(true);
+                }
 
                 _unitAnimation.PlayClip("Death");
                 _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
@@ -212,6 +215,8 @@ namespace Veganimus.BattleSystem
             _unitDefense = unitStats.UnitDefense;
             TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, 10);// Need to change this so it's not hard coded.
             StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} Defense was reset."));
+            StartCoroutine(ResetStatDelayRoutine(2));
+            
         }
         public void BuffStats(StatAffected statAffected, int amount)
         {
@@ -336,6 +341,10 @@ namespace Veganimus.BattleSystem
             
             else if (dieRoll + _owner.AIAgression < 3)
                 UseDefenseMoveSlot(defenseToUse);
+        }
+        private IEnumerator ResetStatDelayRoutine(float delay)
+        {
+            yield return new WaitForSeconds(delay);
         }
         private IEnumerator StatUpdateDelayRoutine(string actionTakenText)
         {

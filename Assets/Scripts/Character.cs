@@ -60,7 +60,7 @@ namespace Veganimus.BattleSystem
             activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,activeUnitSpot);
             
             activeUnit.unitStats = _party[0];
-            activeUnitPrefab.transform.position = activeUnitSpot.position;
+            activeUnitPrefab.transform.position = new Vector3(activeUnit.transform.position.x, 15, activeUnit.transform.position.z);
             activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
             
             UpdateCharacterNames();

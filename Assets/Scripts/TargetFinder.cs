@@ -16,6 +16,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private Unit _targetUnit;
         public IDamageable targetIDamageable;
         public IBuffable targetIBuffable;
+        public IHealable targetIHealable;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -24,6 +25,7 @@ namespace Veganimus.BattleSystem
             {
                 targetIDamageable = _targetUnit.GetComponent<IDamageable>();
                 targetIBuffable = _targetUnit.GetComponent<IBuffable>();
+                targetIHealable = _targetUnit.GetComponent<IHealable>();
             }
 
         }

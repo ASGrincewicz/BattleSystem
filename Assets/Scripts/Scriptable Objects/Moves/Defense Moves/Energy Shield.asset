@@ -15,12 +15,15 @@ MonoBehaviour:
   moveName: Energy Shield
   moveUses: 2
   moveAccuracy: 0
-  moveType: 0
+  moveType: 1
   elementType: 0
+  animationTrigger: 
   _assignedUnit: {fileID: 0}
   displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   defenseBuff: 2
-  _defeneseStrength: 2
+  turnsActive: 2
+  _defenseType: 0
+  effectObject: {fileID: 0}
   OnDefenseMoveUsed:
     m_PersistentCalls:
       m_Calls: []
