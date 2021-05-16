@@ -61,10 +61,13 @@ namespace Veganimus.BattleSystem
         /// </summary>
         public void GenerateCopyItems()
         {
-            foreach(var item in _assetInventory)
+            if (_assetInventory.Count > 0)
             {
-                var copy = Instantiate(item);
-                battleInventory.Add(copy);
+                foreach (var item in _assetInventory)
+                {
+                    var copy = Instantiate(item);
+                    battleInventory.Add(copy);
+                }
             }
         }
     }

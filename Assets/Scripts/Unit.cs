@@ -20,7 +20,7 @@ namespace Veganimus.BattleSystem
     ///Aaron Grincewicz
     ///@info:Assigned to a Unit Prefab to determine Stats, Moves, etc...
     ///</summary>
-    public class Unit : MonoBehaviour, IDamageable, IHealable,IDefendable
+    public class Unit : MonoBehaviour, IDamageable, IHealable,IDefendable, IBuffable
     {
         [SerializeField] protected Character _owner;
         [SerializeField] protected CharacterType _characterType;
@@ -171,6 +171,24 @@ namespace Veganimus.BattleSystem
             _unitDefense += amount;
             StartCoroutine(StatUpdateDelayRoutine(($"{_owner.CharacterName} {_unitName} raised Defense by {amount}.")));
         }
+        public void BuffStats(StatAffected statAffected, int amount)
+        {
+            switch(statAffected)
+            {
+                case StatAffected.Speed:
+                    _unitSpeed += amount;
+                    break;
+                case StatAffected.Defense:
+                    _unitDefense += amount;
+                    break;
+                case StatAffected.Accuracy:
+                    _accuracyModifier += amount;
+                    break;
+
+            }
+            StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} raised {statAffected} by {amount}."));
+        }
+
         public void UseAttackMoveSlot(int slotNumber)
         {
             var move = _attackMoveSet[slotNumber];
@@ -188,7 +206,7 @@ namespace Veganimus.BattleSystem
                 {
                     int damageAmount = move.damageAmount;
                     _targetUnit.targetIDamageable.Damage(damageAmount);
-                    move.RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
+                    //move.RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
                 }
                 else if (didMoveHit == false)
                 {
@@ -220,7 +238,7 @@ namespace Veganimus.BattleSystem
                     BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].moveUses, slotNumber);
                     BattleUIManager.Instance.ActivateButtons(false);
                 }
-                move.RaiseDefenseMoveUsedEvent(_unitName);
+               // move.RaiseDefenseMoveUsedEvent(_unitName);
                 AdjustDefense(move.defenseBuff);
                 _owner.IsTurnComplete = true;
                 _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType,_owner.IsTurnComplete);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Veganimus.BattleSystem
@@ -45,6 +46,7 @@ namespace Veganimus.BattleSystem
         public bool IsTurnComplete { get => _isTurnComplete; set => _isTurnComplete = value; }
 
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
+        private object _statUpdateDelay;
 
         private void OnEnable() => characterTurnChannel.OnCharacterTurn.AddListener(InitiateCharacterTurn);
 
@@ -82,9 +84,17 @@ namespace Veganimus.BattleSystem
             for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
             {
                 var item = _inventory.battleInventory[i];
+                var type = _inventory.battleInventory[i].itemType;
                 _itemNameUpdateChannel.RaiseMoveNameUpdateEvent(item.itemName, i);
-                if(item.ThisItemType == Item.ItemType.Health)
-                    BattleUIManager.Instance.DisplayMoveStats("health item", 0, 0, item.healAmount, i);
+                switch (type)
+                {
+                    case ItemType.Health:
+                        BattleUIManager.Instance.DisplayItemEffects(type, item.statAffected, item.effectAmount, i);
+                        break;
+                    case ItemType.Equipment:
+                        BattleUIManager.Instance.DisplayItemEffects(type, item.statAffected, item.effectAmount, i);
+                        break;
+                }
             }
         }
         private void UpdateItemUseUI()

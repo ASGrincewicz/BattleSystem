@@ -1,6 +1,8 @@
 using UnityEngine;
 using Veganimus.BattleSystem;
 
+public enum ItemType { Health, Equipment, Boost, Refill, NULL }
+public enum StatAffected { HP, Speed, Defense, Accuracy}
 [CreateAssetMenu(menuName ="Item/Empty")]
 public class Item : ScriptableObject
 {
@@ -10,21 +12,30 @@ public class Item : ScriptableObject
     ///</summary>
     ///
     
+    [Header("Item Settings")]
     public string itemName;
-   
     public bool isConsumable;
-    
     public int itemUses;
+    public ItemType itemType;
+    public StatAffected statAffected;
+    public int effectAmount;
 
-    public enum ItemType { Health, Equipment, Boost, Refill, NULL}
-    [SerializeField] private ItemType _thisItemType;
-    public ItemType ThisItemType { get { return _thisItemType; } }
-
-    public int healAmount;
     public virtual void UseItem(Unit unit)
     {
-        itemUses--;
-        if (itemUses <= 0)
-            return;
+        if (itemUses > 0)
+        {
+            itemUses--;
+       
+            if (itemType == ItemType.Health)
+            {
+                var iHeal = unit.GetComponent<IHealable>();
+                iHeal.Heal(effectAmount);
+            }
+            else if (itemType == ItemType.Equipment)
+            {
+                var iBuff = unit.GetComponent<IBuffable>();
+                iBuff.BuffStats(statAffected, effectAmount);
+            }
+        }
     }
 }

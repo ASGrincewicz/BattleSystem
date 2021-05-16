@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 namespace Veganimus.BattleSystem
 {
@@ -117,6 +118,12 @@ namespace Veganimus.BattleSystem
 
         public void UnPauseGame() => Time.timeScale = 1;
 
-        public void QuitGame() => Application.Quit();
+        public void QuitGame()
+        {
+            Application.Quit();
+#if UNITY_EDITOR
+            EditorApplication.ExitPlaymode();
+#endif
+        }
     }
 }
