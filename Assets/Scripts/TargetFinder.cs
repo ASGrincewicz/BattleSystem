@@ -15,12 +15,17 @@ namespace Veganimus.BattleSystem
         [SerializeField] private Transform _targetUnitPosition;
         [SerializeField] private Unit _targetUnit;
         public IDamageable targetIDamageable;
+        public IBuffable targetIBuffable;
 
         private void OnTriggerEnter(Collider other)
         {
             _targetUnit = other.gameObject.GetComponentInParent<Unit>();
             if (_targetUnit != null)
-                    targetIDamageable = _targetUnit.GetComponent<IDamageable>();
+            {
+                targetIDamageable = _targetUnit.GetComponent<IDamageable>();
+                targetIBuffable = _targetUnit.GetComponent<IBuffable>();
+            }
+
         }
     }
 }

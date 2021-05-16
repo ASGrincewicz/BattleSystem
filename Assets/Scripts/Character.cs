@@ -26,11 +26,10 @@ namespace Veganimus.BattleSystem
 
         [SerializeField] private List<UnitStats> _party = new List<UnitStats>();
         public List<UnitStats> Party { get { return _party; } }
-
+        public List<MoveEffect> effects = new List<MoveEffect>();
         private Inventory _inventory;
         public Unit activeUnit;
         public GameObject activeUnitPrefab;
-        public int turnCount;
         public bool isDefeated;
         [SerializeField] private Transform activeUnitSpot;
         [Header("Broadcasting on")]
@@ -43,6 +42,8 @@ namespace Veganimus.BattleSystem
         [Header("Listening to:")]
         [SerializeField] private CharacterTurnChannel characterTurnChannel;
         [Space]
+        [SerializeField] private int _turnCount;
+        public int TurnCount { get { return _turnCount; } }
         [SerializeField] private bool _isTurnComplete;
         public bool IsTurnComplete { get => _isTurnComplete; set => _isTurnComplete = value; }
 
@@ -69,11 +70,30 @@ namespace Veganimus.BattleSystem
         {
             if (characterType == ThisCharacterType)
             {
+                _turnCount++;
                 IsTurnComplete = false;
                 TurnCompleteChannel.RaiseTurnCompleteEvent(characterType, IsTurnComplete);
+                DeActivateEffects();
                 if (ThisCharacterType != CharacterType.Player && IsTurnComplete == false)
                 {
                     StartCoroutine(activeUnit.TurnDelayRoutine());
+                }
+            }
+        }
+        private void DeActivateEffects()
+        {
+            var efffect = GetComponentsInChildren<MoveEffect>();
+            foreach(var obj in activeUnit.GetComponentsInChildren<MoveEffect>())
+            {
+                effects.Add(obj);
+            }
+            for (int i = effects.Count - 1; i > 0; i--)
+            {
+                if (TurnCount - effects[i].activatedOnTurn > effects[i].turnsActive)
+                {
+                    effects[i].gameObject.SetActive(false);
+                    activeUnit.ResetDefense();
+                    effects.Remove(effects[i]); 
                 }
             }
         }

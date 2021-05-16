@@ -21,7 +21,6 @@ namespace Veganimus.BattleSystem
         [SerializeField] private bool _hasEnemyCompletedTurn;
         private bool _isBattleOver;
         private WaitForSeconds _changeStateDelay;
-        
         [Header("Broadcasting on:")]
         [SerializeField] private CharacterTurnChannel _characterTurnChannel;
         [Header("Listening to")]
