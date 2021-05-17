@@ -1,27 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-[System.Serializable]
-public class UnitAttackMove : UnitMove
+namespace Veganimus.BattleSystem
 {
-    public int damageAmount;
-    public int attackSpeed;
-   
-
-    public UnityEvent<int, Transform> OnAttackMoveUsed;
-
-    public  void RaiseAttackMoveUsedEvent(string unitName,Transform unit,int moveSlot)
+    public class UnitAttackMove : UnitMove
     {
-        _assignedUnit = unit;
-        //PerformAttackMove(unitName, moveSlot);
-    }
-    
-    private void PerformAttackMove(string unitName, int moveSlot)
-    {
-        if (moveName != "")
+        public int damageAmount;
+        public int attackSpeed;
+        public enum AttackType { quickShot, rifle, missile, rockets, laser }
+        [SerializeField] private AttackType _attackType;
+        public AttackType MoveAttackType { get { return _attackType; } }
+
+        public UnityEvent<int, Transform> OnAttackMoveUsed;
+
+        public void RaiseAttackMoveUsedEvent(Unit unit, AttackType attackType)
         {
-            displayActionChannel.RaiseDisplayActionEvent($"{unitName} used {moveName}!");
+            //PerformAttackMove(unit, attackType);
         }
-        else
-            return;
+
+        private void PerformAttackMove(Unit unit, AttackType attackType)
+        {
+          
+        }
     }
 }

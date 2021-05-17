@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486031166377582584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.01, y: 0.08, z: 4.29}
+  m_LocalPosition: {x: 1.28, y: 0.08, z: 4.29}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 7997833819627163817}
@@ -308,7 +308,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 9005771799514709918}
-  _animationClips: []
+  _animationClips:
+  - {fileID: 7400000, guid: abc7db363d43b4230be8580910416cf4, type: 2}
+  - {fileID: 7400000, guid: a02374c02d5284c7abe7a6764e0cd8f6, type: 2}
+  - {fileID: 7400000, guid: 77798f4f20b2b4400b906d73606ce491, type: 2}
+  - {fileID: 7400000, guid: ab7de7bc6c9674e5291dd17b93bd99ea, type: 2}
+  - {fileID: 7400000, guid: 26c99b33a14564510ababf3ca831293e, type: 2}
 --- !u!114 &-6346968862192176269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4371,15 +4376,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4746837767181356, guid: 462b1704516b7458ca009ff4af76c9dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4746837767181356, guid: 462b1704516b7458ca009ff4af76c9dd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4746837767181356, guid: 462b1704516b7458ca009ff4af76c9dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4746837767181356, guid: 462b1704516b7458ca009ff4af76c9dd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4435,7 +4440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198220305799672018, guid: 462b1704516b7458ca009ff4af76c9dd, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 199566598014243720, guid: 462b1704516b7458ca009ff4af76c9dd, type: 3}
       propertyPath: m_Materials.Array.size
