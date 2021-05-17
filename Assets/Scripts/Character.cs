@@ -28,6 +28,7 @@ namespace Veganimus.BattleSystem
         public List<UnitStats> Party { get { return _party; } }
         public List<MoveEffect> effects = new List<MoveEffect>();
         private Inventory _inventory;
+        public Inventory ThisInventory { get { return _inventory; } }
         public Unit activeUnit;
         public GameObject activeUnitPrefab;
         public bool isDefeated;
@@ -137,7 +138,7 @@ namespace Veganimus.BattleSystem
         {
             var itemName = _inventory.battleInventory[slotNumber].itemName;
             int usesLeft = _inventory.battleInventory[slotNumber].itemUses;
-           
+
             if (usesLeft > 0 && itemName != "")
             {
                 _inventory.UseItem(slotNumber);
@@ -147,8 +148,13 @@ namespace Veganimus.BattleSystem
                 IsTurnComplete = true;
                 TurnCompleteChannel.RaiseTurnCompleteEvent(ThisCharacterType, IsTurnComplete);
             }
-            else if (usesLeft <= 0 && itemName == "")
-                return;
+            else if (usesLeft <= 0|| itemName == "")
+            {
+                if (ThisCharacterType != CharacterType.Player)
+                    activeUnit.DetermineAction();
+                else
+                    return;
+            }
         }
     }
 }

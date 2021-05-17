@@ -17,10 +17,12 @@ MonoBehaviour:
   moveAccuracy: 70
   moveType: 0
   elementType: 0
+  animationTrigger: 
   _assignedUnit: {fileID: 0}
   displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   damageAmount: 20
   attackSpeed: 0
+  _attackType: 2
   OnAttackMoveUsed:
     m_PersistentCalls:
       m_Calls: []
