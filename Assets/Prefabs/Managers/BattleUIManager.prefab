@@ -101,6 +101,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _defenseMoveActiveTurns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _playerDefenseButtons:
   - {fileID: 0}
   - {fileID: 0}
