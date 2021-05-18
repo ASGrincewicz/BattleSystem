@@ -15,6 +15,7 @@ namespace Veganimus.BattleSystem
     ///</summary>
     public class Character : MonoBehaviour
     {
+        public CharacterStats ThisCharacterStats;
         [SerializeField] private CharacterType _thisCharacterType;
         public CharacterType ThisCharacterType { get { return _thisCharacterType; } }
 

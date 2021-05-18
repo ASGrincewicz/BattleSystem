@@ -5552,7 +5552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &956950874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6025,6 +6025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e964b143a5a484eb78f5ebaec6d20c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThisCharacterStats: {fileID: 0}
   _thisCharacterType: 1
   _characterName: Enemy
   _aiAgression: 0
@@ -10960,6 +10961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e964b143a5a484eb78f5ebaec6d20c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ThisCharacterStats: {fileID: 0}
   _thisCharacterType: 0
   _characterName: Player One
   _aiAgression: 0
