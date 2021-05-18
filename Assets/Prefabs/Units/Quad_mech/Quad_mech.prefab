@@ -3586,7 +3586,7 @@ PrefabInstance:
       value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 1427477575606461552, guid: 4d20765eeee1a4da98764e5784fe57c1, type: 3}
-      propertyPath: m_Layer
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2080698870466394090, guid: 4d20765eeee1a4da98764e5784fe57c1, type: 3}
