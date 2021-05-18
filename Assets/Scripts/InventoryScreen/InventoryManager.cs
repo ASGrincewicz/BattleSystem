@@ -23,13 +23,14 @@ public class InventoryManager : Singleton<InventoryManager>
     private void Start()
     {
         AddDropDownOptions();
+        owner = _characters[0];
         inventory = owner.characterInventory;
         battleInventory = owner.battleInventory;
         PopulateInventoryGrid();
     }
     public void ChangeCharacter(int index)
     {
-        index = _selectCharacter.value -1;
+        index = _selectCharacter.value;
         owner = _characters[index];
         itemImage.Clear();
 
