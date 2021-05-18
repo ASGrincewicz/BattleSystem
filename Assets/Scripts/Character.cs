@@ -31,6 +31,7 @@ namespace Veganimus.BattleSystem
         public List<UnitStats> Party { get { return _party; } }
         public List<MoveEffect> effects = new List<MoveEffect>();
         private BattleInventory _inventory;
+        public BattleInventory ThisInventory { get { return _inventory; } }
         public Unit activeUnit;
         public GameObject activeUnitPrefab;
         public bool isDefeated;
