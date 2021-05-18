@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleScreen.unity
     guid: c9b36f39303174ba99248e4b1eeb4297
+  - enabled: 1
+    path: Assets/Scenes/InventoryScreen.unity
+    guid: b0cb9e2cdcb1547caa77c47782b86487
   m_configObjects: {}

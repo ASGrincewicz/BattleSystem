@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using Veganimus.BattleSystem;
 
 public enum ItemType { Health, Equipment, Boost, Refill, NULL }
