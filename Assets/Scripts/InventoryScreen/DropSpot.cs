@@ -1,11 +1,18 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropSpot : MonoBehaviour,IDropHandler
+public class DropSpot : MonoBehaviour,IDropHandler, IPointerEnterHandler
 {
     [SerializeField] private bool _isBattleInventory;
     [SerializeField] private int _itemCount;
+    public int ItemCount { get { return _itemCount;} set { _itemCount = value; } }
     [SerializeField] private int _capacity;
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(2f);
+        _itemCount = transform.childCount;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -28,5 +35,10 @@ public class DropSpot : MonoBehaviour,IDropHandler
             }
             _itemCount = transform.childCount;
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _itemCount = transform.childCount;
     }
 }

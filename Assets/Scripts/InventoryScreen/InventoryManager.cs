@@ -30,7 +30,7 @@ public class InventoryManager : Singleton<InventoryManager>
     }
     public void ChangeCharacter(int index)
     {
-        index = _selectCharacter.value -1;
+        index = _selectCharacter.value;
         owner = _characters[index];
         itemImage.Clear();
 
