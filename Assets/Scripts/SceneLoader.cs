@@ -9,5 +9,7 @@ public class SceneLoader : MonoBehaviour
         var load = SceneManager.LoadSceneAsync(index);
         if (load.isDone)
             SceneManager.UnloadSceneAsync(toUnload);
+        if(Time.timeScale < 1 )
+          Time.timeScale = 1;
     }
 }
