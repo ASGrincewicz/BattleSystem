@@ -28,8 +28,8 @@ namespace Veganimus.BattleSystem
         [SerializeField] private List<UnitStats> _party = new List<UnitStats>();
         public List<UnitStats> Party { get { return _party; } }
         public List<MoveEffect> effects = new List<MoveEffect>();
-        private Inventory _inventory;
-        public Inventory ThisInventory { get { return _inventory; } }
+        private BattleInventory _inventory;
+        public BattleInventory ThisInventory { get { return _inventory; } }
         public Unit activeUnit;
         public GameObject activeUnitPrefab;
         public bool isDefeated;
@@ -58,7 +58,8 @@ namespace Veganimus.BattleSystem
 
         private void Start()
         {
-            _inventory = GetComponent<Inventory>();
+            _characterName = ThisCharacterStats.CharacterName;
+            _inventory = GetComponent<BattleInventory>();
             activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,activeUnitSpot);
             
             activeUnit.unitStats = _party[0];
