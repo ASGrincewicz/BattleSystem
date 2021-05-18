@@ -1825,6 +1825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 245413197}
+  - component: {fileID: 245413198}
   m_Layer: 5
   m_Name: --PlayerUI--
   m_TagString: Untagged
@@ -1853,6 +1854,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &245413198
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245413196}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &260110247
 GameObject:
   m_ObjectHideFlags: 0
@@ -6149,6 +6169,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066312431}
   m_Enabled: 1
+
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc0feaa8c27b74f5bb6036c89589d10f, type: 3}
   m_Name: 
@@ -6187,6 +6208,51 @@ MonoBehaviour:
   gridTwo: {fileID: 2041553366}
 --- !u!114 &1066312434
 MonoBehaviour:
+
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 0098e36d51d51407b98bc391cdc3b75b, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -2903478137596125354, guid: 0098e36d51d51407b98bc391cdc3b75b, type: 2}
+    value: {fileID: 793879308}
+  - key: {fileID: -3240706893952996431, guid: 0098e36d51d51407b98bc391cdc3b75b, type: 2}
+    value: {fileID: 333592052}
+  - key: {fileID: 6426315425188599426, guid: 0098e36d51d51407b98bc391cdc3b75b, type: 2}
+    value: {fileID: 333592054}
+  - key: {fileID: 2373575229666725749, guid: 0098e36d51d51407b98bc391cdc3b75b, type: 2}
+    value: {fileID: 956950873}
+  - key: {fileID: -1628072113055994622, guid: 0098e36d51d51407b98bc391cdc3b75b, type: 2}
+    value: {fileID: 245413198}
+  - key: {fileID: -2822281017036930682, guid: 0098e36d51d51407b98bc391cdc3b75b, type: 2}
+    value: {fileID: 1280522497}
+  m_ExposedReferences:
+    m_References:
+    - 3528c654d1ac64052969fb7d3a5e1959: {fileID: 2082750764}
+--- !u!1 &968464737
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 968464738}
+  - component: {fileID: 968464741}
+  - component: {fileID: 968464740}
+  - component: {fileID: 968464739}
+  m_Layer: 5
+  m_Name: Item_button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &968464738
+RectTransform:
+
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6660,7 +6726,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _owner: {fileID: 0}
   battleInventory: []
+
   _assetBattleInventory: []
+
   _capacity: 4
   _selectedItem: {fileID: 0}
   _emptySlotPlaceHolder: {fileID: 11400000, guid: 2045649d4bd4c4f6191dc0e887e1c53a, type: 2}
@@ -7799,6 +7867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1280522496}
+  - component: {fileID: 1280522497}
   m_Layer: 5
   m_Name: --EnemyUI--
   m_TagString: Untagged
@@ -7824,9 +7893,28 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1000, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1280522497
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280522495}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!224 &1296253411 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 714907297410086690, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}

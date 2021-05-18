@@ -243,6 +243,7 @@ namespace Veganimus.BattleSystem
             {
                 _displayActionChannel.RaiseDisplayActionEvent($"{_owner.CharacterName} {_unitName} used {move.moveName}!");
                 _attackMoveSet[slotNumber].moveUses--;
+                _unitAnimation.SetInteger(move.MoveAttackType.ToString(), 1);
                 if (_owner.ThisCharacterType == CharacterType.Player)
                 {
                     BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].moveUses, slotNumber);
@@ -251,9 +252,11 @@ namespace Veganimus.BattleSystem
                 bool didMoveHit = move.RollForMoveAccuracy(_accuracyModifier);
                 if (didMoveHit == true)
                 {
+                    Debug.Log(move.MoveAttackType.ToString());
                     int damageAmount = move.damageAmount;
                     _targetUnit.targetIDamageable.Damage(damageAmount);
-                    //move.RaiseAttackMoveUsedEvent(_unitName, this.transform, slotNumber);
+                  
+                   // move.RaiseAttackMoveUsedEvent(this,move.MoveAttackType);
                 }
                 else if (didMoveHit == false)
                 {
@@ -330,17 +333,21 @@ namespace Veganimus.BattleSystem
         ///<summary>
         ///Uses a dice roll system to determine what Action an AI character will take.
         ///</summary>
-        private void DetermineAction()
+        public void DetermineAction()//Move to character
         {
-            var dieRoll = UnityEngine.Random.Range(1, 6);
+            var dieRoll = UnityEngine.Random.Range(0, 6);
             var attackToUse = UnityEngine.Random.Range(0, _attackMoveSet.Count);
             var defenseToUse = UnityEngine.Random.Range(0, _defenseMoveSet.Count);
+            var itemToUse = UnityEngine.Random.Range(0, _owner.ThisInventory.battleInventory.Count);
             //var itemToUse = Random.Range(0, _unitItems.Length);
             if (dieRoll + _owner.AIAgression >= 3)
                 UseAttackMoveSlot(attackToUse);
-            
-            else if (dieRoll + _owner.AIAgression < 3)
+
+            else if (dieRoll + _owner.AIAgression < 3 && dieRoll + _owner.AIAgression > 0)
                 UseDefenseMoveSlot(defenseToUse);
+
+            else if (dieRoll + _owner.AIAgression <= 0)
+                _owner.UseItemSlot(itemToUse);
         }
         private IEnumerator ResetStatDelayRoutine(float delay)
         {
