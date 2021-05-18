@@ -9,6 +9,7 @@ public class DragItem : MonoBehaviour,IBeginDragHandler,IEndDragHandler, IDragHa
     public CanvasGroup canvasGroup;
     public RectTransform rectTransform;
     public Item item;
+    public Transform originalPos;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -23,6 +24,7 @@ public class DragItem : MonoBehaviour,IBeginDragHandler,IEndDragHandler, IDragHa
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        originalPos = transform.parent;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.5f;
     }

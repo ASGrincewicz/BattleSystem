@@ -23,6 +23,7 @@ public class InventoryManager : Singleton<InventoryManager>
     private void Start()
     {
         AddDropDownOptions();
+        owner = _characters[0];
         inventory = owner.characterInventory;
         battleInventory = owner.battleInventory;
         PopulateInventoryGrid();

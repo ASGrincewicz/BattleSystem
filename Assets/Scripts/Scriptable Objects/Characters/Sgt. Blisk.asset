@@ -16,7 +16,7 @@ MonoBehaviour:
   characterInventory:
   - {fileID: 11400000, guid: 57639d33d0f3944baa7e21c15955333e, type: 2}
   battleInventory:
-  - {fileID: 11400000, guid: e958dd22f42a54d61923dd7ea22b06b4, type: 2}
-  - {fileID: 11400000, guid: 3618f2762e5d646b6b7184ab50a410a2, type: 2}
   - {fileID: 11400000, guid: 5a1b25f10341e4f28aad013560aba9a6, type: 2}
+  - {fileID: 11400000, guid: 3618f2762e5d646b6b7184ab50a410a2, type: 2}
+  - {fileID: 11400000, guid: 57639d33d0f3944baa7e21c15955333e, type: 2}
   - {fileID: 11400000, guid: b2cf95d61337948b990433c3a44ecce8, type: 2}
