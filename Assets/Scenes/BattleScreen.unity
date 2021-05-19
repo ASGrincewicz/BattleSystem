@@ -6287,8 +6287,8 @@ MonoBehaviour:
   _characterName: Enemy
   _aiAgression: 0
   _party:
-  - {fileID: 11400000, guid: 1155447400e224388ba3660d30cb1a92, type: 2}
-  - {fileID: 11400000, guid: d22fb20ddf7ce4689a2a1554b53445b3, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   effects: []
   activeUnit: {fileID: 519409849}
   activeUnitPrefab: {fileID: 0}
@@ -11654,8 +11654,8 @@ MonoBehaviour:
   _characterName: Player One
   _aiAgression: 0
   _party:
-  - {fileID: 11400000, guid: d22fb20ddf7ce4689a2a1554b53445b3, type: 2}
-  - {fileID: 11400000, guid: 1155447400e224388ba3660d30cb1a92, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   effects: []
   activeUnit: {fileID: 2117615750}
   activeUnitPrefab: {fileID: 0}

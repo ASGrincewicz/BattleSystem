@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896baabd08f5449b09ff26ad842d7405, type: 3}
+  m_Name: Decoy
+  m_EditorClassIdentifier: 
+  _moveInfo:
+    moveName: Decoy
+    uses: 1
+    accuracy: 0
+    moveType: 0
+    elementType: 0
+  animationTrigger: 
+  _assignedUnit: {fileID: 0}
+  displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
+  defenseBuff: 0
+  turnsActive: 0
+  _defenseType: 3
+  effectObject: {fileID: 1878528156927705140, guid: aaeec5dcd878c442ead1695c6f2d129e, type: 3}
+  OnDefenseMoveUsed:
+    m_PersistentCalls:
+      m_Calls: []

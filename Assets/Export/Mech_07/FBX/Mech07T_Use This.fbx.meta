@@ -1,67 +1,185 @@
 fileFormatVersion: 2
 guid: 78133d90f06b9cb499893d1cc23c8a71
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Circle
-    100002: //RootNode
-    100004: mixamorig:Head
-    100006: mixamorig:HeadTop_End
-    100008: mixamorig:Hips
-    100010: mixamorig:LeftArm
-    100012: mixamorig:LeftFoot
-    100014: mixamorig:LeftForeArm
-    100016: mixamorig:LeftHand
-    100018: mixamorig:LeftLeg
-    100020: mixamorig:LeftShoulder
-    100022: mixamorig:LeftToe_End
-    100024: mixamorig:LeftToeBase
-    100026: mixamorig:LeftUpLeg
-    100028: mixamorig:Neck
-    100030: mixamorig:RightArm
-    100032: mixamorig:RightFoot
-    100034: mixamorig:RightForeArm
-    100036: mixamorig:RightHand
-    100038: mixamorig:RightLeg
-    100040: mixamorig:RightShoulder
-    100042: mixamorig:RightToe_End
-    100044: mixamorig:RightToeBase
-    100046: mixamorig:RightUpLeg
-    100048: mixamorig:Spine
-    100050: mixamorig:Spine1
-    100052: mixamorig:Spine2
-    400000: Circle
-    400002: //RootNode
-    400004: mixamorig:Head
-    400006: mixamorig:HeadTop_End
-    400008: mixamorig:Hips
-    400010: mixamorig:LeftArm
-    400012: mixamorig:LeftFoot
-    400014: mixamorig:LeftForeArm
-    400016: mixamorig:LeftHand
-    400018: mixamorig:LeftLeg
-    400020: mixamorig:LeftShoulder
-    400022: mixamorig:LeftToe_End
-    400024: mixamorig:LeftToeBase
-    400026: mixamorig:LeftUpLeg
-    400028: mixamorig:Neck
-    400030: mixamorig:RightArm
-    400032: mixamorig:RightFoot
-    400034: mixamorig:RightForeArm
-    400036: mixamorig:RightHand
-    400038: mixamorig:RightLeg
-    400040: mixamorig:RightShoulder
-    400042: mixamorig:RightToe_End
-    400044: mixamorig:RightToeBase
-    400046: mixamorig:RightUpLeg
-    400048: mixamorig:Spine
-    400050: mixamorig:Spine1
-    400052: mixamorig:Spine2
-    2100000: No Name
-    4300000: Circle
-    7400000: mixamo.com
-    9500000: //RootNode
-    13700000: Circle
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Circle
+  - first:
+      1: 100002
+    second: //RootNode
+  - first:
+      1: 100004
+    second: mixamorig:Head
+  - first:
+      1: 100006
+    second: mixamorig:HeadTop_End
+  - first:
+      1: 100008
+    second: mixamorig:Hips
+  - first:
+      1: 100010
+    second: mixamorig:LeftArm
+  - first:
+      1: 100012
+    second: mixamorig:LeftFoot
+  - first:
+      1: 100014
+    second: mixamorig:LeftForeArm
+  - first:
+      1: 100016
+    second: mixamorig:LeftHand
+  - first:
+      1: 100018
+    second: mixamorig:LeftLeg
+  - first:
+      1: 100020
+    second: mixamorig:LeftShoulder
+  - first:
+      1: 100022
+    second: mixamorig:LeftToe_End
+  - first:
+      1: 100024
+    second: mixamorig:LeftToeBase
+  - first:
+      1: 100026
+    second: mixamorig:LeftUpLeg
+  - first:
+      1: 100028
+    second: mixamorig:Neck
+  - first:
+      1: 100030
+    second: mixamorig:RightArm
+  - first:
+      1: 100032
+    second: mixamorig:RightFoot
+  - first:
+      1: 100034
+    second: mixamorig:RightForeArm
+  - first:
+      1: 100036
+    second: mixamorig:RightHand
+  - first:
+      1: 100038
+    second: mixamorig:RightLeg
+  - first:
+      1: 100040
+    second: mixamorig:RightShoulder
+  - first:
+      1: 100042
+    second: mixamorig:RightToe_End
+  - first:
+      1: 100044
+    second: mixamorig:RightToeBase
+  - first:
+      1: 100046
+    second: mixamorig:RightUpLeg
+  - first:
+      1: 100048
+    second: mixamorig:Spine
+  - first:
+      1: 100050
+    second: mixamorig:Spine1
+  - first:
+      1: 100052
+    second: mixamorig:Spine2
+  - first:
+      4: 400000
+    second: Circle
+  - first:
+      4: 400002
+    second: //RootNode
+  - first:
+      4: 400004
+    second: mixamorig:Head
+  - first:
+      4: 400006
+    second: mixamorig:HeadTop_End
+  - first:
+      4: 400008
+    second: mixamorig:Hips
+  - first:
+      4: 400010
+    second: mixamorig:LeftArm
+  - first:
+      4: 400012
+    second: mixamorig:LeftFoot
+  - first:
+      4: 400014
+    second: mixamorig:LeftForeArm
+  - first:
+      4: 400016
+    second: mixamorig:LeftHand
+  - first:
+      4: 400018
+    second: mixamorig:LeftLeg
+  - first:
+      4: 400020
+    second: mixamorig:LeftShoulder
+  - first:
+      4: 400022
+    second: mixamorig:LeftToe_End
+  - first:
+      4: 400024
+    second: mixamorig:LeftToeBase
+  - first:
+      4: 400026
+    second: mixamorig:LeftUpLeg
+  - first:
+      4: 400028
+    second: mixamorig:Neck
+  - first:
+      4: 400030
+    second: mixamorig:RightArm
+  - first:
+      4: 400032
+    second: mixamorig:RightFoot
+  - first:
+      4: 400034
+    second: mixamorig:RightForeArm
+  - first:
+      4: 400036
+    second: mixamorig:RightHand
+  - first:
+      4: 400038
+    second: mixamorig:RightLeg
+  - first:
+      4: 400040
+    second: mixamorig:RightShoulder
+  - first:
+      4: 400042
+    second: mixamorig:RightToe_End
+  - first:
+      4: 400044
+    second: mixamorig:RightToeBase
+  - first:
+      4: 400046
+    second: mixamorig:RightUpLeg
+  - first:
+      4: 400048
+    second: mixamorig:Spine
+  - first:
+      4: 400050
+    second: mixamorig:Spine1
+  - first:
+      4: 400052
+    second: mixamorig:Spine2
+  - first:
+      21: 2100000
+    second: No Name
+  - first:
+      43: 4300000
+    second: Circle
+  - first:
+      74: 7400000
+    second: mixamo.com
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Circle
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -69,7 +187,7 @@ ModelImporter:
       name: No Name
     second: {fileID: 2100000, guid: 0ec54b9b1bef1e34bb5c315f1c34c732, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -87,7 +205,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -102,25 +220,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -129,10 +254,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -142,13 +267,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
