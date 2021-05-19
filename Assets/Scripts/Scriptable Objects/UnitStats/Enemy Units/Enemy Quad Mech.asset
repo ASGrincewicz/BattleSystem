@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Enemy Quad Mech
   m_EditorClassIdentifier: 
   _unitModelPrefab: {fileID: 6201759631085898106, guid: fd58524da5bf94d20badb97d65b15ca4, type: 3}
-  _unitName: Quad Mech
-  _unitType: 0
-  _unitHitPoints: 50
-  _unitSpeed: 0
-  _unitDefense: 0
-  _unitAccuracyModifier: 0
+  _unitInfo:
+    unitName: Quad Mech
+    hitPoints: 50
+    speed: 0
+    defense: 1
+    accuracyMod: 0
+    elementType: 0
   _unitAttackMoves:
   - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
   - {fileID: 11400000, guid: a3dc5d20cb25f4c5b805798a2a3c874a, type: 2}
@@ -27,8 +28,3 @@ MonoBehaviour:
   _unitDefenseMoves:
   - {fileID: 11400000, guid: 652e65b08661c41ac859fe762502f818, type: 2}
   - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
-  _unitEnergyShield: {fileID: 1427477575606461552, guid: 4d20765eeee1a4da98764e5784fe57c1, type: 3}
-  _unitBarrier: {fileID: 7829826569569594933, guid: b54a9ba6a29d341fe8c90b8f604c7997, type: 3}
-  _unitCloak: {fileID: 3691809047538443911, guid: b88e04af6e6564ea29aff59afa23eece, type: 3}
-  director: {fileID: 0}
-  unitMoveCutscenes: []

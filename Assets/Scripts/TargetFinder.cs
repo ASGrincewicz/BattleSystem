@@ -17,6 +17,8 @@ namespace Veganimus.BattleSystem
         public IDamageable targetIDamageable;
         public IBuffable targetIBuffable;
         public IHealable targetIHealable;
+        private UnitStats _targetStats;
+        public UnitStats TargetStats { get { return _targetStats; } set{ } }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -26,6 +28,7 @@ namespace Veganimus.BattleSystem
                 targetIDamageable = _targetUnit.GetComponent<IDamageable>();
                 targetIBuffable = _targetUnit.GetComponent<IBuffable>();
                 targetIHealable = _targetUnit.GetComponent<IHealable>();
+                _targetStats = _targetUnit.GetComponent<UnitStats>();
             }
 
         }
