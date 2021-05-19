@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,8 @@ namespace Veganimus.BattleSystem
 {
     public class BattleUIManager : Singleton<BattleUIManager>
     {
+        //public Button attackButtonPrefab;
+        //public Transform attackButtonPanel;
         [SerializeField] private Canvas _battleCanvas;
         [Header("Player UI")]
         [SerializeField] private GameObject _playerUI;
@@ -71,7 +74,7 @@ namespace Veganimus.BattleSystem
         {
             _unitNameUpdateChannel.OnUnitNameUpdated.AddListener(DisplayUnitName);
             _unitHPUpdateChannel.OnUnitHPUpdated.AddListener(DisplayCurrentUnitHP);
-            _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentAttackMoveNames);
+           _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentDefenseMoveNames);
             _itemNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentItemNames);
             _displayActionTakenChannel.OnDisplayAction.AddListener(DisplayCurrentActionTaken);
@@ -81,7 +84,7 @@ namespace Veganimus.BattleSystem
         {
             _unitNameUpdateChannel.OnUnitNameUpdated.RemoveListener(DisplayUnitName);
             _unitHPUpdateChannel.OnUnitHPUpdated.RemoveListener(DisplayCurrentUnitHP);
-            _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentAttackMoveNames);
+           _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentDefenseMoveNames);
             _itemNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentItemNames);
             _displayActionTakenChannel.OnDisplayAction.RemoveListener(DisplayCurrentActionTaken);
@@ -191,7 +194,16 @@ namespace Veganimus.BattleSystem
                     break;
             }
         }
-       
+        //public void PopulateAttackButtons(List<UnitAttackMove> moves)
+        // {
+        //     foreach(var move in moves)
+        //     {
+        //         var attackButton = Instantiate(attackButtonPrefab, attackButtonPanel);
+        //         var info = attackButton.GetComponent<AttackButton>().attackButtonInfo;
+        //         info.FillText(move.MoveName, move.MoveUses, move.MoveAccuracy, move.damageAmount);
+
+        //     }
+        // }
         private void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
         {
             for (int a = _playerAttackNames.Length; a >= 0; a--)

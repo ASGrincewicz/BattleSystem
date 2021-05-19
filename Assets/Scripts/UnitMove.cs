@@ -18,7 +18,13 @@ public abstract class UnitMove : ScriptableObject
     [SerializeField] protected Transform _assignedUnit;
     public DisplayActionChannel displayActionChannel;
     private DieRoll dieRoll;
+    public int runtimeUses;
 
+    private void OnEnable()
+    {
+        runtimeUses = MoveUses;
+        Debug.Log($"{MoveName}: {runtimeUses}");
+    }
     public bool RollForMoveAccuracy(int accuracyModifier)
     {
         dieRoll = new DieRoll();

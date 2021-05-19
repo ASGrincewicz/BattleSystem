@@ -22,6 +22,7 @@ namespace Veganimus.BattleSystem
     ///</summary>
     public class Unit : MonoBehaviour, IDamageable, IHealable, IDefendable, IBuffable
     {
+        public List<int> runtimeMoveUses = new List<int>();
         [SerializeField] protected Character _owner;
         public Character Owner { get { return _owner; } }
         [SerializeField] protected CharacterType _characterType;
@@ -29,13 +30,11 @@ namespace Veganimus.BattleSystem
         protected int _unitLevel;
         [SerializeField] protected TargetFinder _targetUnit;
         public TargetFinder TargetUnit { get { return _targetUnit; } }
-        [SerializeField] protected ElementType _unitType;
-        [SerializeField] protected string _unitName;
-        [SerializeField] protected int _unitHitPoints;
+        [Header("Runtime Unit Stats")]
+        [SerializeField] private UnitInfo _runTimeUnitInfo;
+       
         [SerializeField] private int _currentUnitHP;
-        [SerializeField] protected int _unitSpeed;
-        [SerializeField] protected int _unitDefense;
-        [SerializeField] protected int _accuracyModifier;
+      
         [Header("Defense Effect Prefabs")]
         [SerializeField] private GameObject _unitBaseModel;
         public GameObject UnitBaseModel { get { return _unitBaseModel; } private set { _unitBaseModel = value; } }
@@ -65,6 +64,7 @@ namespace Veganimus.BattleSystem
         private WaitForSeconds _statUpdateDelay;
         private WaitForSeconds _endBattleDelay;
         private bool _isEffectActive;
+        private string _actionAnnouncementAbbrev;
 
         private void Awake()
         {
@@ -81,20 +81,22 @@ namespace Veganimus.BattleSystem
             yield return new WaitForSeconds(2f);
             PopulateRuntimeStats();
             GenerateMoveSet();
+            //BattleUIManager.Instance.PopulateAttackButtons(_attackMoveSet);
         }
         private void PopulateRuntimeStats()
         {
+            _runTimeUnitInfo = new UnitInfo();
             _unitPrefab = _owner.activeUnitPrefab;
-            _unitName = unitStats.UnitName;
-            _unitHitPoints = unitStats.UnitHitPoints;
-            _currentUnitHP = _unitHitPoints;
-            _unitSpeed = unitStats.UnitSpeed;
-            _unitDefense = unitStats.UnitDefense;
-            _accuracyModifier = unitStats.UnitAccuracyModifier;
-           
+            _runTimeUnitInfo.unitName = unitStats.UnitName;
+            _runTimeUnitInfo.hitPoints = unitStats.UnitHitPoints;
+            _currentUnitHP = _runTimeUnitInfo.hitPoints;
+            _runTimeUnitInfo.speed = unitStats.UnitSpeed;
+            _runTimeUnitInfo.defense = unitStats.UnitDefense;
+            _runTimeUnitInfo.accuracyMod = unitStats.UnitAccuracyModifier;
+            _actionAnnouncementAbbrev = $"{_owner.CharacterName} {_runTimeUnitInfo.unitName}";
             CheckPrefabs();
             _unitAnimation = GetComponentInChildren<UnitAnimation>();
-            _unitNameUpdateChannel.RaiseUnitNameUpdateEvent(_characterType, _unitName);
+            _unitNameUpdateChannel.RaiseUnitNameUpdateEvent(_characterType, _runTimeUnitInfo.unitName);
 
         }
         private void CheckPrefabs()
@@ -119,6 +121,7 @@ namespace Veganimus.BattleSystem
             {
                 var attackCopy = Instantiate(attackMove);
                 _attackMoveSet.Add(attackCopy);
+                runtimeMoveUses.Add(attackCopy.runtimeUses);
             }
             foreach(var defenseMove in unitStats.UnitDefenseMoves)
             {
@@ -128,10 +131,10 @@ namespace Veganimus.BattleSystem
         }
        
         public void DisplayUnitStats() => BattleUIManager.Instance.DisplayUnitStats(_currentUnitHP,
-                                                                                    _unitHitPoints,
-                                                                                    _unitSpeed,
-                                                                                    _unitDefense,
-                                                                                    _accuracyModifier);
+                                                                                    _runTimeUnitInfo.hitPoints,
+                                                                                    _runTimeUnitInfo.speed,
+                                                                                    _runTimeUnitInfo.defense,
+                                                                                   _runTimeUnitInfo.accuracyMod);
        
         public void UpdateMoveNames(string moveType)
         {
@@ -160,18 +163,18 @@ namespace Veganimus.BattleSystem
         {
             for (int a = _attackMoveSet.Count-1; a >= 0; a--)
             {
-                if(_attackMoveSet[a].MoveUses >0)
-                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[a].MoveUses, a);
+                if(_attackMoveSet[a].runtimeUses >0)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[a].runtimeUses, a);
             }
             for (int d = _defenseMoveSet.Count-1; d >= 0; d--)
             {
-                if(_defenseMoveSet[d].MoveUses > 0)
-                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[d].MoveUses, d);
+                if(_defenseMoveSet[d].runtimeUses > 0)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[d].runtimeUses, d);
             }
         }
         public void Damage(int amount)
         {
-            int damage = amount -= _unitDefense;
+            int damage = amount -= _runTimeUnitInfo.defense;
             if (damage <= 0)
                 damage = 0;
 
@@ -186,34 +189,34 @@ namespace Veganimus.BattleSystem
                 }
 
                 _unitAnimation.PlayClip("Death");
-                _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
-                StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} took {damage} damage!"));
+                _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _runTimeUnitInfo.hitPoints, _currentUnitHP);
+                StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} took {damage} damage!"));
                 StartCoroutine(EndBattleDelayRoutine());
             }
-            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
-            StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} took {damage} damage!"));
+            _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _runTimeUnitInfo.hitPoints, _currentUnitHP);
+            StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} took {damage} damage!"));
         }
         public void Heal(int amount)
         {
-            if (amount + _currentUnitHP > _unitHitPoints)
-                amount = _unitHitPoints - _currentUnitHP;
+            if (amount + _currentUnitHP > _runTimeUnitInfo.hitPoints)
+                amount = _runTimeUnitInfo.hitPoints - _currentUnitHP;
 
-            if (_currentUnitHP <= _unitHitPoints)
+            if (_currentUnitHP <= _runTimeUnitInfo.hitPoints)
             {
                 _currentUnitHP += amount;
-                if (_currentUnitHP > _unitHitPoints)
-                    _currentUnitHP = _unitHitPoints;
+                if (_currentUnitHP > _runTimeUnitInfo.hitPoints)
+                    _currentUnitHP = _runTimeUnitInfo.hitPoints;
 
-                _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _unitHitPoints, _currentUnitHP);
-                StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} healed {amount} HP!"));
+                _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _runTimeUnitInfo.hitPoints, _currentUnitHP);
+                StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} healed {amount} HP!"));
             }
             else
                 return;
         }
         public void AdjustDefense(int amount)
         {
-            _unitDefense += amount;
-            StartCoroutine(StatUpdateDelayRoutine(($"{_owner.CharacterName} {_unitName} raised Defense by {amount}.")));
+            _runTimeUnitInfo.defense += amount;
+            StartCoroutine(StatUpdateDelayRoutine(($"{_actionAnnouncementAbbrev} raised Defense by {amount}.")));
         }
         public void ResetDefense()
         {
@@ -223,9 +226,9 @@ namespace Veganimus.BattleSystem
                 _unitBaseModel.SetActive(true);
                 ActiveEffect = null;
             }
-            _unitDefense = unitStats.UnitDefense;
-            TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, _targetUnit.TargetStats.UnitAccuracyModifier);// Need to change this so it's not hard coded.
-            StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} Defense was reset."));
+            _runTimeUnitInfo.defense = unitStats.UnitDefense;
+           // TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, _targetUnit.TargetStats.UnitAccuracyModifier);// Need to change this so it's not hard coded.
+            StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} Defense was reset."));
             StartCoroutine(ResetStatDelayRoutine(2));
             
         }
@@ -234,33 +237,34 @@ namespace Veganimus.BattleSystem
             switch(statAffected)
             {
                 case StatAffected.Speed:
-                    _unitSpeed += amount;
+                    _runTimeUnitInfo.speed += amount;
                     break;
                 case StatAffected.Defense:
-                    _unitDefense += amount;
+                    _runTimeUnitInfo.defense += amount;
                     break;
                 case StatAffected.Accuracy:
-                    _accuracyModifier += amount;
+                    _runTimeUnitInfo.accuracyMod += amount;
                     break;
 
             }
-            StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} raised {statAffected} by {amount}."));
+            StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} raised {statAffected} by {amount}."));
         }
 
         public void UseAttackMoveSlot(int slotNumber)
         {
             var move = _attackMoveSet[slotNumber];
-            if (_attackMoveSet[slotNumber].MoveUses > 0)
+            if (_attackMoveSet[slotNumber].runtimeUses > 0)
             {
-                _displayActionChannel.RaiseDisplayActionEvent($"{_owner.CharacterName} {_unitName} used {move.MoveName}!");
-                _attackMoveSet[slotNumber].MoveUses--;
+                _displayActionChannel.RaiseDisplayActionEvent($"{_actionAnnouncementAbbrev} used {move.MoveName}!");
+                _attackMoveSet[slotNumber].runtimeUses--;
+                runtimeMoveUses[slotNumber]--;
                 _unitAnimation.SetInteger(move.MoveAttackType.ToString(), 1);
                 if (_owner.ThisCharacterType == CharacterType.Player)
                 {
-                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].MoveUses, slotNumber);
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].runtimeUses, slotNumber);
                     BattleUIManager.Instance.ActivateButtons(false);
                 }
-                bool didMoveHit = move.RollForMoveAccuracy(_accuracyModifier);
+                bool didMoveHit = move.RollForMoveAccuracy(_runTimeUnitInfo.accuracyMod);
                 if (didMoveHit == true)
                 {
                     int damageAmount = move.damageAmount;
@@ -270,14 +274,14 @@ namespace Veganimus.BattleSystem
                 }
                 else if (didMoveHit == false)
                 {
-                    StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} Missed!"));
+                    StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} Missed!"));
                 }
                 _owner.IsTurnComplete = true;
                 _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType, _owner.IsTurnComplete);
             }
-            else if (_attackMoveSet[slotNumber].MoveUses <= 0)
+            else if (_attackMoveSet[slotNumber].runtimeUses <= 0)
             {
-                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].MoveUses, slotNumber);
+                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].runtimeUses, slotNumber);
                 if (_characterType != CharacterType.Player)
                     DetermineAction();
                 else
@@ -287,16 +291,16 @@ namespace Veganimus.BattleSystem
 
         public void UseDefenseMoveSlot(int slotNumber)
         {
-            int usesLeft = _defenseMoveSet[slotNumber].MoveUses;
+            int usesLeft = _defenseMoveSet[slotNumber].runtimeUses;
             var move = _defenseMoveSet[slotNumber];
 
             if (CheckIfEffectActive() && usesLeft > 0)
                 {
-                    _displayActionChannel.RaiseDisplayActionEvent($"{_owner.CharacterName} {_unitName} used {move.MoveName}!");
-                    _defenseMoveSet[slotNumber].MoveUses--;
+                    _displayActionChannel.RaiseDisplayActionEvent($"{_actionAnnouncementAbbrev} used {move.MoveName}!");
+                    _defenseMoveSet[slotNumber].runtimeUses--;
                     if (_owner.ThisCharacterType == CharacterType.Player)
                     {
-                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].MoveUses, slotNumber);
+                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].runtimeUses, slotNumber);
                         BattleUIManager.Instance.ActivateButtons(false);
                     }
                 _isEffectActive = true;
@@ -304,15 +308,15 @@ namespace Veganimus.BattleSystem
                 if (move.MoveDefenseType != UnitDefenseMove.DefenseType.Cloak)
                     AdjustDefense(move.defenseBuff);
                 else
-                    StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} is harder to hit!"));
+                    StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} is harder to hit!"));
 
                     _owner.IsTurnComplete = true;
                     _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType, _owner.IsTurnComplete);
                 }
-                else if (_defenseMoveSet[slotNumber].MoveUses <= 0 || CheckIfEffectActive()==false)
+                else if (_defenseMoveSet[slotNumber].runtimeUses <= 0 || CheckIfEffectActive()==false)
                 {
                     if (_owner.ThisCharacterType == CharacterType.Player)
-                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].MoveUses, slotNumber);
+                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].runtimeUses, slotNumber);
 
                     if (_characterType != CharacterType.Player)
                         DetermineAction();
