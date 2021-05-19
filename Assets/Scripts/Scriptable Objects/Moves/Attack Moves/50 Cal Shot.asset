@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481f41dc42a5f424e9e3a1186c52fd9d, type: 3}
   m_Name: 50 Cal Shot
   m_EditorClassIdentifier: 
-  moveName: .50 cal Shot
-  moveUses: 10
-  moveAccuracy: 80
-  moveType: 0
-  elementType: 0
+  _moveInfo:
+    moveName: .50 cal Shot
+    uses: 5
+    accuracy: 80
+    moveType: 0
+    elementType: 0
   animationTrigger: quickShot
   _assignedUnit: {fileID: 0}
   displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   damageAmount: 10
   attackSpeed: 0
+  _attackType: 0
   OnAttackMoveUsed:
     m_PersistentCalls:
       m_Calls: []

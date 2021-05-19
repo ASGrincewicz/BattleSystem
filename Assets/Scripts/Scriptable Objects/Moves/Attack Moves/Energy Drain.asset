@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481f41dc42a5f424e9e3a1186c52fd9d, type: 3}
   m_Name: Energy Drain
   m_EditorClassIdentifier: 
-  moveName: Energy Drain
-  moveUses: 5
-  moveAccuracy: 90
-  moveType: 0
-  elementType: 0
+  _moveInfo:
+    moveName: Energy Drain
+    uses: 2
+    accuracy: 85
+    moveType: 1
+    elementType: 4
+  animationTrigger: 
   _assignedUnit: {fileID: 0}
   displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   damageAmount: 5
   attackSpeed: 0
+  _attackType: 0
   OnAttackMoveUsed:
     m_PersistentCalls:
       m_Calls: []

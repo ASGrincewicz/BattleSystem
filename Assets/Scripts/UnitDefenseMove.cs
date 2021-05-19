@@ -22,7 +22,7 @@ public class UnitDefenseMove : UnitMove
         switch (defenseType)
         {
             case DefenseType.EnergyShield:
-                if (unit.UnitEnergyShield.activeInHierarchy == false)
+                if (unit.UnitEnergyShield.activeInHierarchy == false && unit.UnitEnergyShield)
                 {
                     unit.ActiveEffect = unit.UnitEnergyShield;
                     effectObject = unit.UnitEnergyShield;
@@ -32,7 +32,7 @@ public class UnitDefenseMove : UnitMove
                     return;
                 break;
             case DefenseType.Barrier:
-                if (unit.UnitBarrier.activeInHierarchy == false)
+                if (unit.UnitBarrier.activeInHierarchy == false && unit.UnitBarrier)
                 {
                     unit.ActiveEffect = unit.UnitBarrier;
                     effectObject = unit.UnitBarrier;
@@ -42,7 +42,7 @@ public class UnitDefenseMove : UnitMove
                     return;
                 break;
             case DefenseType.Cloak:
-                if (unit.UnitCloak.activeInHierarchy == false)
+                if (unit.UnitCloak.activeInHierarchy == false && unit.UnitCloak)
                 {
                     unit.ActiveEffect = unit.UnitCloak;
                     effectObject = unit.UnitCloak;
@@ -54,7 +54,7 @@ public class UnitDefenseMove : UnitMove
                     return;
                 break;
             case DefenseType.Armor:
-
+                unit.AdjustDefense(defenseBuff);
                 break;
         }
         effectObject.GetComponent<MoveEffect>().turnsActive = turnsActive;

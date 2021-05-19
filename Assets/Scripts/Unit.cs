@@ -65,6 +65,7 @@ namespace Veganimus.BattleSystem
         private WaitForSeconds _statUpdateDelay;
         private WaitForSeconds _endBattleDelay;
         private bool _isEffectActive;
+
         private void Awake()
         {
             _owner = GetComponentInParent<Character>();
@@ -90,17 +91,27 @@ namespace Veganimus.BattleSystem
             _unitSpeed = unitStats.UnitSpeed;
             _unitDefense = unitStats.UnitDefense;
             _accuracyModifier = unitStats.UnitAccuracyModifier;
-            var prefab = _unitPrefab.GetComponent<UnitPrefab>();
-            _unitBaseModel = prefab.baseModel;
-            _unitEnergyShield = prefab.shield;
-            _unitEnergyShield.SetActive(false);
-            _unitBarrier = prefab.barrier;
-            _unitBarrier.SetActive(false);
-            _unitCloak = prefab.cloak;
-            _unitCloak.SetActive(false);
+           
+            CheckPrefabs();
             _unitAnimation = GetComponentInChildren<UnitAnimation>();
             _unitNameUpdateChannel.RaiseUnitNameUpdateEvent(_characterType, _unitName);
 
+        }
+        private void CheckPrefabs()
+        {
+            var prefab = _unitPrefab.GetComponent<UnitPrefab>();
+            _unitBaseModel = prefab.baseModel;
+            _unitEnergyShield = prefab.shield;
+            if(_unitEnergyShield)
+                _unitEnergyShield.SetActive(false);
+            
+            _unitBarrier = prefab.barrier;
+            if (_unitBarrier)
+                _unitBarrier.SetActive(false);
+
+            _unitCloak = prefab.cloak;
+            if(_unitCloak)
+                _unitCloak.SetActive(false);
         }
         public void GenerateMoveSet()
         {
@@ -131,8 +142,8 @@ namespace Veganimus.BattleSystem
                 for (int a = _attackMoveSet.Count - 1; a >= 0; a--)
                 {
                     var move = _attackMoveSet[a];
-                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.moveName, a);
-                    BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.moveAccuracy,0, 0, a);
+                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, a);
+                    BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.MoveAccuracy,0, 0, a);
                 }
             }
             else if (moveType == "Defense")
@@ -140,7 +151,7 @@ namespace Veganimus.BattleSystem
                 for (int d = _defenseMoveSet.Count - 1; d >= 0; d--)
                 {
                     var move = _defenseMoveSet[d];
-                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.moveName, d);
+                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, d);
                     BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.defenseBuff,move.turnsActive, d);
                 }
             }
@@ -149,13 +160,13 @@ namespace Veganimus.BattleSystem
         {
             for (int a = _attackMoveSet.Count-1; a >= 0; a--)
             {
-                if(_attackMoveSet[a].moveUses >0)
-                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[a].moveUses, a);
+                if(_attackMoveSet[a].MoveUses >0)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[a].MoveUses, a);
             }
             for (int d = _defenseMoveSet.Count-1; d >= 0; d--)
             {
-                if(_defenseMoveSet[d].moveUses > 0)
-                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[d].moveUses, d);
+                if(_defenseMoveSet[d].MoveUses > 0)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[d].MoveUses, d);
             }
         }
         public void Damage(int amount)
@@ -213,7 +224,7 @@ namespace Veganimus.BattleSystem
                 ActiveEffect = null;
             }
             _unitDefense = unitStats.UnitDefense;
-            TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, 10);// Need to change this so it's not hard coded.
+            TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, _targetUnit.TargetStats.UnitAccuracyModifier);// Need to change this so it's not hard coded.
             StartCoroutine(StatUpdateDelayRoutine($"{_owner.CharacterName} {_unitName} Defense was reset."));
             StartCoroutine(ResetStatDelayRoutine(2));
             
@@ -239,20 +250,19 @@ namespace Veganimus.BattleSystem
         public void UseAttackMoveSlot(int slotNumber)
         {
             var move = _attackMoveSet[slotNumber];
-            if (_attackMoveSet[slotNumber].moveUses > 0)
+            if (_attackMoveSet[slotNumber].MoveUses > 0)
             {
-                _displayActionChannel.RaiseDisplayActionEvent($"{_owner.CharacterName} {_unitName} used {move.moveName}!");
-                _attackMoveSet[slotNumber].moveUses--;
+                _displayActionChannel.RaiseDisplayActionEvent($"{_owner.CharacterName} {_unitName} used {move.MoveName}!");
+                _attackMoveSet[slotNumber].MoveUses--;
                 _unitAnimation.SetInteger(move.MoveAttackType.ToString(), 1);
                 if (_owner.ThisCharacterType == CharacterType.Player)
                 {
-                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].moveUses, slotNumber);
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].MoveUses, slotNumber);
                     BattleUIManager.Instance.ActivateButtons(false);
                 }
                 bool didMoveHit = move.RollForMoveAccuracy(_accuracyModifier);
                 if (didMoveHit == true)
                 {
-                    Debug.Log(move.MoveAttackType.ToString());
                     int damageAmount = move.damageAmount;
                     _targetUnit.targetIDamageable.Damage(damageAmount);
                   
@@ -265,9 +275,9 @@ namespace Veganimus.BattleSystem
                 _owner.IsTurnComplete = true;
                 _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType, _owner.IsTurnComplete);
             }
-            else if (_attackMoveSet[slotNumber].moveUses <= 0)
+            else if (_attackMoveSet[slotNumber].MoveUses <= 0)
             {
-                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].moveUses, slotNumber);
+                BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].MoveUses, slotNumber);
                 if (_characterType != CharacterType.Player)
                     DetermineAction();
                 else
@@ -277,16 +287,16 @@ namespace Veganimus.BattleSystem
 
         public void UseDefenseMoveSlot(int slotNumber)
         {
-            int usesLeft = _defenseMoveSet[slotNumber].moveUses;
+            int usesLeft = _defenseMoveSet[slotNumber].MoveUses;
             var move = _defenseMoveSet[slotNumber];
 
             if (CheckIfEffectActive() && usesLeft > 0)
                 {
-                    _displayActionChannel.RaiseDisplayActionEvent($"{_owner.CharacterName} {_unitName} used {move.moveName}!");
-                    _defenseMoveSet[slotNumber].moveUses--;
+                    _displayActionChannel.RaiseDisplayActionEvent($"{_owner.CharacterName} {_unitName} used {move.MoveName}!");
+                    _defenseMoveSet[slotNumber].MoveUses--;
                     if (_owner.ThisCharacterType == CharacterType.Player)
                     {
-                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].moveUses, slotNumber);
+                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].MoveUses, slotNumber);
                         BattleUIManager.Instance.ActivateButtons(false);
                     }
                 _isEffectActive = true;
@@ -299,10 +309,10 @@ namespace Veganimus.BattleSystem
                     _owner.IsTurnComplete = true;
                     _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType, _owner.IsTurnComplete);
                 }
-                else if (_defenseMoveSet[slotNumber].moveUses <= 0 || CheckIfEffectActive()==false)
+                else if (_defenseMoveSet[slotNumber].MoveUses <= 0 || CheckIfEffectActive()==false)
                 {
                     if (_owner.ThisCharacterType == CharacterType.Player)
-                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].moveUses, slotNumber);
+                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].MoveUses, slotNumber);
 
                     if (_characterType != CharacterType.Player)
                         DetermineAction();
@@ -328,7 +338,6 @@ namespace Veganimus.BattleSystem
             }
             else
                 return false;
-
         }
         ///<summary>
         ///Uses a dice roll system to determine what Action an AI character will take.

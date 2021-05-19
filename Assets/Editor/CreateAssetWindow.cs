@@ -88,30 +88,30 @@ namespace Veganimus.BattleSystem
                     newItem.statAffected = _affectedStat;
                     newItem.effectAmount = _effectAmount;
                     break;
-                case AssetTypeToCreate.AttackMove:
-                    var newAttackMove = CreateInstance<UnitAttackMove>();
-                    AssetDatabase.CreateAsset(
-                        newAttackMove,
-                        $"Assets/Scripts/Scriptable Objects/Moves/Attack Moves/{_assetName}.asset");
-                    newAttackMove.moveName = _assetName;
-                    newAttackMove.moveUses = uses;
-                    newAttackMove.damageAmount = attackDamage;
-                    newAttackMove.moveAccuracy = attackAccuracy;
-                    newAttackMove.moveType = moveType;
-                    newAttackMove.elementType = elementType;
-                    newAttackMove.displayActionChannel = (DisplayActionChannel)channel;
-                    break;
-                case AssetTypeToCreate.DefenseMove:
-                    var newDefenseMove = CreateInstance<UnitDefenseMove>();
-                    AssetDatabase.CreateAsset(
-                        newDefenseMove,
-                        $"Assets/Scripts/Scriptable Objects/Moves/Defense Moves/{_assetName}.asset");
-                    newDefenseMove.moveName = _assetName;
-                    newDefenseMove.moveUses = uses;
-                    newDefenseMove.defenseBuff = defenseBuff;
-                    newDefenseMove.moveType = moveType;
-                    newDefenseMove.displayActionChannel = (DisplayActionChannel)channel;
-                    break;
+                //case AssetTypeToCreate.AttackMove:
+                //    var newAttackMove = CreateInstance<UnitAttackMove>();
+                //    AssetDatabase.CreateAsset(
+                //        newAttackMove,
+                //        $"Assets/Scripts/Scriptable Objects/Moves/Attack Moves/{_assetName}.asset");
+                //    newAttackMove.MoveName = _assetName;
+                //    newAttackMove.MoveUses = uses;
+                //    newAttackMove.damageAmount = attackDamage;
+                //    newAttackMove.MoveAccuracy = attackAccuracy;
+                //    newAttackMove.MoveType = moveType;
+                //    newAttackMove.MoveElementType = elementType;
+                //    newAttackMove.displayActionChannel = (DisplayActionChannel)channel;
+                //    break;
+                //case AssetTypeToCreate.DefenseMove:
+                //    var newDefenseMove = CreateInstance<UnitDefenseMove>();
+                //    AssetDatabase.CreateAsset(
+                //        newDefenseMove,
+                //        $"Assets/Scripts/Scriptable Objects/Moves/Defense Moves/{_assetName}.asset");
+                //    newDefenseMove.MoveName = _assetName;
+                //    newDefenseMove.MoveUses = uses;
+                //    newDefenseMove.defenseBuff = defenseBuff;
+                //    newDefenseMove.MoveType = moveType;
+                //    newDefenseMove.displayActionChannel = (DisplayActionChannel)channel;
+                //    break;
             }
         }
     }

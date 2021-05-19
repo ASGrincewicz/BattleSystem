@@ -6287,7 +6287,8 @@ MonoBehaviour:
   _characterName: Enemy
   _aiAgression: 0
   _party:
-  - {fileID: 11400000, guid: d22fb20ddf7ce4689a2a1554b53445b3, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   effects: []
   activeUnit: {fileID: 519409849}
   activeUnitPrefab: {fileID: 0}
@@ -8937,6 +8938,56 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2568198878102701477, guid: 6e169b93ad55e42f9ad6caf87ef4b6b9, type: 3}
   m_PrefabInstance: {fileID: 395586725}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1487310484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487310486}
+  - component: {fileID: 1487310485}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1487310485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487310484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a168cc1c4944dc794f70ba088b0044, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info:
+    unitName: Test Unit
+    hitPoints: 50
+    speed: 5
+    defense: 5
+    accuracyMod: 0
+    elementType: 0
+--- !u!4 &1487310486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487310484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.21031153, y: 2.492503, z: -4.7350464}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1487345503 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -6904350171076661266, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
@@ -11603,7 +11654,8 @@ MonoBehaviour:
   _characterName: Player One
   _aiAgression: 0
   _party:
-  - {fileID: 11400000, guid: d22fb20ddf7ce4689a2a1554b53445b3, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   effects: []
   activeUnit: {fileID: 2117615750}
   activeUnitPrefab: {fileID: 0}
