@@ -122,6 +122,7 @@ namespace Veganimus.BattleSystem
             {
                 var attackCopy = Instantiate(attackMove);
                 _attackMoveSet.Add(attackCopy);
+                _attackMoveSet.Sort();
                 runtimeMoveUses.Add(attackCopy.runtimeUses);
             }
             foreach(var defenseMove in unitStats.UnitDefenseMoves)

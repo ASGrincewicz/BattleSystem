@@ -145,11 +145,11 @@ GameObject:
   - component: {fileID: 8192912429071894161}
   - component: {fileID: 8192912429071894163}
   - component: {fileID: 8192912429071894162}
-  - component: {fileID: 7729881575484982439}
   - component: {fileID: 5176609251868593227}
   - component: {fileID: 4460555925522247851}
+  - component: {fileID: 8712583208494234214}
   m_Layer: 5
-  m_Name: ItemImagePrefab
+  m_Name: ShopItemImagePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,25 +213,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7729881575484982439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8192912429071894160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 351a44c09770e4aa6a127873b7648640, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  canvasGroup: {fileID: 5176609251868593227}
-  rectTransform: {fileID: 8192912429071894161}
-  item: {fileID: 0}
-  originalPos: {fileID: 0}
-  previousSpot: {fileID: 0}
-  newSpot: {fileID: 0}
 --- !u!225 &5176609251868593227
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -268,3 +249,22 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &8712583208494234214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8192912429071894160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b083419a1b24a82b1f745b6359df50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  canvasGroup: {fileID: 5176609251868593227}
+  rectTransform: {fileID: 8192912429071894161}
+  item: {fileID: 0}
+  originalPos: {fileID: 0}
+  previousSpot: {fileID: 0}
+  newSpot: {fileID: 0}

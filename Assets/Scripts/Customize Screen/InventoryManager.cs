@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,14 +19,20 @@ public class InventoryManager : Singleton<InventoryManager>
     [SerializeField] private Transform battleItemGrid;
     [SerializeField] private List<CharacterStats> _characters;
     [SerializeField] private TMP_Dropdown _selectCharacter;
-    
+    [ContextMenuItem("Populate Dropdown", "AddDropdownOptions")]
+    public string populateDropDown;
    
     private void Start()
     {
-        AddDropDownOptions();
+        if (_selectCharacter.options.Count > 0)
+            _selectCharacter.ClearOptions();
+
+        AddDropdownOptions();
         owner = _characters[0];
         inventory = owner.characterInventory;
         battleInventory = owner.battleInventory;
+        inventory.Sort();
+        battleInventory.Sort();
         PopulateInventoryGrid();
     }
     public void ChangeCharacter(int index)
@@ -33,22 +40,26 @@ public class InventoryManager : Singleton<InventoryManager>
         index = _selectCharacter.value;
         owner = _characters[index];
         itemImage.Clear();
-
-        ClearChildObjects(itemGrid);
-        ClearChildObjects(battleItemGrid);
+        ClearChildObjects(itemGrid, battleItemGrid);
         inventory = owner.characterInventory;
         battleInventory = owner.battleInventory;
+        inventory.Sort();
+        battleInventory.Sort();
         PopulateInventoryGrid();
     }
-    public void AddDropDownOptions()
+    public void AddDropdownOptions()
     {
+        var characters = Resources.FindObjectsOfTypeAll<CharacterStats>();
         var characterNames = new List<string>();
-        foreach(var character in _characters)
+        foreach(var character in characters)
         {
             var characterName = character.CharacterName;
             characterNames.Add(characterName);
+            _characters.Add(character);
+            _characters.Sort();
         }
         _selectCharacter.AddOptions(characterNames);
+        _selectCharacter.RefreshShownValue();
     }
     private void PopulateInventoryGrid()
     {
@@ -72,19 +83,34 @@ public class InventoryManager : Singleton<InventoryManager>
         if (battleInventory.Count == 4) return;
         battleInventory.Add(item);
         inventory.Remove(item);
+        SortInventory(battleInventory, inventory);
     }
     public void AddToInventory(Item item)
     {
         battleInventory.Remove(item);
         inventory.Add(item);
+        SortInventory(inventory, battleInventory);
     }
-    public void ClearChildObjects(Transform transform)
+    public void SortInventory(List<Item> inventoryToSort, [Optional] List<Item> secondInventory)
+    {
+        inventoryToSort.Sort();
+        secondInventory.Sort();
+    }
+    public void ClearChildObjects(Transform transform, [Optional] Transform secondTransform)
     {
         if (transform.childCount > 0)
         {
             for (int i = 0; i < transform.childCount; i++)
             {
                 var child = transform.GetChild(i);
+                Destroy(child.gameObject);
+            }
+        }
+        if (secondTransform.childCount > 0)
+        {
+            for (int i = 0; i < secondTransform.childCount; i++)
+            {
+                var child = secondTransform.GetChild(i);
                 Destroy(child.gameObject);
             }
         }

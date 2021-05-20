@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7926167caca0447fcb649649cfc893c7, type: 3}
   m_Name: Large Repair Kit
   m_EditorClassIdentifier: 
+  itemCreditCost: 20
   itemName: Large Repair Kit
   isConsumable: 1
   itemUses: 1

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4413296630673555403
+--- !u!1 &7278803015311342860
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4413296630673555402}
-  - component: {fileID: 4413296630673555401}
+  - component: {fileID: 7278803015311342851}
+  - component: {fileID: 7278803015311342850}
   m_Layer: 0
-  m_Name: InventoryManager
+  m_Name: ShopManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4413296630673555402
+--- !u!4 &7278803015311342851
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4413296630673555403}
+  m_GameObject: {fileID: 7278803015311342860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,26 +31,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4413296630673555401
+--- !u!114 &7278803015311342850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4413296630673555403}
+  m_GameObject: {fileID: 7278803015311342860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6eed6130350499799bdeb5f2e85cf3, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b0a7924633494d38a1b3aaf0688a136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemImage: []
-  owner: {fileID: 0}
-  inventory: []
-  battleInventory: []
-  itemImagePrefab: {fileID: 8192912429071894162, guid: 24b338b7bbe01444a94aabb149fd5f32, type: 3}
-  itemGrid: {fileID: 0}
-  battleItemGrid: {fileID: 0}
-  _characters:
-  - {fileID: 11400000, guid: ed0d9b21011fc4f3e9bc0500d0948e7a, type: 2}
-  - {fileID: 11400000, guid: 68e9601fad1b54377a441a73f4ae1ffa, type: 2}
+  _shopInventory: {fileID: 11400000, guid: 6228fbefe08084e18baebc6424878db7, type: 2}
+  _productImages: []
+  _productImagePrefab: {fileID: 8192912429071894162, guid: 24b338b7bbe01444a94aabb149fd5f32, type: 3}
+  _shopInventoryList: []
+  _customerInventoryList: []
+  _shopGrid: {fileID: 0}
+  _inventoryGrid: {fileID: 0}
+  _customer: {fileID: 0}
+  _characters: []
   _selectCharacter: {fileID: 0}
+  _characterCredits: {fileID: 0}
+  _shopCredits: {fileID: 0}
+  getItems: 

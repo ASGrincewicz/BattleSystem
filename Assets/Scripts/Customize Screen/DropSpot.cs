@@ -18,15 +18,16 @@ public class DropSpot : MonoBehaviour,IDropHandler, IPointerEnterHandler
     {
         if (eventData.pointerDrag != null)
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-            eventData.pointerDrag.transform.SetParent(this.transform);
-
             if (_isBattleInventory && _itemCount < _capacity)
             {
+                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+                eventData.pointerDrag.transform.SetParent(this.transform);
                 InventoryManager.Instance.AddToBattleInventory(eventData.pointerDrag.GetComponent<DragItem>().item);
             }
             else if (!_isBattleInventory && _itemCount < _capacity)
             {
+                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+                eventData.pointerDrag.transform.SetParent(this.transform);
                 InventoryManager.Instance.AddToInventory(eventData.pointerDrag.GetComponent<DragItem>().item);
             }
             else
