@@ -10,6 +10,7 @@ namespace Veganimus.BattleSystem
         //public Button attackButtonPrefab;
         //public Transform attackButtonPanel;
         [SerializeField] private Canvas _battleCanvas;
+        [SerializeField] private GameObject _startSequence;
         [Header("Player UI")]
         [SerializeField] private GameObject _playerUI;
         [SerializeField] private Image _playerTurnIndicator;
@@ -94,6 +95,7 @@ namespace Veganimus.BattleSystem
         {
             _displayTextDelay = new WaitForSeconds(2f);
             _endBattleDelay = new WaitForSeconds(5f);
+            _startSequence.SetActive(true);
         }
 
         public void UpdateCharacterNames(CharacterType characterType, string characterName)
@@ -111,7 +113,7 @@ namespace Veganimus.BattleSystem
 
         public void ActivateButtons(bool isPlayerTurn)
         {
-            if (isPlayerTurn == false)
+            if (!isPlayerTurn)
             {
                 foreach (var attackButton in _playerAttackButtons)
                 {
@@ -204,16 +206,11 @@ namespace Veganimus.BattleSystem
 
         //     }
         // }
-        private void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
+        public void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
         {
             for (int a = _playerAttackNames.Length; a >= 0; a--)
             {
                 _playerAttackNames[moveSlot].text = $"{moveName}";
-                foreach (Button button in _playerAttackButtons)
-                {
-                    if (moveName == "")
-                        button.gameObject.SetActive(false);
-                }
             }
         }
         private void DisplayCurrentDefenseMoveNames(string moveName, int moveSlot)
@@ -274,8 +271,6 @@ namespace Veganimus.BattleSystem
                     _playerItemEffects[itemSlot].text = $"Heal Amount: {amount}";
                     break;
                 case ItemType.Equipment:
-                    _playerItemEffects[itemSlot].text = $"{stat}: +{ amount}";
-                    break;
                 case ItemType.Boost:
                     _playerItemEffects[itemSlot].text = $"{stat}: +{ amount}";
                     break;

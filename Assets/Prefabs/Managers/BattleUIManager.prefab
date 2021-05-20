@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _battleCanvas: {fileID: 0}
+  _startSequence: {fileID: 0}
   _playerUI: {fileID: 0}
   _playerTurnIndicator: {fileID: 0}
   _playerCharacterNameText: {fileID: 0}

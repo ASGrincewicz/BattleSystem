@@ -3240,7 +3240,7 @@ GameObject:
   m_Layer: 7
   m_Name: Enemy_ActiveUnit_spot
   m_TagString: Enemy
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3271,6 +3271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d04de171a784eda80869f08e149735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runtimeMoveUses: 
   _owner: {fileID: 0}
   _characterType: 1
   unitStats: {fileID: 0}
@@ -3282,13 +3283,7 @@ MonoBehaviour:
     defense: 0
     accuracyMod: 0
     elementType: 0
-  _unitType: 0
-  _unitName: 
-  _unitHitPoints: 0
   _currentUnitHP: 0
-  _unitSpeed: 0
-  _unitDefense: 0
-  _accuracyModifier: 0
   _unitBaseModel: {fileID: 0}
   _unitEnergyShield: {fileID: 0}
   _unitBarrier: {fileID: 0}
@@ -6246,10 +6241,10 @@ GameObject:
   m_Layer: 5
   m_Name: StartSequence
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &956950874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9798,13 +9793,13 @@ MonoBehaviour:
       - m_Target: {fileID: 2117615750}
         m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
         m_MethodName: UpdateMoveNames
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Attack
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1776855241}
@@ -13637,7 +13632,7 @@ GameObject:
   m_Layer: 5
   m_Name: EnemyTurn_indicator
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
@@ -13904,7 +13899,7 @@ GameObject:
   m_Layer: 6
   m_Name: Player_ActiveUnit_spot
   m_TagString: Enemy
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -13935,6 +13930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11d04de171a784eda80869f08e149735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runtimeMoveUses: 
   _owner: {fileID: 0}
   _characterType: 0
   unitStats: {fileID: 0}
@@ -13946,13 +13942,7 @@ MonoBehaviour:
     defense: 0
     accuracyMod: 0
     elementType: 0
-  _unitType: 0
-  _unitName: 
-  _unitHitPoints: 0
   _currentUnitHP: 0
-  _unitSpeed: 0
-  _unitDefense: 0
-  _accuracyModifier: 0
   _unitBaseModel: {fileID: 0}
   _unitEnergyShield: {fileID: 0}
   _unitBarrier: {fileID: 0}
@@ -14704,10 +14694,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleUIManager
       objectReference: {fileID: 0}
-    - target: {fileID: 4042837017265398788, guid: 646c0f1355e3c454e8e882c185499fa5, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4042837017265398790, guid: 646c0f1355e3c454e8e882c185499fa5, type: 3}
       propertyPath: _enemyUI
       value: 
@@ -14745,21 +14731,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1148509764}
     - target: {fileID: 4042837017265398790, guid: 646c0f1355e3c454e8e882c185499fa5, type: 3}
+      propertyPath: _startSequence
+      value: 
+      objectReference: {fileID: 956950873}
+    - target: {fileID: 4042837017265398790, guid: 646c0f1355e3c454e8e882c185499fa5, type: 3}
       propertyPath: _statUpdateText
       value: 
       objectReference: {fileID: 1895158117}
     - target: {fileID: 4042837017265398790, guid: 646c0f1355e3c454e8e882c185499fa5, type: 3}
-      propertyPath: attackButtonPanel
-      value: 
-      objectReference: {fileID: 1776855242}
-    - target: {fileID: 4042837017265398790, guid: 646c0f1355e3c454e8e882c185499fa5, type: 3}
       propertyPath: _enemyUnitNameText
       value: 
       objectReference: {fileID: 512457086}
-    - target: {fileID: 4042837017265398790, guid: 646c0f1355e3c454e8e882c185499fa5, type: 3}
-      propertyPath: attackButtonPrefab
-      value: 
-      objectReference: {fileID: 714907297410086693, guid: 06ac90507c20f4f1a8b978f9d2ba3544, type: 3}
     - target: {fileID: 4042837017265398790, guid: 646c0f1355e3c454e8e882c185499fa5, type: 3}
       propertyPath: _enemyTurnIndicator
       value: 

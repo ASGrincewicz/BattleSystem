@@ -81,7 +81,8 @@ namespace Veganimus.BattleSystem
             yield return new WaitForSeconds(2f);
             PopulateRuntimeStats();
             GenerateMoveSet();
-            //BattleUIManager.Instance.PopulateAttackButtons(_attackMoveSet);
+            yield return new WaitForSeconds(1f);
+            UpdateMoveNames();
         }
         private void PopulateRuntimeStats()
         {
@@ -136,27 +137,20 @@ namespace Veganimus.BattleSystem
                                                                                     _runTimeUnitInfo.defense,
                                                                                    _runTimeUnitInfo.accuracyMod);
        
-        public void UpdateMoveNames(string moveType)
+        public void UpdateMoveNames()
         {
             UpdateMoveUseUI();
-            
-            if (moveType == "Attack")
+            for (int a = _attackMoveSet.Count - 1; a >= 0; a--)
             {
-                for (int a = _attackMoveSet.Count - 1; a >= 0; a--)
-                {
-                    var move = _attackMoveSet[a];
-                    _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, a);
-                    BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.MoveAccuracy,0, 0, a);
-                }
+                var move = _attackMoveSet[a];
+                BattleUIManager.Instance.DisplayCurrentAttackMoveNames(move.MoveName, a);
+                BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.MoveAccuracy, 0, 0, a);
             }
-            else if (moveType == "Defense")
+            for (int d = _defenseMoveSet.Count - 1; d >= 0; d--)
             {
-                for (int d = _defenseMoveSet.Count - 1; d >= 0; d--)
-                {
-                    var move = _defenseMoveSet[d];
-                    _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, d);
-                    BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.defenseBuff,move.turnsActive, d);
-                }
+                var move = _defenseMoveSet[d];
+                _unitDefenseMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, d);
+                BattleUIManager.Instance.DisplayMoveStats("defense", 0, 0, move.defenseBuff, move.turnsActive, d);
             }
         }
         public void UpdateMoveUseUI()
