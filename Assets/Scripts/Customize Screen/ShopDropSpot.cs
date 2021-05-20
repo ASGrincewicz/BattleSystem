@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropSpot : MonoBehaviour,IDropHandler, IPointerEnterHandler
+public class ShopDropSpot : MonoBehaviour, IDropHandler, IPointerEnterHandler
 {
-    [SerializeField] private bool _isBattleInventory;
+    [SerializeField] private bool _isCustomerInventory;
     [SerializeField] private int _itemCount;
-    public int ItemCount { get { return _itemCount;} set { _itemCount = value; } }
+    public int ItemCount { get { return _itemCount; } set { _itemCount = value; } }
     [SerializeField] private int _capacity;
     private IEnumerator Start()
     {
@@ -18,21 +18,24 @@ public class DropSpot : MonoBehaviour,IDropHandler, IPointerEnterHandler
     {
         if (eventData.pointerDrag != null)
         {
-            if (_isBattleInventory && _itemCount < _capacity)
+           
+            var item = eventData.pointerDrag.GetComponent<ShopDragItem>().item;
+
+            if (_isCustomerInventory && _itemCount < _capacity && ShopManager.Instance.Customer.characterCredits >= item.itemCreditCost)
             {
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
                 eventData.pointerDrag.transform.SetParent(this.transform);
-                InventoryManager.Instance.AddToBattleInventory(eventData.pointerDrag.GetComponent<DragItem>().item);
+                ShopManager.Instance.BuyItem(eventData.pointerDrag.GetComponent<ShopDragItem>().item);
             }
-            else if (!_isBattleInventory && _itemCount < _capacity)
+            else if (!_isCustomerInventory && _itemCount < _capacity && ShopManager.Instance.ShopCreditsAmount >= item.itemCreditCost)
             {
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
                 eventData.pointerDrag.transform.SetParent(this.transform);
-                InventoryManager.Instance.AddToInventory(eventData.pointerDrag.GetComponent<DragItem>().item);
+                ShopManager.Instance.SellItem(eventData.pointerDrag.GetComponent<ShopDragItem>().item);
             }
             else
             {
-                eventData.pointerDrag.transform.SetParent(eventData.pointerDrag.GetComponent<DragItem>().originalPos);
+                eventData.pointerDrag.transform.SetParent(eventData.pointerDrag.GetComponent<ShopDragItem>().originalPos);
             }
             _itemCount = transform.childCount;
         }

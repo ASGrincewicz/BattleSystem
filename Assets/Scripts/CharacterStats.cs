@@ -8,6 +8,7 @@ public class CharacterStats : ScriptableObject, IComparable<CharacterStats>
     [SerializeField] private int id;
     [SerializeField] private string _characterName;
     public string CharacterName { get { return _characterName; } }
+    public int characterCredits;
 
     public List<Item> characterInventory = new List<Item>();
 

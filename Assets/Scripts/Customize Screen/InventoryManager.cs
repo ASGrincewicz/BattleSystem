@@ -40,9 +40,7 @@ public class InventoryManager : Singleton<InventoryManager>
         index = _selectCharacter.value;
         owner = _characters[index];
         itemImage.Clear();
-
-        ClearChildObjects(itemGrid);
-        ClearChildObjects(battleItemGrid);
+        ClearChildObjects(itemGrid, battleItemGrid);
         inventory = owner.characterInventory;
         battleInventory = owner.battleInventory;
         inventory.Sort();
@@ -96,14 +94,23 @@ public class InventoryManager : Singleton<InventoryManager>
     public void SortInventory(List<Item> inventoryToSort, [Optional] List<Item> secondInventory)
     {
         inventoryToSort.Sort();
+        secondInventory.Sort();
     }
-    public void ClearChildObjects(Transform transform)
+    public void ClearChildObjects(Transform transform, [Optional] Transform secondTransform)
     {
         if (transform.childCount > 0)
         {
             for (int i = 0; i < transform.childCount; i++)
             {
                 var child = transform.GetChild(i);
+                Destroy(child.gameObject);
+            }
+        }
+        if (secondTransform.childCount > 0)
+        {
+            for (int i = 0; i < secondTransform.childCount; i++)
+            {
+                var child = secondTransform.GetChild(i);
                 Destroy(child.gameObject);
             }
         }

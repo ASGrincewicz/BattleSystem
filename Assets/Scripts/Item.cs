@@ -13,9 +13,9 @@ public class Item : ScriptableObject, IComparable<Item>
     ///</summary>
     ///
 
-    
-    public int itemID => (int)itemType;
-    public int secondID => (int)statAffected;
+    public int itemCreditCost;
+    public int ItemID => (int)itemType;
+    public int SecondID => (int)statAffected;
     [Header("Item Settings")]
     public string itemName;
     public bool isConsumable;
@@ -56,21 +56,21 @@ public class Item : ScriptableObject, IComparable<Item>
 
     public int CompareTo(Item other)
     {
-        if (this.itemID < other.itemID)
+        if (this.ItemID < other.ItemID)
             return -1;
 
-        else if (this.itemID > other.itemID)
+        else if (this.ItemID > other.ItemID)
             return 1;
 
-        else if (itemID == other.itemID)
+        else if (ItemID == other.ItemID)
         {
-            if (secondID < other.secondID)
+            if (SecondID < other.SecondID)
                 return -1;
 
-            else if (this.secondID > other.secondID)
+            else if (this.SecondID > other.SecondID)
                 return 1;
 
-            else if (this.secondID == other.secondID)
+            else if (this.SecondID == other.SecondID)
             {
                 if (this.effectAmount < other.effectAmount)
                     return -1;
