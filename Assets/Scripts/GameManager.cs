@@ -123,6 +123,9 @@ namespace Veganimus.BattleSystem
 #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
 #endif
+#if PLATFORM_WEBGL
+            Application.OpenURL("https://veganimus.itch.io/turn-based-battle-system-demo");
+#endif
         }
     }
 }

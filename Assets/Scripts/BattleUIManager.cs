@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,10 @@ namespace Veganimus.BattleSystem
 {
     public class BattleUIManager : Singleton<BattleUIManager>
     {
+        //public Button attackButtonPrefab;
+        //public Transform attackButtonPanel;
         [SerializeField] private Canvas _battleCanvas;
+        [SerializeField] private GameObject _startSequence;
         [Header("Player UI")]
         [SerializeField] private GameObject _playerUI;
         [SerializeField] private Image _playerTurnIndicator;
@@ -71,7 +75,7 @@ namespace Veganimus.BattleSystem
         {
             _unitNameUpdateChannel.OnUnitNameUpdated.AddListener(DisplayUnitName);
             _unitHPUpdateChannel.OnUnitHPUpdated.AddListener(DisplayCurrentUnitHP);
-            _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentAttackMoveNames);
+           _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentDefenseMoveNames);
             _itemNameUpdateChannel.OnMoveNameUpdated.AddListener(DisplayCurrentItemNames);
             _displayActionTakenChannel.OnDisplayAction.AddListener(DisplayCurrentActionTaken);
@@ -81,7 +85,7 @@ namespace Veganimus.BattleSystem
         {
             _unitNameUpdateChannel.OnUnitNameUpdated.RemoveListener(DisplayUnitName);
             _unitHPUpdateChannel.OnUnitHPUpdated.RemoveListener(DisplayCurrentUnitHP);
-            _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentAttackMoveNames);
+           _unitAttackMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentAttackMoveNames);
             _UnitDefenseMoveNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentDefenseMoveNames);
             _itemNameUpdateChannel.OnMoveNameUpdated.RemoveListener(DisplayCurrentItemNames);
             _displayActionTakenChannel.OnDisplayAction.RemoveListener(DisplayCurrentActionTaken);
@@ -91,6 +95,7 @@ namespace Veganimus.BattleSystem
         {
             _displayTextDelay = new WaitForSeconds(2f);
             _endBattleDelay = new WaitForSeconds(5f);
+            _startSequence.SetActive(true);
         }
 
         public void UpdateCharacterNames(CharacterType characterType, string characterName)
@@ -108,7 +113,7 @@ namespace Veganimus.BattleSystem
 
         public void ActivateButtons(bool isPlayerTurn)
         {
-            if (isPlayerTurn == false)
+            if (!isPlayerTurn)
             {
                 foreach (var attackButton in _playerAttackButtons)
                 {
@@ -191,17 +196,21 @@ namespace Veganimus.BattleSystem
                     break;
             }
         }
-       
-        private void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
+        //public void PopulateAttackButtons(List<UnitAttackMove> moves)
+        // {
+        //     foreach(var move in moves)
+        //     {
+        //         var attackButton = Instantiate(attackButtonPrefab, attackButtonPanel);
+        //         var info = attackButton.GetComponent<AttackButton>().attackButtonInfo;
+        //         info.FillText(move.MoveName, move.MoveUses, move.MoveAccuracy, move.damageAmount);
+
+        //     }
+        // }
+        public void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
         {
             for (int a = _playerAttackNames.Length; a >= 0; a--)
             {
                 _playerAttackNames[moveSlot].text = $"{moveName}";
-                foreach (Button button in _playerAttackButtons)
-                {
-                    if (moveName == "")
-                        button.gameObject.SetActive(false);
-                }
             }
         }
         private void DisplayCurrentDefenseMoveNames(string moveName, int moveSlot)
@@ -262,8 +271,6 @@ namespace Veganimus.BattleSystem
                     _playerItemEffects[itemSlot].text = $"Heal Amount: {amount}";
                     break;
                 case ItemType.Equipment:
-                    _playerItemEffects[itemSlot].text = $"{stat}: +{ amount}";
-                    break;
                 case ItemType.Boost:
                     _playerItemEffects[itemSlot].text = $"{stat}: +{ amount}";
                     break;

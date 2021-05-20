@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 714907297410086693}
   - component: {fileID: 714907297410086694}
   - component: {fileID: -6904350171076661266}
+  - component: {fileID: 3454602279749418431}
   m_Layer: 5
   m_Name: Attack_button
   m_TagString: Untagged
@@ -28,7 +29,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714907297410086691}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -125,8 +126,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Veganimus.BattleSystem.Unit, Assembly-CSharp
-        m_MethodName: UseAttackMoveSlot
+        m_TargetAssemblyTypeName: Veganimus.BattleSystem.UseButton, Assembly-CSharp
+        m_MethodName: UseAttack
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -190,13 +191,13 @@ MonoBehaviour:
   onRight:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: -6904350171076661266}
+        m_TargetAssemblyTypeName: Veganimus.BattleSystem.GUIPointerClick, Assembly-CSharp
+        m_MethodName: RightClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -204,6 +205,22 @@ MonoBehaviour:
         m_CallState: 2
   gridOne: {fileID: 2381614249737186450}
   gridTwo: {fileID: 6319720853372251940}
+--- !u!114 &3454602279749418431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714907297410086691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75dc0a2a35694079b9ddffbab86c384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackName: {fileID: 714907297918734731}
+  attackUses: {fileID: 714907297954788609}
+  attackAccuracy: {fileID: 5061486159641383096}
+  attackDamage: {fileID: 5623673936534161363}
 --- !u!1 &714907297918734729
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +233,7 @@ GameObject:
   - component: {fileID: 714907297918734730}
   - component: {fileID: 714907297918734731}
   m_Layer: 5
-  m_Name: Attack_1_button_text
+  m_Name: AttackName_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -269,7 +286,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Missile Attack
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -403,7 +420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'uses left: 2'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

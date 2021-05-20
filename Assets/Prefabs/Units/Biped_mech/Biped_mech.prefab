@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 4398592152830831979}
   - component: {fileID: 6849993688158076094}
   - component: {fileID: 2511450261182469208}
+  - component: {fileID: -5440165930573257868}
   m_Layer: 0
   m_Name: Biped_mech
   m_TagString: Untagged
@@ -817,6 +818,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.8, y: 12.47, z: 4.15}
   m_Center: {x: 0, y: 6.23, z: 0}
+--- !u!114 &-5440165930573257868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2918960500259816600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1689bb76600ab46fc9d63e16b0d2e71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unitModelPrefab: {fileID: 2918960500259816600}
+  _unitInfo:
+    unitName: Biped Mech
+    hitPoints: 60
+    speed: 0
+    defense: 0
+    accuracyMod: 0
+    elementType: 0
+  _unitAttackMoves:
+  - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
+  - {fileID: 11400000, guid: 60c44e7a30f164eb9a58298d78b28b0e, type: 2}
+  _unitDefenseMoves:
+  - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
 --- !u!1 &2918960500259816602
 GameObject:
   m_ObjectHideFlags: 0
