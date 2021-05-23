@@ -36,13 +36,19 @@ public class DragItem : MonoBehaviour,IBeginDragHandler,IEndDragHandler, IDragHa
     {
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
-
+        newSpot = GetComponentInParent<DropSpot>();
         StartCoroutine(AddToCountDelayRoutine());
     }
     private IEnumerator AddToCountDelayRoutine()
     {
         yield return new WaitForSeconds(1f);
-        newSpot = GetComponentInParent<DropSpot>();
-        newSpot.ItemCount++;
+        if(newSpot.ItemCount > newSpot.Capacity)
+        {
+            transform.SetParent(originalPos);
+        }
+        else
+        {
+            newSpot.ItemCount++;
+        }
     }
 }

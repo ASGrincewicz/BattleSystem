@@ -26,7 +26,7 @@ public class Item : ScriptableObject, IComparable<Item>
 
     public Item() { }
 
-    public virtual void UseItem(Unit unit)
+    public void UseItem(Unit unit)
     {
         if (itemUses > 0)
         {

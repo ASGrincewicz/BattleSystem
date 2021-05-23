@@ -35,13 +35,19 @@ public class ShopDragItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, I
     {
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
-
+        newSpot = GetComponentInParent<ShopDropSpot>();
         StartCoroutine(AddToCountDelayRoutine());
     }
     private IEnumerator AddToCountDelayRoutine()
     {
         yield return new WaitForSeconds(1f);
-        newSpot = GetComponentInParent<ShopDropSpot>();
-        newSpot.ItemCount++;
+        if (newSpot.ItemCount > newSpot.Capacity)
+        {
+            transform.SetParent(originalPos);
+        }
+        else
+        {
+            newSpot.ItemCount++;
+        }
     }
 }

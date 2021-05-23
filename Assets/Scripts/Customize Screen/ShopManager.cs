@@ -95,10 +95,8 @@ public class ShopManager : Singleton<ShopManager>
         index = _selectCharacter.value;
         _customer = _characters[index];
         _productImages.Clear();
-        ClearChildObjects(_shopGrid, _inventoryGrid);
         _customerInventoryList = _customer.characterInventory;
-        SortInventory(_shopInventoryList, _customerInventoryList);
-        PopulateInventoryGrid();
+        RefreshGrids();
     }
     public void BuyItem(Item item)
     {
@@ -107,10 +105,9 @@ public class ShopManager : Singleton<ShopManager>
         {
             _customer.characterCredits -= item.itemCreditCost;
             _shopCreditsAmount += item.itemCreditCost;
-            UpdateCreditsText(_customer.characterCredits, _shopCreditsAmount);
             _customerInventoryList.Add(item);
             _shopInventoryList.Remove(item);
-            SortInventory(_shopInventoryList, _customerInventoryList);
+            RefreshGrids();
         }
     }
     public void SellItem(Item item)
@@ -119,19 +116,17 @@ public class ShopManager : Singleton<ShopManager>
         {
             _customer.characterCredits += item.itemCreditCost;
             _shopCreditsAmount -= item.itemCreditCost;
-            UpdateCreditsText(_customer.characterCredits, _shopCreditsAmount);
             _customerInventoryList.Remove(item);
             _shopInventoryList.Add(item);
-            SortInventory(_shopInventoryList, _customerInventoryList);
+            RefreshGrids();
         }
     }
     private void UpdateCreditsText(int customerAmount, int shopAmount)
     {
-        _characterCredits.text = $"Character's $: {customerAmount}";
+        _characterCredits.text = $"{Customer.CharacterName}'s $: {customerAmount}";
         _shopCredits.text = $"Shop $: {shopAmount}";
     }
     public void SortInventory(List<Item> inventoryToSort, [Optional] List<Item> secondInventory)
-
     {
         inventoryToSort.Sort();
         secondInventory.Sort();
@@ -154,6 +149,13 @@ public class ShopManager : Singleton<ShopManager>
                 Destroy(child.gameObject);
             }
         }
+    }
+    public void RefreshGrids()
+    {
+        ClearChildObjects(_shopGrid, _inventoryGrid);
+        SortInventory(_shopInventoryList, _customerInventoryList);
+        PopulateInventoryGrid();
+        UpdateCreditsText(_customer.characterCredits, _shopCreditsAmount);
     }
 }
 

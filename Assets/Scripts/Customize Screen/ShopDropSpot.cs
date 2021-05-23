@@ -8,8 +8,14 @@ public class ShopDropSpot : MonoBehaviour, IDropHandler, IPointerEnterHandler
     [SerializeField] private int _itemCount;
     public int ItemCount { get { return _itemCount; } set { _itemCount = value; } }
     [SerializeField] private int _capacity;
+    public int Capacity { get { return _capacity; } }
+    private ShopManager ShopManager;
+    private CharacterStats Customer;
+
     private IEnumerator Start()
     {
+        ShopManager = ShopManager.Instance;
+        Customer = ShopManager.Instance.Customer;
         yield return new WaitForSeconds(2f);
         _itemCount = transform.childCount;
     }
@@ -18,24 +24,34 @@ public class ShopDropSpot : MonoBehaviour, IDropHandler, IPointerEnterHandler
     {
         if (eventData.pointerDrag != null)
         {
-           
+            Customer = ShopManager.Instance.Customer;
             var item = eventData.pointerDrag.GetComponent<ShopDragItem>().item;
 
-            if (_isCustomerInventory && _itemCount < _capacity && ShopManager.Instance.Customer.characterCredits >= item.itemCreditCost)
+            if (_isCustomerInventory && _itemCount < _capacity && Customer.characterCredits >= item.itemCreditCost)
             {
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
                 eventData.pointerDrag.transform.SetParent(this.transform);
-                ShopManager.Instance.BuyItem(eventData.pointerDrag.GetComponent<ShopDragItem>().item);
+                ShopManager.BuyItem(eventData.pointerDrag.GetComponent<ShopDragItem>().item);
             }
-            else if (!_isCustomerInventory && _itemCount < _capacity && ShopManager.Instance.ShopCreditsAmount >= item.itemCreditCost)
+            else if (!_isCustomerInventory && _itemCount < _capacity && ShopManager.ShopCreditsAmount >= item.itemCreditCost)
             {
                 eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
                 eventData.pointerDrag.transform.SetParent(this.transform);
-                ShopManager.Instance.SellItem(eventData.pointerDrag.GetComponent<ShopDragItem>().item);
+                ShopManager.SellItem(eventData.pointerDrag.GetComponent<ShopDragItem>().item);
             }
-            else
+            else if (_isCustomerInventory && _itemCount >= _capacity || item.itemCreditCost > Customer.characterCredits)
             {
-                eventData.pointerDrag.transform.SetParent(eventData.pointerDrag.GetComponent<ShopDragItem>().originalPos);
+                var orig = eventData.pointerDrag.GetComponent<ShopDragItem>().originalPos;
+                eventData.pointerDrag.transform.SetParent(orig);
+                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = orig.GetComponent<RectTransform>().anchoredPosition;
+                ShopManager.Instance.RefreshGrids();
+            }
+            else if(!_isCustomerInventory && item.itemCreditCost > ShopManager.ShopCreditsAmount)
+            {
+                var orig = eventData.pointerDrag.GetComponent<ShopDragItem>().originalPos;
+                eventData.pointerDrag.transform.SetParent(orig);
+                eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = orig.GetComponent<RectTransform>().anchoredPosition;
+                ShopManager.RefreshGrids();
             }
             _itemCount = transform.childCount;
         }
