@@ -23,10 +23,11 @@ public class Item : ScriptableObject, IComparable<Item>
     public ItemType itemType;
     public StatAffected statAffected;
     public int effectAmount;
+    public Sprite itemIcon;
 
     public Item() { }
 
-    public virtual void UseItem(Unit unit)
+    public void UseItem(Unit unit)
     {
         if (itemUses > 0)
         {

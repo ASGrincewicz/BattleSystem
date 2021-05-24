@@ -19,3 +19,4 @@ MonoBehaviour:
   itemType: 0
   statAffected: 0
   effectAmount: 25
+  itemIcon: {fileID: 21300000, guid: aaae683fa212540b59a92ac00b1b1118, type: 3}

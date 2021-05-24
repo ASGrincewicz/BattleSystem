@@ -8,7 +8,6 @@ using Veganimus.BattleSystem;
 public class InventoryManager : Singleton<InventoryManager>
 {
     public List<Image> itemImage = new List<Image>();
-  
     public CharacterStats owner;
     [SerializeField] private List<Item> inventory;
     [SerializeField] private List<Item> battleInventory;
@@ -19,6 +18,7 @@ public class InventoryManager : Singleton<InventoryManager>
     [SerializeField] private Transform battleItemGrid;
     [SerializeField] private List<CharacterStats> _characters;
     [SerializeField] private TMP_Dropdown _selectCharacter;
+    private Image newItemImage;
     [ContextMenuItem("Populate Dropdown", "AddDropdownOptions")]
     public string populateDropDown;
    
@@ -31,21 +31,16 @@ public class InventoryManager : Singleton<InventoryManager>
         owner = _characters[0];
         inventory = owner.characterInventory;
         battleInventory = owner.battleInventory;
-        inventory.Sort();
-        battleInventory.Sort();
-        PopulateInventoryGrid();
+        RefreshGrids();
     }
     public void ChangeCharacter(int index)
     {
         index = _selectCharacter.value;
         owner = _characters[index];
         itemImage.Clear();
-        ClearChildObjects(itemGrid, battleItemGrid);
         inventory = owner.characterInventory;
         battleInventory = owner.battleInventory;
-        inventory.Sort();
-        battleInventory.Sort();
-        PopulateInventoryGrid();
+        RefreshGrids();
     }
     public void AddDropdownOptions()
     {
@@ -56,26 +51,34 @@ public class InventoryManager : Singleton<InventoryManager>
             var characterName = character.CharacterName;
             characterNames.Add(characterName);
             _characters.Add(character);
-            _characters.Sort();
+            
+            if (characterName.Contains("Manager"))
+                characterNames.Remove(characterName);
+
+            
         }
         _selectCharacter.AddOptions(characterNames);
         _selectCharacter.RefreshShownValue();
     }
     private void PopulateInventoryGrid()
     {
+        
         foreach(var item in owner.characterInventory)
         {
-            var newItemImage = Instantiate(itemImagePrefab, itemGrid);
+            newItemImage = Instantiate(itemImagePrefab, itemGrid);
             newItemImage.GetComponent<DragItem>().item = item;
             newItemImage.GetComponentInChildren<TMP_Text>().text = item.itemName;
+            newItemImage.GetComponentInChildren<DragItem>().itemIcon.sprite = item.itemIcon;
             itemImage.Add(newItemImage);
         }
         foreach (var item in owner.battleInventory)
         {
-            var newItemImage = Instantiate(itemImagePrefab, battleItemGrid);
+            newItemImage = Instantiate(itemImagePrefab, battleItemGrid);
             newItemImage.GetComponent<DragItem>().item = item;
             newItemImage.GetComponentInChildren<TMP_Text>().text = item.itemName;
+            newItemImage.GetComponentInChildren<DragItem>().itemIcon.sprite = item.itemIcon;
             itemImage.Add(newItemImage);
+
         }
     }
     public void AddToBattleInventory(Item item)
@@ -83,13 +86,13 @@ public class InventoryManager : Singleton<InventoryManager>
         if (battleInventory.Count == 4) return;
         battleInventory.Add(item);
         inventory.Remove(item);
-        SortInventory(battleInventory, inventory);
+        RefreshGrids();
     }
     public void AddToInventory(Item item)
     {
         battleInventory.Remove(item);
         inventory.Add(item);
-        SortInventory(inventory, battleInventory);
+        RefreshGrids();
     }
     public void SortInventory(List<Item> inventoryToSort, [Optional] List<Item> secondInventory)
     {
@@ -106,7 +109,7 @@ public class InventoryManager : Singleton<InventoryManager>
                 Destroy(child.gameObject);
             }
         }
-        if (secondTransform.childCount > 0)
+        if (secondTransform != null && secondTransform.childCount > 0)
         {
             for (int i = 0; i < secondTransform.childCount; i++)
             {
@@ -114,5 +117,12 @@ public class InventoryManager : Singleton<InventoryManager>
                 Destroy(child.gameObject);
             }
         }
+    }
+    public void RefreshGrids()
+    {
+        ClearChildObjects(battleItemGrid, itemGrid);
+        SortInventory(inventory, battleInventory);
+        itemImage.Clear();
+        PopulateInventoryGrid();
     }
 }

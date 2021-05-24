@@ -45,14 +45,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shopInventory: {fileID: 11400000, guid: 6228fbefe08084e18baebc6424878db7, type: 2}
   _productImages: []
-  _productImagePrefab: {fileID: 8192912429071894162, guid: 24b338b7bbe01444a94aabb149fd5f32, type: 3}
+  _productImagePrefab: {fileID: 8192912429071894162, guid: 45f013ed6217541b6b7590b2aa311fac, type: 3}
   _shopInventoryList: []
   _customerInventoryList: []
   _shopGrid: {fileID: 0}
   _inventoryGrid: {fileID: 0}
   _customer: {fileID: 0}
+  _shopManager: {fileID: 11400000, guid: ef427f507040f4525a0ccaca3f16f483, type: 2}
   _characters: []
   _selectCharacter: {fileID: 0}
   _characterCredits: {fileID: 0}
   _shopCredits: {fileID: 0}
+  _shopCreditsAmount: 155
   getItems: 

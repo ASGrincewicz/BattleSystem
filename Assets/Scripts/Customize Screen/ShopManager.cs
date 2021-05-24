@@ -18,6 +18,8 @@ public class ShopManager : Singleton<ShopManager>
 
     [SerializeField] private CharacterStats _customer;
     public CharacterStats Customer { get { return _customer; } }
+    [SerializeField] private CharacterStats _shopManager;
+    public CharacterStats ThisShopManager { get { return _shopManager; } }
    
     [SerializeField] private List<CharacterStats> _characters;
     [SerializeField] private TMP_Dropdown _selectCharacter;
@@ -37,7 +39,7 @@ public class ShopManager : Singleton<ShopManager>
         _customer = _characters[0];
         GetItems();
         _customerInventoryList = _customer.characterInventory;
-       _customerInventoryList.Sort();
+        _customerInventoryList.Sort();
         PopulateInventoryGrid();
         yield return new WaitForSeconds(2f);
         UpdateCreditsText(_customer.characterCredits, _shopCreditsAmount);
@@ -48,12 +50,13 @@ public class ShopManager : Singleton<ShopManager>
         foreach(var character in characters)
         {
             _characters.Add(character);
+            if (character.CharacterName.Contains("Manager"))
+                _characters.Remove(character);
         }
     }
     public void GetItems()
     {
-        var items = Resources.FindObjectsOfTypeAll<Item>();
-        foreach(var item in items)
+        foreach(var item in _shopManager.characterInventory)
         {
             _shopInventoryList.Add(item);
             _shopCreditsAmount += item.itemCreditCost;
@@ -78,14 +81,16 @@ public class ShopManager : Singleton<ShopManager>
         {
             var newProductImage = Instantiate(_productImagePrefab, _shopGrid);
             newProductImage.GetComponent<ShopDragItem>().item = item;
-            newProductImage.GetComponentInChildren<TMP_Text>().text = item.itemName;
+            newProductImage.GetComponentInChildren<ShopDragItem>().itemNameText.text = item.itemName;
+            newProductImage.GetComponentInChildren<ShopDragItem>().itemIcon.sprite = item.itemIcon;
+            
             _productImages.Add(newProductImage);
-           
         }
         foreach (var item in _customerInventoryList)
         {
             var newItemImage = Instantiate(_productImagePrefab, _inventoryGrid);
             newItemImage.GetComponent<ShopDragItem>().item = item;
+            newItemImage.GetComponentInChildren<ShopDragItem>().itemIcon.sprite = item.itemIcon;
             newItemImage.GetComponentInChildren<TMP_Text>().text = item.itemName;
             _productImages.Add(newItemImage);
         }
@@ -95,10 +100,8 @@ public class ShopManager : Singleton<ShopManager>
         index = _selectCharacter.value;
         _customer = _characters[index];
         _productImages.Clear();
-        ClearChildObjects(_shopGrid, _inventoryGrid);
         _customerInventoryList = _customer.characterInventory;
-        SortInventory(_shopInventoryList, _customerInventoryList);
-        PopulateInventoryGrid();
+        RefreshGrids();
     }
     public void BuyItem(Item item)
     {
@@ -107,10 +110,9 @@ public class ShopManager : Singleton<ShopManager>
         {
             _customer.characterCredits -= item.itemCreditCost;
             _shopCreditsAmount += item.itemCreditCost;
-            UpdateCreditsText(_customer.characterCredits, _shopCreditsAmount);
             _customerInventoryList.Add(item);
             _shopInventoryList.Remove(item);
-            SortInventory(_shopInventoryList, _customerInventoryList);
+            RefreshGrids();
         }
     }
     public void SellItem(Item item)
@@ -119,19 +121,17 @@ public class ShopManager : Singleton<ShopManager>
         {
             _customer.characterCredits += item.itemCreditCost;
             _shopCreditsAmount -= item.itemCreditCost;
-            UpdateCreditsText(_customer.characterCredits, _shopCreditsAmount);
             _customerInventoryList.Remove(item);
             _shopInventoryList.Add(item);
-            SortInventory(_shopInventoryList, _customerInventoryList);
+            RefreshGrids();
         }
     }
     private void UpdateCreditsText(int customerAmount, int shopAmount)
     {
-        _characterCredits.text = $"Character's $: {customerAmount}";
+        _characterCredits.text = $"{Customer.CharacterName}'s $: {customerAmount}";
         _shopCredits.text = $"Shop $: {shopAmount}";
     }
     public void SortInventory(List<Item> inventoryToSort, [Optional] List<Item> secondInventory)
-
     {
         inventoryToSort.Sort();
         secondInventory.Sort();
@@ -154,6 +154,14 @@ public class ShopManager : Singleton<ShopManager>
                 Destroy(child.gameObject);
             }
         }
+    }
+    public void RefreshGrids()
+    {
+        ClearChildObjects(_shopGrid, _inventoryGrid);
+        SortInventory(_shopInventoryList, _customerInventoryList);
+        _productImages.Clear();
+        PopulateInventoryGrid();
+        UpdateCreditsText(_customer.characterCredits, _shopCreditsAmount);
     }
 }
 
