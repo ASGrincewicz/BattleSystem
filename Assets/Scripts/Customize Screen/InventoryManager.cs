@@ -8,7 +8,6 @@ using Veganimus.BattleSystem;
 public class InventoryManager : Singleton<InventoryManager>
 {
     public List<Image> itemImage = new List<Image>();
-  
     public CharacterStats owner;
     [SerializeField] private List<Item> inventory;
     [SerializeField] private List<Item> battleInventory;
@@ -52,7 +51,11 @@ public class InventoryManager : Singleton<InventoryManager>
             var characterName = character.CharacterName;
             characterNames.Add(characterName);
             _characters.Add(character);
-            _characters.Sort();
+            
+            if (characterName.Contains("Manager"))
+                characterNames.Remove(characterName);
+
+            
         }
         _selectCharacter.AddOptions(characterNames);
         _selectCharacter.RefreshShownValue();
@@ -65,6 +68,7 @@ public class InventoryManager : Singleton<InventoryManager>
             newItemImage = Instantiate(itemImagePrefab, itemGrid);
             newItemImage.GetComponent<DragItem>().item = item;
             newItemImage.GetComponentInChildren<TMP_Text>().text = item.itemName;
+            newItemImage.GetComponentInChildren<DragItem>().itemIcon.sprite = item.itemIcon;
             itemImage.Add(newItemImage);
         }
         foreach (var item in owner.battleInventory)
@@ -72,6 +76,7 @@ public class InventoryManager : Singleton<InventoryManager>
             newItemImage = Instantiate(itemImagePrefab, battleItemGrid);
             newItemImage.GetComponent<DragItem>().item = item;
             newItemImage.GetComponentInChildren<TMP_Text>().text = item.itemName;
+            newItemImage.GetComponentInChildren<DragItem>().itemIcon.sprite = item.itemIcon;
             itemImage.Add(newItemImage);
 
         }
@@ -117,6 +122,7 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         ClearChildObjects(battleItemGrid, itemGrid);
         SortInventory(inventory, battleInventory);
+        itemImage.Clear();
         PopulateInventoryGrid();
     }
 }

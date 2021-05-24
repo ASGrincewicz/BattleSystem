@@ -23,6 +23,7 @@ public class Item : ScriptableObject, IComparable<Item>
     public ItemType itemType;
     public StatAffected statAffected;
     public int effectAmount;
+    public Sprite itemIcon;
 
     public Item() { }
 
