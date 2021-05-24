@@ -11,9 +11,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public CharacterStats owner;
     [SerializeField] private List<Item> inventory;
     [SerializeField] private List<Item> battleInventory;
-
     [SerializeField] private Image itemImagePrefab;
-
     [SerializeField] private Transform itemGrid;
     [SerializeField] private Transform battleItemGrid;
     [SerializeField] private List<CharacterStats> _characters;
@@ -44,18 +42,14 @@ public class InventoryManager : Singleton<InventoryManager>
     }
     public void AddDropdownOptions()
     {
-        var characters = Resources.FindObjectsOfTypeAll<CharacterStats>();
         var characterNames = new List<string>();
-        foreach(var character in characters)
+        foreach(var character in _characters)
         {
             var characterName = character.CharacterName;
             characterNames.Add(characterName);
-            _characters.Add(character);
             
             if (characterName.Contains("Manager"))
                 characterNames.Remove(characterName);
-
-            
         }
         _selectCharacter.AddOptions(characterNames);
         _selectCharacter.RefreshShownValue();

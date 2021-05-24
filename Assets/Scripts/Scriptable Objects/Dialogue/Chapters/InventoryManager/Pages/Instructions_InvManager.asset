@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d785a23afd49644f7997e5032aa130c6, type: 3}
   m_Name: Instructions_InvManager
   m_EditorClassIdentifier: 
-  content: 
+  content: This is the Inventory Manager. Just Drag & Drop to Add or Remove Items
+    from an Inventory Category.
   pageNumber: 0

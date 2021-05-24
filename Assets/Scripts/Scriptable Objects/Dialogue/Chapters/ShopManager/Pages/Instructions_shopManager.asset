@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d785a23afd49644f7997e5032aa130c6, type: 3}
   m_Name: Instructions_shopManager
   m_EditorClassIdentifier: 
-  content: 
+  content: 'Welcome to the Item Shop! Just Drag & Drop items you''d
+
+    like to
+    sell to the ''For Sale'' category. To Purchase Items,
+
+    Drag them to the Inventory
+    category. '
   pageNumber: 0

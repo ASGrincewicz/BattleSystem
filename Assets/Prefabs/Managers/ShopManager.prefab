@@ -52,7 +52,9 @@ MonoBehaviour:
   _inventoryGrid: {fileID: 0}
   _customer: {fileID: 0}
   _shopManager: {fileID: 11400000, guid: ef427f507040f4525a0ccaca3f16f483, type: 2}
-  _characters: []
+  _characters:
+  - {fileID: 11400000, guid: ed0d9b21011fc4f3e9bc0500d0948e7a, type: 2}
+  - {fileID: 11400000, guid: 68e9601fad1b54377a441a73f4ae1ffa, type: 2}
   _selectCharacter: {fileID: 0}
   _characterCredits: {fileID: 0}
   _shopCredits: {fileID: 0}

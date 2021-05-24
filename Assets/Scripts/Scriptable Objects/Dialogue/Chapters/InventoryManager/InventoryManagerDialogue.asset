@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd2261c985684fcfa69bf8f3ff03a4c, type: 3}
   m_Name: InventoryManagerDialogue
   m_EditorClassIdentifier: 
-  chapterPages: []
+  chapterPages:
+  - {fileID: 11400000, guid: 8caefdee29408448ea8932180a353e1d, type: 2}
   chapterNumber: 0
