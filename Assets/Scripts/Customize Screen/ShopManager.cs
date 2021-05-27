@@ -46,10 +46,8 @@ public class ShopManager : Singleton<ShopManager>
     }
     public void GetCharacters()
     {
-        var characters = Resources.FindObjectsOfTypeAll<CharacterStats>();
-        foreach(var character in characters)
+        foreach(var character in _characters)
         {
-            _characters.Add(character);
             if (character.CharacterName.Contains("Manager"))
                 _characters.Remove(character);
         }

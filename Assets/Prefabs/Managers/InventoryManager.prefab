@@ -54,3 +54,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed0d9b21011fc4f3e9bc0500d0948e7a, type: 2}
   - {fileID: 11400000, guid: 68e9601fad1b54377a441a73f4ae1ffa, type: 2}
   _selectCharacter: {fileID: 0}
+  populateDropDown: 

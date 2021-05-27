@@ -1343,19 +1343,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
-  m_ActionsAsset: {fileID: -944628639613478452, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_PointAction: {fileID: 3488587093643107542, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_MoveAction: {fileID: 8388422447678926381, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_SubmitAction: {fileID: 3431118036019614107, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_CancelAction: {fileID: 317474172668589530, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_LeftClickAction: {fileID: -811256242656439345, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_MiddleClickAction: {fileID: -1227530051806241854, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_RightClickAction: {fileID: -8875722575738938678, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_ScrollWheelAction: {fileID: -848387684267101670, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_TrackedDevicePositionAction: {fileID: -1839881615620246036, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: -466215916316421481, guid: d4141ad161ab44ab4bf6c22c87a56ecd, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 2064916234097673511, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: -1967631576421560919, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: 3279352641294131588, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: 3837173908680883260, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
+  m_PointerBehavior: 2
 --- !u!114 &144946165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1383,7 +1383,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &174018011
 GameObject:
@@ -2127,7 +2127,7 @@ RectTransform:
   - {fileID: 1280522496}
   - {fileID: 956950874}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6776,7 +6776,7 @@ Transform:
   m_Children:
   - {fileID: 519409848}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
 --- !u!114 &1115869861
 MonoBehaviour:
@@ -7496,7 +7496,7 @@ Transform:
   m_Children:
   - {fileID: 622201772}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1189509344 stripped
 Transform:
@@ -8583,7 +8583,7 @@ Transform:
   - {fileID: 1327451590}
   - {fileID: 197173144}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1397240639
 GameObject:
@@ -9337,7 +9337,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1729306604}
+      - m_Target: {fileID: 11400000, guid: 8c1c672537e954acba7b67975445032f, type: 2}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: LoadGame
         m_Mode: 3
@@ -11384,49 +11384,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 2
---- !u!1 &1729306603
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1729306605}
-  - component: {fileID: 1729306604}
-  m_Layer: 0
-  m_Name: SceneLoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1729306604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729306603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dfadbd9ef8214975a3a820d4883c2dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1729306605
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729306603}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 443.33832, y: 1560.455, z: -24.272095}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1732674783
 GameObject:
   m_ObjectHideFlags: 0
@@ -12237,7 +12194,7 @@ Transform:
   m_Children:
   - {fileID: 2117615749}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
 --- !u!114 &1842159427
 MonoBehaviour:
@@ -13930,7 +13887,7 @@ Transform:
   - {fileID: 1895158119}
   - {fileID: 1148509763}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2092408449
 GameObject:
@@ -14529,10 +14486,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1468919546}
-        m_TargetAssemblyTypeName: Veganimus.BattleSystem.GameManager, Assembly-CSharp
-        m_MethodName: LoadMainMenu
-        m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: 8c1c672537e954acba7b67975445032f, type: 2}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

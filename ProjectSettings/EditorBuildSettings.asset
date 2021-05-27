@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Customize.unity
     guid: b24209743434147f4b0650e669e6e70d
+  - enabled: 1
+    path: Assets/Scenes/LoadingScreen.unity
+    guid: aa8b785336a9d4d949c4091935bb8be2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3c50be69282b34f439bec18670eb8263, type: 2}
