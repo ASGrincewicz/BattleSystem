@@ -17,9 +17,11 @@ public class InventoryManager : Singleton<InventoryManager>
     [SerializeField] private List<CharacterStats> _characters;
     [SerializeField] private TMP_Dropdown _selectCharacter;
     private Image newItemImage;
-    [ContextMenuItem("Populate Dropdown", "AddDropdownOptions")]
-    public string populateDropDown;
-   
+    [Header("Audio")]
+    [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private AudioClip _addToBInvSound;
+    [SerializeField] private AudioClip _addToInvSound;
+
     private void Start()
     {
         if (_selectCharacter.options.Count > 0)
@@ -80,12 +82,14 @@ public class InventoryManager : Singleton<InventoryManager>
         if (battleInventory.Count == 4) return;
         battleInventory.Add(item);
         inventory.Remove(item);
+        _audioManager.PlaySFX(_addToBInvSound);
         RefreshGrids();
     }
     public void AddToInventory(Item item)
     {
         battleInventory.Remove(item);
         inventory.Add(item);
+        _audioManager.PlaySFX(_addToInvSound);
         RefreshGrids();
     }
     public void SortInventory(List<Item> inventoryToSort, [Optional] List<Item> secondInventory)

@@ -26,8 +26,11 @@ public class ShopManager : Singleton<ShopManager>
     [SerializeField] private TMP_Text _characterCredits, _shopCredits;
     [SerializeField] private int _shopCreditsAmount;
     public int ShopCreditsAmount { get { return _shopCreditsAmount; } }
-    [ContextMenuItem("Get Items", "GetItems")]
-    public string getItems;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private AudioClip _buySound;
+    [SerializeField] private AudioClip _sellSound;
 
     private IEnumerator Start()
     {
@@ -110,6 +113,7 @@ public class ShopManager : Singleton<ShopManager>
             _shopCreditsAmount += item.itemCreditCost;
             _customerInventoryList.Add(item);
             _shopInventoryList.Remove(item);
+            _audioManager.PlaySFX(_buySound);
             RefreshGrids();
         }
     }
@@ -121,6 +125,7 @@ public class ShopManager : Singleton<ShopManager>
             _shopCreditsAmount -= item.itemCreditCost;
             _customerInventoryList.Remove(item);
             _shopInventoryList.Add(item);
+            _audioManager.PlaySFX(_sellSound);
             RefreshGrids();
         }
     }
