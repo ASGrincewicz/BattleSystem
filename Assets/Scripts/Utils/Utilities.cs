@@ -7,4 +7,10 @@ public class Utilities : MonoBehaviour
         position.z = camera.nearClipPlane;
         return camera.ScreenToWorldPoint(position);
     }
+
+    public static Ray ScreenPointToRay(Camera camera, Vector3 position)
+    {
+        position.z = camera.nearClipPlane;
+        return camera.ScreenPointToRay(position);
+    }
 }
