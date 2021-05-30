@@ -6,12 +6,12 @@ namespace Veganimus.BattleSystem
     public struct MoveInfo
     {
         public string moveName;
-        [Range(1, 10)] public int uses;
+        [Range(1, 10)] public uint uses;
         public int accuracy;
         public MoveType moveType;
         public ElementType elementType;
 
-        public MoveInfo(string moveName, int uses, int accuracy, MoveType moveType, ElementType elementType)
+        public MoveInfo(string moveName, uint uses, int accuracy, MoveType moveType, ElementType elementType)
         {
             this.moveName = moveName;
             this.uses = uses;
@@ -19,7 +19,7 @@ namespace Veganimus.BattleSystem
             this.moveType = moveType;
             this.elementType = elementType;
         }
-        public MoveInfo(string moveName, int uses)
+        public MoveInfo(string moveName, uint uses)
         {
             this.moveName = moveName;
             this.uses = uses;

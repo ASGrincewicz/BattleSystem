@@ -234,7 +234,7 @@ namespace Veganimus.BattleSystem
             _unitDefense.text = $"Defense: {defense}";
             _unitAccuracy.text = $"Accuracy Mod: {accuracyMod}";
         }
-        public void DisplayCurrentMoveUsesLeft(string moveType, int uses, int moveSlot)
+        public void DisplayCurrentMoveUsesLeft(string moveType, uint uses, int moveSlot)
         {
             switch(moveType)
             {

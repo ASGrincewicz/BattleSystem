@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Shop Inventory")]
-public class ShopInventory : ScriptableObject
+namespace Veganimus.BattleSystem
 {
-    public List<Item> shopInventory = new List<Item>();
+    [CreateAssetMenu(menuName = "Shop Inventory")]
+    public class ShopInventory : ScriptableObject
+    {
+        public List<Item> shopInventory = new List<Item>();
 
-    public ShopInventory() { }
+        public ShopInventory() { }
+    }
 }

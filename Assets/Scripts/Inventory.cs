@@ -44,7 +44,7 @@ namespace Veganimus.BattleSystem
         }
         public void RemoveItem(Item item)
         {
-            if (item.itemUses <= 0)
+            if (item.ItemUses <= 0)
             {
                 battleInventory.Remove(item);
                 var empty = Instantiate(_emptySlotPlaceHolder);

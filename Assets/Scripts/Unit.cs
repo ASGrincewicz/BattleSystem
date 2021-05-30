@@ -22,7 +22,7 @@ namespace Veganimus.BattleSystem
     ///</summary>
     public class Unit : MonoBehaviour, IDamageable, IHealable, IDefendable, IBuffable
     {
-        public List<int> runtimeMoveUses = new List<int>();
+        public List<uint> runtimeMoveUses = new List<uint>();
         [SerializeField] protected Character _owner;
         public Character Owner { get { return _owner; } }
         [SerializeField] protected CharacterType _characterType;
@@ -286,7 +286,7 @@ namespace Veganimus.BattleSystem
 
         public void UseDefenseMoveSlot(int slotNumber)
         {
-            int usesLeft = _defenseMoveSet[slotNumber].runtimeUses;
+            uint usesLeft = _defenseMoveSet[slotNumber].runtimeUses;
             var move = _defenseMoveSet[slotNumber];
 
             if (CheckIfEffectActive() && usesLeft > 0)
