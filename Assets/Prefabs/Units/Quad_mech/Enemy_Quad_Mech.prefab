@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -656767483803026749, guid: fd58524da5bf94d20badb97d65b15ca4, type: 3}
+      propertyPath: _unitInfo.speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -656767483803026749, guid: fd58524da5bf94d20badb97d65b15ca4, type: 3}
       propertyPath: _unitModelPrefab
       value: 
       objectReference: {fileID: 12654955900626118}
@@ -105,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6201759631085898106, guid: fd58524da5bf94d20badb97d65b15ca4, type: 3}
       propertyPath: m_Name
-      value: Enemy_Quad_mech
+      value: Enemy_Quad_Mech
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd58524da5bf94d20badb97d65b15ca4, type: 3}
