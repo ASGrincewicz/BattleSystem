@@ -110,15 +110,15 @@ namespace Veganimus.BattleSystem
             for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
             {
                 var item = _inventory.battleInventory[i];
-                var type = _inventory.battleInventory[i].itemType;
-                _itemNameUpdateChannel.RaiseMoveNameUpdateEvent(item.itemName, i);
+                var type = _inventory.battleInventory[i].ItemType;
+                _itemNameUpdateChannel.RaiseMoveNameUpdateEvent(item.ItemName, i);
                 switch (type)
                 {
                     case ItemType.Health:
-                        BattleUIManager.Instance.DisplayItemEffects(type, item.statAffected, item.effectAmount, i);
+                        BattleUIManager.Instance.DisplayItemEffects(type, item.StatAffected, item.EffectAmount, i);
                         break;
                     case ItemType.Equipment:
-                        BattleUIManager.Instance.DisplayItemEffects(type, item.statAffected, item.effectAmount, i);
+                        BattleUIManager.Instance.DisplayItemEffects(type, item.StatAffected, item.EffectAmount, i);
                         break;
                 }
             }
@@ -129,7 +129,7 @@ namespace Veganimus.BattleSystem
             for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
             {
                 var item = _inventory.battleInventory[i];
-                int usesLeft = _inventory.battleInventory[i].itemUses;
+                uint usesLeft = _inventory.battleInventory[i].ItemUses;
                 if (usesLeft >= 0)
                     BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("item", usesLeft, i);
                 else
@@ -138,15 +138,15 @@ namespace Veganimus.BattleSystem
         }
         public void UseItemSlot(int slotNumber)
         {
-            var itemName = _inventory.battleInventory[slotNumber].itemName;
-            int usesLeft = _inventory.battleInventory[slotNumber].itemUses;
+            var itemName = _inventory.battleInventory[slotNumber].ItemName;
+            uint usesLeft = _inventory.battleInventory[slotNumber].ItemUses;
 
             if (usesLeft > 0 && itemName != "")
             {
                 _inventory.UseItem(slotNumber);
                 BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("item", usesLeft, slotNumber);
                 BattleUIManager.Instance.ActivateButtons(false);
-                _displayActionChannel.RaiseDisplayActionEvent($"{_characterName} used {_inventory.battleInventory[slotNumber].itemName}!");
+                _displayActionChannel.RaiseDisplayActionEvent($"{_characterName} used {_inventory.battleInventory[slotNumber].ItemName}!");
                 IsTurnComplete = true;
                 TurnCompleteChannel.RaiseTurnCompleteEvent(ThisCharacterType, IsTurnComplete);
             }

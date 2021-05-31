@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7926167caca0447fcb649649cfc893c7, type: 3}
   m_Name: Overclocked CPU
   m_EditorClassIdentifier: 
-  itemCreditCost: 50
-  itemName: Overclocked CPU
-  isConsumable: 0
-  itemUses: 1
-  itemType: 1
-  statAffected: 1
-  effectAmount: 5
-  itemIcon: {fileID: 21300000, guid: e1c9b662210604a27b96a7f628a0eec0, type: 3}
+  _itemName: Overclocked CPU
+  _isConsumable: 0
+  _itemUses: 1
+  _itemType: 1
+  _statAffected: 1
+  _effectAmount: 5
+  _itemIcon: {fileID: 21300000, guid: e1c9b662210604a27b96a7f628a0eec0, type: 3}
+  _itemCreditCost: 75
+  _itemSound: {fileID: 0}
+  _audioClipChannel: {fileID: 11400000, guid: ae76898f52cac4de59fcea3d74d0e66b, type: 2}

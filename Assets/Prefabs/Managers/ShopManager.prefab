@@ -60,3 +60,6 @@ MonoBehaviour:
   _shopCredits: {fileID: 0}
   _shopCreditsAmount: 155
   getItems: 
+  _audioManager: {fileID: 0}
+  _buySound: {fileID: 8300000, guid: 8a35c00d18775436895a9f7513c3ff64, type: 3}
+  _sellSound: {fileID: 8300000, guid: 6be9ee1b2296741489f16c191b0981e1, type: 3}

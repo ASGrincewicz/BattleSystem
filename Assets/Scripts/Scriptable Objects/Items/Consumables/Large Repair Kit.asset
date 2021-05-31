@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7926167caca0447fcb649649cfc893c7, type: 3}
   m_Name: Large Repair Kit
   m_EditorClassIdentifier: 
-  itemCreditCost: 20
-  itemName: Large Repair Kit
-  isConsumable: 1
-  itemUses: 1
-  itemType: 0
-  statAffected: 0
-  effectAmount: 25
-  itemIcon: {fileID: 21300000, guid: aaae683fa212540b59a92ac00b1b1118, type: 3}
+  _itemName: Large Repair Kit
+  _isConsumable: 1
+  _itemUses: 1
+  _itemType: 0
+  _statAffected: 0
+  _effectAmount: 25
+  _itemIcon: {fileID: 21300000, guid: aaae683fa212540b59a92ac00b1b1118, type: 3}
+  _itemCreditCost: 25
+  _itemSound: {fileID: 8300000, guid: d9f213de17a1348fba0734e1ddcfdec6, type: 3}
+  _audioClipChannel: {fileID: 11400000, guid: ae76898f52cac4de59fcea3d74d0e66b, type: 2}

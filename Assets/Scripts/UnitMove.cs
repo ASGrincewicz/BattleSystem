@@ -1,30 +1,36 @@
 using UnityEngine;
-using Veganimus.BattleSystem;
 
-public enum MoveType
+namespace Veganimus.BattleSystem
 {
-    Physical, Special, Buff, DeBuff
-}
-[System.Serializable]
-public abstract class UnitMove : ScriptableObject
-{
-    [SerializeField] private MoveInfo _moveInfo = new MoveInfo();
-    public string MoveName { get { return _moveInfo.moveName; } }
-    public int MoveUses { get { return _moveInfo.uses; } set { } }
-    public float MoveAccuracy { get { return _moveInfo.accuracy; } }
-    public MoveType MoveType { get { return _moveInfo.moveType; } }
-    public ElementType MoveElementType { get { return _moveInfo.elementType; } }
-    public string animationTrigger;
-    [SerializeField] protected Transform _assignedUnit;
-    public DisplayActionChannel displayActionChannel;
-    private DieRoll dieRoll;
-    public int runtimeUses;
-
-    private void OnEnable() => runtimeUses = MoveUses;
-
-    public bool RollForMoveAccuracy(int accuracyModifier)
+    public enum MoveType
     {
-        dieRoll = new DieRoll();
-        return dieRoll.Roll(MoveAccuracy, accuracyModifier);
+        Physical, Special, Buff, DeBuff
+    }
+    [System.Serializable]
+    public abstract class UnitMove : ScriptableObject
+    {
+        [SerializeField] private MoveInfo _moveInfo = new MoveInfo();
+        public string MoveName { get { return _moveInfo.moveName; } }
+        public uint MoveUses { get { return _moveInfo.uses; } set { } }
+        public float MoveAccuracy { get { return _moveInfo.accuracy; } }
+        public MoveType MoveType { get { return _moveInfo.moveType; } }
+        public ElementType MoveElementType { get { return _moveInfo.elementType; } }
+        public AudioClip MoveSoundEffect { get { return _moveInfo.moveSFX; } }
+        public string animationTrigger;
+        public uint runtimeUses;
+        [SerializeField] protected Transform _assignedUnit;
+        [SerializeField] private DisplayActionChannel _displayActionChannel;
+        [SerializeField] private AudioClipChannel _audioClipChannel;
+        private DieRoll dieRoll;
+
+        private void OnEnable() => runtimeUses = MoveUses;
+
+
+        public bool RollForMoveAccuracy(int accuracyModifier)
+        {
+            dieRoll = new DieRoll();
+            return dieRoll.Roll(MoveAccuracy, accuracyModifier);
+        }
+        protected void PlayMoveSoundEffect(AudioClip clip) => _audioClipChannel.RaisePlayClipEvent(clip);
     }
 }

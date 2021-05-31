@@ -16,6 +16,8 @@ public class UnitDefenseMove : UnitMove
     public void RaiseDefenseMoveUsedEvent(Unit unit, DefenseType moveDefenseType)
     {
         ActivateDefenseEffect(unit, moveDefenseType);
+        if (MoveSoundEffect != null)
+            PlayMoveSoundEffect(MoveSoundEffect);
     }
     private void ActivateDefenseEffect(Unit unit, DefenseType defenseType)
     {

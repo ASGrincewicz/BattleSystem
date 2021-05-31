@@ -18,9 +18,12 @@ MonoBehaviour:
     accuracy: 0
     moveType: 1
     elementType: 0
+    moveSFX: {fileID: 0}
   animationTrigger: 
+  runtimeUses: 1
   _assignedUnit: {fileID: 0}
-  displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
+  _displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
+  _audioClipChannel: {fileID: 11400000, guid: ae76898f52cac4de59fcea3d74d0e66b, type: 2}
   defenseBuff: 3
   turnsActive: 1
   _defenseType: 1

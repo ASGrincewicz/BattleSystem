@@ -22,7 +22,7 @@ namespace Veganimus.BattleSystem
     ///</summary>
     public class Unit : MonoBehaviour, IDamageable, IHealable, IDefendable, IBuffable
     {
-        public List<int> runtimeMoveUses = new List<int>();
+        public List<uint> runtimeMoveUses = new List<uint>();
         [SerializeField] protected Character _owner;
         public Character Owner { get { return _owner; } }
         [SerializeField] protected CharacterType _characterType;
@@ -240,7 +240,6 @@ namespace Veganimus.BattleSystem
                 case StatAffected.Accuracy:
                     _runTimeUnitInfo.accuracyMod += amount;
                     break;
-
             }
             StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} raised {statAffected} by {amount}."));
         }
@@ -264,8 +263,7 @@ namespace Veganimus.BattleSystem
                 {
                     int damageAmount = move.damageAmount;
                     _targetUnit.targetIDamageable.Damage(damageAmount);
-                  
-                   // move.RaiseAttackMoveUsedEvent(this,move.MoveAttackType);
+                   move.RaiseAttackMoveUsedEvent(this,move.MoveAttackType);
                 }
                 else if (didMoveHit == false)
                 {
@@ -286,7 +284,7 @@ namespace Veganimus.BattleSystem
 
         public void UseDefenseMoveSlot(int slotNumber)
         {
-            int usesLeft = _defenseMoveSet[slotNumber].runtimeUses;
+            uint usesLeft = _defenseMoveSet[slotNumber].runtimeUses;
             var move = _defenseMoveSet[slotNumber];
 
             if (CheckIfEffectActive() && usesLeft > 0)
