@@ -22,7 +22,7 @@ namespace Veganimus.BattleSystem
     ///</summary>
     public class Unit : MonoBehaviour, IDamageable, IHealable, IDefendable, IBuffable
     {
-        public List<uint> runtimeMoveUses = new List<uint>();
+        private List<uint> _runTimeMoveUses = new List<uint>();
         [SerializeField] protected Character _owner;
         public Character Owner { get { return _owner; } }
         [SerializeField] protected CharacterType _characterType;
@@ -38,6 +38,7 @@ namespace Veganimus.BattleSystem
         [Header("Defense Effect Prefabs")]
         [SerializeField] private GameObject _unitBaseModel;
         public GameObject UnitBaseModel { get { return _unitBaseModel; } private set { _unitBaseModel = value; } }
+
         [SerializeField] private GameObject _unitEnergyShield;
         public GameObject UnitEnergyShield { get { return _unitEnergyShield; } private set { _unitEnergyShield = value; } }
 
@@ -123,7 +124,7 @@ namespace Veganimus.BattleSystem
                 var attackCopy = Instantiate(attackMove);
                 _attackMoveSet.Add(attackCopy);
                 _attackMoveSet.Sort();
-                runtimeMoveUses.Add(attackCopy.runtimeUses);
+                _runTimeMoveUses.Add(attackCopy.runtimeUses);
             }
             foreach(var defenseMove in unitStats.UnitDefenseMoves)
             {
@@ -251,7 +252,7 @@ namespace Veganimus.BattleSystem
             {
                 _displayActionChannel.RaiseDisplayActionEvent($"{_actionAnnouncementAbbrev} used {move.MoveName}!");
                 _attackMoveSet[slotNumber].runtimeUses--;
-                runtimeMoveUses[slotNumber]--;
+                _runTimeMoveUses[slotNumber]--;
                 _unitAnimation.SetInteger(move.MoveAttackType.ToString(), 1);
                 if (_owner.ThisCharacterType == CharacterType.Player)
                 {

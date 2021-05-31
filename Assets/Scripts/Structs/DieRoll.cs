@@ -18,7 +18,21 @@ public struct DieRoll
         _secondDieRoll = _randomNumber.Next(1, 6);
         _result = (_firstDieRoll + _secondDieRoll);
         _finalResult = _result;
-        if (_finalResult > 3)
+        if (_finalResult > 6)
+            return true;
+        else
+            return false;
+    }
+
+    public bool Roll(int unitSpeed)
+    {
+        _randomNumber = new Random();
+        _firstDieRoll = _randomNumber.Next(1, 6);
+        _secondDieRoll = _randomNumber.Next(1, 6);
+        _result = (_firstDieRoll + _secondDieRoll);
+        _modifiedResult = UnityEngine.Mathf.Round(_result + unitSpeed);
+        _finalResult = _modifiedResult;
+        if (_finalResult > 6)
             return true;
         else
             return false;
@@ -32,7 +46,7 @@ public struct DieRoll
         _result = (_firstDieRoll + _secondDieRoll) * moveAccuracy;
         _finalResult = _result / 100f;
 
-        if (_finalResult > 3)
+        if (_finalResult > 6)
             return true;
         else
             return false;
@@ -47,7 +61,7 @@ public struct DieRoll
         _modifiedResult = UnityEngine.Mathf.Round(_result + accuracyModifier);
         _finalResult = _modifiedResult / 100f;
 
-        if (_finalResult > 3)
+        if (_finalResult > 6)
             return true;
         else
             return false;
