@@ -15228,6 +15228,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4870976372375165622, guid: b455029063add4990a175e9707d9f52b, type: 3}
+      propertyPath: m_Volume
+      value: 0.256
+      objectReference: {fileID: 0}
     - target: {fileID: 4870976372375165627, guid: b455029063add4990a175e9707d9f52b, type: 3}
       propertyPath: m_Name
       value: BattleScreen_AudioManager
