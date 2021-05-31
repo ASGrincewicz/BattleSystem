@@ -32,6 +32,7 @@ namespace Veganimus.BattleSystem
         public TargetFinder TargetUnit { get { return _targetUnit; } }
         [Header("Runtime Unit Stats")]
         [SerializeField] private UnitInfo _runTimeUnitInfo;
+        public UnitInfo RunTimeUnitInfo { get { return _runTimeUnitInfo; } }
        
         [SerializeField] private int _currentUnitHP;
       

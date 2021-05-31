@@ -21,15 +21,17 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected Transform _assignedUnit;
         [SerializeField] private DisplayActionChannel _displayActionChannel;
         [SerializeField] private AudioClipChannel _audioClipChannel;
-        private DieRoll dieRoll;
+        //private DieRoll dieRoll;
 
         private void OnEnable() => runtimeUses = MoveUses;
 
 
         public bool RollForMoveAccuracy(int accuracyModifier)
         {
-            dieRoll = new DieRoll();
-            return dieRoll.Roll(MoveAccuracy, accuracyModifier);
+            var dieRoll = new DieRoll();
+            var result =  dieRoll.Roll(MoveAccuracy, accuracyModifier);
+            Debug.Log($"{MoveName}:{dieRoll.GetResult()}");
+            return result;
         }
         protected void PlayMoveSoundEffect(AudioClip clip) => _audioClipChannel.RaisePlayClipEvent(clip);
     }

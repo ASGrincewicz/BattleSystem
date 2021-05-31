@@ -8,9 +8,9 @@ public class UnitStats : MonoBehaviour, IComparable<UnitStats>
     ///<summary>
     ///Assigned in Unit Class on Unit Prefab to determine Stats.
     ///</summary>
-    public int Id => UnitHitPoints;
+    public int Id => UnitSpeed;
     public int SecondID => UnitDefense;
-    public int ThirdID => UnitSpeed;
+    public int ThirdID => UnitHitPoints;
     [SerializeField] private GameObject _unitModelPrefab;
     public GameObject UnitModelPrefab { get { return _unitModelPrefab; } }
     [SerializeField] private UnitInfo _unitInfo = new UnitInfo();
