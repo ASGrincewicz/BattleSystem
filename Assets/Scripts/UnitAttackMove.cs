@@ -15,6 +15,8 @@ namespace Veganimus.BattleSystem
 
         public void RaiseAttackMoveUsedEvent(Unit unit, AttackType attackType)
         {
+            if (MoveSoundEffect != null)
+                PlayMoveSoundEffect(MoveSoundEffect);
             //PerformAttackMove(unit, attackType);
         }
 
@@ -53,11 +55,9 @@ namespace Veganimus.BattleSystem
 
                     else
                         return 0;
-
                 }
                 else
                     return 0;
-
             }
             else
                 return 0;

@@ -240,7 +240,6 @@ namespace Veganimus.BattleSystem
                 case StatAffected.Accuracy:
                     _runTimeUnitInfo.accuracyMod += amount;
                     break;
-
             }
             StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} raised {statAffected} by {amount}."));
         }
@@ -264,8 +263,7 @@ namespace Veganimus.BattleSystem
                 {
                     int damageAmount = move.damageAmount;
                     _targetUnit.targetIDamageable.Damage(damageAmount);
-                  
-                   // move.RaiseAttackMoveUsedEvent(this,move.MoveAttackType);
+                   move.RaiseAttackMoveUsedEvent(this,move.MoveAttackType);
                 }
                 else if (didMoveHit == false)
                 {
