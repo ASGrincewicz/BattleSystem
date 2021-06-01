@@ -17,7 +17,7 @@ MonoBehaviour:
   _itemUses: 1
   _itemType: 1
   _statAffected: 1
-  _effectAmount: 5
+  _effectAmount: 2
   _itemIcon: {fileID: 21300000, guid: e1c9b662210604a27b96a7f628a0eec0, type: 3}
   _itemCreditCost: 75
   _itemSound: {fileID: 0}

@@ -4,10 +4,6 @@ using UnityEngine;
 
 namespace Veganimus.BattleSystem
 {
-    /// <summary>
-    /// Determines if the Character is a User or AI
-    /// </summary>
-    public enum CharacterType { Player, Enemy, Ally, EnemyAlly }
     ///<summary>
     ///@author
     ///Aaron Grincewicz
@@ -31,6 +27,7 @@ namespace Veganimus.BattleSystem
         private BattleInventory _inventory;
         public BattleInventory ThisInventory { get { return _inventory; } }
         public Unit activeUnit;
+       [SerializeField] private int _activeUnitSlotNumber;
         public GameObject activeUnitPrefab;
         public bool isDefeated;
         [SerializeField] private Transform activeUnitSpot;
@@ -40,6 +37,7 @@ namespace Veganimus.BattleSystem
 
         [SerializeField] private DisplayActionChannel _displayActionChannel;
         [SerializeField] private UnitMoveNameUpdate _itemNameUpdateChannel;
+        [SerializeField] private SwapUnitChannel _swapUnitChannel;
         [Space]
         [Header("Listening to:")]
         [SerializeField] private CharacterTurnChannel characterTurnChannel;
@@ -50,7 +48,7 @@ namespace Veganimus.BattleSystem
         public bool IsTurnComplete { get => _isTurnComplete; set => _isTurnComplete = value; }
 
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
-        private object _statUpdateDelay;
+        //private object _statUpdateDelay;
 
         private void OnEnable() => characterTurnChannel.OnCharacterTurn.AddListener(InitiateCharacterTurn);
 
@@ -63,6 +61,8 @@ namespace Veganimus.BattleSystem
             activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,activeUnitSpot);
             
             activeUnit.unitStats = _party[0];
+            _activeUnitSlotNumber = _party.IndexOf(activeUnit.unitStats);
+            Debug.Log($"Active Unit Slot:{_activeUnitSlotNumber}");
             activeUnitPrefab.transform.position = new Vector3(activeUnit.transform.position.x, 15, activeUnit.transform.position.z);
             activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
             
@@ -151,6 +151,31 @@ namespace Veganimus.BattleSystem
                 TurnCompleteChannel.RaiseTurnCompleteEvent(ThisCharacterType, IsTurnComplete);
             }
             else if (usesLeft <= 0|| itemName == "")
+            {
+                if (ThisCharacterType != CharacterType.Player)
+                    activeUnit.DetermineAction();
+                else
+                    return;
+            }
+        }
+        public void SwapUnit(int slotNumber)
+        {
+            if (slotNumber != _activeUnitSlotNumber)
+            {
+                var unitName = _party[slotNumber].UnitName;
+                Destroy(activeUnitPrefab);
+                activeUnitPrefab = Instantiate(_party[slotNumber].UnitModelPrefab, activeUnitSpot);
+                activeUnit.unitStats = _party[slotNumber];
+                _activeUnitSlotNumber = _party.IndexOf(activeUnit.unitStats);
+                _swapUnitChannel.RaiseUnitSwapEvent();
+                activeUnitPrefab.transform.position = new Vector3(activeUnit.transform.position.x, 15, activeUnit.transform.position.z);
+                activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
+                BattleUIManager.Instance.ActivateButtons(false);
+                _displayActionChannel.RaiseDisplayActionEvent($"{_characterName} swapped in {unitName}!");
+                IsTurnComplete = true;
+                TurnCompleteChannel.RaiseTurnCompleteEvent(ThisCharacterType, IsTurnComplete);
+            }
+            else
             {
                 if (ThisCharacterType != CharacterType.Player)
                     activeUnit.DetermineAction();

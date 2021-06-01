@@ -132,6 +132,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _playerUnitButtons: []
+  _playerUnitNames: []
   _unitNameUpdateChannel: {fileID: 11400000, guid: 4ec2433fc3ca04eff8ba1fa64706ed61, type: 2}
   _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
   _unitAttackMoveNameUpdateChannel: {fileID: 11400000, guid: d28ca0c8b51e94f2095baffa3f344130, type: 2}

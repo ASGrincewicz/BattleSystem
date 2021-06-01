@@ -36,24 +36,28 @@ namespace Veganimus.BattleSystem
         [SerializeField] private TMP_Text _unitDefense;
         [SerializeField] private TMP_Text _unitAccuracy;
         [Header("Player Attack Move Buttons")]
-        [SerializeField] private TMP_Text[] _playerAttackNames = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _attackMoveUses = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _attackMoveAccuracy = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _attackMoveDamage = new TMP_Text[0];
-        [SerializeField] private Button[] _playerAttackButtons = new Button[4];
+        [SerializeField] private List<TMP_Text> _playerAttackNames = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _attackMoveUses = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _attackMoveAccuracy = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _attackMoveDamage = new List<TMP_Text>();
+        [SerializeField] private List<Button> _playerAttackButtons = new List<Button>();
 
         [Header("Player Defense Move Buttons")]
-        [SerializeField] private TMP_Text[] _playerDefenseNames = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _defenseMoveUses = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _defenseMoveBuff = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _defenseMoveActiveTurns = new TMP_Text[0];
-        [SerializeField] private Button[] _playerDefenseButtons = new Button[4];
+        [SerializeField] private List<TMP_Text> _playerDefenseNames = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _defenseMoveUses = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _defenseMoveBuff = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _defenseMoveActiveTurns = new List<TMP_Text>();
+        [SerializeField] private List<Button> _playerDefenseButtons = new List<Button>();
 
         [Header("Player Item Buttons")]
-        [SerializeField] private TMP_Text[] _playerItemNames = new TMP_Text[4];
-        [SerializeField] private TMP_Text[] _playerItemUses = new TMP_Text[4];
-        [SerializeField] private TMP_Text[] _playerItemEffects = new TMP_Text[4];
-        [SerializeField] private Button[] _playerItemButtons = new Button[4];
+        [SerializeField] private List<TMP_Text> _playerItemNames = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _playerItemUses = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _playerItemEffects = new List<TMP_Text>();
+        [SerializeField] private List<Button> _playerItemButtons = new List<Button>();
+
+        [Header("Player Unit Buttons")]
+        [SerializeField] private List<Button> _playerUnitButtons = new List<Button>();
+        [SerializeField] private List<TMP_Text> _playerUnitNames = new List<TMP_Text>();
 
         [Header("Listening To")]
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
@@ -127,6 +131,10 @@ namespace Veganimus.BattleSystem
                 {
                     itemButton.interactable = false;
                 }
+                foreach(var unitButton in _playerUnitButtons)
+                {
+                    unitButton.interactable = false;
+                }
             }
             else if (isPlayerTurn)
             {
@@ -141,6 +149,10 @@ namespace Veganimus.BattleSystem
                 foreach (var itemButton in _playerItemButtons)
                 {
                     itemButton.interactable = true;
+                }
+                foreach (var unitButton in _playerUnitButtons)
+                {
+                    unitButton.interactable = true;
                 }
             }
         }
@@ -208,23 +220,32 @@ namespace Veganimus.BattleSystem
         // }
         public void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
         {
-            for (int a = _playerAttackNames.Length; a >= 0; a--)
+            for (int a = _playerAttackNames.Count; a >= 0; a--)
             {
+                if(moveName != null)
                 _playerAttackNames[moveSlot].text = $"{moveName}";
+                else
+                    _playerAttackNames[moveSlot].text = string.Empty;
             }
         }
         private void DisplayCurrentDefenseMoveNames(string moveName, int moveSlot)
         { 
-            for (int d = _playerDefenseNames.Length; d >= 0; d--)
+            for (int d = _playerDefenseNames.Count; d >= 0; d--)
             {
-                _playerDefenseNames[moveSlot].text = $"{moveName}";
+                if (moveName != null)
+                    _playerDefenseNames[moveSlot].text = $"{moveName}";
+                else
+                    _playerDefenseNames[moveSlot].text = string.Empty;
             }
         }
         private void DisplayCurrentItemNames(string itemName, int itemSlot)
         {
-            for(int i = _playerItemNames.Length; i>=0; i--)
+            for(int i = _playerItemNames.Count; i>=0; i--)
             {
-                _playerItemNames[itemSlot].text = $"{itemName}";
+                if (itemName != null)
+                    _playerItemNames[itemSlot].text = $"{itemName}";
+                else
+                    _playerItemNames[itemSlot].text = string.Empty;
             }
         }
         public void DisplayUnitStats(int hp, int maxHP,int speed, int defense, int accuracyMod)

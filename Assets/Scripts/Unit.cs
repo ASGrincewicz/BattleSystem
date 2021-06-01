@@ -22,7 +22,7 @@ namespace Veganimus.BattleSystem
     ///</summary>
     public class Unit : MonoBehaviour, IDamageable, IHealable, IDefendable, IBuffable
     {
-        private List<uint> _runTimeMoveUses = new List<uint>();
+        [SerializeField] private List<uint> _runTimeMoveUses = new List<uint>();
         [SerializeField] protected Character _owner;
         public Character Owner { get { return _owner; } }
         [SerializeField] protected CharacterType _characterType;
@@ -62,6 +62,8 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected UnitHitPointUpdate _unitHPUpdateChannel;
         [SerializeField] protected DisplayActionChannel _displayActionChannel;
         [SerializeField] protected BattleStateChannel _endBattleChannel;
+      
+        [SerializeField] private SwapUnitChannel _swapUnitChannel;
         private WaitForSeconds _turnDelay;
         private WaitForSeconds _statUpdateDelay;
         private WaitForSeconds _endBattleDelay;
@@ -76,7 +78,23 @@ namespace Veganimus.BattleSystem
             _endBattleDelay = new WaitForSeconds(1.5f);
         }
 
-        private IEnumerator Start()
+        private void OnEnable()
+        {
+            if(_swapUnitChannel == null)
+            {
+                _swapUnitChannel = ScriptableObject.CreateInstance<SwapUnitChannel>();
+            }
+            _swapUnitChannel.OnUnitSwap.AddListener(Start);
+        }
+        private void OnDisable()
+        {
+            _swapUnitChannel.OnUnitSwap.RemoveListener(Start);
+        }
+        private void Start()
+        {
+            StartCoroutine(BootUp());
+        }
+        private IEnumerator BootUp()
         {
             _owner.activeUnit = this;
             _characterType = _owner.ThisCharacterType;
@@ -120,6 +138,9 @@ namespace Veganimus.BattleSystem
         }
         public void GenerateMoveSet()
         {
+            _attackMoveSet.Clear();
+            _defenseMoveSet.Clear();
+            _runTimeMoveUses.Clear();
             foreach(var attackMove in unitStats.UnitAttackMoves)
             {
                 var attackCopy = Instantiate(attackMove);
@@ -131,6 +152,7 @@ namespace Veganimus.BattleSystem
             {
                 var defenseCopy = Instantiate(defenseMove);
                 _defenseMoveSet.Add(defenseCopy);
+                _runTimeMoveUses.Add(defenseCopy.runtimeUses);
             }
         }
        
@@ -254,7 +276,10 @@ namespace Veganimus.BattleSystem
                 _displayActionChannel.RaiseDisplayActionEvent($"{_actionAnnouncementAbbrev} used {move.MoveName}!");
                 _attackMoveSet[slotNumber].runtimeUses--;
                 _runTimeMoveUses[slotNumber]--;
-                _unitAnimation.SetInteger(move.MoveAttackType.ToString(), 1);
+                if (_unitAnimation != null)
+                {
+                    _unitAnimation.SetInteger(move.MoveAttackType.ToString(), 1);
+                }
                 if (_owner.ThisCharacterType == CharacterType.Player)
                 {
                     BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[slotNumber].runtimeUses, slotNumber);
@@ -293,7 +318,8 @@ namespace Veganimus.BattleSystem
                 {
                     _displayActionChannel.RaiseDisplayActionEvent($"{_actionAnnouncementAbbrev} used {move.MoveName}!");
                     _defenseMoveSet[slotNumber].runtimeUses--;
-                    if (_owner.ThisCharacterType == CharacterType.Player)
+                    
+                if (_owner.ThisCharacterType == CharacterType.Player)
                     {
                         BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].runtimeUses, slotNumber);
                         BattleUIManager.Instance.ActivateButtons(false);
