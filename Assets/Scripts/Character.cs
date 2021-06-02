@@ -149,17 +149,27 @@ namespace Veganimus.BattleSystem
 
             else if (dieRoll + AIAgression <= 1)
             {
-                var itemToUse = 0;
+                Item itemToUse = inv[Random.Range(0, inv.Count)];
+                int itemSlot = inv.IndexOf(itemToUse);
                 if (activeUnit.CurrentUnitHP < activeUnit.unitStats.UnitHitPoints)
-                 itemToUse = inv.FindIndex(i => i.ItemType.Equals(ItemType.Health));
-                
-                else if(activeUnit.RunTimeUnitInfo.speed < activeUnit.TargetUnit.TargetStats.speed)
-                 itemToUse = inv.FindIndex(i => i.StatAffected.Equals(StatAffected.Speed));
-                
-                else
-                 itemToUse = inv.FindIndex(i => i.ItemType.Equals(ItemType.Equipment));
+                    itemToUse = inv.Find(i => i.ItemType.Equals(ItemType.Health));
 
-                UseItemSlot(itemToUse);
+                else if (activeUnit.RunTimeUnitInfo.speed < activeUnit.TargetUnit.TargetStats.speed)
+                    itemToUse = inv.Find(i => i.StatAffected.Equals(StatAffected.Speed));
+
+                else
+                    itemToUse = inv.Find(i => i.ItemType.Equals(ItemType.Equipment));
+
+                if (itemToUse == null)
+                {
+                    Debug.Log($"Rolling for DetermineAction...");
+                    DetermineAction();
+                }
+                else
+                {
+                    Debug.Log($"Using Item:{itemToUse.ItemName}");
+                    UseItemSlot(itemSlot);
+                }
             }
         }
         public void UseItemSlot(int slotNumber)
