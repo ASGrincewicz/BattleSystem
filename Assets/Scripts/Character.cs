@@ -48,7 +48,7 @@ namespace Veganimus.BattleSystem
         public bool IsTurnComplete { get => _isTurnComplete; set => _isTurnComplete = value; }
 
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
-        //private object _statUpdateDelay;
+        private WaitForSeconds _turnDelay;
 
         private void OnEnable() => characterTurnChannel.OnCharacterTurn.AddListener(InitiateCharacterTurn);
 
@@ -56,6 +56,7 @@ namespace Veganimus.BattleSystem
 
         private void Start()
         {
+            _turnDelay = new WaitForSeconds(5.0f);
             _characterName = ThisCharacterStats.CharacterName;
             _inventory = GetComponent<BattleInventory>();
             activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,activeUnitSpot);
@@ -78,7 +79,7 @@ namespace Veganimus.BattleSystem
                 TurnCompleteChannel.RaiseTurnCompleteEvent(characterType, IsTurnComplete);
                 DeActivateEffects();
                 if (ThisCharacterType != CharacterType.Player && IsTurnComplete == false)
-                 StartCoroutine(activeUnit.TurnDelayRoutine());
+                 StartCoroutine(TurnDelayRoutine());
             }
         }
         private void DeActivateEffects()
@@ -130,6 +131,37 @@ namespace Veganimus.BattleSystem
                     return;
             }
         }
+        ///<summary>
+        ///Uses a dice roll system to determine what Action an AI character will take.
+        ///</summary>
+        public void DetermineAction()
+        {
+            var inv = ThisInventory.battleInventory;
+            var dieRoll = Random.Range(1, 6);
+            var attackToUse = Random.Range(0, activeUnit.AttackMoveSet.Count);
+            var defenseToUse = Random.Range(0, activeUnit.DefenseMoveSet.Count);
+
+            if (dieRoll + AIAgression >= 3)
+                activeUnit.UseAttackMoveSlot(attackToUse);
+
+            else if (dieRoll + AIAgression < 3 && dieRoll + AIAgression > 1)
+                activeUnit.UseDefenseMoveSlot(defenseToUse);
+
+            else if (dieRoll + AIAgression <= 1)
+            {
+                var itemToUse = 0;
+                if (activeUnit.CurrentUnitHP < activeUnit.unitStats.UnitHitPoints)
+                 itemToUse = inv.FindIndex(i => i.ItemType.Equals(ItemType.Health));
+                
+                else if(activeUnit.RunTimeUnitInfo.speed < activeUnit.TargetUnit.TargetStats.speed)
+                 itemToUse = inv.FindIndex(i => i.StatAffected.Equals(StatAffected.Speed));
+                
+                else
+                 itemToUse = inv.FindIndex(i => i.ItemType.Equals(ItemType.Equipment));
+
+                UseItemSlot(itemToUse);
+            }
+        }
         public void UseItemSlot(int slotNumber)
         {
             var itemName = _inventory.battleInventory[slotNumber].ItemName;
@@ -147,12 +179,12 @@ namespace Veganimus.BattleSystem
             else if (usesLeft <= 0|| itemName == "")
             {
                 if (ThisCharacterType != CharacterType.Player)
-                    activeUnit.DetermineAction();
+                    DetermineAction();
                 else
                     return;
             }
         }
-        public void UpdatePartyUnitNames()
+        private void UpdatePartyUnitNames()
         {
             for (int u = _party.Count - 1; u >= 0; u--)
             {
@@ -180,10 +212,15 @@ namespace Veganimus.BattleSystem
             else
             {
                 if (ThisCharacterType != CharacterType.Player)
-                    activeUnit.DetermineAction();
+                    DetermineAction();
                 else
                     return;
             }
+        }
+        private IEnumerator TurnDelayRoutine()
+        {
+            yield return _turnDelay;
+            DetermineAction();
         }
     }
 }

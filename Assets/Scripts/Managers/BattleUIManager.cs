@@ -67,6 +67,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private UnitMoveNameUpdate _itemNameUpdateChannel;
         [SerializeField] private DisplayActionChannel _displayActionTakenChannel;
         [SerializeField] private BattleStateChannel _endBattleChannel;
+        private List<Button> _allButtons = new List<Button>();
 
         protected override void Awake()
         {
@@ -100,6 +101,23 @@ namespace Veganimus.BattleSystem
             _displayTextDelay = new WaitForSeconds(2f);
             _endBattleDelay = new WaitForSeconds(5f);
             _startSequence.SetActive(true);
+            PopulateButtonList();
+        }
+        private void PopulateButtonList()
+        {
+            foreach (var button in _playerAttackButtons)
+                _allButtons.Add(button);
+            foreach (var button in _playerDefenseButtons)
+                _allButtons.Add(button);
+            foreach (var button in _playerItemButtons)
+                _allButtons.Add(button);
+            foreach (var button in _playerUnitButtons)
+                _allButtons.Add(button);
+        }
+        public void ActivateButtons(bool isPlayerTurn)
+        {
+            foreach (var button in _allButtons)
+                button.interactable = isPlayerTurn;
         }
 
         public void UpdateCharacterNames(CharacterType characterType, string characterName)
@@ -114,49 +132,6 @@ namespace Veganimus.BattleSystem
                     break;
             }
         }
-
-        public void ActivateButtons(bool isPlayerTurn)
-        {
-            if (!isPlayerTurn)
-            {
-                foreach (var attackButton in _playerAttackButtons)
-                {
-                    attackButton.interactable = false;
-                }
-                foreach (var defenseButton in _playerDefenseButtons)
-                {
-                    defenseButton.interactable = false;
-                }
-                foreach(var itemButton in _playerItemButtons)
-                {
-                    itemButton.interactable = false;
-                }
-                foreach(var unitButton in _playerUnitButtons)
-                {
-                    unitButton.interactable = false;
-                }
-            }
-            else if (isPlayerTurn)
-            {
-                foreach (var attackButton in _playerAttackButtons)
-                {
-                    attackButton.interactable = true;
-                }
-                foreach (var defenseButton in _playerDefenseButtons)
-                {
-                    defenseButton.interactable = true;
-                }
-                foreach (var itemButton in _playerItemButtons)
-                {
-                    itemButton.interactable = true;
-                }
-                foreach (var unitButton in _playerUnitButtons)
-                {
-                    unitButton.interactable = true;
-                }
-            }
-        }
-        
         private void EndBattleUIActivate(BattleState battleState)
         {
             _playerUI.SetActive(false);
@@ -218,7 +193,7 @@ namespace Veganimus.BattleSystem
 
         //     }
         // }
-        public void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
+        private void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
         {
             for (int a = _playerAttackNames.Count; a >= 0; a--)
             {
