@@ -36,24 +36,28 @@ namespace Veganimus.BattleSystem
         [SerializeField] private TMP_Text _unitDefense;
         [SerializeField] private TMP_Text _unitAccuracy;
         [Header("Player Attack Move Buttons")]
-        [SerializeField] private TMP_Text[] _playerAttackNames = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _attackMoveUses = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _attackMoveAccuracy = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _attackMoveDamage = new TMP_Text[0];
-        [SerializeField] private Button[] _playerAttackButtons = new Button[4];
+        [SerializeField] private List<TMP_Text> _playerAttackNames = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _attackMoveUses = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _attackMoveAccuracy = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _attackMoveDamage = new List<TMP_Text>();
+        [SerializeField] private List<Button> _playerAttackButtons = new List<Button>();
 
         [Header("Player Defense Move Buttons")]
-        [SerializeField] private TMP_Text[] _playerDefenseNames = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _defenseMoveUses = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _defenseMoveBuff = new TMP_Text[0];
-        [SerializeField] private TMP_Text[] _defenseMoveActiveTurns = new TMP_Text[0];
-        [SerializeField] private Button[] _playerDefenseButtons = new Button[4];
+        [SerializeField] private List<TMP_Text> _playerDefenseNames = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _defenseMoveUses = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _defenseMoveBuff = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _defenseMoveActiveTurns = new List<TMP_Text>();
+        [SerializeField] private List<Button> _playerDefenseButtons = new List<Button>();
 
         [Header("Player Item Buttons")]
-        [SerializeField] private TMP_Text[] _playerItemNames = new TMP_Text[4];
-        [SerializeField] private TMP_Text[] _playerItemUses = new TMP_Text[4];
-        [SerializeField] private TMP_Text[] _playerItemEffects = new TMP_Text[4];
-        [SerializeField] private Button[] _playerItemButtons = new Button[4];
+        [SerializeField] private List<TMP_Text> _playerItemNames = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _playerItemUses = new List<TMP_Text>();
+        [SerializeField] private List<TMP_Text> _playerItemEffects = new List<TMP_Text>();
+        [SerializeField] private List<Button> _playerItemButtons = new List<Button>();
+
+        [Header("Player Unit Buttons")]
+        [SerializeField] private List<Button> _playerUnitButtons = new List<Button>();
+        [SerializeField] private List<TMP_Text> _playerUnitNames = new List<TMP_Text>();
 
         [Header("Listening To")]
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
@@ -63,6 +67,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private UnitMoveNameUpdate _itemNameUpdateChannel;
         [SerializeField] private DisplayActionChannel _displayActionTakenChannel;
         [SerializeField] private BattleStateChannel _endBattleChannel;
+        private List<Button> _allButtons = new List<Button>();
 
         protected override void Awake()
         {
@@ -96,6 +101,23 @@ namespace Veganimus.BattleSystem
             _displayTextDelay = new WaitForSeconds(2f);
             _endBattleDelay = new WaitForSeconds(5f);
             _startSequence.SetActive(true);
+            PopulateButtonList();
+        }
+        private void PopulateButtonList()
+        {
+            foreach (var button in _playerAttackButtons)
+                _allButtons.Add(button);
+            foreach (var button in _playerDefenseButtons)
+                _allButtons.Add(button);
+            foreach (var button in _playerItemButtons)
+                _allButtons.Add(button);
+            foreach (var button in _playerUnitButtons)
+                _allButtons.Add(button);
+        }
+        public void ActivateButtons(bool isPlayerTurn)
+        {
+            foreach (var button in _allButtons)
+                button.interactable = isPlayerTurn;
         }
 
         public void UpdateCharacterNames(CharacterType characterType, string characterName)
@@ -110,41 +132,6 @@ namespace Veganimus.BattleSystem
                     break;
             }
         }
-
-        public void ActivateButtons(bool isPlayerTurn)
-        {
-            if (!isPlayerTurn)
-            {
-                foreach (var attackButton in _playerAttackButtons)
-                {
-                    attackButton.interactable = false;
-                }
-                foreach (var defenseButton in _playerDefenseButtons)
-                {
-                    defenseButton.interactable = false;
-                }
-                foreach(var itemButton in _playerItemButtons)
-                {
-                    itemButton.interactable = false;
-                }
-            }
-            else if (isPlayerTurn)
-            {
-                foreach (var attackButton in _playerAttackButtons)
-                {
-                    attackButton.interactable = true;
-                }
-                foreach (var defenseButton in _playerDefenseButtons)
-                {
-                    defenseButton.interactable = true;
-                }
-                foreach (var itemButton in _playerItemButtons)
-                {
-                    itemButton.interactable = true;
-                }
-            }
-        }
-        
         private void EndBattleUIActivate(BattleState battleState)
         {
             _playerUI.SetActive(false);
@@ -206,27 +193,47 @@ namespace Veganimus.BattleSystem
 
         //     }
         // }
-        public void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
+        private void DisplayCurrentAttackMoveNames(string moveName, int moveSlot)
         {
-            for (int a = _playerAttackNames.Length; a >= 0; a--)
+            for (int a = _playerAttackNames.Count; a >= 0; a--)
             {
+                if(moveName != null)
                 _playerAttackNames[moveSlot].text = $"{moveName}";
+                else
+                    _playerAttackNames[moveSlot].text = string.Empty;
             }
         }
         private void DisplayCurrentDefenseMoveNames(string moveName, int moveSlot)
         { 
-            for (int d = _playerDefenseNames.Length; d >= 0; d--)
+            for (int d = _playerDefenseNames.Count; d >= 0; d--)
             {
-                _playerDefenseNames[moveSlot].text = $"{moveName}";
+                if (moveName != null)
+                    _playerDefenseNames[moveSlot].text = $"{moveName}";
+                else
+                    _playerDefenseNames[moveSlot].text = string.Empty;
             }
         }
         private void DisplayCurrentItemNames(string itemName, int itemSlot)
         {
-            for(int i = _playerItemNames.Length; i>=0; i--)
+            for(int i = _playerItemNames.Count; i>=0; i--)
             {
-                _playerItemNames[itemSlot].text = $"{itemName}";
+                if (itemName != null)
+                    _playerItemNames[itemSlot].text = $"{itemName}";
+                else
+                    _playerItemNames[itemSlot].text = string.Empty;
             }
         }
+        public void DisplayPartyUnitNames(string unitName, int unitSlot)
+        {
+            for(int i = _playerUnitNames.Count; i>=0; i--)
+            {
+                if (unitName != string.Empty)
+                    _playerUnitNames[unitSlot].text = $"{unitName}";
+                else
+                    _playerUnitNames[unitSlot].text = string.Empty;
+            }
+        }
+
         public void DisplayUnitStats(int hp, int maxHP,int speed, int defense, int accuracyMod)
         {
             _unitHPText.text = $"Current HP: {hp}/ {maxHP}";
@@ -314,8 +321,7 @@ namespace Veganimus.BattleSystem
             if (delay == _endBattleDelay)
                 GameManager.Instance.LoadMainMenu();
             else if (delay == _displayTextDelay)
-                text.text = "";
-           
+                text.text = string.Empty;
         }
     }
 }

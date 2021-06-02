@@ -13,8 +13,13 @@ namespace Veganimus.BattleSystem
 
         public void SetInteger(string parameter, int integer)
         {
-            _animator.SetInteger(parameter, integer);
-            StartCoroutine(ResetInteger(parameter));
+            if (_animator != null)
+            {
+                _animator.SetInteger(parameter, integer);
+                StartCoroutine(ResetInteger(parameter));
+            }
+            else
+              return;
         }
 
         public void PlayClip(string statename) => _animator.Play(statename);

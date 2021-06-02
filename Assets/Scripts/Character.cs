@@ -4,10 +4,6 @@ using UnityEngine;
 
 namespace Veganimus.BattleSystem
 {
-    /// <summary>
-    /// Determines if the Character is a User or AI
-    /// </summary>
-    public enum CharacterType { Player, Enemy, Ally, EnemyAlly }
     ///<summary>
     ///@author
     ///Aaron Grincewicz
@@ -31,6 +27,7 @@ namespace Veganimus.BattleSystem
         private BattleInventory _inventory;
         public BattleInventory ThisInventory { get { return _inventory; } }
         public Unit activeUnit;
+        private int _activeUnitSlotNumber;
         public GameObject activeUnitPrefab;
         public bool isDefeated;
         [SerializeField] private Transform activeUnitSpot;
@@ -40,6 +37,7 @@ namespace Veganimus.BattleSystem
 
         [SerializeField] private DisplayActionChannel _displayActionChannel;
         [SerializeField] private UnitMoveNameUpdate _itemNameUpdateChannel;
+        [SerializeField] private SwapUnitChannel _swapUnitChannel;
         [Space]
         [Header("Listening to:")]
         [SerializeField] private CharacterTurnChannel characterTurnChannel;
@@ -50,7 +48,7 @@ namespace Veganimus.BattleSystem
         public bool IsTurnComplete { get => _isTurnComplete; set => _isTurnComplete = value; }
 
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
-        private object _statUpdateDelay;
+        private WaitForSeconds _turnDelay;
 
         private void OnEnable() => characterTurnChannel.OnCharacterTurn.AddListener(InitiateCharacterTurn);
 
@@ -58,15 +56,18 @@ namespace Veganimus.BattleSystem
 
         private void Start()
         {
+            _turnDelay = new WaitForSeconds(5.0f);
             _characterName = ThisCharacterStats.CharacterName;
             _inventory = GetComponent<BattleInventory>();
             activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,activeUnitSpot);
-            
             activeUnit.unitStats = _party[0];
+            _activeUnitSlotNumber = _party.IndexOf(activeUnit.unitStats);
+            Debug.Log($"Active Unit Slot:{_activeUnitSlotNumber}");
             activeUnitPrefab.transform.position = new Vector3(activeUnit.transform.position.x, 15, activeUnit.transform.position.z);
             activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
             
             UpdateCharacterNames();
+            UpdatePartyUnitNames();
         }
 
         private void InitiateCharacterTurn(CharacterType characterType)
@@ -78,9 +79,7 @@ namespace Veganimus.BattleSystem
                 TurnCompleteChannel.RaiseTurnCompleteEvent(characterType, IsTurnComplete);
                 DeActivateEffects();
                 if (ThisCharacterType != CharacterType.Player && IsTurnComplete == false)
-                {
-                    StartCoroutine(activeUnit.TurnDelayRoutine());
-                }
+                 StartCoroutine(TurnDelayRoutine());
             }
         }
         private void DeActivateEffects()
@@ -100,23 +99,19 @@ namespace Veganimus.BattleSystem
                 }
             }
         }
-        private void UpdateCharacterNames()
-        {
-            BattleUIManager.Instance.UpdateCharacterNames(ThisCharacterType, CharacterName);
-        }
+        private void UpdateCharacterNames() => BattleUIManager.Instance.UpdateCharacterNames(ThisCharacterType, CharacterName);
+
         public void UpdateItemNames()
         {
             UpdateItemUseUI();
             for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
             {
                 var item = _inventory.battleInventory[i];
-                var type = _inventory.battleInventory[i].ItemType;
+                var type = item.ItemType;
                 _itemNameUpdateChannel.RaiseMoveNameUpdateEvent(item.ItemName, i);
                 switch (type)
                 {
                     case ItemType.Health:
-                        BattleUIManager.Instance.DisplayItemEffects(type, item.StatAffected, item.EffectAmount, i);
-                        break;
                     case ItemType.Equipment:
                         BattleUIManager.Instance.DisplayItemEffects(type, item.StatAffected, item.EffectAmount, i);
                         break;
@@ -129,11 +124,52 @@ namespace Veganimus.BattleSystem
             for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
             {
                 var item = _inventory.battleInventory[i];
-                uint usesLeft = _inventory.battleInventory[i].ItemUses;
+                uint usesLeft = item.ItemUses;
                 if (usesLeft >= 0)
                     BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("item", usesLeft, i);
                 else
                     return;
+            }
+        }
+        ///<summary>
+        ///Uses a dice roll system to determine what Action an AI character will take.
+        ///</summary>
+        public void DetermineAction()
+        {
+            var inv = ThisInventory.battleInventory;
+            var dieRoll = Random.Range(1, 6);
+            var attackToUse = Random.Range(0, activeUnit.AttackMoveSet.Count);
+            var defenseToUse = Random.Range(0, activeUnit.DefenseMoveSet.Count);
+
+            if (dieRoll + AIAgression >= 3)
+                activeUnit.UseAttackMoveSlot(attackToUse);
+
+            else if (dieRoll + AIAgression < 3 && dieRoll + AIAgression > 1)
+                activeUnit.UseDefenseMoveSlot(defenseToUse);
+
+            else if (dieRoll + AIAgression <= 1)
+            {
+                Item itemToUse = inv[Random.Range(0, inv.Count)];
+                int itemSlot = inv.IndexOf(itemToUse);
+                if (activeUnit.CurrentUnitHP < activeUnit.unitStats.UnitHitPoints)
+                    itemToUse = inv.Find(i => i.ItemType.Equals(ItemType.Health));
+
+                else if (activeUnit.RunTimeUnitInfo.speed < activeUnit.TargetUnit.TargetStats.speed)
+                    itemToUse = inv.Find(i => i.StatAffected.Equals(StatAffected.Speed));
+
+                else
+                    itemToUse = inv.Find(i => i.ItemType.Equals(ItemType.Equipment));
+
+                if (itemToUse == null)
+                {
+                    Debug.Log($"Rolling for DetermineAction...");
+                    DetermineAction();
+                }
+                else
+                {
+                    Debug.Log($"Using Item:{itemToUse.ItemName}");
+                    UseItemSlot(itemSlot);
+                }
             }
         }
         public void UseItemSlot(int slotNumber)
@@ -153,10 +189,48 @@ namespace Veganimus.BattleSystem
             else if (usesLeft <= 0|| itemName == "")
             {
                 if (ThisCharacterType != CharacterType.Player)
-                    activeUnit.DetermineAction();
+                    DetermineAction();
                 else
                     return;
             }
+        }
+        private void UpdatePartyUnitNames()
+        {
+            for (int u = _party.Count - 1; u >= 0; u--)
+            {
+                var unit = _party[u];
+                BattleUIManager.Instance.DisplayPartyUnitNames(unit.UnitName, u);
+            }
+        }
+        public void SwapUnit(int slotNumber)
+        {
+            var unitName = _party[slotNumber].UnitName;
+            if (slotNumber != _activeUnitSlotNumber && unitName != "")
+            {
+                Destroy(activeUnitPrefab);
+                activeUnitPrefab = Instantiate(_party[slotNumber].UnitModelPrefab, activeUnitSpot);
+                activeUnit.unitStats = _party[slotNumber];
+                _activeUnitSlotNumber = _party.IndexOf(activeUnit.unitStats);
+                _swapUnitChannel.RaiseUnitSwapEvent();
+                activeUnitPrefab.transform.position = new Vector3(activeUnit.transform.position.x, 15, activeUnit.transform.position.z);
+                activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
+                BattleUIManager.Instance.ActivateButtons(false);
+                _displayActionChannel.RaiseDisplayActionEvent($"{_characterName} swapped in {unitName}!");
+                IsTurnComplete = true;
+                TurnCompleteChannel.RaiseTurnCompleteEvent(ThisCharacterType, IsTurnComplete);
+            }
+            else
+            {
+                if (ThisCharacterType != CharacterType.Player)
+                    DetermineAction();
+                else
+                    return;
+            }
+        }
+        private IEnumerator TurnDelayRoutine()
+        {
+            yield return _turnDelay;
+            DetermineAction();
         }
     }
 }

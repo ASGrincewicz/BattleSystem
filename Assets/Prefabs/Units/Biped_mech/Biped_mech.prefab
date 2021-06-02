@@ -840,9 +840,14 @@ MonoBehaviour:
     elementType: 0
   _unitAttackMoves:
   - {fileID: 11400000, guid: 1dbf82a38b53342aabd8fdec39052cda, type: 2}
-  - {fileID: 11400000, guid: 60c44e7a30f164eb9a58298d78b28b0e, type: 2}
+  - {fileID: 11400000, guid: 32451926f6cbe4d5db2b9f9f73067bd2, type: 2}
+  - {fileID: 11400000, guid: a3dc5d20cb25f4c5b805798a2a3c874a, type: 2}
+  - {fileID: 11400000, guid: ddce2552e0fed4b93a7006efa1793fb5, type: 2}
   _unitDefenseMoves:
   - {fileID: 11400000, guid: 965f3c96d71194422a2442acba729a2b, type: 2}
+  - {fileID: 11400000, guid: 1797c1746195f4abf980856a149c29eb, type: 2}
+  - {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
+  - {fileID: 11400000, guid: 4ba36329b69754342bd5126f9a444378, type: 2}
 --- !u!1 &2918960500259816602
 GameObject:
   m_ObjectHideFlags: 0
