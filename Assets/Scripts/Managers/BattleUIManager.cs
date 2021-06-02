@@ -248,6 +248,17 @@ namespace Veganimus.BattleSystem
                     _playerItemNames[itemSlot].text = string.Empty;
             }
         }
+        public void DisplayPartyUnitNames(string unitName, int unitSlot)
+        {
+            for(int i = _playerUnitNames.Count; i>=0; i--)
+            {
+                if (unitName != string.Empty)
+                    _playerUnitNames[unitSlot].text = $"{unitName}";
+                else
+                    _playerUnitNames[unitSlot].text = string.Empty;
+            }
+        }
+
         public void DisplayUnitStats(int hp, int maxHP,int speed, int defense, int accuracyMod)
         {
             _unitHPText.text = $"Current HP: {hp}/ {maxHP}";
@@ -335,8 +346,7 @@ namespace Veganimus.BattleSystem
             if (delay == _endBattleDelay)
                 GameManager.Instance.LoadMainMenu();
             else if (delay == _displayTextDelay)
-                text.text = "";
-           
+                text.text = string.Empty;
         }
     }
 }

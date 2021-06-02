@@ -27,7 +27,7 @@ namespace Veganimus.BattleSystem
         private BattleInventory _inventory;
         public BattleInventory ThisInventory { get { return _inventory; } }
         public Unit activeUnit;
-       [SerializeField] private int _activeUnitSlotNumber;
+        private int _activeUnitSlotNumber;
         public GameObject activeUnitPrefab;
         public bool isDefeated;
         [SerializeField] private Transform activeUnitSpot;
@@ -59,7 +59,6 @@ namespace Veganimus.BattleSystem
             _characterName = ThisCharacterStats.CharacterName;
             _inventory = GetComponent<BattleInventory>();
             activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,activeUnitSpot);
-            
             activeUnit.unitStats = _party[0];
             _activeUnitSlotNumber = _party.IndexOf(activeUnit.unitStats);
             Debug.Log($"Active Unit Slot:{_activeUnitSlotNumber}");
@@ -67,6 +66,7 @@ namespace Veganimus.BattleSystem
             activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
             
             UpdateCharacterNames();
+            UpdatePartyUnitNames();
         }
 
         private void InitiateCharacterTurn(CharacterType characterType)
@@ -78,9 +78,7 @@ namespace Veganimus.BattleSystem
                 TurnCompleteChannel.RaiseTurnCompleteEvent(characterType, IsTurnComplete);
                 DeActivateEffects();
                 if (ThisCharacterType != CharacterType.Player && IsTurnComplete == false)
-                {
-                    StartCoroutine(activeUnit.TurnDelayRoutine());
-                }
+                 StartCoroutine(activeUnit.TurnDelayRoutine());
             }
         }
         private void DeActivateEffects()
@@ -100,23 +98,19 @@ namespace Veganimus.BattleSystem
                 }
             }
         }
-        private void UpdateCharacterNames()
-        {
-            BattleUIManager.Instance.UpdateCharacterNames(ThisCharacterType, CharacterName);
-        }
+        private void UpdateCharacterNames() => BattleUIManager.Instance.UpdateCharacterNames(ThisCharacterType, CharacterName);
+
         public void UpdateItemNames()
         {
             UpdateItemUseUI();
             for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
             {
                 var item = _inventory.battleInventory[i];
-                var type = _inventory.battleInventory[i].ItemType;
+                var type = item.ItemType;
                 _itemNameUpdateChannel.RaiseMoveNameUpdateEvent(item.ItemName, i);
                 switch (type)
                 {
                     case ItemType.Health:
-                        BattleUIManager.Instance.DisplayItemEffects(type, item.StatAffected, item.EffectAmount, i);
-                        break;
                     case ItemType.Equipment:
                         BattleUIManager.Instance.DisplayItemEffects(type, item.StatAffected, item.EffectAmount, i);
                         break;
@@ -129,7 +123,7 @@ namespace Veganimus.BattleSystem
             for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
             {
                 var item = _inventory.battleInventory[i];
-                uint usesLeft = _inventory.battleInventory[i].ItemUses;
+                uint usesLeft = item.ItemUses;
                 if (usesLeft >= 0)
                     BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("item", usesLeft, i);
                 else
@@ -158,11 +152,19 @@ namespace Veganimus.BattleSystem
                     return;
             }
         }
+        public void UpdatePartyUnitNames()
+        {
+            for (int u = _party.Count - 1; u >= 0; u--)
+            {
+                var unit = _party[u];
+                BattleUIManager.Instance.DisplayPartyUnitNames(unit.UnitName, u);
+            }
+        }
         public void SwapUnit(int slotNumber)
         {
-            if (slotNumber != _activeUnitSlotNumber)
+            var unitName = _party[slotNumber].UnitName;
+            if (slotNumber != _activeUnitSlotNumber && unitName != "")
             {
-                var unitName = _party[slotNumber].UnitName;
                 Destroy(activeUnitPrefab);
                 activeUnitPrefab = Instantiate(_party[slotNumber].UnitModelPrefab, activeUnitSpot);
                 activeUnit.unitStats = _party[slotNumber];
