@@ -54,7 +54,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] private CameraShakeChannel _cameraShakeChannel;
         [Header("Listening To:")]
         [SerializeField] private SwapUnitChannel _swapUnitChannel;
-       
+
         private WaitForSeconds _statUpdateDelay;
         private WaitForSeconds _endBattleDelay;
         private bool _isEffectActive;
@@ -69,9 +69,9 @@ namespace Veganimus.BattleSystem
 
         private void OnEnable()
         {
-            if(_swapUnitChannel == null)
+            if (_swapUnitChannel == null)
                 _swapUnitChannel = ScriptableObject.CreateInstance<SwapUnitChannel>();
-            
+
             _swapUnitChannel.OnUnitSwap.AddListener(Start);
         }
         private void OnDisable() => _swapUnitChannel.OnUnitSwap.RemoveListener(Start);
@@ -88,7 +88,7 @@ namespace Veganimus.BattleSystem
             UpdateMoveNames();
             _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _runTimeUnitInfo.hitPoints, _currentUnitHP);
             yield return new WaitForSeconds(2.0f);
-            
+
         }
         private void PopulateRuntimeStats()
         {
@@ -111,15 +111,15 @@ namespace Veganimus.BattleSystem
             var prefab = _unitPrefab.GetComponent<UnitPrefab>();
             _unitBaseModel = prefab.baseModel;
             _unitEnergyShield = prefab.shield;
-            if(_unitEnergyShield)
+            if (_unitEnergyShield)
                 _unitEnergyShield.SetActive(false);
-            
+
             _unitBarrier = prefab.barrier;
             if (_unitBarrier)
                 _unitBarrier.SetActive(false);
 
             _unitCloak = prefab.cloak;
-            if(_unitCloak)
+            if (_unitCloak)
                 _unitCloak.SetActive(false);
         }
         public void GenerateMoveSet()
@@ -127,33 +127,33 @@ namespace Veganimus.BattleSystem
             _attackMoveSet.Clear();
             _defenseMoveSet.Clear();
             _runTimeMoveUses.Clear();
-            foreach(var attackMove in unitStats.UnitAttackMoves)
+            foreach (var attackMove in unitStats.UnitAttackMoves)
             {
                 var attackCopy = Instantiate(attackMove);
                 _attackMoveSet.Add(attackCopy);
                 _attackMoveSet.Sort();
                 _runTimeMoveUses.Add(attackCopy.runtimeUses);
             }
-            foreach(var defenseMove in unitStats.UnitDefenseMoves)
+            foreach (var defenseMove in unitStats.UnitDefenseMoves)
             {
                 var defenseCopy = Instantiate(defenseMove);
                 _defenseMoveSet.Add(defenseCopy);
                 _runTimeMoveUses.Add(defenseCopy.runtimeUses);
             }
         }
-       
+
         public void DisplayUnitStats() => BattleUIManager.Instance.DisplayUnitStats(_currentUnitHP,
                                                                                     _runTimeUnitInfo.hitPoints,
                                                                                     _runTimeUnitInfo.speed,
                                                                                     _runTimeUnitInfo.defense,
                                                                                    _runTimeUnitInfo.accuracyMod);
-       
+
         public void UpdateMoveNames()
         {
             for (int a = _attackMoveSet.Count - 1; a >= 0; a--)
             {
                 var move = _attackMoveSet[a];
-               _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, a);
+                _unitAttackMoveNameUpdateChannel.RaiseMoveNameUpdateEvent(move.MoveName, a);
                 BattleUIManager.Instance.DisplayMoveStats("attack", move.damageAmount, move.MoveAccuracy, 0, 0, a);
                 if (_attackMoveSet[a].runtimeUses != 0)
                     BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("attack", _attackMoveSet[a].runtimeUses, a);
@@ -221,20 +221,20 @@ namespace Veganimus.BattleSystem
         public void ResetDefense()
         {
             _isEffectActive = false;
-            if(!_unitBaseModel.activeInHierarchy)
+            if (!_unitBaseModel.activeInHierarchy)
             {
                 _unitBaseModel.SetActive(true);
                 ActiveEffect = null;
             }
             _runTimeUnitInfo.defense = unitStats.UnitDefense;
-           // TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, _targetUnit.TargetStats.UnitAccuracyModifier);// Need to change this so it's not hard coded.
+            // TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, _targetUnit.TargetStats.UnitAccuracyModifier);// Need to change this so it's not hard coded.
             StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} Defense was reset."));
             StartCoroutine(ResetStatDelayRoutine(2));
-            
+
         }
         public void BuffStats(StatAffected statAffected, int amount)
         {
-            switch(statAffected)
+            switch (statAffected)
             {
                 case StatAffected.Speed:
                     _runTimeUnitInfo.speed += amount;
@@ -270,7 +270,7 @@ namespace Veganimus.BattleSystem
                 {
                     int damageAmount = move.damageAmount;
                     _targetUnit.targetIDamageable.Damage(damageAmount);
-                   move.RaiseAttackMoveUsedEvent(this,move.MoveAttackType);
+                    move.RaiseAttackMoveUsedEvent(this, move.MoveAttackType);
                 }
                 else if (!didMoveHit)
                     StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} Missed!"));
@@ -294,35 +294,35 @@ namespace Veganimus.BattleSystem
             var move = _defenseMoveSet[slotNumber];
 
             if (CheckIfEffectActive() && usesLeft > 0)
+            {
+                _displayActionChannel.RaiseDisplayActionEvent($"{_actionAnnouncementAbbrev} used {move.MoveName}!");
+                _defenseMoveSet[slotNumber].runtimeUses--;
+
+                if (_owner.ThisCharacterType == CharacterType.Player)
                 {
-                    _displayActionChannel.RaiseDisplayActionEvent($"{_actionAnnouncementAbbrev} used {move.MoveName}!");
-                    _defenseMoveSet[slotNumber].runtimeUses--;
-                    
-                    if (_owner.ThisCharacterType == CharacterType.Player)
-                    {
-                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].runtimeUses, slotNumber);
-                        BattleUIManager.Instance.ActivateButtons(false);
-                    }
-                     _isEffectActive = true;
-                    move.RaiseDefenseMoveUsedEvent(this, move.MoveDefenseType);
-                    if (move.MoveDefenseType != UnitDefenseMove.DefenseType.Cloak)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].runtimeUses, slotNumber);
+                    BattleUIManager.Instance.ActivateButtons(false);
+                }
+                _isEffectActive = true;
+                move.RaiseDefenseMoveUsedEvent(this, move.MoveDefenseType);
+                if (move.MoveDefenseType != UnitDefenseMove.DefenseType.Cloak)
                     AdjustDefense(move.defenseBuff);
-                    else
+                else
                     StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} is harder to hit!"));
 
-                    _owner.IsTurnComplete = true;
-                    _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType, _owner.IsTurnComplete);
-                }
-                else if (_defenseMoveSet[slotNumber].runtimeUses <= 0 || CheckIfEffectActive()==false)
-                {
-                    if (_owner.ThisCharacterType == CharacterType.Player)
-                        BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].runtimeUses, slotNumber);
+                _owner.IsTurnComplete = true;
+                _owner.TurnCompleteChannel.RaiseTurnCompleteEvent(_characterType, _owner.IsTurnComplete);
+            }
+            else if (_defenseMoveSet[slotNumber].runtimeUses <= 0 || CheckIfEffectActive() == false)
+            {
+                if (_owner.ThisCharacterType == CharacterType.Player)
+                    BattleUIManager.Instance.DisplayCurrentMoveUsesLeft("defense", _defenseMoveSet[slotNumber].runtimeUses, slotNumber);
 
-                    if (_characterType != CharacterType.Player)
-                        _owner.DetermineAction();
-                    else
-                        return;
-                }
+                if (_characterType != CharacterType.Player)
+                    _owner.DetermineAction();
+                else
+                    return;
+            }
         }
         private bool CheckIfEffectActive()
         {

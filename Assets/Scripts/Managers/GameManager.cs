@@ -9,9 +9,9 @@ namespace Veganimus.BattleSystem
     public class GameManager : Singleton<GameManager>
     {
         [SerializeField] private BattleState _battleState;
-        [SerializeField] private List<Character> characters;
-        [SerializeField] private GameObject _currentPlayerUnit;
-        [SerializeField] private GameObject _currentEnemyUnit;
+        [SerializeField] private List<GameObject> _characters;
+        [SerializeField] private Unit _currentPlayerUnit;
+        [SerializeField] private Unit _currentEnemyUnit;
         [SerializeField] private bool _hasPlayerCompletedTurn;
         [SerializeField] private bool _hasEnemyCompletedTurn;
         [SerializeField] private int _playerSpeed;
@@ -40,8 +40,8 @@ namespace Veganimus.BattleSystem
 
         private void Start()
         {
-            _currentPlayerUnit = GameObject.FindGameObjectWithTag("Player");
-            _currentEnemyUnit = GameObject.FindGameObjectWithTag("Enemy");
+            _currentPlayerUnit = _characters[0].GetComponent<Character>().activeUnit;
+            _currentEnemyUnit = _characters[1].GetComponent<Character>().activeUnit;
             _changeStateDelay = new WaitForSeconds(3f);
             _battleState = BattleState.Start;
             RollForTurn();
@@ -52,7 +52,7 @@ namespace Veganimus.BattleSystem
             if (_playerSpeed > _enemySpeed)
             {
                 var result = _dieRoll.Roll(_playerSpeed - _enemySpeed);
-               // Debug.Log($"Player Roll:{_dieRoll.GetResult()}");
+                Debug.Log($"Player Roll:{_dieRoll.GetResult()}");
                 if (result == true && _consecutiveTurns < 1 )
                 {
                      _consecutiveTurns++;
@@ -67,7 +67,7 @@ namespace Veganimus.BattleSystem
             else if (_enemySpeed > _playerSpeed)
             {
                 var result = _dieRoll.Roll(_enemySpeed - _playerSpeed);
-                //Debug.Log($"Enemy Roll:{_dieRoll.GetResult()}");
+                Debug.Log($"Enemy Roll:{_dieRoll.GetResult()}");
                 if (result == true && _consecutiveTurns < 1 )
                 {
                     _consecutiveTurns++;
@@ -83,7 +83,7 @@ namespace Veganimus.BattleSystem
             else if (_playerSpeed == _enemySpeed)
             {
                 var result = _dieRoll.Roll();
-               // Debug.Log($"Roll:{_dieRoll.GetResult()}");
+                Debug.Log($"Roll:{_dieRoll.GetResult()}");
                 if (result == true)
                     StartCoroutine(ChangeState(BattleState.PlayerTurn));
                 else
@@ -161,8 +161,8 @@ namespace Veganimus.BattleSystem
                     BattleUIManager.Instance.ToggleTurnIndicators(BattleState.Lose);
                     break;
             }
-            _playerSpeed = _currentPlayerUnit.GetComponentInChildren<Unit>().RunTimeUnitInfo.speed;
-            _enemySpeed = _currentEnemyUnit.GetComponentInChildren<Unit>().RunTimeUnitInfo.speed;
+            _playerSpeed = _currentPlayerUnit.RunTimeUnitInfo.speed;
+            _enemySpeed = _currentEnemyUnit.RunTimeUnitInfo.speed;
         }
         public void LoadMainMenu()
         {
