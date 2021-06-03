@@ -1168,7 +1168,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: be8d58a1ab8714dfea775bf7e56b6a1b, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -3581,6 +3581,7 @@ MonoBehaviour:
   _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
   _displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   _endBattleChannel: {fileID: 11400000, guid: 3e2e44ced2e734f2bb44a5993706eb3b, type: 2}
+  _cameraShakeChannel: {fileID: 11400000, guid: 2547a871de6054c4e88ad96dede009ff, type: 2}
   _swapUnitChannel: {fileID: 11400000, guid: 134579854193842caa9d3d93b2d6bff7, type: 2}
 --- !u!65 &519409850
 BoxCollider:
@@ -5798,7 +5799,7 @@ PrefabInstance:
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1842159427}
+      objectReference: {fileID: 1842159431}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
@@ -5813,7 +5814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Veganimus.BattleSystem.Character, Assembly-CSharp
+      value: Veganimus.BattleSystem.UseButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
@@ -7442,13 +7443,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115869859}
-  m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
+  m_LocalRotation: {x: -0, y: 0.13052616, z: -0, w: 0.9914449}
   m_LocalPosition: {x: 2.895155, y: 0, z: 1.2824869}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519409848}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 2082750765}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
 --- !u!114 &1115869861
 MonoBehaviour:
@@ -9331,7 +9332,7 @@ Transform:
   - {fileID: 1327451590}
   - {fileID: 197173144}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1397240639
 GameObject:
@@ -10196,7 +10197,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: be8d58a1ab8714dfea775bf7e56b6a1b, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -11394,7 +11395,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: be8d58a1ab8714dfea775bf7e56b6a1b, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -12020,7 +12021,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: be8d58a1ab8714dfea775bf7e56b6a1b, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -12208,6 +12209,7 @@ GameObject:
   - component: {fileID: 1717926553}
   - component: {fileID: 1717926552}
   - component: {fileID: 1717926555}
+  - component: {fileID: 1717926556}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12274,7 +12276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1717926551}
   m_LocalRotation: {x: 0.20586252, y: 0, z: 0, w: 0.9785809}
-  m_LocalPosition: {x: 0, y: 3.08, z: -5.61}
+  m_LocalPosition: {x: 0, y: 0, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12312,6 +12314,22 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1717926556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717926551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7bda18db76d24699900203df285b3c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isShaking: 0
+  _duration: 0.5
+  _magnitude: 0.5
+  _cameraShakeChannel: {fileID: 11400000, guid: 2547a871de6054c4e88ad96dede009ff, type: 2}
 --- !u!1 &1725649098
 GameObject:
   m_ObjectHideFlags: 0
@@ -12876,7 +12894,7 @@ PrefabInstance:
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1842159427}
+      objectReference: {fileID: 1842159431}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
@@ -12891,7 +12909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Veganimus.BattleSystem.Character, Assembly-CSharp
+      value: Veganimus.BattleSystem.UseButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
@@ -13316,8 +13334,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2117615749}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 2082750765}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
 --- !u!114 &1842159427
 MonoBehaviour:
@@ -14657,7 +14675,7 @@ PrefabInstance:
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1842159427}
+      objectReference: {fileID: 1842159431}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
@@ -14672,7 +14690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Veganimus.BattleSystem.Character, Assembly-CSharp
+      value: Veganimus.BattleSystem.UseButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
@@ -15103,15 +15121,17 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082750764}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1189509344}
   - {fileID: 1978592161}
   - {fileID: 1895158119}
   - {fileID: 1148509763}
+  - {fileID: 1842159426}
+  - {fileID: 1115869860}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2092408449
 GameObject:
@@ -15246,6 +15266,7 @@ MonoBehaviour:
   _unitHPUpdateChannel: {fileID: 11400000, guid: 68cbae3c43e4347aab43573374bd7513, type: 2}
   _displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   _endBattleChannel: {fileID: 11400000, guid: 3e2e44ced2e734f2bb44a5993706eb3b, type: 2}
+  _cameraShakeChannel: {fileID: 11400000, guid: 2547a871de6054c4e88ad96dede009ff, type: 2}
   _swapUnitChannel: {fileID: 11400000, guid: 134579854193842caa9d3d93b2d6bff7, type: 2}
 --- !u!65 &2117615751
 BoxCollider:
@@ -15787,7 +15808,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: be8d58a1ab8714dfea775bf7e56b6a1b, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -16573,7 +16594,7 @@ PrefabInstance:
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1842159427}
+      objectReference: {fileID: 1842159431}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
@@ -16588,7 +16609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Veganimus.BattleSystem.Character, Assembly-CSharp
+      value: Veganimus.BattleSystem.UseButton, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2156613397850879407, guid: 2445114d684794945ac85260e03bcb2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
@@ -17199,63 +17220,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e169b93ad55e42f9ad6caf87ef4b6b9, type: 3}
---- !u!1001 &6456617675433247228
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1580.0181
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 404.14172
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.1179962
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 896149696476241535, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2788938850192742186, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
-      propertyPath: m_Name
-      value: EmptyUnit
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
 --- !u!224 &6799793146898975139
 RectTransform:
   m_ObjectHideFlags: 0

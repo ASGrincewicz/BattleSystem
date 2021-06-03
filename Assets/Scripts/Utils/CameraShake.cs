@@ -13,19 +13,25 @@ namespace Veganimus
 
         private void OnEnable() => _cameraShakeChannel.OnCameraShake.AddListener(StartCameraShake);
         private void OnDisable() => _cameraShakeChannel.OnCameraShake.RemoveListener(StartCameraShake);
-        private void StartCameraShake() => StartCoroutine(CameraShakeRoutine());
+        private void StartCameraShake(float magnitude)
+        {
+            if (!_isShaking)
+                StartCoroutine(CameraShakeRoutine(magnitude));
+            else
+                return;
+        }
 
-        private IEnumerator CameraShakeRoutine()
+        private IEnumerator CameraShakeRoutine(float magnitude)
         {
             var defaultPosition = transform.position;
             var elapsedTime = 0f;
-
+            _magnitude = magnitude;
             while(elapsedTime < _duration)
             {
                 _isShaking = true;
                 float x = Random.Range(-1, 1) * _magnitude;
                 float y = Random.Range(-1, 1) * _magnitude;
-                transform.position = new Vector3(x, y, -10f);
+                transform.position = new Vector3(x, y, transform.position.z);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }

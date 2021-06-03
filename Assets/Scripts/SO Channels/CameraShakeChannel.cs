@@ -7,12 +7,12 @@ namespace Veganimus
     [CreateAssetMenu(menuName ="Camera Shake Channel")]
     public class CameraShakeChannel : ScriptableObject
     {
-        public UnityEvent OnCameraShake;
+        public UnityEvent<float> OnCameraShake;
 
-        public void RaiseCameraShakeEvent()
+        public void RaiseCameraShakeEvent(float magnitude)
         {
             if (OnCameraShake != null)
-                OnCameraShake.Invoke();
+                OnCameraShake.Invoke(magnitude);
         }
     }
 }

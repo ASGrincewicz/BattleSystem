@@ -15,26 +15,23 @@ namespace Veganimus.BattleSystem
         public Character Owner { get { return _owner; } }
         [SerializeField] protected CharacterType _characterType;
         public UnitStats unitStats;
-        private int _unitLevel;
+        //private int _unitLevel;
         [SerializeField] protected TargetFinder _targetUnit;
         public TargetFinder TargetUnit { get { return _targetUnit; } }
+
         [Header("Runtime Unit Stats")]
         [SerializeField] private UnitInfo _runTimeUnitInfo;
         public UnitInfo RunTimeUnitInfo { get { return _runTimeUnitInfo; } }
-       
         [SerializeField] private int _currentUnitHP;
         public int CurrentUnitHP { get { return _currentUnitHP; } }
-      
+
         [Header("Defense Effect Prefabs")]
         [SerializeField] private GameObject _unitBaseModel;
         public GameObject UnitBaseModel { get { return _unitBaseModel; } private set { _unitBaseModel = value; } }
-
         [SerializeField] private GameObject _unitEnergyShield;
         public GameObject UnitEnergyShield { get { return _unitEnergyShield; } private set { _unitEnergyShield = value; } }
-
         [SerializeField] private GameObject _unitBarrier;
         public GameObject UnitBarrier { get { return _unitBarrier; } private set { _unitBarrier = value; } }
-
         [SerializeField] private GameObject _unitCloak;
         public GameObject UnitCloak { get { return _unitCloak; } private set { _unitCloak = value; } }
         public GameObject ActiveEffect { get; set; }
@@ -47,12 +44,15 @@ namespace Veganimus.BattleSystem
         public List<UnitDefenseMove> DefenseMoveSet { get { return _defenseMoveSet; } }
         [Space]
         [SerializeField] protected UnitAnimation _unitAnimation;
+        [Header("Broadcasting On:")]
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         [SerializeField] protected UnitMoveNameUpdate _unitAttackMoveNameUpdateChannel;
         [SerializeField] protected UnitMoveNameUpdate _unitDefenseMoveNameUpdateChannel;
         [SerializeField] protected UnitHitPointUpdate _unitHPUpdateChannel;
         [SerializeField] protected DisplayActionChannel _displayActionChannel;
         [SerializeField] protected BattleStateChannel _endBattleChannel;
+        [SerializeField] private CameraShakeChannel _cameraShakeChannel;
+        [Header("Listening To:")]
         [SerializeField] private SwapUnitChannel _swapUnitChannel;
        
         private WaitForSeconds _statUpdateDelay;
@@ -172,6 +172,11 @@ namespace Veganimus.BattleSystem
             int damage = amount -= _runTimeUnitInfo.defense;
             if (damage <= 0)
                 damage = 0;
+            if (_owner.ThisCharacterType == CharacterType.Player)
+            {
+                var magnitude = damage / 100f;
+                _cameraShakeChannel.RaiseCameraShakeEvent(magnitude);
+            }
 
             _currentUnitHP -= damage;
             if (_currentUnitHP <= 0)
