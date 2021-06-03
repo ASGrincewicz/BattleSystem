@@ -14,13 +14,10 @@ namespace Veganimus.BattleSystem
         public CharacterStats ThisCharacterStats;
         [SerializeField] private CharacterType _thisCharacterType;
         public CharacterType ThisCharacterType { get { return _thisCharacterType; } }
-
         [SerializeField] private string _characterName;
         public string CharacterName { get { return _characterName; } }
-
         [Range(-1, 1)][SerializeField] private int _aiAgression;
         public int AIAgression { get { return _aiAgression; } }
-
         [SerializeField] private List<UnitStats> _party = new List<UnitStats>();
         public List<UnitStats> Party { get { return _party; } }
         public List<MoveEffect> effects = new List<MoveEffect>();
@@ -34,7 +31,6 @@ namespace Veganimus.BattleSystem
         [Header("Broadcasting on")]
         [SerializeField] private TurnCompleteChannel _turnCompleteChannel;
         public TurnCompleteChannel TurnCompleteChannel { get { return _turnCompleteChannel; } }
-
         [SerializeField] private DisplayActionChannel _displayActionChannel;
         [SerializeField] private UnitMoveNameUpdate _itemNameUpdateChannel;
         [SerializeField] private SwapUnitChannel _swapUnitChannel;
@@ -46,7 +42,6 @@ namespace Veganimus.BattleSystem
         public int TurnCount { get { return _turnCount; } }
         [SerializeField] private bool _isTurnComplete;
         public bool IsTurnComplete { get => _isTurnComplete; set => _isTurnComplete = value; }
-
         [SerializeField] private UnitNameUpdate _unitNameUpdateChannel;
         private WaitForSeconds _turnDelay;
 
@@ -77,25 +72,29 @@ namespace Veganimus.BattleSystem
                 _turnCount++;
                 IsTurnComplete = false;
                 TurnCompleteChannel.RaiseTurnCompleteEvent(characterType, IsTurnComplete);
-                DeActivateEffects();
+                DeActivateEffects(false);
                 if (ThisCharacterType != CharacterType.Player && IsTurnComplete == false)
                  StartCoroutine(TurnDelayRoutine());
             }
         }
-        private void DeActivateEffects()
+        private void DeActivateEffects(bool isSwappingUnit)
         {
             var efffect = GetComponentsInChildren<MoveEffect>();
             foreach(var obj in activeUnit.GetComponentsInChildren<MoveEffect>())
-            {
                 effects.Add(obj);
-            }
+            
             for (int i = effects.Count - 1; i > 0; i--)
             {
-                if (TurnCount - effects[i].activatedOnTurn > effects[i].turnsActive)
+                if (TurnCount - effects[i].activatedOnTurn > effects[i].turnsActive || isSwappingUnit)
                 {
-                    effects[i].gameObject.SetActive(false);
-                    activeUnit.ResetDefense();
-                    effects.Remove(effects[i]); 
+                    if (isSwappingUnit)
+                        effects.Clear();
+                    else
+                    {
+                        effects[i].gameObject.SetActive(false);
+                        activeUnit.ResetDefense();
+                        effects.Remove(effects[i]);
+                    }
                 }
             }
         }
@@ -120,7 +119,6 @@ namespace Veganimus.BattleSystem
         }
         private void UpdateItemUseUI()
         {
-           
             for (int i = _inventory.battleInventory.Count - 1; i >= 0; i--)
             {
                 var item = _inventory.battleInventory[i];
@@ -150,7 +148,7 @@ namespace Veganimus.BattleSystem
             else if (dieRoll + AIAgression <= 1)
             {
                 Item itemToUse = inv[Random.Range(0, inv.Count)];
-                int itemSlot = inv.IndexOf(itemToUse);
+               
                 if (activeUnit.CurrentUnitHP < activeUnit.unitStats.UnitHitPoints)
                     itemToUse = inv.Find(i => i.ItemType.Equals(ItemType.Health));
 
@@ -160,16 +158,12 @@ namespace Veganimus.BattleSystem
                 else
                     itemToUse = inv.Find(i => i.ItemType.Equals(ItemType.Equipment));
 
+                int itemSlot = inv.IndexOf(itemToUse);
                 if (itemToUse == null)
-                {
-                    Debug.Log($"Rolling for DetermineAction...");
                     DetermineAction();
-                }
+                
                 else
-                {
-                    Debug.Log($"Using Item:{itemToUse.ItemName}");
-                    UseItemSlot(itemSlot);
-                }
+                     UseItemSlot(itemSlot);
             }
         }
         public void UseItemSlot(int slotNumber)
@@ -207,6 +201,7 @@ namespace Veganimus.BattleSystem
             var unitName = _party[slotNumber].UnitName;
             if (slotNumber != _activeUnitSlotNumber && unitName != "")
             {
+                DeActivateEffects(true);
                 Destroy(activeUnitPrefab);
                 activeUnitPrefab = Instantiate(_party[slotNumber].UnitModelPrefab, activeUnitSpot);
                 activeUnit.unitStats = _party[slotNumber];

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 
 namespace Veganimus.BattleSystem
 {
@@ -14,6 +13,8 @@ namespace Veganimus.BattleSystem
         public void UseDefend(int slotNumber) => _user.activeUnit.UseDefenseMoveSlot(slotNumber);
 
         public void UseItem(int slotNumber) => _user.UseItemSlot(slotNumber);
+
+        public void SwapUnit(int slotNumber) => _user.SwapUnit(slotNumber);
 
         public void DisplayUnitStats() => _user.activeUnit.DisplayUnitStats();
     }
