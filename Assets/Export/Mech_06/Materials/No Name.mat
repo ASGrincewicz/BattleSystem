@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: No Name
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _METALLICSPECGLOSSMAP _NORMALMAP
+  m_Shader: {fileID: 4800000, guid: ee7e4c9a5f6364b688a332c67fc32cca, type: 3}
+  m_ShaderKeywords: _EMISSION _METALLICSPECGLOSSMAP _NORMALMAP
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,12 +20,20 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_e9c778c4f11744e9b5e966d1a0a07254:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: da110e8dbc391fe469c9fbc4dfc06b46, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 68d95d90ce063fa499d1074447e278c3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ClearCoatMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -77,9 +85,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_3692c2f5e9aa4479b8314b171e93eb78: 1.5
+    - Vector1_47f5e8926c974e3ea8f21081e44b5f6a: 0.16
+    - Vector1_849a50a3c130477187612272d9167e78: 5
+    - Vector1_fd16920fdcbf4bcf926a3848f53e4cc2: 0.6
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
+    - _ClearCoat: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -106,6 +119,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_fd0cff5de0f347bb8f3f9e529c72b9e4: {r: 0.6073487, g: 0.024664639, b: 1.7429711, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
