@@ -10,14 +10,10 @@ namespace Veganimus.BattleSystem
         [SerializeField] private Unit _activeUnit;
         [SerializeField] private DefenseUIChannel _defenseUIChannel;
 
-        public void OnEnable()
-        {
-            _defenseUIChannel.OnDefenseChange.AddListener(ShowDefense);
-        }
-        public void OnDisable()
-        {
-            _defenseUIChannel.OnDefenseChange.RemoveListener(ShowDefense);
-        }
+        public void OnEnable() => _defenseUIChannel.OnDefenseChange.AddListener(ShowDefense);
+
+        public void OnDisable() => _defenseUIChannel.OnDefenseChange.RemoveListener(ShowDefense);
+
         public void ClearDefense()
         {
             foreach(var image in _defensePointImage)

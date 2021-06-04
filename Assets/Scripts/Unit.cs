@@ -231,10 +231,7 @@ namespace Veganimus.BattleSystem
             }
             _runTimeUnitInfo.defense = unitStats.UnitDefense;
             _defenseUIChannel.RaiseDefenseUIChange(_runTimeUnitInfo.defense);
-            // TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, _targetUnit.TargetStats.UnitAccuracyModifier);// Need to change this so it's not hard coded.
-            StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} Defense was reset."));
             StartCoroutine(ResetStatDelayRoutine(2));
-
         }
         public void BuffStats(StatAffected statAffected, int amount)
         {
