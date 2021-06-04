@@ -52,6 +52,7 @@ namespace Veganimus.BattleSystem
         [SerializeField] protected DisplayActionChannel _displayActionChannel;
         [SerializeField] protected BattleStateChannel _endBattleChannel;
         [SerializeField] private CameraShakeChannel _cameraShakeChannel;
+        [SerializeField] private DefenseUIChannel _defenseUIChannel;
         [Header("Listening To:")]
         [SerializeField] private SwapUnitChannel _swapUnitChannel;
 
@@ -103,6 +104,7 @@ namespace Veganimus.BattleSystem
             _actionAnnouncementAbbrev = $"{_owner.CharacterName} {_runTimeUnitInfo.unitName}";
             CheckPrefabs();
             _unitAnimation = GetComponentInChildren<UnitAnimation>();
+            _defenseUIChannel.RaiseDefenseUIChange(_runTimeUnitInfo.defense);
             _unitNameUpdateChannel.RaiseUnitNameUpdateEvent(_characterType, _runTimeUnitInfo.unitName);
 
         }
@@ -216,6 +218,7 @@ namespace Veganimus.BattleSystem
         public void AdjustDefense(int amount)
         {
             _runTimeUnitInfo.defense += amount;
+            _defenseUIChannel.RaiseDefenseUIChange(_runTimeUnitInfo.defense);
             StartCoroutine(StatUpdateDelayRoutine(($"{_actionAnnouncementAbbrev} raised Defense by {amount}.")));
         }
         public void ResetDefense()
@@ -227,10 +230,8 @@ namespace Veganimus.BattleSystem
                 ActiveEffect = null;
             }
             _runTimeUnitInfo.defense = unitStats.UnitDefense;
-            // TargetUnit.targetIBuffable.BuffStats(StatAffected.Accuracy, _targetUnit.TargetStats.UnitAccuracyModifier);// Need to change this so it's not hard coded.
-            StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} Defense was reset."));
+            _defenseUIChannel.RaiseDefenseUIChange(_runTimeUnitInfo.defense);
             StartCoroutine(ResetStatDelayRoutine(2));
-
         }
         public void BuffStats(StatAffected statAffected, int amount)
         {
