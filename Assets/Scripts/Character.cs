@@ -91,9 +91,12 @@ namespace Veganimus.BattleSystem
                         effects.Clear();
                     else
                     {
-                        effects[i].gameObject.SetActive(false);
+                        if (effects[i] != null)
+                        {
+                            effects[i].gameObject.SetActive(false);
+                            effects.Remove(effects[i]);
+                        }
                         activeUnit.ResetDefense();
-                        effects.Remove(effects[i]);
                     }
                 }
             }
