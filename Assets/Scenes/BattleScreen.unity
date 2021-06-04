@@ -7469,7 +7469,7 @@ MonoBehaviour:
   _aiAgression: 0
   _party:
   - {fileID: 2368708064175314815, guid: ec65c5a98f6504093909fa135652adc9, type: 3}
-  - {fileID: 463307247385772095, guid: 7659c403b963c459c80b346f15321dc8, type: 3}
+  - {fileID: 636982409131606168, guid: 7659c403b963c459c80b346f15321dc8, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
   effects: []
@@ -13355,7 +13355,7 @@ MonoBehaviour:
   _aiAgression: 0
   _party:
   - {fileID: 3729264902716440565, guid: 8853c0f3590e44536846066df349c220, type: 3}
-  - {fileID: 3538063851622273444, guid: 92e42b2056cfe4e5985007cb0221d62b, type: 3}
+  - {fileID: 1299417461680437342, guid: 92e42b2056cfe4e5985007cb0221d62b, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
   effects: []
