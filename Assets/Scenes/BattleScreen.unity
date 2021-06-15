@@ -3136,7 +3136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466424261}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.000000014901159}
-  m_LocalPosition: {x: 1.7529981, y: 0, z: 6.074549}
+  m_LocalPosition: {x: 1.75, y: 0, z: 6.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 519409848}
@@ -10355,7 +10355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462197948}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.000000014901159}
-  m_LocalPosition: {x: 1.752998, y: 0, z: 6.0745482}
+  m_LocalPosition: {x: -1.06, y: 0, z: 7.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2117615749}
@@ -13912,7 +13912,7 @@ MonoBehaviour:
   _characterName: Player One
   _aiAgression: 0
   _party:
-  - {fileID: 3729264902716440565, guid: 8853c0f3590e44536846066df349c220, type: 3}
+  - {fileID: 7651437209023409692, guid: 2527a0c7a861d40a8af0efca1d5a56b3, type: 3}
   - {fileID: 1299417461680437342, guid: 92e42b2056cfe4e5985007cb0221d62b, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
@@ -15607,14 +15607,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117615748}
-  m_LocalRotation: {x: -0, y: 0.13052616, z: -0, w: 0.9914449}
+  m_LocalRotation: {x: 0, y: 0.42261827, z: 0, w: 0.9063079}
   m_LocalPosition: {x: -0.015474863, y: 0.99, z: -0.22726022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1462197951}
   m_Father: {fileID: 1842159426}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 50, z: 0}
 --- !u!114 &2117615750
 MonoBehaviour:
   m_ObjectHideFlags: 0

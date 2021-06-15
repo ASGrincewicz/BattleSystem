@@ -9,7 +9,7 @@ namespace Veganimus.BattleSystem
 
         [SerializeField] private List<AnimationClip> _animationClips = new List<AnimationClip>();
 
-        private void Start() => _animator = GetComponent<Animator>();
+        private void Start() => _animator = GetComponentInChildren<Animator>();
 
         public void SetInteger(string parameter, int integer)
         {

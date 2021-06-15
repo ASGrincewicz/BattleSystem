@@ -190,7 +190,7 @@ namespace Veganimus.BattleSystem
                     UnitBaseModel.SetActive(true);
                 }
 
-                _unitAnimation.PlayClip("Death");
+                _unitAnimation.SetInteger("hitPoints", 0);
                 _unitHPUpdateChannel.RaiseUnitHPUpdateEvent(_characterType, _runTimeUnitInfo.hitPoints, _currentUnitHP);
                 StartCoroutine(StatUpdateDelayRoutine($"{_actionAnnouncementAbbrev} took {damage} damage!"));
                 StartCoroutine(EndBattleDelayRoutine());
