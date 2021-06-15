@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cloak
-  m_Shader: {fileID: -6465566751694194690, guid: ab3e6504ea0114f11bf608b0b5c983d8, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: f347072a9bb42495eb58ac8e9df31c8c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

@@ -13,6 +13,7 @@ namespace Veganimus.BattleSystem
     public class TargetFinder : MonoBehaviour
     {
         [SerializeField] private Transform _targetUnitPosition;
+        public Transform TargetUnitPosition { get { return _targetUnitPosition; } }
         [SerializeField] private Unit _targetUnit;
         public IDamageable targetIDamageable;
         public IBuffable targetIBuffable;
@@ -29,6 +30,7 @@ namespace Veganimus.BattleSystem
                 targetIBuffable = _targetUnit.GetComponent<IBuffable>();
                 targetIHealable = _targetUnit.GetComponent<IHealable>();
                 _targetStats = _targetUnit.RunTimeUnitInfo;
+                _targetUnitPosition = _targetUnit.GetComponentInParent<Transform>();
                 Debug.Log($"Found Target Info: Defense:{_targetStats.defense},Speed:{_targetStats.speed}");
                 
             }

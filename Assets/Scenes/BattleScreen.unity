@@ -3522,7 +3522,7 @@ GameObject:
   - component: {fileID: 519409848}
   - component: {fileID: 519409850}
   - component: {fileID: 519409849}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Enemy_ActiveUnit_spot
   m_TagString: Enemy
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -7710,12 +7710,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e964b143a5a484eb78f5ebaec6d20c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeUnitSpotRotation: {x: 0, y: 0, z: 0, w: 0}
   ThisCharacterStats: {fileID: 11400000, guid: 68e9601fad1b54377a441a73f4ae1ffa, type: 2}
   _thisCharacterType: 1
   _characterName: Enemy
   _aiAgression: 0
   _party:
-  - {fileID: 2368708064175314815, guid: ec65c5a98f6504093909fa135652adc9, type: 3}
+  - {fileID: 5435946702509890759, guid: 12ab634d5a7f6457688458efaae6a6b1, type: 3}
   - {fileID: 636982409131606168, guid: 7659c403b963c459c80b346f15321dc8, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
@@ -7723,7 +7724,7 @@ MonoBehaviour:
   activeUnit: {fileID: 519409849}
   activeUnitPrefab: {fileID: 0}
   isDefeated: 0
-  activeUnitSpot: {fileID: 519409848}
+  _activeUnitSpot: {fileID: 519409848}
   _turnCompleteChannel: {fileID: 11400000, guid: 806e1a1780c0a4041b1de77b3dd670da, type: 2}
   _displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   _itemNameUpdateChannel: {fileID: 11400000, guid: 934baab64d80546c7b14daa67b9fb295, type: 2}
@@ -13907,12 +13908,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e964b143a5a484eb78f5ebaec6d20c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeUnitSpotRotation: {x: 0, y: 0, z: 0, w: 0}
   ThisCharacterStats: {fileID: 11400000, guid: ed0d9b21011fc4f3e9bc0500d0948e7a, type: 2}
   _thisCharacterType: 0
   _characterName: Player One
   _aiAgression: 0
   _party:
-  - {fileID: 7651437209023409692, guid: 2527a0c7a861d40a8af0efca1d5a56b3, type: 3}
+  - {fileID: 2976786503422884974, guid: 66d6d8ee3a7e544a58dbe3bca186f8a1, type: 3}
   - {fileID: 1299417461680437342, guid: 92e42b2056cfe4e5985007cb0221d62b, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
   - {fileID: 2328927739161460567, guid: 81ac30834f3e14234a7fdbefabf32890, type: 3}
@@ -13920,7 +13922,7 @@ MonoBehaviour:
   activeUnit: {fileID: 2117615750}
   activeUnitPrefab: {fileID: 0}
   isDefeated: 0
-  activeUnitSpot: {fileID: 2117615749}
+  _activeUnitSpot: {fileID: 2117615749}
   _turnCompleteChannel: {fileID: 11400000, guid: 806e1a1780c0a4041b1de77b3dd670da, type: 2}
   _displayActionChannel: {fileID: 11400000, guid: 6d6bec84ddd4b4dfcbea4c52e79691cf, type: 2}
   _itemNameUpdateChannel: {fileID: 11400000, guid: 934baab64d80546c7b14daa67b9fb295, type: 2}
@@ -15593,9 +15595,9 @@ GameObject:
   - component: {fileID: 2117615749}
   - component: {fileID: 2117615751}
   - component: {fileID: 2117615750}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Player_ActiveUnit_spot
-  m_TagString: Enemy
+  m_TagString: Player
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

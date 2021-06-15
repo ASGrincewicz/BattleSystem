@@ -11,6 +11,7 @@ namespace Veganimus.BattleSystem
     ///</summary>
     public class Character : MonoBehaviour
     {
+        public Quaternion activeUnitSpotRotation;
         public CharacterStats ThisCharacterStats;
         [SerializeField] private CharacterType _thisCharacterType;
         public CharacterType ThisCharacterType { get { return _thisCharacterType; } }
@@ -27,7 +28,8 @@ namespace Veganimus.BattleSystem
         private int _activeUnitSlotNumber;
         public GameObject activeUnitPrefab;
         public bool isDefeated;
-        [SerializeField] private Transform activeUnitSpot;
+        [SerializeField] private Transform _activeUnitSpot;
+        public Transform ActiveUnitSpot { get { return _activeUnitSpot; } }
         [Header("Broadcasting on")]
         [SerializeField] private TurnCompleteChannel _turnCompleteChannel;
         public TurnCompleteChannel TurnCompleteChannel { get { return _turnCompleteChannel; } }
@@ -54,13 +56,12 @@ namespace Veganimus.BattleSystem
             _turnDelay = new WaitForSeconds(5.0f);
             _characterName = ThisCharacterStats.CharacterName;
             _inventory = GetComponent<BattleInventory>();
-            activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,activeUnitSpot);
+            activeUnitPrefab = Instantiate(_party[0].UnitModelPrefab ,_activeUnitSpot);
             activeUnit.unitStats = _party[0];
             _activeUnitSlotNumber = _party.IndexOf(activeUnit.unitStats);
-            Debug.Log($"Active Unit Slot:{_activeUnitSlotNumber}");
+           // Debug.Log($"Active Unit Slot:{_activeUnitSlotNumber}");
             activeUnitPrefab.transform.position = new Vector3(activeUnit.transform.position.x, 15, activeUnit.transform.position.z);
-            activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
-            
+            activeUnitPrefab.transform.rotation = ActiveUnitSpot.rotation;
             UpdateCharacterNames();
             UpdatePartyUnitNames();
         }
@@ -206,12 +207,12 @@ namespace Veganimus.BattleSystem
             {
                 DeActivateEffects(true);
                 Destroy(activeUnitPrefab);
-                activeUnitPrefab = Instantiate(_party[slotNumber].UnitModelPrefab, activeUnitSpot);
+                activeUnitPrefab = Instantiate(_party[slotNumber].UnitModelPrefab, _activeUnitSpot);
                 activeUnit.unitStats = _party[slotNumber];
                 _activeUnitSlotNumber = _party.IndexOf(activeUnit.unitStats);
                 _swapUnitChannel.RaiseUnitSwapEvent();
                 activeUnitPrefab.transform.position = new Vector3(activeUnit.transform.position.x, 15, activeUnit.transform.position.z);
-                activeUnitPrefab.transform.rotation = activeUnitSpot.rotation;
+                activeUnitPrefab.transform.rotation = _activeUnitSpot.rotation;
                 BattleUIManager.Instance.ActivateButtons(false);
                 _displayActionChannel.RaiseDisplayActionEvent($"{_characterName} swapped in {unitName}!");
                 IsTurnComplete = true;
