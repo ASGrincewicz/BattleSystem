@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnsActive: 2
-  activatedOnTurn: 2
+  activatedOnTurn: 0
 --- !u!1 &6389417455969904733
 GameObject:
   m_ObjectHideFlags: 0
